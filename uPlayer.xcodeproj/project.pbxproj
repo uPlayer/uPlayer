@@ -13,6 +13,12 @@
 		1EDE8FB01A773D810086677B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAF1A773D810086677B /* Images.xcassets */; };
 		1EDE8FB31A773D810086677B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE8FB11A773D810086677B /* Main.storyboard */; };
 		1EDE8FBF1A773D810086677B /* uPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FBE1A773D810086677B /* uPlayerTests.m */; };
+		1EDE8FCA1A77405D0086677B /* CppWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FC91A77405D0086677B /* CppWrapper.mm */; };
+		1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCB1A7740DC0086677B /* audioTag.cpp */; };
+		1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCD1A7740DC0086677B /* fileCtrl.cpp */; };
+		1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCF1A7740DC0086677B /* threadpool.cpp */; };
+		1EDE8FE01A7741EE0086677B /* SFBAudioEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */; };
+		1EDE8FE11A7741EE0086677B /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +30,20 @@
 			remoteInfo = uPlayer;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1EDE8FDC1A77419B0086677B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1EDE8FE11A7741EE0086677B /* SFBAudioEngine.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1EDE8FA21A773D810086677B /* uPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +58,15 @@
 		1EDE8FB81A773D810086677B /* uPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE8FBD1A773D810086677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EDE8FBE1A773D810086677B /* uPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uPlayerTests.m; sourceTree = "<group>"; };
+		1EDE8FC81A77405D0086677B /* CppWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CppWrapper.h; sourceTree = "<group>"; };
+		1EDE8FC91A77405D0086677B /* CppWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CppWrapper.mm; sourceTree = "<group>"; };
+		1EDE8FCB1A7740DC0086677B /* audioTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = audioTag.cpp; path = lyricsFetcher/src/audioTag.cpp; sourceTree = "<group>"; };
+		1EDE8FCC1A7740DC0086677B /* audioTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = audioTag.h; path = lyricsFetcher/src/audioTag.h; sourceTree = "<group>"; };
+		1EDE8FCD1A7740DC0086677B /* fileCtrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fileCtrl.cpp; path = lyricsFetcher/src/fileCtrl.cpp; sourceTree = "<group>"; };
+		1EDE8FCE1A7740DC0086677B /* fileCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fileCtrl.h; path = lyricsFetcher/src/fileCtrl.h; sourceTree = "<group>"; };
+		1EDE8FCF1A7740DC0086677B /* threadpool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threadpool.cpp; path = lyricsFetcher/src/threadpool.cpp; sourceTree = "<group>"; };
+		1EDE8FD01A7740DC0086677B /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threadpool.h; path = lyricsFetcher/src/threadpool.h; sourceTree = "<group>"; };
+		1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SFBAudioEngine.framework; path = Frameworks/SFBAudioEngine.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDE8FE01A7741EE0086677B /* SFBAudioEngine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,8 +91,10 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1EDE8FD41A7740EC0086677B /* lyricsFetcher */,
 				1EDE8FA41A773D810086677B /* uPlayer */,
 				1EDE8FBB1A773D810086677B /* uPlayerTests */,
+				1EDE8FE21A7742000086677B /* Frameworks */,
 				1EDE8FA31A773D810086677B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,6 +111,8 @@
 		1EDE8FA41A773D810086677B /* uPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				1EDE8FC81A77405D0086677B /* CppWrapper.h */,
+				1EDE8FC91A77405D0086677B /* CppWrapper.mm */,
 				1EDE8FA71A773D810086677B /* AppDelegate.h */,
 				1EDE8FA81A773D810086677B /* AppDelegate.m */,
 				1EDE8FAC1A773D810086677B /* ViewController.h */,
@@ -116,6 +150,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1EDE8FD41A7740EC0086677B /* lyricsFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE8FCB1A7740DC0086677B /* audioTag.cpp */,
+				1EDE8FCC1A7740DC0086677B /* audioTag.h */,
+				1EDE8FCD1A7740DC0086677B /* fileCtrl.cpp */,
+				1EDE8FCE1A7740DC0086677B /* fileCtrl.h */,
+				1EDE8FCF1A7740DC0086677B /* threadpool.cpp */,
+				1EDE8FD01A7740DC0086677B /* threadpool.h */,
+			);
+			name = lyricsFetcher;
+			sourceTree = "<group>";
+		};
+		1EDE8FE21A7742000086677B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,6 +181,7 @@
 				1EDE8F9E1A773D810086677B /* Sources */,
 				1EDE8F9F1A773D810086677B /* Frameworks */,
 				1EDE8FA01A773D810086677B /* Resources */,
+				1EDE8FDC1A77419B0086677B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -215,7 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */,
+				1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */,
 				1EDE8FAE1A773D810086677B /* ViewController.m in Sources */,
+				1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */,
+				1EDE8FCA1A77405D0086677B /* CppWrapper.mm in Sources */,
 				1EDE8FAB1A773D810086677B /* main.m in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.m in Sources */,
 			);
@@ -331,9 +391,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-ltag";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -342,9 +415,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-ltag";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -404,6 +490,7 @@
 				1EDE8FC41A773D810086677B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1EDE8FC51A773D810086677B /* Build configuration list for PBXNativeTarget "uPlayerTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +499,7 @@
 				1EDE8FC71A773D810086677B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
