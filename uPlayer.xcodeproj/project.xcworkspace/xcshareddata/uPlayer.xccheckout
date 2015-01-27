@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>68FECB0B-CC7A-4BB3-8026-AE22384DE6B9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>uPlayer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
+		<string>https://github.com/uPlayer/uPlayer.git</string>
+		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
+		<string>/Users/liaogang/%E5%BF%AB%E7%9B%98/git/lyricsFetcher.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>uPlayer.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
+		<string>../..</string>
+		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
+		<string>../..lyricsFetcher/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/uPlayer/uPlayer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>lyricsFetcher</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
+			<key>IDESourceControlWCCName</key>
+			<string>uPlayer</string>
+		</dict>
+	</array>
+</dict>
+</plist>
