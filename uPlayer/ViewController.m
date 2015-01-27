@@ -7,11 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "CppWrapper.h"
+#import "UPlayer.h"
 
 
-
-@class TrackInfo,PlayerCore;
 
 
 @interface ViewController () <NSTableViewDelegate , NSTableViewDataSource>
@@ -56,8 +54,7 @@
     
     const NSString *path = @"/Users/liaogang/Music";
     
-    self.trackInfo= [CppWrapper enumAudioFiles:path];
-    
+    self.trackInfo= enumAudioFiles(path);
     
     self.tableView.usesAlternatingRowBackgroundColors = true;
     self.tableView.delegate = self;
@@ -79,13 +76,21 @@
         
         TrackInfo *info = self.trackInfo[row];
         
-        if (self.core) {
-            [self.core playPause:nil];
+        if (self.core)
+        {
+            if ([self.core isPlaying] || [self.core isPaused])
+            {
+                [self.core playPause:nil];
+            }
+            else if ([self.core isStopped])
+            {
+                [self.core playURL: [NSURL fileURLWithPath:info.path ]];
+            }
         }
         else
         {
             self.core = [[PlayerCore alloc]init];
-            [self.core playURL: [NSURL fileURLWithPath:[info getPath]]];
+            [self.core playURL: [NSURL fileURLWithPath:info.path ]];
         }
         
     }
@@ -116,23 +121,23 @@
     }
     else if(column == 1)
     {
-        textField.stringValue = [info getArtist];
+        textField.stringValue = info.artist;
     }
     else if(column == 2)
     {
-        textField.stringValue = [info getTitle];
+        textField.stringValue = info.title ;
     }
     else if(column == 3)
     {
-        textField.stringValue = [info getAlbum];
+        textField.stringValue = info.album;
     }
     else if(column == 4)
     {
-        textField.stringValue = [info getGenre];
+        textField.stringValue = info.genre;
     }
     else if(column == 5)
     {
-        textField.stringValue = [info getYear];
+        textField.stringValue = info.year;
     }
     
     return textField;
