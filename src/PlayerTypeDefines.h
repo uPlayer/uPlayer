@@ -6,17 +6,11 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-<<<<<<< HEAD
 
 #import <Foundation/Foundation.h>
 
 
-=======
-#import <Foundation/Foundation.h>
 
-
-
->>>>>>> eb33dbd211f0a9a2aaa5c588b10c9e76795eb186
 enum PlayStatus
 {
     playstatus_stopped,

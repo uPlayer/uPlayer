@@ -7,15 +7,8 @@
 //
 
 #import "PlayerTrack.h"
-<<<<<<< HEAD
-#import "audioTag.h"
-=======
-
-
-
 #import "audioTag.h"
 
->>>>>>> eb33dbd211f0a9a2aaa5c588b10c9e76795eb186
 #import "fileCtrl.h"
 #import "threadpool.h"
 

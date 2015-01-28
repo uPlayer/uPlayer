@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-<<<<<<< HEAD
 #import "PlayerTypeDefines.h"
 #import "PlayerDocument.h"
 #import <Foundation/Foundation.h>
@@ -26,6 +25,4 @@
 }
 
 @end
-=======
-#import <Foundation/Foundation.h>
->>>>>>> eb33dbd211f0a9a2aaa5c588b10c9e76795eb186
+

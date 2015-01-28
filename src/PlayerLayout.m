@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-<<<<<<< HEAD
 #import "PlayerLayout.h"
 
 
@@ -24,5 +23,4 @@
 }
 
 @end
-=======
->>>>>>> eb33dbd211f0a9a2aaa5c588b10c9e76795eb186
+
