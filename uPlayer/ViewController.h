@@ -10,6 +10,7 @@
 
 @interface ViewController : NSViewController 
 
+-(void)filterTable:(NSString*)key;
 
 @end
 

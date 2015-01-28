@@ -12,36 +12,36 @@
 
 
 
-@interface ViewController () <NSTableViewDelegate , NSTableViewDataSource>
+@interface ViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
-@property (nonatomic,strong) NSArray *trackInfo; // TrackInfo
+@property (nonatomic,strong) NSArray *trackInfo,*trackInfoFiltered; // TrackInfo
+
 @property (nonatomic,strong) PlayerCore *core;
+
+@property (nonatomic) bool searchMode;
 @end
 
 @implementation ViewController
--(void)awakeFromNib
-{
-    
-}
+
 
 -(void)viewDidAppear
 {
     [super viewDidAppear];
     
-    NSLog(@"%p: %@",self.view.window,self.view.window.title);
-    self.view.window.title=player().document.windowName;//player.document.windowName;
-    NSLog(@"%@",player().document.windowName);
+    self.view.window.title=player().document.windowName;
     
-    NSLog(@"%@",[[NSApplication sharedApplication] mainWindow]);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%p: %@",self.view.window,self.view.window.title);
+    NSMenu *menu;
+    menu.delegate;
     
+    NSSearchField *search;
     
+    search.delegate;
     
     NSScrollView *tableContainer = [[NSScrollView alloc]initWithFrame:self.view.bounds];
     tableContainer.autoresizingMask = ~0;
@@ -85,14 +85,40 @@
     [self.tableView reloadData];
 }
 
+
+
+-(void)filterTable:(NSString*)key
+{
+    if (key.length > 0)
+    {
+        self.searchMode = true;
+        
+        //search title first.
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",key,key,key];
+        
+        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF.artist contains[c] %@ ||SELF.album contains[c] %@",key,key,key];
+        
+        self.trackInfoFiltered = [self.trackInfo filteredArrayUsingPredicate:predicate];
+        
+        self.trackInfoFiltered = [self.trackInfoFiltered arrayByAddingObjectsFromArray: [self.trackInfo filteredArrayUsingPredicate:predicate2]];
+        
+    }
+    else
+    {
+        self.searchMode = false;
+    }
+    
+    
+    [self.tableView reloadData];
+}
+
 -(void)doubleClicked
 {
     //int col = self.tableView.clickedColumn;
     int row = (int)self.tableView.clickedRow;
     if ( row >= 0)
     {
-        
-        TrackInfo *info = self.trackInfo[row];
+        TrackInfo *info = self.searchMode ?self.trackInfoFiltered[row] : self.trackInfo[row];
         
         if (self.core)
         {
@@ -102,6 +128,7 @@
             }
             else if ([self.core isStopped])
             {
+                
                 [self.core playURL: [NSURL fileURLWithPath:info.path ]];
             }
         }
@@ -109,6 +136,8 @@
         {
             self.core = [[PlayerCore alloc]init];
             [self.core playURL: [NSURL fileURLWithPath:info.path ]];
+            
+            
         }
         
     }
@@ -117,7 +146,7 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.trackInfo.count;
+    return self.searchMode ?self.trackInfoFiltered.count : self.trackInfo.count;
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -132,7 +161,7 @@
     textField.drawsBackground = false;
     textField.font = [NSFont systemFontOfSize:30];
     
-    TrackInfo *info = self.trackInfo[row];
+    TrackInfo *info = self.searchMode? self.trackInfoFiltered[row]: self.trackInfo[row];
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];

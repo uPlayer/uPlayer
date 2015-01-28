@@ -9,6 +9,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_OPTIONS(int, PlayOrder)
+{
+    playorder_single = 0,
+    playorder_default = 1,
+    playorder_random = 2,
+    playorder_repeat_single = 4,
+    playorder_repeat_list = 8,
+    playorder_shuffle = 16
+};
 
 
 enum PlayStatus
@@ -20,7 +29,4 @@ enum PlayStatus
 
 
 
-typedef enum : NSUInteger {
-    a = 0
-} PlayOrder;
 

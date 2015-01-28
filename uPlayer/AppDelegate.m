@@ -16,6 +16,16 @@
 
 @implementation AppDelegate
 
+- (IBAction)cmdFind:(id)sender
+{
+    NSLog(@"command: Find");
+    
+    
+   
+    
+    
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   

@@ -12,6 +12,9 @@
 #import "fileCtrl.h"
 #import "threadpool.h"
 
+#import "UPlayer.h"
+
+
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
@@ -69,3 +72,10 @@ NSArray* enumAudioFiles(NSString* path)
     
     return array;
 }
+
+
+void playTrack(TrackInfo *track)
+{
+    [player().core playURL: [NSURL fileURLWithPath:track.path]];
+}
+

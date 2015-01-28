@@ -22,6 +22,16 @@
 @end
 
 
+
+#if defined(__cplusplus)
+extern "C" {
+#endif /* defined(__cplusplus) */
+    
 UPlayer *player(); // the global and only instance.
 
 
+void playTrack(TrackInfo *track);
+
+#if defined(__cplusplus)
+}
+#endif /* defined(__cplusplus) */
