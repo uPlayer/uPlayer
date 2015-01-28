@@ -14,6 +14,7 @@
 		1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */; };
 		1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */; };
 		1E0B2C001A77575400B4FE14 /* PlayerTypeDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFF1A77575400B4FE14 /* PlayerTypeDefines.m */; };
+		1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E169A7F1A78D05D003D3D01 /* Localizable.strings */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.m */; };
 		1EDE8FAB1A773D810086677B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAA1A773D810086677B /* main.m */; };
 		1EDE8FAE1A773D810086677B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAD1A773D810086677B /* ViewController.m */; };
@@ -65,6 +66,9 @@
 		1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerImpl.mm; sourceTree = "<group>"; };
 		1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTypeDefines.h; sourceTree = "<group>"; };
 		1E0B2BFF1A77575400B4FE14 /* PlayerTypeDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTypeDefines.m; sourceTree = "<group>"; };
+		1E169A7E1A78D05D003D3D01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E169A831A78D295003D3D01 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		1E169A841A78D295003D3D01 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1EDE8FA21A773D810086677B /* uPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE8FA61A773D810086677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EDE8FA71A773D810086677B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 		1EDE8FA51A773D810086677B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E169A7F1A78D05D003D3D01 /* Localizable.strings */,
 				1EDE8FA61A773D810086677B /* Info.plist */,
 				1EDE8FAA1A773D810086677B /* main.m */,
 			);
@@ -269,8 +274,8 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 1EDE8F991A773D810086677B;
 			productRefGroup = 1EDE8FA31A773D810086677B /* Products */;
@@ -289,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
+				1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,10 +348,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1E169A7F1A78D05D003D3D01 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E169A7E1A78D05D003D3D01 /* Base */,
+				1E169A841A78D295003D3D01 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		1EDE8FB11A773D810086677B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1EDE8FB21A773D810086677B /* Base */,
+				1E169A831A78D295003D3D01 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

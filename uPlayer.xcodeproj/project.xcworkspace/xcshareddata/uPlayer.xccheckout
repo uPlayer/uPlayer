@@ -22,7 +22,7 @@
 		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
 		<string>../..</string>
 		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
-		<string>../..lyricsFetcher/</string>
+		<string>../..lyricsFetcher</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/uPlayer/uPlayer.git</string>
@@ -36,17 +36,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
+			<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
 			<key>IDESourceControlWCCName</key>
-			<string>lyricsFetcher</string>
+			<string>uPlayer</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
+			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>uPlayer</string>
+			<string>uPlayerlyricsFetcher</string>
 		</dict>
 	</array>
 </dict>

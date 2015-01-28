@@ -20,3 +20,6 @@
 @property (nonatomic,strong) PlayerCore *core;
 @end
 
+
+UPlayer *player(); // the global and only instance.
+

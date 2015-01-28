@@ -13,16 +13,8 @@
 
 -(bool)isPaused;
 
-/*!
- * @brief Determine if the player is pending
- * @return \c true if a \c Decoder has started decoding but not yet started rendering, \c false otherwise
- */
 -(bool)isPending;
 
-/*!
- * @brief Determine if the player is stopped
- * @return \c true if a \c Decoder has not started decoding or the decoder queue is empty, \c false otherwise
- */
 -(bool)isStopped;
 
 - (void) windowWillClose:(NSNotification *)notification;

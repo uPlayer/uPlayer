@@ -20,9 +20,28 @@
 @end
 
 @implementation ViewController
+-(void)awakeFromNib
+{
+    
+}
+
+-(void)viewDidAppear
+{
+    [super viewDidAppear];
+    
+    NSLog(@"%p: %@",self.view.window,self.view.window.title);
+    self.view.window.title=player().document.windowName;//player.document.windowName;
+    NSLog(@"%@",player().document.windowName);
+    
+    NSLog(@"%@",[[NSApplication sharedApplication] mainWindow]);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"%p: %@",self.view.window,self.view.window.title);
+    
+    
     
     NSScrollView *tableContainer = [[NSScrollView alloc]initWithFrame:self.view.bounds];
     tableContainer.autoresizingMask = ~0;
@@ -31,12 +50,11 @@
     self.tableView.autoresizingMask = ~0;
     self.tableView.rowHeight = 40.;
     
-    CGFloat heightHeader = 32;
+    //CGFloat heightHeader = 32;
     
     self.columnNames = [NSArray arrayWithObjects:@"#",@"artist",@"title",@"album",@"genre",@"year", nil];
-    
-    
     self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
+    
     
     NSLog(@"names: %@",self.columnNames);
     

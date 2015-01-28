@@ -6,6 +6,6 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-@interface PlayerLayout
+@interface PlayerLayout :NSObject
 
 @end

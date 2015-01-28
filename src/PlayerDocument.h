@@ -7,7 +7,10 @@
 //
 
 
-@interface PlayerDocument
+#import <Foundation/Foundation.h>
+
+@interface PlayerDocument : NSObject
+
 @property (nonatomic,strong) NSString *windowName;
 @property (nonatomic) bool resumeAtReboot;
 @property (nonatomic) int volume;
@@ -15,6 +18,7 @@
 @property (nonatomic) int playListIndex,trackIndex;
 @property (nonatomic) enum PlayStatus playStatus;
 @property (nonatomic) int listFontHeight,lyricsFontHeight;
+
 @end
 
 
