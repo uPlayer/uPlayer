@@ -30,7 +30,15 @@
 -(void)reloadTrackList
 {
     [self.tableView reloadData];
-    [self.tableView scrollRowToVisible: player().document.trackIndex ];
+    int row = player().document.trackIndex;
+    
+    
+    //int rowsPerPage = self.tableView.bounds.size.height / self.tableView.rowHeight;
+    
+    
+    [self.tableView scrollRowToVisible: row ];
+    
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
 }
 
 -(void)viewDidAppear

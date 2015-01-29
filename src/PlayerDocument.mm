@@ -12,8 +12,25 @@
 #import "serialize.h"
 
 
-const char filePath[] = "/Users/liaogang/uPlayer.document";
 
+NSString *getDocumentFilePath()
+{
+    NSString *path = NSHomeDirectoryForUser (NSFullUserName() );
+   
+    path = [path stringByAppendingPathComponent:@".uPlayer"];
+    
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (error) {
+        NSLog(@"%@",error);
+    }
+    
+    path = [path stringByAppendingPathComponent:@"uPlayer.document"];
+    
+    
+    return path;
+}
 
 @interface PlayerDocument ()
 @end
@@ -36,7 +53,7 @@ const char filePath[] = "/Users/liaogang/uPlayer.document";
 
 -(bool)load
 {
-    FILE *file = fopen(filePath, "r");
+    FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
     if (file)
     {
         *file >> _resumeAtReboot  >> _volume >> _playOrder >> _playListIndex >> _trackIndex >> _playStatus >> _fontHeight;
@@ -52,7 +69,7 @@ const char filePath[] = "/Users/liaogang/uPlayer.document";
 
 -(bool)save
 {
-    FILE *file = fopen(filePath, "w");
+    FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
     if (file)
     {
         

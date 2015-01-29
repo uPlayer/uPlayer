@@ -25,7 +25,9 @@
     [openDlg setCanChooseDirectories: YES ];
     [openDlg setAllowsMultipleSelection:NO];
     
-    if ( [openDlg runModalForDirectory:@"/Users" file:nil] == NSOKButton )
+    NSString *initPath = NSSearchPathForDirectoriesInDomains( NSMusicDirectory, NSUserDomainMask, false).firstObject;
+    
+    if ( [openDlg runModalForDirectory:initPath file:nil] == NSOKButton )
     {
         NSArray* files = [openDlg filenames];
         if (files.count > 0) {
@@ -45,11 +47,7 @@
 - (IBAction)cmdFind:(id)sender
 {
     NSLog(@"command: Find");
-    
-    
-   
-    
-    
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
