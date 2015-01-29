@@ -10,12 +10,14 @@
 #import "PlayerEngine.h"
 #import "PlayerMessage.h"
 
+#import "UPlayer.h"
 
 #include <atomic>
 #include <SFBAudioEngine/AudioDecoder.h>
 #include <SFBAudioEngine/AudioPlayer.h>
 #include <SFBAudioEngine/AudioMetadata.h>
 
+using namespace SFB::Audio;
 
 
 enum ePlayerFlags : unsigned int {
@@ -27,6 +29,7 @@ enum ePlayerFlags : unsigned int {
 {
     std::atomic_uint	_playerFlags;
     dispatch_source_t	_timer;
+    Player::PlayerState _playState;
 }
 @property (nonatomic,assign) SFB::Audio::Player *player;
 @end
@@ -78,10 +81,26 @@ enum ePlayerFlags : unsigned int {
                 return;
             }
             
-            if(!_player->IsPlaying())
-                postEvent(EventID_track_resumed, nil);
-            else
-                postEvent(EventID_track_paused, nil);
+            Player::PlayerState state = _player->GetPlayerState();
+            
+            if (_playState != state)
+            {
+                if( state == Player::PlayerState::Paused )
+                    postEvent(EventID_track_paused, nil);
+                else if (state == Player::PlayerState::Stopped)
+                    postEvent(EventID_track_stopped, nil);
+                else if ( state == Player::PlayerState::Playing)
+                {
+                    if (_playState == Player::PlayerState::Stopped)
+                        postEvent(EventID_track_started, nil);
+                    else if ( _playState == Player::PlayerState::Paused)
+                        postEvent(EventID_track_resumed, nil);
+                }
+            }
+            
+            if (state != Player::PlayerState::Pending)
+                _playState = state;
+            
             
             SInt64 currentFrame, totalFrames;
             CFTimeInterval currentTime, totalTime;
@@ -109,7 +128,11 @@ enum ePlayerFlags : unsigned int {
 
 -(void)playNext
 {
+    PlayerDocument *d = player().document;
     
+    TrackInfo* track = d.trackInfoList[d.trackIndex];
+    
+    playTrack(track);
 }
 
 -(void)dealloc
@@ -178,6 +201,7 @@ enum ePlayerFlags : unsigned int {
 {
     return _player->Stop();
 }
+
 
 
 @end

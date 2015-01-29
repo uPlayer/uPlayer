@@ -68,9 +68,6 @@
     self.columnNames = [NSArray arrayWithObjects:@"#",@"artist",@"title",@"album",@"genre",@"year", nil];
     self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
     
-    
-    NSLog(@"names: %@",self.columnNames);
-    
     for (int i = 0; i < self.columnNames.count; i++)
     {
         NSTableColumn *cn = [[NSTableColumn alloc]initWithIdentifier: @"idn"];

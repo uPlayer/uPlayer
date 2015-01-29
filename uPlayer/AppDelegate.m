@@ -33,8 +33,6 @@
         if (files.count > 0) {
             NSString* fileName = files.firstObject;
             
-            NSLog(@"directory: %@",fileName);
-            
             PlayerDocument *document = player().document;
             document.trackInfoList = enumAudioFiles(fileName);
             
