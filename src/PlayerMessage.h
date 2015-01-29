@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, EventID)
     EventID_track_selected,
     EventID_track_progress_changed,
     EventID_playerqueue_changed,
+    EventID_to_reload_tracklist,
     EventID_to_save_config,
     EventID_to_reload_lyrics,
     EventID_to_center_item,

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0B2BF31A77536800B4FE14 /* PlayerDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BEE1A77536800B4FE14 /* PlayerDocument.m */; };
+		1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */; };
 		1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */; };
 		1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF21A77536800B4FE14 /* UPlayer.mm */; };
 		1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */; };
@@ -17,6 +17,7 @@
 		1E169A891A78E701003D3D01 /* windowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.m */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
+		1E5F9ECA1A7A2DB2000360D7 /* serialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* serialize.mm */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.m */; };
 		1EDE8FAB1A773D810086677B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAA1A773D810086677B /* main.m */; };
 		1EDE8FAE1A773D810086677B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAD1A773D810086677B /* ViewController.m */; };
@@ -56,7 +57,7 @@
 
 /* Begin PBXFileReference section */
 		1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDocument.h; sourceTree = "<group>"; };
-		1E0B2BEE1A77536800B4FE14 /* PlayerDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDocument.m; sourceTree = "<group>"; };
+		1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerDocument.mm; sourceTree = "<group>"; };
 		1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerLayout.h; sourceTree = "<group>"; };
 		1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerLayout.m; sourceTree = "<group>"; };
 		1E0B2BF11A77536800B4FE14 /* UPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPlayer.h; sourceTree = "<group>"; };
@@ -76,6 +77,8 @@
 		1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEngine.h; sourceTree = "<group>"; };
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
 		1E5F9EC71A7A2607000360D7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		1E5F9EC81A7A2DB2000360D7 /* serialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = serialize.mm; sourceTree = "<group>"; };
+		1E5F9EC91A7A2DB2000360D7 /* serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serialize.h; sourceTree = "<group>"; };
 		1EDE8FA21A773D810086677B /* uPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE8FA61A773D810086677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EDE8FA71A773D810086677B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 		1E0B2BEC1A77536800B4FE14 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1E5F9EC91A7A2DB2000360D7 /* serialize.h */,
+				1E5F9EC81A7A2DB2000360D7 /* serialize.mm */,
 				1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */,
 				1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */,
 				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
@@ -128,7 +133,7 @@
 				1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */,
 				1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */,
 				1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */,
-				1E0B2BEE1A77536800B4FE14 /* PlayerDocument.m */,
+				1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */,
 				1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */,
 				1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */,
 				1E0B2BF11A77536800B4FE14 /* UPlayer.h */,
@@ -331,6 +336,7 @@
 				1EDE8FAE1A773D810086677B /* ViewController.m in Sources */,
 				1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */,
 				1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */,
+				1E5F9ECA1A7A2DB2000360D7 /* serialize.mm in Sources */,
 				1EDE8FAB1A773D810086677B /* main.m in Sources */,
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
@@ -339,7 +345,7 @@
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
 				1E169A861A78DB22003D3D01 /* MenuDelegate.m in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.m in Sources */,
-				1E0B2BF31A77536800B4FE14 /* PlayerDocument.m in Sources */,
+				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

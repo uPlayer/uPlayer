@@ -68,6 +68,12 @@
                                                 <action selector="openDocument:" target="Ady-hI-5gd" id="bVn-NM-KNZ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Open Directory" id="ICK-h2-7oe">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdOpenDirectory:" target="Voe-Tx-rLC" id="f5f-XO-lOb"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Open Recent" id="tXI-mr-wws">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">

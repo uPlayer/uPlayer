@@ -38,6 +38,7 @@
 
 @end
 
+/// @todo nsprogress ?
 
 @interface ProgressInfo : NSObject
 @property (nonatomic) double current,total,fractionComplete;

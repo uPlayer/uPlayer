@@ -22,6 +22,16 @@
 
 @implementation ViewController
 
+-(void)awakeFromNib
+{
+    addObserverForEvent(self, @selector(reloadTrackList), EventID_to_reload_tracklist);
+}
+
+-(void)reloadTrackList
+{
+    [self.tableView reloadData];
+    [self.tableView scrollRowToVisible: player().document.trackIndex ];
+}
 
 -(void)viewDidAppear
 {
@@ -65,9 +75,7 @@
     
     self.tableView.doubleAction=@selector(doubleClicked);
     
-    NSString *path = @"/Users/liaogang/Music";
-    PlayerDocument *document = player().document;
-    document.trackInfoList = enumAudioFiles(path);
+    
     
     self.tableView.usesAlternatingRowBackgroundColors = true;
     self.tableView.delegate = self;

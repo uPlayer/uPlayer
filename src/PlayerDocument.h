@@ -10,15 +10,25 @@
 #import <Foundation/Foundation.h>
 
 @interface PlayerDocument : NSObject
-@property (nonatomic,strong) NSString *windowName;
-@property (nonatomic) bool resumeAtReboot;
+
+/// value need to searialize.
+@property (nonatomic) int resumeAtReboot;
 @property (nonatomic) int volume;
-@property (nonatomic) PlayOrder playOrder;
+@property (nonatomic) int playOrder; //enum PlayOrder
 @property (nonatomic) int playListIndex,trackIndex;
-@property (nonatomic) enum PlayStatus playStatus;
-@property (nonatomic) int listFontHeight,lyricsFontHeight;
+@property (nonatomic) int playStatus;//enum PlayStatus
+@property (nonatomic) int fontHeight;
 
 @property (nonatomic,strong) NSArray *trackInfoList;
+
+
+/// value not need to .
+@property (nonatomic,strong) NSString *windowName;
+
+///
+-(bool)save;
+-(bool)load;
+
 @end
 
 

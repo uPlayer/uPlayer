@@ -11,6 +11,8 @@
 #import "UPlayer.h"
 #import "PlayerMessage.h"
 
+
+
 @interface WindowController ()
 <NSToolbarDelegate>
 @property (weak) IBOutlet NSComboBox *orderCombo;
@@ -66,13 +68,19 @@
     
     self.window.title=n.object;
 }
-
-- (void) windowWillClose:(NSNotification *)notification
+-(void)dealloc
 {
-    removeObserver(self);
     
-    [player().engine stop];
+    removeObserver(self);
 }
 
+
+
+
+-(void)awakeFromNib
+{
+    /// @todo remove the progress bar thumb when stopped.
+    
+}
 @end
 

@@ -18,6 +18,7 @@ const char *arrEvent[] =
     "track_selected",
     "track_progress_changed",
     "playerqueue_changed",
+    "to_reload_tracklist",
     "to_save_config",
     "to_reload_lyrics",
     "to_center_item",
