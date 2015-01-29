@@ -7,9 +7,8 @@
 //
 
 
+@interface PlayerEngine : NSObject
 
-
-@interface PlayerCore: NSObject
 
 -(bool)isPlaying ;
 
@@ -19,7 +18,6 @@
 
 -(bool)isStopped;
 
-- (void) windowWillClose:(NSNotification *)notification;
 
 - (void) playPause:(id)sender;
 
@@ -37,6 +35,10 @@
 
 - (BOOL) stop;
 
+
 @end
 
 
+@interface ProgressInfo : NSObject
+@property (nonatomic) double current,total,fractionComplete;
+@end

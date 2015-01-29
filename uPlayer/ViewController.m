@@ -9,16 +9,14 @@
 #import "ViewController.h"
 #import "UPlayer.h"
 
+#import "PlayerMessage.h"
 
 
 
 @interface ViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
-@property (nonatomic,strong) NSArray *trackInfo,*trackInfoFiltered; // TrackInfo
-
-@property (nonatomic,strong) PlayerCore *core;
-
+@property (nonatomic,strong) NSArray *trackInfoFiltered; // TrackInfo
 @property (nonatomic) bool searchMode;
 @end
 
@@ -35,19 +33,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    CGFloat bottomBarHeight = 22.0;
     
-    NSMenu *menu;
-    menu.delegate;
+    NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
     
-    NSSearchField *search;
-    
-    search.delegate;
-    
-    NSScrollView *tableContainer = [[NSScrollView alloc]initWithFrame:self.view.bounds];
-    tableContainer.autoresizingMask = ~0;
+    NSScrollView *tableContainer = [[NSScrollView alloc]initWithFrame:rc];
+    tableContainer.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     
     self.tableView = [[NSTableView alloc]initWithFrame:tableContainer.bounds];
-    self.tableView.autoresizingMask = ~0;
+    self.tableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;;
     self.tableView.rowHeight = 40.;
     
     //CGFloat heightHeader = 32;
@@ -70,9 +65,9 @@
     
     self.tableView.doubleAction=@selector(doubleClicked);
     
-    const NSString *path = @"/Users/liaogang/Music";
-    
-    self.trackInfo= enumAudioFiles(path);
+    NSString *path = @"/Users/liaogang/Music";
+    PlayerDocument *document = player().document;
+    document.trackInfoList = enumAudioFiles(path);
     
     self.tableView.usesAlternatingRowBackgroundColors = true;
     self.tableView.delegate = self;
@@ -81,7 +76,7 @@
     tableContainer.documentView = self.tableView;
     tableContainer.hasVerticalScroller = true;
     [self.view addSubview:tableContainer];
-
+    
     [self.tableView reloadData];
 }
 
@@ -98,9 +93,9 @@
         
         NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF.artist contains[c] %@ ||SELF.album contains[c] %@",key,key,key];
         
-        self.trackInfoFiltered = [self.trackInfo filteredArrayUsingPredicate:predicate];
+        self.trackInfoFiltered = [player().document.trackInfoList filteredArrayUsingPredicate:predicate];
         
-        self.trackInfoFiltered = [self.trackInfoFiltered arrayByAddingObjectsFromArray: [self.trackInfo filteredArrayUsingPredicate:predicate2]];
+        self.trackInfoFiltered = [self.trackInfoFiltered arrayByAddingObjectsFromArray: [player().document.trackInfoList filteredArrayUsingPredicate:predicate2]];
         
     }
     else
@@ -115,30 +110,26 @@
 -(void)doubleClicked
 {
     //int col = self.tableView.clickedColumn;
-    int row = (int)self.tableView.clickedRow;
-    if ( row >= 0)
+    PlayerDocument *document = player().document;
+    
+    document.trackIndex = (int) self.tableView.clickedRow;
+    
+    if ( document.trackIndex >= 0)
     {
-        TrackInfo *info = self.searchMode ?self.trackInfoFiltered[row] : self.trackInfo[row];
+        TrackInfo *info = self.searchMode ? self.trackInfoFiltered[document.trackIndex] : player().document.trackInfoList[document.trackIndex];
         
-        if (self.core)
+        PlayerEngine *eg = player().engine;
+        
+        if ([eg isPlaying] || [eg isPaused])
         {
-            if ([self.core isPlaying] || [self.core isPaused])
-            {
-                [self.core playPause:nil];
-            }
-            else if ([self.core isStopped])
-            {
-                
-                [self.core playURL: [NSURL fileURLWithPath:info.path ]];
-            }
+            [eg playPause:nil];
         }
-        else
+        else if ([eg isStopped])
         {
-            self.core = [[PlayerCore alloc]init];
-            [self.core playURL: [NSURL fileURLWithPath:info.path ]];
-            
-            
+            [eg playURL: [NSURL fileURLWithPath:info.path ]];
+            postEvent(EventID_to_change_player_title, info.title);
         }
+        
         
     }
     
@@ -146,7 +137,7 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.searchMode ?self.trackInfoFiltered.count : self.trackInfo.count;
+    return self.searchMode ?self.trackInfoFiltered.count : player().document.trackInfoList.count;
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -168,7 +159,7 @@
     }
 
 
-    TrackInfo *info = self.searchMode? self.trackInfoFiltered[row]: self.trackInfo[row];
+    TrackInfo *info = self.searchMode? self.trackInfoFiltered[row]: player().document.trackInfoList[row];
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
@@ -205,4 +196,13 @@
     // Update the view, if already loaded.
 }
 
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+    printf("key pressed: %s\n", [[theEvent description] cString]);
+    
+    if (theEvent.characters ) {
+        
+    }
+}
 @end

@@ -12,13 +12,12 @@
 #import "PlayerTrack.h"
 #import "PlayerDocument.h"
 #import "PlayerLayout.h"
-#import "PlayerCore.h"
-
+#import "PlayerEngine.h"
 
 @interface UPlayer : NSObject
 @property (nonatomic,strong) PlayerDocument *document;
 @property (nonatomic,strong) PlayerLayout *layout;
-@property (nonatomic,strong) PlayerCore *core;
+@property (nonatomic,strong) PlayerEngine *engine;
 @end
 
 

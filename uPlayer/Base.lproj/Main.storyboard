@@ -659,7 +659,7 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                         <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="108D3BC3-664A-4DB1-88C8-5DC1DF07920B" label="" paletteLabel="Order" id="FQ4-wm-eyT">
+                                <toolbarItem implicitItemIdentifier="108D3BC3-664A-4DB1-88C8-5DC1DF07920B" label="Order" paletteLabel="Order" id="FQ4-wm-eyT">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="79" height="26"/>
                                     <size key="maxSize" width="99" height="26"/>
@@ -681,14 +681,14 @@
                                         </connections>
                                     </comboBox>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="BAB6B808-6508-4563-9B74-7E76B16EA9D5" label="" paletteLabel="Progress" id="pmD-eR-0dO">
+                                <toolbarItem implicitItemIdentifier="BAB6B808-6508-4563-9B74-7E76B16EA9D5" label="Progress" paletteLabel="Progress" id="pmD-eR-0dO">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="21"/>
                                     <size key="maxSize" width="159" height="21"/>
                                     <slider key="view" verticalHuggingPriority="750" id="Wg7-DP-k7t">
                                         <rect key="frame" x="0.0" y="14" width="159" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="EJJ-Ka-gnN"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="EJJ-Ka-gnN"/>
                                         <connections>
                                             <action selector="actionProgressSlider:" target="B8D-0N-5wS" id="Udb-1N-nwX"/>
                                         </connections>

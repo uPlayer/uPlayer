@@ -22,7 +22,7 @@
     {
         self.document = [[PlayerDocument alloc ] init];
         self.layout= [[PlayerLayout alloc] init];
-        self.core = [[PlayerCore alloc] init];
+        self.engine= [[PlayerEngine alloc] init];
         
     }
     return self;

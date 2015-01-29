@@ -76,6 +76,6 @@ NSArray* enumAudioFiles(NSString* path)
 
 void playTrack(TrackInfo *track)
 {
-    [player().core playURL: [NSURL fileURLWithPath:track.path]];
+    [player().engine playURL: [NSURL fileURLWithPath:track.path]];
 }
 

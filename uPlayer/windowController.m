@@ -9,6 +9,7 @@
 #import "windowController.h"
 #import "ViewController.h"
 #import "UPlayer.h"
+#import "PlayerMessage.h"
 
 @interface WindowController ()
 <NSToolbarDelegate>
@@ -27,33 +28,50 @@
     
     [vc filterTable:sf.stringValue];
 }
+
 - (IBAction)actionChangePlayOrder:(id)sender {
 }
+
 - (IBAction)actionProgressSlider:(id)sender {
 }
+
 - (IBAction)actionVolumnSlider:(id)sender {
 }
 
--(instancetype)init
+-(void)windowWillLoad
 {
-    self =[ super init];
-    if (self) {
-        
-        
-        
-    }
+    addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
     
-    return self;
+    addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
+    
+}
+
+
+-(void)updateProgressInfo:(NSNotification*)n
+{
+    ProgressInfo *info = n.object;
+    
+    NSAssert([info isKindOfClass:[ProgressInfo class]], nil);
+    
+    
+    [self.progressSlider setMinValue:0];
+    [self.progressSlider setMaxValue:info.total];
+    [self.progressSlider setDoubleValue:info.current];
+    
+}
+
+-(void)setWindowTitle:(NSNotification*)n
+{
+    NSAssert([n.object isKindOfClass:[NSString class]],nil);
+    
+    self.window.title=n.object;
 }
 
 - (void) windowWillClose:(NSNotification *)notification
 {
-    [player().core stop];
-}
-
--(void)awakeFromNib
-{
-    [self.window setContentBorderThickness:22 forEdge:NSMinYEdge];
+    removeObserver(self);
+    
+    [player().engine stop];
 }
 
 @end
