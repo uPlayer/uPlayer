@@ -96,4 +96,9 @@
     return _player->Enqueue((__bridge CFURLRef)url);
 }
 
+- (BOOL) stop
+{
+    return _player->Stop();
+}
+
 @end

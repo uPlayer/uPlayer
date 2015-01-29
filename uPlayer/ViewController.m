@@ -151,20 +151,29 @@
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    int column = [self.tableView.tableColumns indexOfObject:tableColumn];
+    NSInteger column = [self.tableView.tableColumns indexOfObject:tableColumn];
     
-    NSTextField *textField = [[NSTextField alloc]init];
+    NSString *identifier = @"t_itf";
+    NSTextField *textField = (NSTextField *)[self.tableView makeViewWithIdentifier:identifier owner:self];
     
-    textField.autoresizingMask = ~0;
-    
-    textField.bordered = false;
-    textField.drawsBackground = false;
-    textField.font = [NSFont systemFontOfSize:30];
-    
+    if (textField == nil)
+    {
+        textField = [[NSTextField alloc]initWithFrame:NSMakeRect(0, 0, tableColumn.width, 0)];
+        textField.autoresizingMask = ~0 ;
+        textField.bordered = false ;
+        textField.drawsBackground = false ;
+        textField.font = [NSFont systemFontOfSize:30] ;
+        textField.editable = false ;
+        textField.identifier=identifier;
+    }
+
+
     TrackInfo *info = self.searchMode? self.trackInfoFiltered[row]: self.trackInfo[row];
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
+        textField.editable = false;
+        
     }
     else if(column == 1)
     {

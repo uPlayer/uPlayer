@@ -35,6 +35,8 @@
 
 - (BOOL) enqueueURL:(NSURL *)url;
 
+- (BOOL) stop;
+
 @end
 
 

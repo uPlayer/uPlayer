@@ -655,13 +655,59 @@
                 <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" title="uPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="718" y="383" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                         <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="0h2-9c-cli"/>
-                                <toolbarItem implicitItemIdentifier="707DB16C-CFAD-4386-85E8-71E9A49B8A4F" label="Search" paletteLabel="Custom View" id="T1d-Pw-hE4">
+                                <toolbarItem implicitItemIdentifier="108D3BC3-664A-4DB1-88C8-5DC1DF07920B" label="" paletteLabel="Order" id="FQ4-wm-eyT">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="79" height="26"/>
+                                    <size key="maxSize" width="99" height="26"/>
+                                    <comboBox key="view" verticalHuggingPriority="750" id="w9j-sZ-jaX">
+                                        <rect key="frame" x="0.0" y="14" width="79" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="a2q-TB-wLQ">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <objectValues>
+                                                <string>Item 1</string>
+                                                <string>Item 2</string>
+                                                <string>Item 3</string>
+                                            </objectValues>
+                                        </comboBoxCell>
+                                        <connections>
+                                            <action selector="actionChangePlayOrder:" target="B8D-0N-5wS" id="ElK-Ef-4Nb"/>
+                                        </connections>
+                                    </comboBox>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="BAB6B808-6508-4563-9B74-7E76B16EA9D5" label="" paletteLabel="Progress" id="pmD-eR-0dO">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="21"/>
+                                    <size key="maxSize" width="159" height="21"/>
+                                    <slider key="view" verticalHuggingPriority="750" id="Wg7-DP-k7t">
+                                        <rect key="frame" x="0.0" y="14" width="159" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="EJJ-Ka-gnN"/>
+                                        <connections>
+                                            <action selector="actionProgressSlider:" target="B8D-0N-5wS" id="Udb-1N-nwX"/>
+                                        </connections>
+                                    </slider>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="A92D386B-6596-4220-9333-3C61F944BF15" label="" paletteLabel="Volumn" id="1U9-cg-qxf">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="21"/>
+                                    <size key="maxSize" width="96" height="21"/>
+                                    <slider key="view" verticalHuggingPriority="750" id="mlb-Ky-CB6">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="flZ-HD-eeR"/>
+                                        <connections>
+                                            <action selector="actionVolumnSlider:" target="B8D-0N-5wS" id="NVI-7U-07C"/>
+                                        </connections>
+                                    </slider>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="707DB16C-CFAD-4386-85E8-71E9A49B8A4F" label="Search" paletteLabel="Search" id="T1d-Pw-hE4">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="22"/>
                                     <size key="maxSize" width="96" height="22"/>
@@ -679,12 +725,12 @@
                                     </searchField>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="Fm4-g3-JmQ"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="Chz-P6-s6E"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Ml3-NW-m2V"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kVY-E4-A0e"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="Fm4-g3-JmQ"/>
+                                <toolbarItem reference="FQ4-wm-eyT"/>
+                                <toolbarItem reference="pmD-eR-0dO"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
                             </defaultToolbarItems>
@@ -692,9 +738,14 @@
                                 <outlet property="delegate" destination="B8D-0N-5wS" id="Ijt-wc-9Og"/>
                             </connections>
                         </toolbar>
+                        <contentBorderThickness minY="22"/>
                     </window>
                     <connections>
+                        <outlet property="orderCombo" destination="w9j-sZ-jaX" id="8Vp-6T-mVp"/>
+                        <outlet property="progressSlider" destination="Wg7-DP-k7t" id="Kg9-SN-45h"/>
+                        <outlet property="searchField" destination="3Z0-st-x37" id="J6V-hx-q0b"/>
                         <outlet property="toolBar" destination="9tp-fk-1gk" id="Psb-IG-UHj"/>
+                        <outlet property="volumnSlider" destination="mlb-Ky-CB6" id="gHg-e6-Jq3"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
@@ -707,7 +758,7 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="240"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>

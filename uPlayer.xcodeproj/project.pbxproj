@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E0B2BF31A77536800B4FE14 /* PlayerDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BEE1A77536800B4FE14 /* PlayerDocument.m */; };
 		1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */; };
-		1E0B2BF51A77536800B4FE14 /* UPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF21A77536800B4FE14 /* UPlayer.m */; };
+		1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF21A77536800B4FE14 /* UPlayer.mm */; };
 		1E0B2BF81A77542E00B4FE14 /* PlayerCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF71A77542E00B4FE14 /* PlayerCore.mm */; };
 		1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */; };
 		1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */; };
@@ -17,6 +17,7 @@
 		1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E169A7F1A78D05D003D3D01 /* Localizable.strings */; };
 		1E169A861A78DB22003D3D01 /* MenuDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A851A78DB22003D3D01 /* MenuDelegate.m */; };
 		1E169A891A78E701003D3D01 /* windowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.m */; };
+		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.m */; };
 		1EDE8FAB1A773D810086677B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAA1A773D810086677B /* main.m */; };
 		1EDE8FAE1A773D810086677B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAD1A773D810086677B /* ViewController.m */; };
@@ -60,7 +61,7 @@
 		1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerLayout.h; sourceTree = "<group>"; };
 		1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerLayout.m; sourceTree = "<group>"; };
 		1E0B2BF11A77536800B4FE14 /* UPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPlayer.h; sourceTree = "<group>"; };
-		1E0B2BF21A77536800B4FE14 /* UPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPlayer.m; sourceTree = "<group>"; };
+		1E0B2BF21A77536800B4FE14 /* UPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UPlayer.mm; sourceTree = "<group>"; };
 		1E0B2BF61A77542E00B4FE14 /* PlayerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCore.h; sourceTree = "<group>"; };
 		1E0B2BF71A77542E00B4FE14 /* PlayerCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerCore.mm; sourceTree = "<group>"; };
 		1E0B2BF91A7754D000B4FE14 /* PlayerTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTrack.h; sourceTree = "<group>"; };
@@ -75,6 +76,8 @@
 		1E169A871A78DB7D003D3D01 /* MenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuDelegate.h; sourceTree = "<group>"; };
 		1E169A881A78E701003D3D01 /* windowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = windowController.m; sourceTree = "<group>"; };
 		1E169A8A1A78E715003D3D01 /* windowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = windowController.h; sourceTree = "<group>"; };
+		1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMessage.h; sourceTree = "<group>"; };
+		1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMessage.mm; sourceTree = "<group>"; };
 		1EDE8FA21A773D810086677B /* uPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE8FA61A773D810086677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EDE8FA71A773D810086677B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 		1E0B2BEC1A77536800B4FE14 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */,
+				1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */,
 				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
 				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
 				1E0B2BFF1A77575400B4FE14 /* PlayerTypeDefines.m */,
@@ -130,7 +135,7 @@
 				1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */,
 				1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */,
 				1E0B2BF11A77536800B4FE14 /* UPlayer.h */,
-				1E0B2BF21A77536800B4FE14 /* UPlayer.m */,
+				1E0B2BF21A77536800B4FE14 /* UPlayer.mm */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -167,8 +172,8 @@
 				1EDE8FAD1A773D810086677B /* ViewController.m */,
 				1E169A871A78DB7D003D3D01 /* MenuDelegate.h */,
 				1E169A851A78DB22003D3D01 /* MenuDelegate.m */,
-				1EDE8FAF1A773D810086677B /* Images.xcassets */,
 				1EDE8FB11A773D810086677B /* Main.storyboard */,
+				1EDE8FAF1A773D810086677B /* Images.xcassets */,
 				1EDE8FA51A773D810086677B /* Supporting Files */,
 			);
 			path = uPlayer;
@@ -325,7 +330,7 @@
 			files = (
 				1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */,
 				1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */,
-				1E0B2BF51A77536800B4FE14 /* UPlayer.m in Sources */,
+				1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */,
 				1EDE8FAE1A773D810086677B /* ViewController.m in Sources */,
 				1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */,
 				1E0B2C001A77575400B4FE14 /* PlayerTypeDefines.m in Sources */,
@@ -335,6 +340,7 @@
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
 				1E169A891A78E701003D3D01 /* windowController.m in Sources */,
 				1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */,
+				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
 				1E169A861A78DB22003D3D01 /* MenuDelegate.m in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.m in Sources */,
