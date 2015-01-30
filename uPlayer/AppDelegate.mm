@@ -21,6 +21,8 @@
 @implementation AppDelegate
 - (IBAction)cmdNewPlayerList:(id)sender {
 
+    //NSPreferences *pre;
+    
     PlayerDocument *document = player().document;
     PlayerlList *lList = document.playerlList;
     
@@ -65,6 +67,7 @@
 {
     [player().document load];
     postEvent(EventID_to_reload_tracklist, nil);
+    postEvent(EventID_player_document_loaded, nil);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

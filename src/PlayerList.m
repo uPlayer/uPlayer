@@ -73,6 +73,7 @@
             track.info=info;
             track.index=index;
             [arr addObject:track];
+            index++;
         }
         
         [self.playerTrackList addObjectsFromArray: arr];

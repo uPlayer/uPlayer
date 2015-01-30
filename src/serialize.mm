@@ -355,7 +355,7 @@ NSString *getDocumentFilePath()
         self.playStatus=playStatus;
         self.fontHeight=fontHeight;
         
-        self.playerlList = [[PlayerlList alloc]init];
+        assert(self.playerlList);
         [self.playerlList loadFrom:file];
         
         

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C99d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="6254"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -21,7 +22,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="cXs-mD-VeK" kind="show" id="eAD-9U-TCp"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -781,6 +786,75 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-37" y="769"/>
+        </scene>
+        <!--Tab View Controller-->
+        <scene sceneID="qlU-lg-upG">
+            <objects>
+                <tabViewController id="cXs-mD-VeK" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem identifier="" id="Gmz-bv-EoF"/>
+                        <tabViewItem identifier="" id="pRG-Jo-oZ1"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="DOg-b7-Xak">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                    </tabView>
+                    <connections>
+                        <segue destination="nV6-9K-d5L" kind="relationship" relationship="tabItems" id="tUK-uV-20W"/>
+                        <segue destination="GhU-n2-vCT" kind="relationship" relationship="tabItems" id="36W-d9-CbN"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="0Bm-uw-ucq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="805"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3aC-UV-Rbc">
+            <objects>
+                <viewController id="nV6-9K-d5L" sceneMemberID="viewController">
+                    <view key="view" id="L4J-nL-fiM">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mT-fG-fsV">
+                                <rect key="frame" x="65" y="63" width="291" height="217"/>
+                                <clipView key="contentView" misplaced="YES" id="78n-VO-uYg">
+                                    <rect key="frame" x="1" y="1" width="274" height="200"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <amWorkflowView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-tR-beG"/>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="h7x-e8-tCE">
+                                    <rect key="frame" x="1" y="201" width="274" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="tKP-mz-sFd">
+                                    <rect key="frame" x="275" y="1" width="15" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="OiC-2J-mvR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1126" y="624"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="k4Y-uf-aZw">
+            <objects>
+                <viewController id="GhU-n2-vCT" sceneMemberID="viewController">
+                    <view key="view" id="Mhw-nd-Cjq">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="7qr-0P-1uM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1126" y="986"/>
         </scene>
     </scenes>
 </document>

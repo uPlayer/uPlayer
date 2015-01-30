@@ -36,6 +36,16 @@ enum ePlayerFlags : unsigned int {
 
 @implementation PlayerEngine
 
+-(void)needResumePlayAtBoot
+{
+    PlayerDocument *doc = player().document;
+    if (doc.resumeAtReboot)
+    {
+        //if ( isPlaying)
+            playTrack( [[doc.playerlList getSelectedList] getSelectedItem].info);
+    }
+}
+
 -(instancetype)init
 {
     self = [super init];
@@ -43,6 +53,8 @@ enum ePlayerFlags : unsigned int {
         
         self.player = new SFB::Audio::Player();
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped);
+        addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
+        
         
         _playState = Player::PlayerState::Stopped;
         
@@ -133,6 +145,8 @@ enum ePlayerFlags : unsigned int {
     PlayerDocument *d = player().document;
     PlayerList *list = d.currPlayingList;
     PlayerTrack *track = d.currPlayingTrack;
+    
+    assert(list);
     
     if ( track.index < [list count] )
     {

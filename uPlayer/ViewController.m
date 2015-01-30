@@ -32,12 +32,13 @@
 
 -(void)reloadTrackList
 {
-    [self.tableView reloadData];
-    int row = self.playerlList.selectIndex;
+    /// @todo save top index.
     
+    
+    [self.tableView reloadData];
+    int row = [self.playerlList getSelectedList].selectIndex;
     
     //int rowsPerPage = self.tableView.bounds.size.height / self.tableView.rowHeight;
-    
     
     [self.tableView scrollRowToVisible: row ];
     
@@ -157,6 +158,8 @@
             playTrack(track.info);
             
             document.currPlayingTrack = track;
+            
+            document.currPlayingList = [_playerlList getSelectedList];
             
             postEvent(EventID_to_change_player_title, track.info.title);
         }
