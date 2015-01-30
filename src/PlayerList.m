@@ -45,15 +45,16 @@
 
 -(void)addItems:(NSArray*)items
 {
-    int count = items.count;
+    int count = (int)items.count;
     if (count > 0) {
         assert( [items.firstObject isKindOfClass:[PlayerTrack class] ]);
         
         
-        int index =self.playerTrackList.count;
+        int index = (int) self.playerTrackList.count;
         
         for (PlayerTrack *track in items) {
             track.index=index;
+            index++;
         }
         
         [self.playerTrackList addObjectsFromArray: items];
@@ -62,10 +63,10 @@
 
 -(void)addTrackInfoItems:(NSArray*)items
 {
-     int count = items.count;
+     int count = (int) items.count;
     if (count > 0) {
         assert( [items.firstObject isKindOfClass:[TrackInfo class] ]);
-         int index =self.playerTrackList.count;
+         int index = (int)self.playerTrackList.count;
         
         NSMutableArray *arr = [NSMutableArray array];
         for (TrackInfo *info in items) {
@@ -120,7 +121,7 @@
     PlayerList *list = [[PlayerList alloc]init];
     list.name=@"unnamed playerlist";
     [self.playerlList addObject:list];
-    _selectIndex = self.playerlList.count-1;
+    _selectIndex = (int)self.playerlList.count-1;
     return list;
 }
 

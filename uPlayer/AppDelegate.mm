@@ -36,7 +36,7 @@
     PlayerDocument *document = player().document;
     PlayerlList *lList = document.playerlList;
     
-    PlayerList *list =  [lList newPlayerList];
+    [lList newPlayerList];
     
     self.menuOpenDirectory.enabled=true;
 }
@@ -50,11 +50,14 @@
     
     NSString *initPath = NSSearchPathForDirectoriesInDomains( NSMusicDirectory, NSUserDomainMask, false).firstObject;
     
-    if ( [openDlg runModalForDirectory:initPath file:nil] == NSOKButton )
+    openDlg.directoryURL = [NSURL fileURLWithPath: initPath];
+    
+    if ( [openDlg runModal] == NSModalResponseOK)
     {
-        NSArray* files = [openDlg filenames];
+        NSArray* files = [openDlg URLs];
         if (files.count > 0) {
-            NSString* fileName = files.firstObject;
+            
+            NSString* fileName =[(NSURL*)(files.firstObject) absoluteString];
             
             PlayerDocument *document = player().document;
             PlayerList *list = [document.playerlList getSelectedList];
@@ -85,6 +88,11 @@
     [player().engine stop];
     
     [player().document save];
+}
+
+-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return TRUE;
 }
 
 @end

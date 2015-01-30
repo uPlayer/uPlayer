@@ -149,7 +149,7 @@
         }
 
         
-        if ( document.currPlayingTrack == track)
+        if ( document.currPlayingiList == _playerlList.selectIndex && document.currPlayingiTrack == track.index)
         {
             [eg playPause:nil];
         }
@@ -157,9 +157,9 @@
         {
             playTrack(track.info);
             
-            document.currPlayingTrack = track;
+            document.currPlayingiTrack = track.index;
             
-            document.currPlayingList = [_playerlList getSelectedList];
+            document.currPlayingiList = _playerlList.selectIndex;
             
             postEvent(EventID_to_change_player_title, track.info.title);
         }
@@ -192,7 +192,7 @@
     }
 
 
-    PlayerTrack *track = self.searchMode? [self.searchMng.playerlistFilter getItem:row ]: [[self.playerlList getSelectedList] getItem:row];
+    PlayerTrack *track = self.searchMode? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
     
     TrackInfo *info = track.info;
     
@@ -234,7 +234,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    printf("key pressed: %s\n", [[theEvent description] cString]);
+    //printf("key pressed: %s\n", [[theEvent description] cString]);
     
     if (theEvent.characters ) {
         

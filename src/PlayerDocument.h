@@ -19,13 +19,13 @@
 @property (nonatomic) int playStatus;//enum PlayStatus
 @property (nonatomic) int fontHeight;
 
+@property (nonatomic) int currPlayingiTrack,currPlayingiList;
+
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 
 /// value not need to ==>
 @property (nonatomic,strong) NSString *windowName;
-@property (nonatomic,strong) PlayerTrack *currPlayingTrack;
-@property (nonatomic,strong) PlayerList *currPlayingList;
 /// value not need to <==
 
 

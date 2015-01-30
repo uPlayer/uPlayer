@@ -72,6 +72,7 @@
     
     self.window.title=n.object;
 }
+
 -(void)dealloc
 {
     
@@ -86,5 +87,7 @@
     /// @todo remove the progress bar thumb when stopped.
     
 }
+
+
 @end
 

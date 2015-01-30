@@ -249,9 +249,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     *file << self.selectIndex << self.topIndex;
     
-    
-    
-    int count = self.playerTrackList.count;
+    int count = (int) self.playerTrackList.count;
     *file << count;
     
     for (PlayerTrack *track in self.playerTrackList) {
@@ -345,21 +343,24 @@ NSString *getDocumentFilePath()
     FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
     if (file)
     {
-        int resumeAtReboot, volume ,playOrder ,playStatus , fontHeight;
+        int resumeAtReboot, volume ,playOrder ,playStatus , fontHeight , currList , currTrack;
         
-        *file >> resumeAtReboot  >> volume >> playOrder >>playStatus >> fontHeight;
+        *file >> resumeAtReboot  >> volume >> playOrder >>playStatus >> fontHeight >> currList >> currTrack;
         
         self.resumeAtReboot=resumeAtReboot;
         self.volume=volume;
         self.playOrder=playOrder;
         self.playStatus=playStatus;
         self.fontHeight=fontHeight;
+        self.currPlayingiList=currList;
+        self.currPlayingiTrack=currTrack;
         
         assert(self.playerlList);
         [self.playerlList loadFrom:file];
         
         
         fclose(file);
+        
         return true;
     }
     
@@ -371,7 +372,7 @@ NSString *getDocumentFilePath()
     FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
     if (file)
     {
-        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playStatus << self.fontHeight;
+        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playStatus << self.fontHeight << self.currPlayingiList << self.currPlayingiTrack;
         
         [self.playerlList saveTo:file];
         

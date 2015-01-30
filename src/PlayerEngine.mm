@@ -143,16 +143,21 @@ enum ePlayerFlags : unsigned int {
 -(void)playNext
 {
     PlayerDocument *d = player().document;
-    PlayerList *list = d.currPlayingList;
-    PlayerTrack *track = d.currPlayingTrack;
+    
+    PlayerList *list = [d.playerlList getItem: d.currPlayingiList];
+    PlayerTrack *track = [list getItem: d.currPlayingiTrack];
     
     assert(list);
     
     if ( track.index < [list count] )
     {
-        PlayerTrack* next = [list getItem: (track.index +1) ];
+        int indexNext = track.index +1;
+        
+        PlayerTrack* next = [list getItem: indexNext ];
     
         playTrack(next.info);
+        
+        d.currPlayingiTrack = indexNext;
     }
     
 }

@@ -23,10 +23,10 @@
     
     NSArray *dataOld = [_playerlistOriginal.playerTrackList copy];
     
-    NSArray *dataNew ;
-    dataNew = [dataOld filteredArrayUsingPredicate:predicate];
+    NSMutableArray *dataNew = [ NSMutableArray array];
+    [dataNew addObjectsFromArray: [dataOld filteredArrayUsingPredicate:predicate]];
     
-    dataNew = [ dataNew arrayByAddingObjectsFromArray:[dataOld filteredArrayUsingPredicate: predicate2]];
+    [dataNew arrayByAddingObjectsFromArray:[dataOld filteredArrayUsingPredicate: predicate2]];
     
     if(!_dicFilterToOrginal)
         _dicFilterToOrginal = [NSMutableDictionary dictionary];
