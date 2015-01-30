@@ -148,11 +148,10 @@ enum ePlayerFlags : unsigned int {
     PlayerTrack *track = [list getItem: d.currPlayingiTrack];
     
     assert(list);
-    
-    if ( track.index < [list count] )
+
+    int indexNext = track.index +1;
+    if ( indexNext < [list count] )
     {
-        int indexNext = track.index +1;
-        
         PlayerTrack* next = [list getItem: indexNext ];
     
         playTrack(next.info);

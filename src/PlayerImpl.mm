@@ -13,7 +13,7 @@
 #import "threadpool.h"
 
 #import "UPlayer.h"
-
+#import "PlayerMessage.h"
 
 TrackInfo* getId3Info(NSString *filename)
 {
@@ -77,4 +77,5 @@ NSArray* enumAudioFiles(NSString* path)
 void playTrack(TrackInfo *track)
 {
     [player().engine playURL: [NSURL fileURLWithPath:track.path]];
+    postEvent(EventID_to_change_player_title, track.title);
 }

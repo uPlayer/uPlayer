@@ -49,7 +49,7 @@
 {
     [super viewDidAppear];
     
-    self.view.window.title=player().document.windowName;
+
     
 }
 
@@ -161,7 +161,6 @@
             
             document.currPlayingiList = _playerlList.selectIndex;
             
-            postEvent(EventID_to_change_player_title, track.info.title);
         }
         
     }

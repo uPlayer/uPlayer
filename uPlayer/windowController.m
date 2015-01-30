@@ -45,7 +45,6 @@
     addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
     
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
-    
 }
 
 -(void)windowDidLoad
@@ -86,6 +85,7 @@
 {
     /// @todo remove the progress bar thumb when stopped.
     
+    self.window.title=player().document.windowName;
 }
 
 
