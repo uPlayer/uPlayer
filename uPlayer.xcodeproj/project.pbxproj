@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0443611A7B747A00B644D8 /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E04435E1A7B747A00B644D8 /* AppPreferences.m */; };
+		1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */; };
+		1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */; };
+		1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0443691A7B787D00B644D8 /* GeneralPreferences.png */; };
 		1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */; };
 		1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */; };
 		1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF21A77536800B4FE14 /* UPlayer.mm */; };
@@ -58,6 +62,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E04435D1A7B747A00B644D8 /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
+		1E04435E1A7B747A00B644D8 /* AppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPreferences.m; sourceTree = "<group>"; };
+		1E04435F1A7B747A00B644D8 /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
+		1E0443601A7B747A00B644D8 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
+		1E0443641A7B75EE00B644D8 /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
+		1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferences.m; sourceTree = "<group>"; };
+		1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = GeneralPreferences.nib; sourceTree = "<group>"; };
+		1E0443691A7B787D00B644D8 /* GeneralPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralPreferences.png; sourceTree = "<group>"; };
 		1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDocument.h; sourceTree = "<group>"; };
 		1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerDocument.mm; sourceTree = "<group>"; };
 		1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerLayout.h; sourceTree = "<group>"; };
@@ -125,6 +137,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E04435C1A7B747A00B644D8 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				1E0443641A7B75EE00B644D8 /* GeneralPreferences.h */,
+				1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */,
+				1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */,
+				1E0443691A7B787D00B644D8 /* GeneralPreferences.png */,
+				1E04435D1A7B747A00B644D8 /* AppPreferences.h */,
+				1E04435E1A7B747A00B644D8 /* AppPreferences.m */,
+				1E04435F1A7B747A00B644D8 /* NSPreferences.h */,
+				1E0443601A7B747A00B644D8 /* NSPreferencesModule.h */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		1E0B2BEC1A77536800B4FE14 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +182,7 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1E04435C1A7B747A00B644D8 /* Preferences */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
 				1EDE8FD41A7740EC0086677B /* lyricsFetcher */,
 				1EDE8FA41A773D810086677B /* uPlayer */,
@@ -321,6 +349,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
+				1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */,
+				1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */,
 				1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
 			);
@@ -352,8 +382,10 @@
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
 				1E169A891A78E701003D3D01 /* windowController.m in Sources */,
 				1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */,
+				1E0443611A7B747A00B644D8 /* AppPreferences.m in Sources */,
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
 				1E169A861A78DB22003D3D01 /* MenuDelegate.m in Sources */,
+				1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */,
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,

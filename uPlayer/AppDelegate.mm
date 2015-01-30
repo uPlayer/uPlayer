@@ -11,6 +11,8 @@
 #import "PlayerMessage.h"
 #import "serialize.h"
 
+#import "AppPreferences.h"
+
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 
@@ -19,6 +21,14 @@
 
 
 @implementation AppDelegate
+
+
+- (IBAction)showPreferences:(id)sender {
+    [NSPreferences setDefaultPreferencesClass:[AppPreferences class] ];
+    
+	[[NSPreferences sharedPreferences] showPreferencesPanel];
+}
+
 - (IBAction)cmdNewPlayerList:(id)sender {
 
     //NSPreferences *pre;
