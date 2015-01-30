@@ -12,12 +12,23 @@
 #import "serialize.h"
 
 @interface AppDelegate ()
+@property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 
 @end
 
 
 
 @implementation AppDelegate
+- (IBAction)cmdNewPlayerList:(id)sender {
+
+    PlayerDocument *document = player().document;
+    PlayerlList *lList = document.playerlList;
+    
+    PlayerList *list =  [lList newPlayerList];
+    
+    self.menuOpenDirectory.enabled=true;
+}
+
 - (IBAction)cmdOpenDirectory:(id)sender
 {
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
@@ -35,7 +46,8 @@
             
             PlayerDocument *document = player().document;
             PlayerList *list = [document.playerlList getSelectedList];
-            list.playerTrackList = enumAudioFiles(fileName);
+            
+            [list  addTrackInfoItems: enumAudioFiles(fileName)];
             
             postEvent(EventID_to_reload_tracklist, nil);
         }

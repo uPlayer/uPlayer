@@ -26,7 +26,7 @@
     if (self)
     {
         self.windowName = NSLocalizedString(@"uPlayer windows name", nil);
-        
+        self.playerlList = [[PlayerlList alloc]init];
     }
     
     return self;

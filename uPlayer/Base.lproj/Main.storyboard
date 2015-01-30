@@ -68,10 +68,16 @@
                                                 <action selector="openDocument:" target="Ady-hI-5gd" id="bVn-NM-KNZ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="New PlayerList" id="Fxj-BS-OlW">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdNewPlayerList:" target="Voe-Tx-rLC" id="kcL-1q-gEv"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Open Directory" id="ICK-h2-7oe">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="cmdOpenDirectory:" target="Voe-Tx-rLC" id="f5f-XO-lOb"/>
+                                                <action selector="cmdOpenDirectory:" target="Voe-Tx-rLC" id="J9f-kD-myF"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -650,7 +656,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+                    <connections>
+                        <outlet property="menuOpenDirectory" destination="ICK-h2-7oe" id="1Lu-jG-2kn"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32" y="-1"/>

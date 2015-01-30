@@ -103,11 +103,17 @@
     if (key.length > 0)
     {
         self.searchMode = true;
+        if (self.searchMng == nil)
+            self.searchMng = [[PlayerSearchMng alloc]init];
         
+        self.searchMng.playerlistOriginal = [self.playerlList getSelectedList];
+        
+        [self.searchMng search:key];
     }
     else
     {
         self.searchMode = false;
+        
     }
     
     [self.tableView reloadData];
@@ -183,7 +189,9 @@
     }
 
 
-    TrackInfo *info = self.searchMode? [self.searchMng.playerlistFilter getItem:row ]: [[self.playerlList getSelectedList] getItem:row];
+    PlayerTrack *track = self.searchMode? [self.searchMng.playerlistFilter getItem:row ]: [[self.playerlList getSelectedList] getItem:row];
+    
+    TrackInfo *info = track.info;
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
