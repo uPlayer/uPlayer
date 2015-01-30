@@ -8,6 +8,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import "PlayerList.h"
 
 @interface PlayerDocument : NSObject
 
@@ -15,19 +16,21 @@
 @property (nonatomic) int resumeAtReboot;
 @property (nonatomic) int volume;
 @property (nonatomic) int playOrder; //enum PlayOrder
-@property (nonatomic) int playListIndex,trackIndex;
 @property (nonatomic) int playStatus;//enum PlayStatus
 @property (nonatomic) int fontHeight;
 
-@property (nonatomic,strong) NSArray *trackInfoList;
+@property (nonatomic,strong) PlayerlList *playerlList;
 
 
-/// value not need to .
+/// value not need to ==>
 @property (nonatomic,strong) NSString *windowName;
+@property (nonatomic,strong) PlayerTrack *currPlayingTrack;
+@property (nonatomic,strong) PlayerList *currPlayingList;
+/// value not need to <==
 
-///
--(bool)save;
--(bool)load;
+
+
+
 
 @end
 

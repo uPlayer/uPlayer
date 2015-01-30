@@ -13,24 +13,6 @@
 
 
 
-NSString *getDocumentFilePath()
-{
-    NSString *path = NSHomeDirectoryForUser (NSFullUserName() );
-   
-    path = [path stringByAppendingPathComponent:@".uPlayer"];
-    
-    NSError *error;
-    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-    
-    if (error) {
-        NSLog(@"%@",error);
-    }
-    
-    path = [path stringByAppendingPathComponent:@"uPlayer.document"];
-    
-    
-    return path;
-}
 
 @interface PlayerDocument ()
 @end
@@ -51,38 +33,6 @@ NSString *getDocumentFilePath()
 }
 
 
--(bool)load
-{
-    FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
-    if (file)
-    {
-        *file >> _resumeAtReboot  >> _volume >> _playOrder >> _playListIndex >> _trackIndex >> _playStatus >> _fontHeight;
-        
-        _trackInfoList =  loadTrackInfoArray(*file);
-        
-        fclose(file);
-        return true;
-    }
-    
-    return false;
-}
-
--(bool)save
-{
-    FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
-    if (file)
-    {
-        
-        *file << _resumeAtReboot  << _volume << _playOrder << _playListIndex << _trackIndex << _playStatus << _fontHeight;
-        
-         saveTrackInfoArray(*file , _trackInfoList);
-        
-        fclose(file);
-        return true;
-    }
-    
-    return false;
-}
 
 
 @end

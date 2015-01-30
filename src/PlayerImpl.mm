@@ -78,4 +78,3 @@ void playTrack(TrackInfo *track)
 {
     [player().engine playURL: [NSURL fileURLWithPath:track.path]];
 }
-

@@ -48,6 +48,10 @@
     
 }
 
+-(void)windowDidLoad
+{
+    
+}
 
 -(void)updateProgressInfo:(NSNotification*)n
 {

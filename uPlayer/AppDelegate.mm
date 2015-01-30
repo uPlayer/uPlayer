@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "UPlayer.h"
 #import "PlayerMessage.h"
-
+#import "serialize.h"
 
 @interface AppDelegate ()
 
@@ -34,7 +34,8 @@
             NSString* fileName = files.firstObject;
             
             PlayerDocument *document = player().document;
-            document.trackInfoList = enumAudioFiles(fileName);
+            PlayerList *list = [document.playerlList getSelectedList];
+            list.playerTrackList = enumAudioFiles(fileName);
             
             postEvent(EventID_to_reload_tracklist, nil);
         }

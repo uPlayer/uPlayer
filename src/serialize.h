@@ -16,7 +16,9 @@
 #include <string>
 #include <cstring>
 #include <vector>
-
+#import "PlayerList.h"
+#import "PlayerTrack.h"
+#import "PlayerDocument.h"
 using namespace std;
 
 
@@ -57,6 +59,29 @@ FILE& operator<<(FILE& f,const vector<T> &t);
 
 template <class T>
 FILE& operator>>(FILE& f,vector<T> &t);
+
+
+@interface PlayerTrack (serialize)
+-(void)saveTo:(FILE*)file;
+-(void)loadFrom:(FILE*)file;
+@end
+
+@interface PlayerList (serialize)
+-(void)saveTo:(FILE*)file;
+-(void)loadFrom:(FILE*)file;
+@end
+
+@interface PlayerlList (serialize)
+-(void)saveTo:(FILE*)file;
+-(void)loadFrom:(FILE*)file;
+@end
+
+
+@interface PlayerDocument (serialize)
+-(bool)save;
+-(bool)load;
+@end
+
 
 
 @class TrackInfo;

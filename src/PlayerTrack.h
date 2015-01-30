@@ -17,7 +17,15 @@
 @end
 
 
+@interface PlayerTrack : NSObject
+@property (nonatomic) int index;
+@property (nonatomic,strong) TrackInfo *info;
 
+///
+//
+/// value not need to searialize.
+
+@end
 
 
 

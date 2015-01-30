@@ -44,6 +44,8 @@ enum ePlayerFlags : unsigned int {
         self.player = new SFB::Audio::Player();
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped);
         
+        _playState = Player::PlayerState::Stopped;
+        
         _playerFlags = 0;
         
         // This will be called from the realtime rendering thread and as such MUST NOT BLOCK!!
@@ -129,10 +131,16 @@ enum ePlayerFlags : unsigned int {
 -(void)playNext
 {
     PlayerDocument *d = player().document;
+    PlayerList *list = d.currPlayingList;
+    PlayerTrack *track = d.currPlayingTrack;
     
-    TrackInfo* track = d.trackInfoList[d.trackIndex];
+    if ( track.index < [list count] )
+    {
+        PlayerTrack* next = [list getItem: (track.index +1) ];
     
-    playTrack(track);
+        playTrack(next.info);
+    }
+    
 }
 
 -(void)dealloc

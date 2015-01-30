@@ -10,14 +10,15 @@
 #import "UPlayer.h"
 
 #import "PlayerMessage.h"
-
+#import "PlayerSerachMng.h"
 
 
 @interface ViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
-@property (nonatomic,strong) NSArray *trackInfoFiltered; // TrackInfo
 @property (nonatomic) bool searchMode;
+@property (nonatomic,strong) PlayerSearchMng* searchMng;
+@property (nonatomic,strong) PlayerlList *playerlList;
 @end
 
 @implementation ViewController
@@ -25,12 +26,14 @@
 -(void)awakeFromNib
 {
     addObserverForEvent(self, @selector(reloadTrackList), EventID_to_reload_tracklist);
+    
+    self.playerlList = player().document.playerlList;
 }
 
 -(void)reloadTrackList
 {
     [self.tableView reloadData];
-    int row = player().document.trackIndex;
+    int row = self.playerlList.selectIndex;
     
     
     //int rowsPerPage = self.tableView.bounds.size.height / self.tableView.rowHeight;
@@ -101,21 +104,11 @@
     {
         self.searchMode = true;
         
-        //search title first.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",key,key,key];
-        
-        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF.artist contains[c] %@ ||SELF.album contains[c] %@",key,key,key];
-        
-        self.trackInfoFiltered = [player().document.trackInfoList filteredArrayUsingPredicate:predicate];
-        
-        self.trackInfoFiltered = [self.trackInfoFiltered arrayByAddingObjectsFromArray: [player().document.trackInfoList filteredArrayUsingPredicate:predicate2]];
-        
     }
     else
     {
         self.searchMode = false;
     }
-    
     
     [self.tableView reloadData];
 }
@@ -125,24 +118,42 @@
     //int col = self.tableView.clickedColumn;
     PlayerDocument *document = player().document;
     
-    document.trackIndex = (int) self.tableView.clickedRow;
+    int row = (int) self.tableView.clickedRow;
     
-    if ( document.trackIndex >= 0)
+    if ( row >= 0)
     {
-        TrackInfo *info = self.searchMode ? self.trackInfoFiltered[document.trackIndex] : player().document.trackInfoList[document.trackIndex];
-        
         PlayerEngine *eg = player().engine;
         
-        if ([eg isPlaying] || [eg isPaused])
+        PlayerList *list ;
+        
+        PlayerTrack *track;
+        if (self.searchMode )
+        {
+            list = self.searchMng.playerlistFilter ;
+            
+            track = [self.searchMng getOrginalByIndex:row];
+            [list setSelectIndex:row];
+        }
+        else
+        {
+            list = [_playerlList getSelectedList];
+            track = [list getItem:row];
+            [list setSelectIndex:row];
+        }
+
+        
+        if ( document.currPlayingTrack == track)
         {
             [eg playPause:nil];
         }
-        else if ([eg isStopped])
+        else
         {
-            [eg playURL: [NSURL fileURLWithPath:info.path ]];
-            postEvent(EventID_to_change_player_title, info.title);
+            playTrack(track.info);
+            
+            document.currPlayingTrack = track;
+            
+            postEvent(EventID_to_change_player_title, track.info.title);
         }
-        
         
     }
     
@@ -150,7 +161,7 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.searchMode ?self.trackInfoFiltered.count : player().document.trackInfoList.count;
+    return self.searchMode ?[self.searchMng.playerlistFilter count ]: [[self.playerlList getSelectedList] count];
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -172,7 +183,7 @@
     }
 
 
-    TrackInfo *info = self.searchMode? self.trackInfoFiltered[row]: player().document.trackInfoList[row];
+    TrackInfo *info = self.searchMode? [self.searchMng.playerlistFilter getItem:row ]: [[self.playerlList getSelectedList] getItem:row];
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];

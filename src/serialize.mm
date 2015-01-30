@@ -7,9 +7,7 @@
 //
 
 #import "serialize.h"
-#import "PlayerTrack.h"
 #include <assert.h>
-
 typedef char TCHAR;
 
 /// int
@@ -219,3 +217,169 @@ NSArray *loadTrackInfoArray(FILE &file)
     return array;
 }
 
+
+
+
+@implementation PlayerTrack (serialize)
+
+-(void)saveTo:(FILE*)file
+{
+    *file << self.index;
+    saveTrackInfo(*file, self.info);
+}
+
+-(void)loadFrom:(FILE*)file
+{
+    int index;
+    *file >> index;
+    self.index = index;
+    
+    TrackInfo *info = loadTrackInfo(*file);
+    self.info = info;
+    
+}
+@end
+
+
+
+@implementation PlayerList (serialize)
+-(void)saveTo:(FILE*)file
+{
+    saveString(*file, self.name);
+    
+    *file << self.selectIndex << self.topIndex;
+    
+    
+    
+    int count = self.playerTrackList.count;
+    *file << count;
+    
+    for (PlayerTrack *track in self.playerTrackList) {
+        [track saveTo:file];
+    }
+}
+
+
+-(void)loadFrom:(FILE*)file
+{
+    self.name = loadString(*file);
+    int selectIndex,topIndex;
+    *file >> selectIndex >> topIndex;
+    self.selectIndex=selectIndex;
+    self.topIndex=topIndex;
+    
+    int count = -1;
+    *file >> count;
+    NSMutableArray *arr = [NSMutableArray array];
+    while (count-- > 0) {
+        PlayerTrack *track = [[PlayerTrack alloc]init];
+        [track loadFrom:file];
+        [arr addObject:track];
+    }
+    
+    self.playerTrackList = arr;
+    
+}
+@end
+
+
+@implementation PlayerlList (serialize)
+-(void)saveTo:(FILE*)file
+{
+    *file << self.selectIndex;
+    
+    int count = (int) self.playerlList.count;
+    *file << count;
+    
+    for ( PlayerList *list in self.playerlList) {
+        [list saveTo:file];
+    }
+    
+}
+-(void)loadFrom:(FILE*)file
+{
+    int si;
+    *file >> si;
+    self.selectIndex = si;
+    
+    int count = -1;
+    *file >> count;
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    while (count-- > 0) {
+        PlayerList *list = [[PlayerList alloc]init];
+        [list loadFrom:file];
+        [arr addObject: list];
+    }
+    
+    self.playerlList = arr;
+}
+
+@end
+
+
+
+NSString *getDocumentFilePath()
+{
+    NSString *path = NSHomeDirectoryForUser (NSFullUserName() );
+   
+    path = [path stringByAppendingPathComponent:@".uPlayer"];
+    
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (error) {
+        NSLog(@"%@",error);
+    }
+    
+    path = [path stringByAppendingPathComponent:@"uPlayer.document"];
+    
+    
+    return path;
+}
+
+@implementation PlayerDocument (serialize)
+
+-(bool)load
+{
+    FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
+    if (file)
+    {
+        int resumeAtReboot, volume ,playOrder ,playStatus , fontHeight;
+        
+        *file >> resumeAtReboot  >> volume >> playOrder >>playStatus >> fontHeight;
+        
+        self.resumeAtReboot=resumeAtReboot;
+        self.volume=volume;
+        self.playOrder=playOrder;
+        self.playStatus=playStatus;
+        self.fontHeight=fontHeight;
+        
+        self.playerlList = [[PlayerlList alloc]init];
+        [self.playerlList loadFrom:file];
+        
+        
+        fclose(file);
+        return true;
+    }
+    
+    return false;
+}
+
+-(bool)save
+{
+    FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
+    if (file)
+    {
+        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playStatus << self.fontHeight;
+        
+        [self.playerlList saveTo:file];
+        
+        fclose(file);
+        return true;
+    }
+    
+    return false;
+}
+
+@end
