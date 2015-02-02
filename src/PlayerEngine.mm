@@ -41,8 +41,9 @@ enum ePlayerFlags : unsigned int {
     PlayerDocument *doc = player().document;
     if (doc.resumeAtReboot)
     {
-        //if ( isPlaying)
-            playTrack( [[doc.playerlList getSelectedList] getSelectedItem].info);
+        if ( 1) // isplaying
+        {            playTrack( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
+        }
     }
 }
 
@@ -144,8 +145,8 @@ enum ePlayerFlags : unsigned int {
 {
     PlayerDocument *d = player().document;
     
-    PlayerList *list = [d.playerlList getItem: d.currPlayingiList];
-    PlayerTrack *track = [list getItem: d.currPlayingiTrack];
+    PlayerList *list = [d.playerlList getPlayList];
+    PlayerTrack *track = [list getPlayItem];
     
     assert(list);
 
@@ -153,11 +154,10 @@ enum ePlayerFlags : unsigned int {
     if ( indexNext < [list count] )
     {
         PlayerTrack* next = [list getItem: indexNext ];
-    
-        playTrack(next.info);
-        
-        d.currPlayingiTrack = indexNext;
+        playTrack(list,next);
     }
+    else
+        playTrack(list,nil);
     
 }
 
@@ -188,17 +188,17 @@ enum ePlayerFlags : unsigned int {
 }
 
 
-- (void) playPause:(id)sender
+- (void) playPause
 {
     _player->PlayPause();
 }
 
-- (void) seekForward:(id)sender
+- (void) seekForward
 {
     _player->SeekForward();
 }
 
-- (void) seekBackward:(id)sender
+- (void) seekBackward
 {
     _player->SeekBackward();
 }
@@ -208,7 +208,7 @@ enum ePlayerFlags : unsigned int {
     _player->SeekToPosition([sender floatValue]);
 }
 
-- (void) skipToNextTrack:(id)sender
+- (void) skipToNextTrack
 {
     _player->SkipToNextTrack();
 }

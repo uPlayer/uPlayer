@@ -106,7 +106,24 @@ FILE& operator>>(FILE& f,vector<T> &t)
 
 
 
-
+NSString *getDocumentFilePath()
+{
+    NSString *path = NSHomeDirectoryForUser (NSFullUserName() );
+   
+    path = [path stringByAppendingPathComponent:@".uPlayer"];
+    
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (error) {
+        NSLog(@"%@",error);
+    }
+    
+    path = [path stringByAppendingPathComponent:@"uPlayer.document"];
+    
+    
+    return path;
+}
 
 
 
@@ -247,7 +264,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 {
     saveString(*file, self.name);
     
-    *file << self.selectIndex << self.topIndex;
+    *file << self.selectIndex << self.playIndex << self.topIndex;
     
     int count = (int) self.playerTrackList.count;
     *file << count;
@@ -261,9 +278,10 @@ NSArray *loadTrackInfoArray(FILE &file)
 -(void)loadFrom:(FILE*)file
 {
     self.name = loadString(*file);
-    int selectIndex,topIndex;
-    *file >> selectIndex >> topIndex;
+    int selectIndex,playIndex,topIndex;
+    *file >> selectIndex >> playIndex >> topIndex;
     self.selectIndex=selectIndex;
+    self.playIndex = playIndex;
     self.topIndex=topIndex;
     
     int count = -1;
@@ -284,7 +302,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 @implementation PlayerlList (serialize)
 -(void)saveTo:(FILE*)file
 {
-    *file << self.selectIndex;
+    *file << self.selectIndex << self.playIndex ;
     
     int count = (int) self.playerlList.count;
     *file << count;
@@ -294,11 +312,13 @@ NSArray *loadTrackInfoArray(FILE &file)
     }
     
 }
+
 -(void)loadFrom:(FILE*)file
 {
-    int si;
-    *file >> si;
+    int si,pi;
+    *file >> si >> pi;
     self.selectIndex = si;
+    self.playIndex = pi;
     
     int count = -1;
     *file >> count;
@@ -317,24 +337,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 
 
-NSString *getDocumentFilePath()
-{
-    NSString *path = NSHomeDirectoryForUser (NSFullUserName() );
-   
-    path = [path stringByAppendingPathComponent:@".uPlayer"];
-    
-    NSError *error;
-    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-    
-    if (error) {
-        NSLog(@"%@",error);
-    }
-    
-    path = [path stringByAppendingPathComponent:@"uPlayer.document"];
-    
-    
-    return path;
-}
+
 
 @implementation PlayerDocument (serialize)
 
@@ -343,17 +346,15 @@ NSString *getDocumentFilePath()
     FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
     if (file)
     {
-        int resumeAtReboot, volume ,playOrder ,playStatus , fontHeight , currList , currTrack;
+        int resumeAtReboot, volume ,playOrder ,playStatus , fontHeight ;
         
-        *file >> resumeAtReboot  >> volume >> playOrder >>playStatus >> fontHeight >> currList >> currTrack;
+        *file >> resumeAtReboot  >> volume >> playOrder >>playStatus >> fontHeight ;
         
         self.resumeAtReboot=resumeAtReboot;
         self.volume=volume;
         self.playOrder=playOrder;
         self.playStatus=playStatus;
         self.fontHeight=fontHeight;
-        self.currPlayingiList=currList;
-        self.currPlayingiTrack=currTrack;
         
         assert(self.playerlList);
         [self.playerlList loadFrom:file];
@@ -372,7 +373,7 @@ NSString *getDocumentFilePath()
     FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
     if (file)
     {
-        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playStatus << self.fontHeight << self.currPlayingiList << self.currPlayingiTrack;
+        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playStatus << self.fontHeight ;
         
         [self.playerlList saveTo:file];
         

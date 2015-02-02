@@ -13,6 +13,7 @@
 #import "PlayerDocument.h"
 #import "PlayerLayout.h"
 #import "PlayerEngine.h"
+#import "PlayerList.h"
 
 @interface UPlayer : NSObject
 @property (nonatomic,strong) PlayerDocument *document;
@@ -29,7 +30,8 @@ extern "C" {
 UPlayer *player(); // the global and only instance.
 
 
-void playTrack(TrackInfo *track);
+void playTrack(PlayerList *list,PlayerTrack *track);
+
 
 #if defined(__cplusplus)
 }

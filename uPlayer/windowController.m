@@ -44,6 +44,8 @@
 {
     addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
     
+    addObserverForEvent(self , @selector(clearWindowTitle:), EventID_track_stopped);
+    
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
 }
 
@@ -70,6 +72,11 @@
     NSAssert([n.object isKindOfClass:[NSString class]],nil);
     
     self.window.title=n.object;
+}
+
+-(void)clearWindowTitle:(NSNotification*)n
+{
+    self.window.title = player().document.windowName;
 }
 
 -(void)dealloc

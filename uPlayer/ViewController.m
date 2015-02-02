@@ -30,17 +30,40 @@
     self.playerlList = player().document.playerlList;
 }
 
+
 -(void)reloadTrackList
 {
     /// @todo save top index.
     
-    
     [self.tableView reloadData];
-    int row = [self.playerlList getSelectedList].selectIndex;
     
-    //int rowsPerPage = self.tableView.bounds.size.height / self.tableView.rowHeight;
+    PlayerList *list = [self.playerlList getPlayList];
+    int row = list.playIndex;
     
-    [self.tableView scrollRowToVisible: row ];
+    if (row == -1)
+        return;
+    
+    int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
+    
+    NSRange rg = [self.tableView rowsInRect:self.tableView.visibleRect];
+    int topIndex = (int) rg.location;
+    
+    int target;
+    if ( row < topIndex )
+    {
+        target = row - rowsPerPage / 2;
+        if (target < 0)
+            target = 0;
+    }
+    else
+    {
+        int count = (int) [list count];
+        target = row + rowsPerPage /2;
+        if (target > count - 1)
+            target = count - 1;
+    }
+    
+    [self.tableView scrollRowToVisible: target ];
     
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
 }
@@ -123,14 +146,10 @@
 -(void)doubleClicked
 {
     //int col = self.tableView.clickedColumn;
-    PlayerDocument *document = player().document;
-    
     int row = (int) self.tableView.clickedRow;
     
     if ( row >= 0)
     {
-        PlayerEngine *eg = player().engine;
-        
         PlayerList *list ;
         
         PlayerTrack *track;
@@ -148,21 +167,7 @@
             [list setSelectIndex:row];
         }
 
-        
-        if ( document.currPlayingiList == _playerlList.selectIndex && document.currPlayingiTrack == track.index)
-        {
-            [eg playPause:nil];
-        }
-        else
-        {
-            playTrack(track.info);
-            
-            document.currPlayingiTrack = track.index;
-            
-            document.currPlayingiList = _playerlList.selectIndex;
-            
-        }
-        
+        playTrack(list, track);
     }
     
 }

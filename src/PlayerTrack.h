@@ -14,6 +14,8 @@
 @interface TrackInfo: NSObject
 @property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
 @property (nonatomic,strong)NSString *path;
+
+-(int)uuid;
 @end
 
 

@@ -48,7 +48,7 @@
     [openDlg setCanChooseDirectories: YES ];
     [openDlg setAllowsMultipleSelection:NO];
     
-    NSString *initPath = NSSearchPathForDirectoriesInDomains( NSMusicDirectory, NSUserDomainMask, false).firstObject;
+    NSString *initPath = NSSearchPathForDirectoriesInDomains( NSMusicDirectory, NSUserDomainMask, true ).firstObject;
     
     openDlg.directoryURL = [NSURL fileURLWithPath: initPath];
     
@@ -57,7 +57,7 @@
         NSArray* files = [openDlg URLs];
         if (files.count > 0) {
             
-            NSString* fileName =[(NSURL*)(files.firstObject) absoluteString];
+            NSString* fileName =[(NSURL*)(files.firstObject) path];
             
             PlayerDocument *document = player().document;
             PlayerList *list = [document.playerlList getSelectedList];
@@ -75,12 +75,18 @@
     NSLog(@"command: Find");
 
 }
+- (IBAction)cmdShowPlayingItem:(id)sender
+{
+    postEvent(EventID_to_reload_tracklist, nil);
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [player().document load];
-    postEvent(EventID_to_reload_tracklist, nil);
-    postEvent(EventID_player_document_loaded, nil);
+    if( [player().document load] )
+    {
+        postEvent(EventID_to_reload_tracklist, nil);
+        postEvent(EventID_player_document_loaded, nil);
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

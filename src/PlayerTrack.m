@@ -9,13 +9,39 @@
 
 #import "PlayerTrack.h"
 
-@interface TrackInfo()
+static int guuid = 0;
 
+@interface TrackInfo()
+{
+    int uuid;
+}
 @end
 
 
 @implementation TrackInfo
 
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        uuid = guuid++;
+    }
+    
+    return self;
+}
+
+/// use uuid instead.
+-(BOOL)isEqual:(id)object
+{
+    NSAssert( false, nil);
+    return 0;
+}
+
+-(int)uuid
+{
+    return uuid;
+}
 
 @end
 

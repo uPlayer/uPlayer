@@ -19,7 +19,6 @@
 @property (nonatomic) int playStatus;//enum PlayStatus
 @property (nonatomic) int fontHeight;
 
-@property (nonatomic) int currPlayingiTrack,currPlayingiList;
 
 @property (nonatomic,strong) PlayerlList *playerlList;
 

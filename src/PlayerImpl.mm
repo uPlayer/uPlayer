@@ -74,8 +74,45 @@ NSArray* enumAudioFiles(NSString* path)
 }
 
 
+
 void playTrack(TrackInfo *track)
 {
-    [player().engine playURL: [NSURL fileURLWithPath:track.path]];
-    postEvent(EventID_to_change_player_title, track.title);
+    static int playUuid = -1;
+    
+    PlayerEngine *e =player().engine;
+    
+    if (playUuid == [track uuid])
+    {
+
+        [player().engine playPause];
+        if ([e isPlaying])
+            postEvent(EventID_track_resumed, track.title);
+        else
+            postEvent(EventID_track_paused, track.title);
+        
+    }
+    else
+    {
+        [e playURL: [NSURL fileURLWithPath:track.path]];
+        postEvent(EventID_to_change_player_title, track.title);
+    }
+    
 }
+
+void playTrack(PlayerList *list,PlayerTrack *track)
+{
+#ifdef DEBUG
+    
+#endif
+    
+    if (track)
+    {
+        playTrack(track.info);
+    }
+    
+    PlayerlList *llist = player().document.playerlList;
+    llist.playIndex = (int) [llist.playerlList indexOfObject:list];
+    list.playIndex = (int) [list.playerTrackList indexOfObject:track];
+    
+}
+

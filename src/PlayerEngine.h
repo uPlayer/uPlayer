@@ -19,15 +19,15 @@
 -(bool)isStopped;
 
 
-- (void) playPause:(id)sender;
+- (void) playPause;
 
-- (void) seekForward:(id)sender;
+- (void) seekForward;
 
-- (void) seekBackward:(id)sender;
+- (void) seekBackward;
 
 - (void) seek:(id)sender;
 
-- (void) skipToNextTrack:(id)sender;
+- (void) skipToNextTrack;
 
 - (BOOL) playURL:(NSURL *)url;
 

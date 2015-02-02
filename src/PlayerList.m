@@ -38,6 +38,14 @@
     return [self getItem: _selectIndex];
 }
 
+-(PlayerTrack*)getPlayItem
+{
+    if (_playIndex == -1)
+        return nil;
+    
+    return [self getItem:_playIndex];
+}
+
 -(size_t)count
 {
     return self.playerTrackList.count;
@@ -109,6 +117,14 @@
         return nil;
     
     return [self getItem:_selectIndex];
+}
+
+-(PlayerList*)getPlayList
+{
+    if (_selectIndex == -1)
+        return nil;
+    
+    return [self getItem:_playIndex];
 }
 
 -(size_t)count

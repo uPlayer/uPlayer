@@ -13,13 +13,14 @@
 
 @interface PlayerList: NSObject
 @property (nonatomic,strong) NSString *name;
-@property (nonatomic) int selectIndex,topIndex;
+@property (nonatomic) int selectIndex,playIndex,topIndex;
 @property (nonatomic,strong) NSMutableArray *playerTrackList;//PlayerTrack
 
 
 -(PlayerTrack*)getItem:(int)index;
 -(size_t)count;
 -(PlayerTrack*)getSelectedItem;
+-(PlayerTrack*)getPlayItem;
 -(void)addItems:(NSArray*)items;
 -(void)addTrackInfoItems:(NSArray*)items;
 @end
@@ -27,12 +28,13 @@
 
 /// list of player list.
 @interface PlayerlList : NSObject
-@property (nonatomic) int selectIndex;
+@property (nonatomic) int selectIndex,playIndex;
 @property (nonatomic,strong) NSMutableArray *playerlList;
 
 
 -(PlayerList*)getItem:(int)index;
 -(PlayerList*)getSelectedList;
+-(PlayerList*)getPlayList;
 -(size_t)count;
 
 -(PlayerList*)newPlayerList;

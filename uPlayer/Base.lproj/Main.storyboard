@@ -611,6 +611,13 @@
                                                 <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="NQp-sR-Jf8"/>
+                                        <menuItem title="Show Playing Item" id="erA-OL-DYs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdShowPlayingItem:" target="Voe-Tx-rLC" id="UQV-FH-GJY"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -675,8 +682,9 @@
                 <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" title="uPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <rect key="contentRect" x="718" y="383" width="480" height="270"/>
+                        <rect key="contentRect" x="718" y="383" width="900" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+                        <value key="minSize" type="size" width="900" height="500"/>
                         <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="108D3BC3-664A-4DB1-88C8-5DC1DF07920B" label="Order" paletteLabel="Order" id="FQ4-wm-eyT">
@@ -771,20 +779,20 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32" y="298"/>
+            <point key="canvasLocation" x="245" y="405.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="240"/>
+                        <rect key="frame" x="0.0" y="0.0" width="900" height="478"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-37" y="769"/>
+            <point key="canvasLocation" x="228" y="964"/>
         </scene>
     </scenes>
 </document>
