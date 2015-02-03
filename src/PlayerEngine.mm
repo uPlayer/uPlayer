@@ -55,7 +55,6 @@ enum ePlayerFlags : unsigned int {
         self.player = new SFB::Audio::Player();
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped);
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
-        addObserverForEvent(self, @selector(changePlayOrder:), EventID_to_change_player_order);
         
         _playState = Player::PlayerState::Stopped;
         
@@ -140,13 +139,7 @@ enum ePlayerFlags : unsigned int {
     return self;
 }
 
--(void)changePlayOrder:(NSNotification*)n
-{
-    NSNumber *nb = (NSNumber *) n.object;
-    PlayOrder order = nb.intValue;
-    
-    self.order = order;
-}
+
 
 -(void)playNext
 {
@@ -159,15 +152,16 @@ enum ePlayerFlags : unsigned int {
     
     int count = (int)[list count];
     int indexNext =-1;
+    PlayOrder order = d.playOrder;
     
-    if (_order == playorder_single) {
-        return;
+    if (order == playorder_single) {
+        
     }
-    else if (self.order == playorder_default)
+    else if (order == playorder_default)
     {
         indexNext = track.index +1;
     }
-    else if(_order == playorder_random)
+    else if(order == playorder_random)
     {
         static int s=0;
         if(s++==0)
@@ -176,14 +170,12 @@ enum ePlayerFlags : unsigned int {
         indexNext =rand() % (count) - 1;
     }
     
+    PlayerTrack* next = nil;
     
-    if ( indexNext < [list count] )
-    {
-        PlayerTrack* next = [list getItem: indexNext ];
-        playTrack(list,next);
-    }
-    else
-        playTrack(list,nil);
+    if ( indexNext > 0 && indexNext < [list count] )
+        next = [list getItem: indexNext ];
+ 
+    playTrack(list,next);
     
 }
 
@@ -229,9 +221,14 @@ enum ePlayerFlags : unsigned int {
     _player->SeekBackward();
 }
 
-- (void) seek:(id)sender
+- (void) seekToPos:(id)sender
 {
     _player->SeekToPosition([sender floatValue]);
+}
+
+- (void) seekToTime:(id)sender
+{
+    _player->SeekToTime([sender floatValue]);
 }
 
 - (void) skipToNextTrack

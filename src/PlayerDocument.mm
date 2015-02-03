@@ -28,7 +28,7 @@
         self.windowName = NSLocalizedString(@"uPlayer windows name", nil);
         self.playerlList = [[PlayerlList alloc]init];
         self.resumeAtReboot = 1;
-        
+        self.playOrder = playorder_default;
     }
     
     return self;

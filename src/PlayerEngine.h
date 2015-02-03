@@ -10,8 +10,6 @@
 
 @interface PlayerEngine : NSObject
 
-@property (nonatomic) PlayOrder order;
-
 -(bool)isPlaying ;
 
 -(bool)isPaused;
@@ -26,7 +24,9 @@
 
 - (void) seekBackward;
 
-- (void) seek:(id)sender;
+- (void) seekToPos:(id)sender;
+
+- (void) seekToTime:(id)sender;
 
 - (void) skipToNextTrack;
 
@@ -42,5 +42,6 @@
 /// @todo nsprogress ?
 
 @interface ProgressInfo : NSObject
-@property (nonatomic) double current,total,fractionComplete;
+@property (nonatomic) double current,total,fractionComplete;//time
 @end
+

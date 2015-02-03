@@ -13,3 +13,9 @@
 @property (weak) IBOutlet NSToolbar *toolBar;
 
 @end
+
+
+@interface NSSliderCellHideThumbWhenDisable : NSSliderCell
+-(void)drawKnob:(NSRect)knobRect;
+@end
+

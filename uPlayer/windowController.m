@@ -13,6 +13,22 @@
 
 
 
+@implementation NSSliderCellHideThumbWhenDisable
+-(void)drawKnob:(NSRect)knobRect
+{
+    if (self.enabled) {
+        [super drawKnob:knobRect];
+    }
+    else
+    {
+        
+    }
+}
+
+@end
+
+
+
 @interface WindowController ()
 <NSToolbarDelegate>
 @property (weak) IBOutlet NSPopUpButton *playOrderBtn;
@@ -24,7 +40,7 @@
 @implementation WindowController
 - (IBAction)actionOrderChanged:(id)sender {
     
-    postEvent(EventID_to_change_player_order, [NSNumber numberWithInt: (int)self.playOrderBtn.indexOfSelectedItem]);
+    player().document.playOrder = (PlayOrder)self.playOrderBtn.indexOfSelectedItem;
 }
 
 
@@ -39,35 +55,25 @@
 
 
 - (IBAction)actionProgressSlider:(id)sender {
+    [player().engine seekToTime:sender];
 }
 
 - (IBAction)actionVolumnSlider:(id)sender {
 }
 
--(void)windowWillLoad
-{
-    addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
-    
-    addObserverForEvent(self , @selector(clearWindowTitle:), EventID_track_stopped);
-    
-    addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
-}
-
--(void)windowDidLoad
-{
-    
-}
 
 -(void)updateProgressInfo:(NSNotification*)n
 {
-    ProgressInfo *info = n.object;
-    
-    NSAssert([info isKindOfClass:[ProgressInfo class]], nil);
-    
-    
-    [self.progressSlider setMinValue:0];
-    [self.progressSlider setMaxValue:info.total];
-    [self.progressSlider setDoubleValue:info.current];
+    if (!self.progressSlider.highlighted)
+    {
+        ProgressInfo *info = n.object;
+        
+        NSAssert([info isKindOfClass:[ProgressInfo class]], nil);
+        
+        [self.progressSlider setMinValue:0];
+        [self.progressSlider setMaxValue:info.total];
+        [self.progressSlider setDoubleValue:info.current];
+    }
     
 }
 
@@ -76,16 +82,21 @@
     NSAssert([n.object isKindOfClass:[NSString class]],nil);
     
     self.window.title=n.object;
+    
+    self.progressSlider.enabled = YES;
 }
 
--(void)clearWindowTitle:(NSNotification*)n
+-(void)trackStopped
 {
     self.window.title = player().document.windowName;
+    
+    self.progressSlider.enabled = false;
 }
+
+
 
 -(void)dealloc
 {
-    
     removeObserver(self);
 }
 
@@ -105,10 +116,20 @@
                                                         @"repeat_list" ,
                                                         @"shuffle" ]];
     
-    [self.playOrderBtn selectItemAtIndex:1];
+
+     addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
     
+    addObserverForEvent(self , @selector(trackStopped), EventID_track_stopped);
+    
+    addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
+    
+    addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
 }
 
+-(void)initCtrls
+{
+     [self.playOrderBtn selectItemAtIndex: player().document.playOrder ];
+}
 
 @end
 

@@ -711,7 +711,7 @@
                                     <slider key="view" verticalHuggingPriority="750" id="Wg7-DP-k7t">
                                         <rect key="frame" x="0.0" y="14" width="220" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="EJJ-Ka-gnN"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="EJJ-Ka-gnN" customClass="NSSliderCellHideThumbWhenDisable"/>
                                         <connections>
                                             <action selector="actionProgressSlider:" target="B8D-0N-5wS" id="Udb-1N-nwX"/>
                                         </connections>

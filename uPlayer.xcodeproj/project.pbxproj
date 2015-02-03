@@ -179,9 +179,17 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		1E9085501A80B84A006144F7 /* res */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1E9085501A80B84A006144F7 /* res */,
 				1E04435C1A7B747A00B644D8 /* Preferences */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
 				1EDE8FD41A7740EC0086677B /* lyricsFetcher */,
