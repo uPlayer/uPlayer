@@ -687,34 +687,29 @@
                         <value key="minSize" type="size" width="900" height="500"/>
                         <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="108D3BC3-664A-4DB1-88C8-5DC1DF07920B" label="Order" paletteLabel="Order" id="FQ4-wm-eyT">
+                                <toolbarItem implicitItemIdentifier="1EA40979-1EA8-4323-90CE-40495BAE45D6" label="Play Order" paletteLabel="Play Order" id="c2Z-N4-MTP">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="79" height="26"/>
-                                    <size key="maxSize" width="99" height="26"/>
-                                    <comboBox key="view" verticalHuggingPriority="750" id="w9j-sZ-jaX">
-                                        <rect key="frame" x="0.0" y="14" width="79" height="26"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="sfz-rD-LJX">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="a2q-TB-wLQ">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <objectValues>
-                                                <string>Item 1</string>
-                                                <string>Item 2</string>
-                                                <string>Item 3</string>
-                                            </objectValues>
-                                        </comboBoxCell>
+                                        <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hLP-WU-D40">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="NhT-82-WJt"/>
+                                        </popUpButtonCell>
                                         <connections>
-                                            <action selector="actionChangePlayOrder:" target="B8D-0N-5wS" id="ElK-Ef-4Nb"/>
+                                            <action selector="actionOrderChanged:" target="B8D-0N-5wS" id="Gez-Dk-FtZ"/>
                                         </connections>
-                                    </comboBox>
+                                    </popUpButton>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="BAB6B808-6508-4563-9B74-7E76B16EA9D5" label="Progress" paletteLabel="Progress" id="pmD-eR-0dO">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="21"/>
-                                    <size key="maxSize" width="159" height="21"/>
+                                    <size key="maxSize" width="220" height="21"/>
                                     <slider key="view" verticalHuggingPriority="750" id="Wg7-DP-k7t">
-                                        <rect key="frame" x="0.0" y="14" width="159" height="21"/>
+                                        <rect key="frame" x="0.0" y="14" width="220" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="EJJ-Ka-gnN"/>
                                         <connections>
@@ -757,7 +752,7 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kVY-E4-A0e"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="FQ4-wm-eyT"/>
+                                <toolbarItem reference="c2Z-N4-MTP"/>
                                 <toolbarItem reference="pmD-eR-0dO"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
@@ -769,7 +764,7 @@
                         <contentBorderThickness minY="22"/>
                     </window>
                     <connections>
-                        <outlet property="orderCombo" destination="w9j-sZ-jaX" id="8Vp-6T-mVp"/>
+                        <outlet property="playOrderBtn" destination="sfz-rD-LJX" id="cgF-0l-BFK"/>
                         <outlet property="progressSlider" destination="Wg7-DP-k7t" id="Kg9-SN-45h"/>
                         <outlet property="searchField" destination="3Z0-st-x37" id="J6V-hx-q0b"/>
                         <outlet property="toolBar" destination="9tp-fk-1gk" id="Psb-IG-UHj"/>
@@ -792,7 +787,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228" y="964"/>
+            <point key="canvasLocation" x="39" y="1019"/>
         </scene>
     </scenes>
 </document>

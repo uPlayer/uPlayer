@@ -15,13 +15,19 @@
 
 @interface WindowController ()
 <NSToolbarDelegate>
-@property (weak) IBOutlet NSComboBox *orderCombo;
+@property (weak) IBOutlet NSPopUpButton *playOrderBtn;
 @property (weak) IBOutlet NSSlider *progressSlider;
 @property (weak) IBOutlet NSSlider *volumnSlider;
 @property (weak) IBOutlet NSSearchField *searchField;
 @end
 
 @implementation WindowController
+- (IBAction)actionOrderChanged:(id)sender {
+    
+    postEvent(EventID_to_change_player_order, [NSNumber numberWithInt: (int)self.playOrderBtn.indexOfSelectedItem]);
+}
+
+
 - (IBAction)actionSearch:(id)sender
 {
     ViewController *vc = (ViewController *) self.contentViewController;
@@ -31,8 +37,6 @@
     [vc filterTable:sf.stringValue];
 }
 
-- (IBAction)actionChangePlayOrder:(id)sender {
-}
 
 - (IBAction)actionProgressSlider:(id)sender {
 }
@@ -93,6 +97,16 @@
     /// @todo remove the progress bar thumb when stopped.
     
     self.window.title=player().document.windowName;
+    
+    [self.playOrderBtn addItemsWithTitles:@[    @"single",
+                                                        @"default" ,
+                                                        @"random" ,
+                                                        @"repeat_single" ,
+                                                        @"repeat_list" ,
+                                                        @"shuffle" ]];
+    
+    [self.playOrderBtn selectItemAtIndex:1];
+    
 }
 
 

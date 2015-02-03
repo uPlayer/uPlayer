@@ -23,7 +23,8 @@ const char *arrEvent[] =
     "to_save_config",
     "to_reload_lyrics",
     "to_center_item",
-    "to_change_player_title"
+    "to_change_player_title",
+    "to_change_player_order"
 };
 
 

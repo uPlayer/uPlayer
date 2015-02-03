@@ -55,7 +55,7 @@ enum ePlayerFlags : unsigned int {
         self.player = new SFB::Audio::Player();
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped);
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
-        
+        addObserverForEvent(self, @selector(changePlayOrder:), EventID_to_change_player_order);
         
         _playState = Player::PlayerState::Stopped;
         
@@ -140,6 +140,13 @@ enum ePlayerFlags : unsigned int {
     return self;
 }
 
+-(void)changePlayOrder:(NSNotification*)n
+{
+    NSNumber *nb = (NSNumber *) n.object;
+    PlayOrder order = nb.intValue;
+    
+    self.order = order;
+}
 
 -(void)playNext
 {
@@ -149,8 +156,27 @@ enum ePlayerFlags : unsigned int {
     PlayerTrack *track = [list getPlayItem];
     
     assert(list);
-
-    int indexNext = track.index +1;
+    
+    int count = (int)[list count];
+    int indexNext =-1;
+    
+    if (_order == playorder_single) {
+        return;
+    }
+    else if (self.order == playorder_default)
+    {
+        indexNext = track.index +1;
+    }
+    else if(_order == playorder_random)
+    {
+        static int s=0;
+        if(s++==0)
+            srand((uint )time(NULL));
+        
+        indexNext =rand() % (count) - 1;
+    }
+    
+    
     if ( indexNext < [list count] )
     {
         PlayerTrack* next = [list getItem: indexNext ];

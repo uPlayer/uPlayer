@@ -6,9 +6,11 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
+#import "PlayerTypeDefines.h"
 
 @interface PlayerEngine : NSObject
 
+@property (nonatomic) PlayOrder order;
 
 -(bool)isPlaying ;
 
@@ -17,7 +19,6 @@
 -(bool)isPending;
 
 -(bool)isStopped;
-
 
 - (void) playPause;
 
