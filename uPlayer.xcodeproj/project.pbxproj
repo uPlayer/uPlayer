@@ -102,7 +102,6 @@
 		1EDE8FCE1A7740DC0086677B /* fileCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fileCtrl.h; path = lyricsFetcher/src/fileCtrl.h; sourceTree = "<group>"; };
 		1EDE8FCF1A7740DC0086677B /* threadpool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threadpool.cpp; path = lyricsFetcher/src/threadpool.cpp; sourceTree = "<group>"; };
 		1EDE8FD01A7740DC0086677B /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threadpool.h; path = lyricsFetcher/src/threadpool.h; sourceTree = "<group>"; };
-		1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SFBAudioEngine.framework; path = Frameworks/SFBAudioEngine.framework; sourceTree = "<group>"; };
 		1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -254,7 +253,6 @@
 			children = (
 				1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */,
 				1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */,
-				1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

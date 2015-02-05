@@ -20,7 +20,7 @@
 
 - (BOOL) playURL:(NSURL *)url;
 
--(PlayState)getPlayState;
+-(enum PlayState)getPlayState;
 
 -(bool)isPaused;
 
@@ -34,7 +34,7 @@
 
 -(NSTimeInterval)currentTime;
 
-- (BOOL) stop;
+- (void) stop;
 
 @end
 
