@@ -353,6 +353,30 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Control" id="kRn-79-x4d">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Control" id="MZE-Pa-qt8">
+                                    <items>
+                                        <menuItem title="Play" keyEquivalent=" " id="2hd-wS-naf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdPlayPause:" target="Voe-Tx-rLC" id="Yhj-Jh-wUo"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Stop" id="Hbi-YC-Aao">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Next" id="SEU-9f-99W">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Previous" id="b1E-Dm-zWD">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="GQy-4g-JWh"/>
+                                        <menuItem title="Go to current song" tag="1" keyEquivalent="l" id="8Op-6c-njz"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Format" id="jxT-CU-nIS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Format" id="GEO-Iw-cKr">
@@ -690,9 +714,9 @@
                                 <toolbarItem implicitItemIdentifier="1EA40979-1EA8-4323-90CE-40495BAE45D6" label="Play Order" paletteLabel="Play Order" id="c2Z-N4-MTP">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
-                                    <size key="maxSize" width="100" height="28"/>
+                                    <size key="maxSize" width="140" height="28"/>
                                     <popUpButton key="view" verticalHuggingPriority="750" id="sfz-rD-LJX">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
+                                        <rect key="frame" x="0.0" y="14" width="140" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hLP-WU-D40">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -787,7 +811,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="39" y="1019"/>
+            <point key="canvasLocation" x="142" y="1261"/>
         </scene>
     </scenes>
 </document>

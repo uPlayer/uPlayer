@@ -21,6 +21,21 @@
 
 
 @implementation AppDelegate
+- (IBAction)cmdPlayPause:(id)sender {
+    bool isPaused =  [player().engine isPaused];
+    
+    if ([player().engine isPlaying])
+    {
+        //postEvent(EventID_to_, nil);
+    }
+    
+    postEvent(EventID_to_play_selected_track, nil);
+    
+    
+    NSMenuItem *item = (NSMenuItem *)sender;
+    item.title =   NSLocalizedString( (isPaused ?@"Pause" :@"Play") , nil);
+    
+}
 
 
 - (IBAction)showPreferences:(id)sender {

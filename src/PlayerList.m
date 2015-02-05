@@ -121,7 +121,7 @@
 
 -(PlayerList*)getPlayList
 {
-    if (_selectIndex == -1)
+    if (_playIndex == -1)
         return nil;
     
     return [self getItem:_playIndex];

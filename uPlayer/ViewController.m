@@ -27,6 +27,8 @@
 {
     addObserverForEvent(self, @selector(reloadTrackList), EventID_to_reload_tracklist);
     
+    addObserverForEvent(self, @selector(playSelctedTrack), EventID_to_play_selected_track);
+    
     self.playerlList = player().document.playerlList;
 }
 
@@ -143,10 +145,11 @@
     [self.tableView reloadData];
 }
 
--(void)doubleClicked
+-(void)playSelctedTrack
 {
-    //int col = self.tableView.clickedColumn;
+     //int col = self.tableView.clickedColumn;
     int row = (int) self.tableView.clickedRow;
+    
     
     if ( row >= 0)
     {
@@ -159,6 +162,8 @@
             
             track = [self.searchMng getOrginalByIndex:row];
             [list setSelectIndex:row];
+            
+            list = self.searchMng.playerlistOriginal;
         }
         else
         {
@@ -169,7 +174,14 @@
 
         playTrack(list, track);
     }
+ 
+}
+
+-(void)doubleClicked
+{
+    //postEvent(EventID_to_play_selected_track, nil);
     
+    [self playSelctedTrack];
 }
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

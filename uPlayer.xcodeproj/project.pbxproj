@@ -29,23 +29,12 @@
 		1EDE8FAE1A773D810086677B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAD1A773D810086677B /* ViewController.m */; };
 		1EDE8FB01A773D810086677B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAF1A773D810086677B /* Images.xcassets */; };
 		1EDE8FB31A773D810086677B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE8FB11A773D810086677B /* Main.storyboard */; };
-		1EDE8FBF1A773D810086677B /* uPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FBE1A773D810086677B /* uPlayerTests.m */; };
 		1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCB1A7740DC0086677B /* audioTag.cpp */; };
 		1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCD1A7740DC0086677B /* fileCtrl.cpp */; };
 		1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCF1A7740DC0086677B /* threadpool.cpp */; };
-		1EDE8FE01A7741EE0086677B /* SFBAudioEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */; };
-		1EDE8FE11A7741EE0086677B /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */; };
+		1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1EDE8FB91A773D810086677B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1EDE8F9A1A773D810086677B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EDE8FA11A773D810086677B;
-			remoteInfo = uPlayer;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1EDE8FDC1A77419B0086677B /* Embed Frameworks */ = {
@@ -54,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1EDE8FE11A7741EE0086677B /* SFBAudioEngine.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +94,6 @@
 		1EDE8FAD1A773D810086677B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1EDE8FAF1A773D810086677B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1EDE8FB21A773D810086677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1EDE8FB81A773D810086677B /* uPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE8FBD1A773D810086677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EDE8FBE1A773D810086677B /* uPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uPlayerTests.m; sourceTree = "<group>"; };
 		1EDE8FCB1A7740DC0086677B /* audioTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = audioTag.cpp; path = lyricsFetcher/src/audioTag.cpp; sourceTree = "<group>"; };
@@ -116,6 +103,8 @@
 		1EDE8FCF1A7740DC0086677B /* threadpool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threadpool.cpp; path = lyricsFetcher/src/threadpool.cpp; sourceTree = "<group>"; };
 		1EDE8FD01A7740DC0086677B /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threadpool.h; path = lyricsFetcher/src/threadpool.h; sourceTree = "<group>"; };
 		1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SFBAudioEngine.framework; path = Frameworks/SFBAudioEngine.framework; sourceTree = "<group>"; };
+		1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,14 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EDE8FE01A7741EE0086677B /* SFBAudioEngine.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDE8FB51A773D810086677B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */,
+				1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				1EDE8FA21A773D810086677B /* uPlayer.app */,
-				1EDE8FB81A773D810086677B /* uPlayerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -270,6 +252,8 @@
 		1EDE8FE21A7742000086677B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */,
+				1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */,
 				1EDE8FDF1A7741EE0086677B /* SFBAudioEngine.framework */,
 			);
 			name = Frameworks;
@@ -296,24 +280,6 @@
 			productReference = 1EDE8FA21A773D810086677B /* uPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1EDE8FB71A773D810086677B /* uPlayerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1EDE8FC51A773D810086677B /* Build configuration list for PBXNativeTarget "uPlayerTests" */;
-			buildPhases = (
-				1EDE8FB41A773D810086677B /* Sources */,
-				1EDE8FB51A773D810086677B /* Frameworks */,
-				1EDE8FB61A773D810086677B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1EDE8FBA1A773D810086677B /* PBXTargetDependency */,
-			);
-			name = uPlayerTests;
-			productName = uPlayerTests;
-			productReference = 1EDE8FB81A773D810086677B /* uPlayerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -325,10 +291,6 @@
 				TargetAttributes = {
 					1EDE8FA11A773D810086677B = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					1EDE8FB71A773D810086677B = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 1EDE8FA11A773D810086677B;
 					};
 				};
 			};
@@ -346,7 +308,6 @@
 			projectRoot = "";
 			targets = (
 				1EDE8FA11A773D810086677B /* uPlayer */,
-				1EDE8FB71A773D810086677B /* uPlayerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -361,13 +322,6 @@
 				1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */,
 				1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDE8FB61A773D810086677B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,23 +355,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1EDE8FB41A773D810086677B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1EDE8FBF1A773D810086677B /* uPlayerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1EDE8FBA1A773D810086677B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1EDE8FA11A773D810086677B /* uPlayer */;
-			targetProxy = 1EDE8FB91A773D810086677B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1E169A7F1A78D05D003D3D01 /* Localizable.strings */ = {
@@ -539,6 +477,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = "-ltag";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
@@ -563,42 +502,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = "-ltag";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		1EDE8FC61A773D810086677B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = uPlayerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/uPlayer.app/Contents/MacOS/uPlayer";
-			};
-			name = Debug;
-		};
-		1EDE8FC71A773D810086677B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = uPlayerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/uPlayer.app/Contents/MacOS/uPlayer";
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};
@@ -619,15 +523,6 @@
 			buildConfigurations = (
 				1EDE8FC31A773D810086677B /* Debug */,
 				1EDE8FC41A773D810086677B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1EDE8FC51A773D810086677B /* Build configuration list for PBXNativeTarget "uPlayerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1EDE8FC61A773D810086677B /* Debug */,
-				1EDE8FC71A773D810086677B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

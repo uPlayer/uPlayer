@@ -10,7 +10,17 @@
 
 @interface PlayerEngine : NSObject
 
--(bool)isPlaying ;
+///Whether or not the Player is playing.
+@property (nonatomic, readonly) BOOL isPlaying;
+
+///The volume level of the player.
+///
+///This property is persistent.
+@property float volume;
+
+- (BOOL) playURL:(NSURL *)url;
+
+-(PlayState)getPlayState;
 
 -(bool)isPaused;
 
@@ -20,22 +30,11 @@
 
 - (void) playPause;
 
-- (void) seekForward;
-
-- (void) seekBackward;
-
-- (void) seekToPos:(id)sender;
-
 - (void) seekToTime:(id)sender;
 
-- (void) skipToNextTrack;
-
-- (BOOL) playURL:(NSURL *)url;
-
-- (BOOL) enqueueURL:(NSURL *)url;
+-(NSTimeInterval)currentTime;
 
 - (BOOL) stop;
-
 
 @end
 

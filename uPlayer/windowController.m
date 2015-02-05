@@ -16,15 +16,9 @@
 @implementation NSSliderCellHideThumbWhenDisable
 -(void)drawKnob:(NSRect)knobRect
 {
-    if (self.enabled) {
+    if (self.enabled)
         [super drawKnob:knobRect];
-    }
-    else
-    {
-        
-    }
 }
-
 @end
 
 

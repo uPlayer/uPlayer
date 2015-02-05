@@ -8,6 +8,7 @@
 
 #import "PlayerMessage.h"
 
+#import <AVFoundation/AVFoundation.h>
 
 const char *arrEvent[] =
 {
@@ -23,7 +24,8 @@ const char *arrEvent[] =
     "to_save_config",
     "to_reload_lyrics",
     "to_center_item",
-    "to_change_player_title"
+    "to_change_player_title",
+    "to_play_selected_track",
 };
 
 

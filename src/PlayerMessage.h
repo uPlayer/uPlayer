@@ -23,7 +23,10 @@ typedef NS_ENUM(NSInteger, EventID)
     EventID_to_save_config,
     EventID_to_reload_lyrics,
     EventID_to_center_item,
-    EventID_to_change_player_title
+    EventID_to_change_player_title,
+    EventID_to_play_selected_track,
+    EventID_to_stop,
+    EventID_to_play
 };
 
 

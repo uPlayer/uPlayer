@@ -7,18 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "PlayerEngine.h"
 #import "PlayerMessage.h"
-
+#import "PlayerTypeDefines.h"
 #import "UPlayer.h"
+#import <atomic>
 
-#include <atomic>
-#include <SFBAudioEngine/AudioDecoder.h>
-#include <SFBAudioEngine/AudioPlayer.h>
-#include <SFBAudioEngine/AudioMetadata.h>
-
-using namespace SFB::Audio;
-
+NSTimeInterval CMTime_NSTime( CMTime time )
+{
+    if (time.timescale == 0) {
+        return 0;
+    }
+    
+    return time.value / time.timescale;
+}
 
 enum ePlayerFlags : unsigned int {
     ePlayerFlagRenderingStarted			= 1u << 0,
@@ -27,11 +31,13 @@ enum ePlayerFlags : unsigned int {
 
 @interface PlayerEngine ()
 {
+    PlayState _state;
+    BOOL _playTimeEnded;
     std::atomic_uint	_playerFlags;
     dispatch_source_t	_timer;
-    Player::PlayerState _playState;
 }
-@property (nonatomic,assign) SFB::Audio::Player *player;
+@property (nonatomic,strong) AVPlayer *player;
+
 @end
 
 @implementation PlayerEngine
@@ -52,23 +58,32 @@ enum ePlayerFlags : unsigned int {
     self = [super init];
     if (self) {
         
-        self.player = new SFB::Audio::Player();
+        self.player = [[AVPlayer alloc]init];
+        self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+        
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped);
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
+       
+        NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
         
-        _playState = Player::PlayerState::Stopped;
+        [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+        
+    
+        _playTimeEnded = TRUE;
+        
+        _state = playstate_stopped;
         
         _playerFlags = 0;
         
         // This will be called from the realtime rendering thread and as such MUST NOT BLOCK!!
-        _player->SetRenderingStartedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
-            _playerFlags.fetch_or(ePlayerFlagRenderingStarted);
-        });
+//        _player->SetRenderingStartedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
+//            _playerFlags.fetch_or(ePlayerFlagRenderingStarted);
+//        });
         
         // This will be called from the realtime rendering thread and as such MUST NOT BLOCK!!
-        _player->SetRenderingFinishedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
-            _playerFlags.fetch_or(ePlayerFlagRenderingFinished);
-        });
+//        _player->SetRenderingFinishedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
+//            _playerFlags.fetch_or(ePlayerFlagRenderingFinished);
+//        });
         
         // Update the UI 5 times per second
         _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
@@ -76,60 +91,58 @@ enum ePlayerFlags : unsigned int {
         
         
         dispatch_source_set_event_handler(_timer, ^{
-            
+        
             // To avoid blocking the realtime rendering thread, flags are set in the callbacks and subsequently handled here
             auto flags = _playerFlags.load();
-            
+        
             if(ePlayerFlagRenderingStarted & flags) {
                 _playerFlags.fetch_and(~ePlayerFlagRenderingStarted);
-                
-                //[self updateWindowUI];
+        
                 
                 return;
             }
             else if(ePlayerFlagRenderingFinished & flags) {
                 _playerFlags.fetch_and(~ePlayerFlagRenderingFinished);
-                
-                //[self updateWindowUI];
+        
                 
                 return;
             }
+        
+            PlayState curr =  [self getPlayState];
             
-            Player::PlayerState state = _player->GetPlayerState();
-            
-            if (_playState != state)
+            if (  curr != _state)
             {
-                if( state == Player::PlayerState::Paused )
+                if( curr == playstate_paused)
                     postEvent(EventID_track_paused, nil);
-                else if (state == Player::PlayerState::Stopped)
+                else if ( curr == playstate_stopped)
                     postEvent(EventID_track_stopped, nil);
-                else if ( state == Player::PlayerState::Playing)
+                else if ( curr == playstate_playing)
                 {
-                    if (_playState == Player::PlayerState::Stopped)
+                    if ( _state == playstate_stopped)
                         postEvent(EventID_track_started, nil);
-                    else if ( _playState == Player::PlayerState::Paused)
+                    else if ( _state == playstate_paused )
                         postEvent(EventID_track_resumed, nil);
                 }
             }
             
-            if (state != Player::PlayerState::Pending)
-                _playState = state;
+            _state = curr ;
             
             
-            SInt64 currentFrame, totalFrames;
-            CFTimeInterval currentTime, totalTime;
             
-            if(_player->GetPlaybackPositionAndTime(currentFrame, totalFrames, currentTime, totalTime)) {
-                double fractionComplete = static_cast<double>(currentFrame) / static_cast<double>(totalFrames);
+            //if(_player->GetPlaybackPositionAndTime(currentFrame, totalFrames, currentTime, totalTime)) {
+            
+            
+                if ( curr != playstate_stopped)
+                {
                 
                 ProgressInfo *info=[[ProgressInfo alloc]init];
-                info.current=currentTime;
-                info.total=totalTime;
-                info.fractionComplete=fractionComplete;
+            info.current =  [self currentTime];
+                info.total = CMTime_NSTime( _player.currentItem.duration );
+                info.fractionComplete= info.current / info.total;
              
                 postEvent(EventID_track_progress_changed, info);
-            }
-            
+            //}
+                }
         });
         
         // Start the timer
@@ -139,7 +152,10 @@ enum ePlayerFlags : unsigned int {
     return self;
 }
 
-
+-(void)DidPlayToEndTime:(NSNotification*)n
+{
+    _playTimeEnded = TRUE;
+}
 
 -(void)playNext
 {
@@ -150,16 +166,17 @@ enum ePlayerFlags : unsigned int {
     
     assert(list);
     
+    int index = track.index;
     int count = (int)[list count];
     int indexNext =-1;
-    PlayOrder order = d.playOrder;
+    PlayOrder order = (PlayOrder)d.playOrder;
     
     if (order == playorder_single) {
         
     }
     else if (order == playorder_default)
     {
-        indexNext = track.index +1;
+        indexNext = index +1;
     }
     else if(order == playorder_random)
     {
@@ -168,6 +185,14 @@ enum ePlayerFlags : unsigned int {
             srand((uint )time(NULL));
         
         indexNext =rand() % (count) - 1;
+    }else if(order == playorder_repeat_single)
+    {
+        indexNext = index;
+    }else if(order == playorder_repeat_list)
+    {
+        indexNext = index + 1;
+        if (indexNext == count - 1)
+            indexNext = 0;
     }
     
     PlayerTrack* next = nil;
@@ -184,74 +209,100 @@ enum ePlayerFlags : unsigned int {
     removeObserver(self);
 }
 
-
--(bool)isPlaying
+-(PlayState)getPlayState
 {
-    return _player->IsPlaying();
+    if ( _playTimeEnded )
+    {
+        return playstate_stopped;
+    }
+    else
+    {
+        if (_player.rate == 0.0) {
+            return playstate_paused;
+        }
+        else //if(_player.rate == 1.0 )
+        {
+            return playstate_playing;
+        }
+    }
+    
+    //return playstate_stopped;
+}
+
+-(BOOL)isPlaying
+{
+    return  (_player.currentItem != nil) && (_player.rate == 1.0) ;
 }
 
 -(bool)isPaused
 {
-    return _player->IsPaused();
+    return _player.rate == 0.0;
 }
 
 -(bool)isStopped
 {
-    return _player->IsStopped();
+    return _player.currentItem == nil;
 }
 
 -(bool)isPending
 {
-    return _player->IsPending();
+    return _state == playstate_pending;
 }
 
 
 - (void) playPause
 {
-    _player->PlayPause();
+    if (self.isPlaying) {
+        [_player pause];
+        _state = playstate_paused ;
+    }
+    else if (self.isPaused)
+    {
+        [_player play];
+        _state = playstate_playing ;
+        _playTimeEnded = FALSE;
+    }
+    
 }
 
-- (void) seekForward
-{
-    _player->SeekForward();
-}
-
-- (void) seekBackward
-{
-    _player->SeekBackward();
-}
-
-- (void) seekToPos:(id)sender
-{
-    _player->SeekToPosition([sender floatValue]);
-}
 
 - (void) seekToTime:(id)sender
 {
-    _player->SeekToTime([sender floatValue]);
+    [_player seekToTime: CMTimeMakeWithSeconds([sender floatValue] , 1) ];
 }
 
-- (void) skipToNextTrack
+-(NSTimeInterval)currentTime
 {
-    _player->SkipToNextTrack();
+   	CMTime time = _player.currentTime;
+    return time.value / time.timescale;
 }
 
 - (BOOL) playURL:(NSURL *)url
 {
-    return _player->Play((__bridge CFURLRef)url);
+    AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL: url];
+    [_player replaceCurrentItemWithPlayerItem: item ];
+    [_player play];
+    _playTimeEnded = FALSE;
+    return 1;
 }
 
-- (BOOL) enqueueURL:(NSURL *)url
+
+
+- (void)stop
 {
-    return _player->Enqueue((__bridge CFURLRef)url);
+    [_player pause];
+    [_player replaceCurrentItemWithPlayerItem:nil];
 }
 
-- (BOOL) stop
+- (void)setVolume:(float)volume
 {
-    return _player->Stop();
+    _player.volume = volume;
 }
 
-
+- (float)volume
+{
+    return  _player.volume;
+}
 
 @end
 

@@ -9,22 +9,25 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_OPTIONS(int, PlayOrder)
+
+typedef NS_ENUM(int, PlayOrder)
 {
-    playorder_single = 0,
-    playorder_default = 1,
-    playorder_random = 2,
-    playorder_repeat_single = 4,
-    playorder_repeat_list = 8,
-    playorder_shuffle = 16
+    playorder_single ,
+    playorder_default ,
+    playorder_random ,
+    playorder_repeat_single ,
+    playorder_repeat_list ,
+    playorder_shuffle
 };
 
 
-enum PlayStatus
+
+enum PlayState
 {
-    playstatus_stopped,
-    playstatus_playing,
-    playstatus_paused
+    playstate_stopped,
+    playstate_playing,
+    playstate_paused,
+    playstate_pending
 };
 
 
