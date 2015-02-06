@@ -82,6 +82,8 @@
 
 -(void)trackStopped
 {
+    NSLog(@"track stopped.");
+    
     self.window.title = player().document.windowName;
     
     self.progressSlider.enabled = false;
@@ -103,15 +105,10 @@
     
     self.window.title=player().document.windowName;
     
-    [self.playOrderBtn addItemsWithTitles:@[    @"single",
-                                                        @"default" ,
-                                                        @"random" ,
-                                                        @"repeat_single" ,
-                                                        @"repeat_list" ,
-                                                        @"shuffle" ]];
+    [self.playOrderBtn addItemsWithTitles: kPlayOrder];
     
 
-     addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
+    addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
     
     addObserverForEvent(self , @selector(trackStopped), EventID_track_stopped);
     

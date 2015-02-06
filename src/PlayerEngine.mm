@@ -13,7 +13,6 @@
 #import "PlayerMessage.h"
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
-#import <atomic>
 
 NSTimeInterval CMTime_NSTime( CMTime time )
 {
@@ -24,16 +23,12 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     return time.value / time.timescale;
 }
 
-enum ePlayerFlags : unsigned int {
-    ePlayerFlagRenderingStarted			= 1u << 0,
-    ePlayerFlagRenderingFinished		= 1u << 1
-};
+
 
 @interface PlayerEngine ()
 {
     PlayState _state;
     BOOL _playTimeEnded;
-    std::atomic_uint	_playerFlags;
     dispatch_source_t	_timer;
 }
 @property (nonatomic,strong) AVPlayer *player;
@@ -61,7 +56,7 @@ enum ePlayerFlags : unsigned int {
         self.player = [[AVPlayer alloc]init];
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
         
-        addObserverForEvent(self, @selector(playNext), EventID_track_stopped);
+        addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
        
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
@@ -73,75 +68,22 @@ enum ePlayerFlags : unsigned int {
         
         _state = playstate_stopped;
         
-        _playerFlags = 0;
         
-        // This will be called from the realtime rendering thread and as such MUST NOT BLOCK!!
-//        _player->SetRenderingStartedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
-//            _playerFlags.fetch_or(ePlayerFlagRenderingStarted);
-//        });
-        
-        // This will be called from the realtime rendering thread and as such MUST NOT BLOCK!!
-//        _player->SetRenderingFinishedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
-//            _playerFlags.fetch_or(ePlayerFlagRenderingFinished);
-//        });
-        
+
         // Update the UI 5 times per second
         _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-        dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 5, NSEC_PER_SEC / 3);
-        
+        dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 2, NSEC_PER_SEC / 3);
         
         dispatch_source_set_event_handler(_timer, ^{
-        
-            // To avoid blocking the realtime rendering thread, flags are set in the callbacks and subsequently handled here
-            auto flags = _playerFlags.load();
-        
-            if(ePlayerFlagRenderingStarted & flags) {
-                _playerFlags.fetch_and(~ePlayerFlagRenderingStarted);
-        
-                
-                return;
-            }
-            else if(ePlayerFlagRenderingFinished & flags) {
-                _playerFlags.fetch_and(~ePlayerFlagRenderingFinished);
-        
-                
-                return;
-            }
-        
-            PlayState curr =  [self getPlayState];
             
-            if (  curr != _state)
-            {
-                if( curr == playstate_paused)
-                    postEvent(EventID_track_paused, nil);
-                else if ( curr == playstate_stopped)
-                    postEvent(EventID_track_stopped, nil);
-                else if ( curr == playstate_playing)
+                if ( [self getPlayState] != playstate_stopped)
                 {
-                    if ( _state == playstate_stopped)
-                        postEvent(EventID_track_started, nil);
-                    else if ( _state == playstate_paused )
-                        postEvent(EventID_track_resumed, nil);
-                }
-            }
-            
-            _state = curr ;
-            
-            
-            
-            //if(_player->GetPlaybackPositionAndTime(currentFrame, totalFrames, currentTime, totalTime)) {
-            
-            
-                if ( curr != playstate_stopped)
-                {
-                
-                ProgressInfo *info=[[ProgressInfo alloc]init];
-            info.current =  [self currentTime];
-                info.total = CMTime_NSTime( _player.currentItem.duration );
-                info.fractionComplete= info.current / info.total;
-             
-                postEvent(EventID_track_progress_changed, info);
-            //}
+                    ProgressInfo *info=[[ProgressInfo alloc]init];
+                    info.current =  [self currentTime];
+                    info.total = CMTime_NSTime( _player.currentItem.duration );
+                    info.fractionComplete= info.current / info.total;
+                    
+                    postEvent(EventID_track_progress_changed, info);
                 }
         });
         
@@ -154,7 +96,11 @@ enum ePlayerFlags : unsigned int {
 
 -(void)DidPlayToEndTime:(NSNotification*)n
 {
+    NSLog(@"play end time.");
     _playTimeEnded = TRUE;
+    
+    postEvent(EventID_track_stopped, nil);
+    postEvent(EventID_track_stopped_playnext, nil);
 }
 
 -(void)playNext
@@ -201,7 +147,6 @@ enum ePlayerFlags : unsigned int {
         next = [list getItem: indexNext ];
  
     playTrack(list,next);
-    
 }
 
 -(void)dealloc
@@ -261,6 +206,7 @@ enum ePlayerFlags : unsigned int {
         [_player play];
         _state = playstate_playing ;
         _playTimeEnded = FALSE;
+        postEvent(EventID_track_resumed, nil);
     }
     
 }

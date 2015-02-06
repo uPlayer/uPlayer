@@ -12,14 +12,15 @@
 
 typedef NS_ENUM(int, PlayOrder)
 {
-    playorder_single ,
     playorder_default ,
     playorder_random ,
     playorder_repeat_single ,
     playorder_repeat_list ,
-    playorder_shuffle
+    playorder_shuffle,
+    playorder_single
 };
 
+#define kPlayOrder (  @[@"default" ,@"random" ,@"repeat_single" , @"repeat_list" , @"shuffle", @"single"])
 
 
 enum PlayState

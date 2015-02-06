@@ -8,18 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-typedef NS_ENUM(NSInteger, EventID)
-{
-    EventID_track_started,
-    EventID_track_stopped,
-    EventID_track_paused,
-    EventID_track_resumed,
-    EventID_track_selected,
-    EventID_track_progress_changed,
-    EventID_playerqueue_changed,
-    EventID_player_document_loaded, // 使配置生效
-    EventID_to_reload_tracklist,
+typedef enum : NSUInteger {
+    EventID_track_started = 0,
+    EventID_track_stopped ,
+    EventID_track_stopped_playnext ,
+    EventID_track_paused ,
+    EventID_track_resumed ,
+    EventID_track_selected ,
+    EventID_track_progress_changed ,
+    EventID_playerqueue_changed ,
+    EventID_player_document_loaded , // 使配置生效
+    EventID_to_reload_tracklist ,
     EventID_to_save_config,
     EventID_to_reload_lyrics,
     EventID_to_center_item,
@@ -27,7 +26,8 @@ typedef NS_ENUM(NSInteger, EventID)
     EventID_to_play_selected_track,
     EventID_to_stop,
     EventID_to_play
-};
+} EventID;
+
 
 
 
@@ -37,13 +37,13 @@ extern "C" {
 #endif /* defined(__cplusplus) */
 
     
-    void addObserverForEvent(id observer , SEL sel, enum EventID et);
+    void addObserverForEvent(id observer , SEL sel, EventID et);
     
-    void removeObserverForEvent(id observer , SEL sel, enum EventID et);
+    void removeObserverForEvent(id observer , SEL sel, EventID et);
     
     void removeObserver(id observer);
     
-    void postEvent(enum EventID et , id object);
+    void postEvent(EventID et , id object);
     
 #if defined(__cplusplus)
 }

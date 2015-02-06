@@ -108,6 +108,7 @@ void playTrack(PlayerList *list,PlayerTrack *track)
     if (track)
     {
         playTrack(track.info);
+        postEvent(EventID_track_started, nil);
     }
     
     PlayerlList *llist = player().document.playerlList;

@@ -39,6 +39,8 @@
     
     [self.tableView reloadData];
     
+    [self.tableView resignFirstResponder];
+    
     PlayerList *list = [self.playerlList getPlayList];
     int row = list.playIndex;
     
@@ -81,6 +83,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    
     CGFloat bottomBarHeight = 22.0;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
