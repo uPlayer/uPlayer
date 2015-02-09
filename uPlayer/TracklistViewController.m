@@ -32,7 +32,7 @@ typedef enum
 
 -(void)awakeFromNib
 {
-    addObserverForEvent(self, @selector(reloadTrackList), EventID_to_reload_tracklist);
+    addObserverForEvent(self, @selector(reloadTrackList:), EventID_to_reload_tracklist);
     
     addObserverForEvent(self, @selector(playSelctedTrack), EventID_to_play_selected_track);
     
@@ -43,15 +43,20 @@ typedef enum
 
 
 
--(void)reloadTrackList
+-(void)reloadTrackList:(NSNotification*)n
 {
     /// @todo save top index.
+    
     
     [self.tableView reloadData];
     
     [self.tableView resignFirstResponder];
     
-    PlayerList *list = [self.playerlList getPlayList];
+    PlayerList *list =  n.object; // the selected
+    
+    if ( list == nil) // then reload playing.
+        list =  [self.playerlList getPlayList] ;
+    
     int row = list.playIndex;
     
     if (row == -1)

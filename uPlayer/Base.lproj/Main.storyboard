@@ -771,11 +771,11 @@
             <objects>
                 <viewController title="PlayList Viewer" id="Qif-73-RE2" customClass="PlaylistViewController" sceneMemberID="viewController">
                     <view key="view" id="QTd-9G-JUC">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="463" height="304"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sof-Yj-DjO">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="463" height="304"/>
                                 <clipView key="contentView" misplaced="YES" id="rHG-2U-uEe">
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -787,12 +787,12 @@
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="playlistColumnIndex" width="116" minWidth="40" maxWidth="1000" id="QYP-aE-oTi">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="#">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="#">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="hLo-7s-qNo">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" title="Text Cell" id="hLo-7s-qNo">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -805,8 +805,8 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="109-ro-5qv">
-                                                                        <font key="font" metaFont="system"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="109-ro-5qv">
+                                                                        <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -818,8 +818,8 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="playlistColumnName" width="326" minWidth="40" maxWidth="1000" id="h2V-xq-zdE">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="name">
+                                                <tableColumn identifier="playlistColumnName" width="339" minWidth="40" maxWidth="1000" id="h2V-xq-zdE">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -832,13 +832,13 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="120" y="1" width="326" height="17"/>
+                                                            <rect key="frame" x="120" y="1" width="339" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="XxM-of-WlE">
-                                                                        <font key="font" metaFont="system"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="XxM-of-WlE">
+                                                                        <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -874,10 +874,10 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Sof-Yj-DjO" firstAttribute="top" secondItem="QTd-9G-JUC" secondAttribute="top" id="FI9-8E-B0p"/>
-                            <constraint firstAttribute="bottom" secondItem="Sof-Yj-DjO" secondAttribute="bottom" id="TJa-bO-zeV"/>
-                            <constraint firstAttribute="trailing" secondItem="Sof-Yj-DjO" secondAttribute="trailing" id="ZtX-dd-Dg6"/>
-                            <constraint firstItem="Sof-Yj-DjO" firstAttribute="leading" secondItem="QTd-9G-JUC" secondAttribute="leading" id="xev-0M-TgA"/>
+                            <constraint firstAttribute="trailing" secondItem="Sof-Yj-DjO" secondAttribute="trailing" id="8xp-wn-Iby"/>
+                            <constraint firstItem="Sof-Yj-DjO" firstAttribute="top" secondItem="QTd-9G-JUC" secondAttribute="top" id="IRj-Tl-iNV"/>
+                            <constraint firstAttribute="bottom" secondItem="Sof-Yj-DjO" secondAttribute="bottom" id="cdC-dh-wlX"/>
+                            <constraint firstItem="Sof-Yj-DjO" firstAttribute="leading" secondItem="QTd-9G-JUC" secondAttribute="leading" id="jJV-FN-1pE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -886,7 +886,7 @@
                 </viewController>
                 <customObject id="8rv-Tv-eeI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-195" y="-115"/>
+            <point key="canvasLocation" x="-179.5" y="-139"/>
         </scene>
         <!--Tracklist Viewer-->
         <scene sceneID="hIz-AP-VOD">

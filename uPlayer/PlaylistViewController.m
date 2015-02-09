@@ -93,8 +93,12 @@
 
 -(void)doubleClicked
 {
-    //postEvent(EventID_to_play_selected_track, nil);
+    int selectedRow = (int) self.tableView.selectedRow;
+    [self.playerlList setSelectIndex:selectedRow];
+    PlayerList *l = [self.playerlList getSelectedList];
     
+    
+    postEvent(EventID_to_reload_tracklist, l );
 }
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -137,4 +141,6 @@
         
     }
 }
+
+
 @end
