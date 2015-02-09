@@ -24,8 +24,10 @@ typedef enum : NSUInteger {
     EventID_to_center_item,
     EventID_to_change_player_title,
     EventID_to_play_selected_track,
+    EventID_to_show_playlist,
+    EventID_to_play_pause,
     EventID_to_stop,
-    EventID_to_play
+    EventID_to_play_next
 } EventID;
 
 

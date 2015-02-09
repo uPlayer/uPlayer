@@ -6,22 +6,29 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "TracklistViewController.h"
 #import "UPlayer.h"
 
 #import "PlayerMessage.h"
 #import "PlayerSerachMng.h"
 
 
-@interface ViewController () <NSTableViewDelegate , NSTableViewDataSource >
+typedef enum
+{
+   displayMode_tracklist,
+   displayMode_tracklist_search,
+   displayMode_playlist
+} displayMode;
+
+@interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
-@property (nonatomic) bool searchMode;
+@property (nonatomic) displayMode displaymode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
 @end
 
-@implementation ViewController
+@implementation TracklistViewController
 
 -(void)awakeFromNib
 {
@@ -29,8 +36,11 @@
     
     addObserverForEvent(self, @selector(playSelctedTrack), EventID_to_play_selected_track);
     
+    
     self.playerlList = player().document.playerlList;
 }
+
+
 
 
 -(void)reloadTrackList
@@ -75,15 +85,11 @@
 -(void)viewDidAppear
 {
     [super viewDidAppear];
-    
-
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    
     CGFloat bottomBarHeight = 22.0;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
@@ -131,7 +137,7 @@
 {
     if (key.length > 0)
     {
-        self.searchMode = true;
+        self.displaymode= displayMode_tracklist_search;
         if (self.searchMng == nil)
             self.searchMng = [[PlayerSearchMng alloc]init];
         
@@ -141,7 +147,7 @@
     }
     else
     {
-        self.searchMode = false;
+        self.displaymode = displayMode_tracklist;
         
     }
     
@@ -159,7 +165,7 @@
         PlayerList *list ;
         
         PlayerTrack *track;
-        if (self.searchMode )
+        if (self.displaymode == displayMode_tracklist_search)
         {
             list = self.searchMng.playerlistFilter ;
             
@@ -189,7 +195,12 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.searchMode ?[self.searchMng.playerlistFilter count ]: [[self.playerlList getSelectedList] count];
+    if ( self.displaymode == displayMode_tracklist_search)
+        return   [self.searchMng.playerlistFilter count ];
+    else if ( self.displaymode == displayMode_tracklist)
+        return   [[self.playerlList getSelectedList] count];
+    else
+        return  [self.playerlList count];
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -211,7 +222,7 @@
     }
 
 
-    PlayerTrack *track = self.searchMode? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
+    PlayerTrack *track = self.displaymode == displayMode_tracklist_search? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
     
     TrackInfo *info = track.info;
     

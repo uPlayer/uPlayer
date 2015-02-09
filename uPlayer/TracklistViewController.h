@@ -8,9 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController 
+@interface TracklistViewController : NSViewController
 
 -(void)filterTable:(NSString*)key;
 
 @end
+
 

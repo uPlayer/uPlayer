@@ -21,6 +21,7 @@
 
 
 @implementation AppDelegate
+
 - (IBAction)cmdPlayPause:(id)sender {
     bool isPaused =  [player().engine isPaused];
     
@@ -34,7 +35,6 @@
     
     NSMenuItem *item = (NSMenuItem *)sender;
     item.title =   NSLocalizedString( (isPaused ?@"Pause" :@"Play") , nil);
-    
 }
 
 
@@ -45,8 +45,6 @@
 }
 
 - (IBAction)cmdNewPlayerList:(id)sender {
-
-    //NSPreferences *pre;
     
     PlayerDocument *document = player().document;
     PlayerlList *lList = document.playerlList;
@@ -90,18 +88,30 @@
     NSLog(@"command: Find");
 
 }
+
 - (IBAction)cmdShowPlayingItem:(id)sender
 {
     postEvent(EventID_to_reload_tracklist, nil);
 }
 
+- (IBAction)cmdShowPlayList:(id)sender
+{
+    postEvent(EventID_to_show_playlist, nil);
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    if( [player().document load] )
+    PlayerDocument *d = player().document;
+    
+    if( [d load] )
     {
         postEvent(EventID_to_reload_tracklist, nil);
         postEvent(EventID_player_document_loaded, nil);
     }
+    
+    
+    self.menuOpenDirectory.enabled = [d.playerlList count]>0;
+    self.menuOpenDirectory.enabled =  false;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

@@ -7,7 +7,7 @@
 //
 
 #import "windowController.h"
-#import "ViewController.h"
+#import "TracklistViewController.h"
 #import "UPlayer.h"
 #import "PlayerMessage.h"
 
@@ -40,7 +40,7 @@
 
 - (IBAction)actionSearch:(id)sender
 {
-    ViewController *vc = (ViewController *) self.contentViewController;
+    TracklistViewController *vc = (TracklistViewController *) self.contentViewController;
     
     NSSearchField *sf = (NSSearchField *)sender;
     
