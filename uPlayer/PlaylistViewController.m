@@ -94,9 +94,12 @@
 -(void)doubleClicked
 {
     int selectedRow = (int) self.tableView.selectedRow;
-    PlayerList *l = [self.playerlList getItem:selectedRow];
-    
-    postEvent(EventID_to_reload_tracklist, l );
+    if ( selectedRow != -1)
+    {
+        PlayerList *l = [self.playerlList getItem:selectedRow];
+        
+        postEvent(EventID_to_reload_tracklist, l );
+    }
 }
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

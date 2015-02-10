@@ -79,17 +79,13 @@ NSArray* enumAudioFiles(NSString* path)
 @implementation PlayerEngine (playTrack)
 -(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi
 {
-    static int playUuid = -1;
-    
-    if (playUuid == [track uuid])
+    if (self.playUuid == [track uuid])
         [player().engine playPause];
     else
     {
-        playUuid = [track uuid];
+        self.playUuid = [track uuid];
         [self playURL:[NSURL fileURLWithPath:track.path] pauseAfterInit:pfi];
     }
-    
-    
 }
 @end
 

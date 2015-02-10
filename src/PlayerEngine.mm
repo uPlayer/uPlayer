@@ -57,6 +57,12 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     self = [super init];
     if (self) {
         
+        _playTimeEnded = TRUE;
+        
+        _state = playstate_stopped;
+        
+        _playUuid = -1;
+        
         self.player = [[AVPlayer alloc]init];
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
         
@@ -70,11 +76,7 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         
         [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         
-        _playTimeEnded = TRUE;
-        
-        _state = playstate_stopped;
-        
-        
+
 
         // Update the UI 5 times per second
         _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
@@ -102,14 +104,12 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 
 -(void)DidPlayToEndTime:(NSNotification*)n
 {
-    NSLog(@"play end time.");
     _playTimeEnded = TRUE;
     
-    postEvent(EventID_track_stopped, nil);
+    [self stop];
+    
     postEvent(EventID_track_stopped_playnext, nil);
 }
-
-
 
 -(void)playNext
 {
@@ -126,7 +126,7 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     PlayOrder order = (PlayOrder)d.playOrder;
     
     if (order == playorder_single) {
-        
+        [self stop];
     }
     else if (order == playorder_default)
     {
@@ -232,7 +232,7 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 -(NSTimeInterval)currentTime
 {
    	CMTime time = _player.currentTime;
-    return time.value / time.timescale;
+    return CMTime_NSTime(time);
 }
 
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
@@ -262,8 +262,10 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
+    self.playUuid = -1;
     
-    postEvent(EventID_track_paused, nil);
+    postEvent(EventID_track_stopped, nil);
+    postEvent(EventID_track_state_changed, nil);
 }
 
 -(PlayStateTime)close

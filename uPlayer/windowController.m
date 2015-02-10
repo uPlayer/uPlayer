@@ -97,19 +97,29 @@
     NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
     
     BOOL stopped = [player().engine isStopped];
-    BOOL playing = [player().engine isPlaying];
+    //BOOL playing = [player().engine isPlaying];
     BOOL paused = [player().engine isPaused];
     
-    if ( paused )
+    if (stopped)
     {
-       self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
+        self.window.title = player().document.windowName;
+        self.progressSlider.enabled = false;
     }
     else
     {
-        self.window.title = title;
+        if ( paused )
+        {
+            self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
+        }
+        else
+        {
+            self.window.title = title;
+        }
+        
+        self.progressSlider.enabled = true;
     }
     
-    self.progressSlider.enabled = !stopped;
+    
 }
 
 //-(void)trackStopped

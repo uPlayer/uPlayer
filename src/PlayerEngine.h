@@ -39,6 +39,10 @@
 
 /// save info and stop.
 -(struct PlayStateTime)close;
+
+
+@property int playUuid;
+
 @end
 
 
