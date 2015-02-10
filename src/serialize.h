@@ -105,6 +105,8 @@ extern "C" {
     void saveStringArray( FILE &file , NSArray *array  );
     
     NSArray *loadStringArray(FILE &file);
+   
+    
     
 #if defined(__cplusplus)
 }

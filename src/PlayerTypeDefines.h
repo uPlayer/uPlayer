@@ -32,5 +32,9 @@ enum PlayState
 };
 
 
-
+struct PlayStateTime
+{
+    enum PlayState state;
+    NSTimeInterval time;
+};
 

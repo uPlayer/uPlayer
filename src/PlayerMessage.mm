@@ -28,7 +28,7 @@ const char *arrEvent[] =
     "to_change_player_title",
     "to_play_selected_track",
     "to_show_playlist",
-    "to_play_pause",
+    "to_play_pause_resume",
     "to_stop",
     "to_play_next"
 };

@@ -32,7 +32,8 @@ UPlayer *player(); // the global and only instance.
 
 void playTrack(PlayerList *list,PlayerTrack *track);
 
-
+void collectInfo(PlayerDocument *d , PlayerEngine *e);
+    
 #if defined(__cplusplus)
 }
 #endif /* defined(__cplusplus) */

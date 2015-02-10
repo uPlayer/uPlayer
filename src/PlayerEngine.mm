@@ -43,7 +43,12 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     if (doc.resumeAtReboot)
     {
         if ( 1) // isplaying
-        {            playTrack( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
+        {
+            playTrack( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
+            
+            if (doc.playTime > 0)
+                [self seekToTime:doc.playTime];
+            
         }
     }
 }
@@ -59,11 +64,13 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
        
+        addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
+        
+        
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
         
         [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         
-    
         _playTimeEnded = TRUE;
         
         _state = playstate_stopped;
@@ -102,6 +109,8 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_stopped_playnext, nil);
 }
+
+
 
 -(void)playNext
 {
@@ -212,9 +221,9 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 }
 
 
-- (void) seekToTime:(id)sender
+-(void)seekToTime:(NSTimeInterval)time
 {
-    [_player seekToTime: CMTimeMakeWithSeconds([sender floatValue] , 1) ];
+    [_player seekToTime: CMTimeMakeWithSeconds( time , 1) ];
 }
 
 -(NSTimeInterval)currentTime
@@ -238,6 +247,15 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
+}
+
+-(PlayStateTime)close
+{
+    PlayStateTime st;
+    st.time =[self currentTime];
+    st.state = [self getPlayState];
+    [self stop];
+    return st;
 }
 
 - (void)setVolume:(float)volume

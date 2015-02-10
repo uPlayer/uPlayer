@@ -28,14 +28,16 @@
 
 -(bool)isStopped;
 
-- (void) playPause;
+-(void)playPause;
 
-- (void) seekToTime:(id)sender;
+-(void)seekToTime:(NSTimeInterval)time;
 
 -(NSTimeInterval)currentTime;
 
-- (void) stop;
+-(void)stop;
 
+/// save info and stop.
+-(struct PlayStateTime)close;
 @end
 
 /// @todo nsprogress ?

@@ -49,7 +49,7 @@
 
 
 - (IBAction)actionProgressSlider:(id)sender {
-    [player().engine seekToTime:sender];
+    [player().engine seekToTime:[sender floatValue]];
 }
 
 - (IBAction)actionVolumnSlider:(id)sender {

@@ -60,6 +60,19 @@ FILE& operator>>(FILE& f,string &str)
     return f;
 }
 
+#pragma mark NSTimeInterval
+FILE& operator<<(FILE& f,const NSTimeInterval &t)
+{
+    fwrite(&t, sizeof(NSTimeInterval), 1, &f);
+    return f;
+}
+
+FILE& operator>>(FILE& f,NSTimeInterval& t)
+{
+    fread(&t, sizeof(NSTimeInterval), 1, &f);
+    return f;
+}
+
 /// time_t
 FILE& operator<<(FILE& f,const time_t &t)
 {
@@ -86,6 +99,7 @@ FILE& operator<<(FILE& f,const vector<T> &t)
     return f;
 }
 
+
 template <class T>
 FILE& operator>>(FILE& f,vector<T> &t)
 {
@@ -104,6 +118,7 @@ FILE& operator>>(FILE& f,vector<T> &t)
 
 
 
+#pragma mark -
 
 
 NSString *getDocumentFilePath()
@@ -346,15 +361,18 @@ NSArray *loadTrackInfoArray(FILE &file)
     FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
     if (file)
     {
-        int resumeAtReboot, volume ,playOrder ,playStatus , fontHeight ;
+        int resumeAtReboot, volume ,playOrder ,playState , fontHeight ;
+        NSTimeInterval playTime;
         
-        *file >> resumeAtReboot  >> volume >> playOrder >>playStatus >> fontHeight ;
+        *file >> resumeAtReboot  >> volume >> playOrder >>playState >> fontHeight >> playTime;
         
         self.resumeAtReboot=resumeAtReboot;
         self.volume=volume;
         self.playOrder=playOrder;
-        self.playStatus=playStatus;
+        self.playState=playState;
         self.fontHeight=fontHeight;
+        self.playTime = playTime;
+        
         
         assert(self.playerlList);
         [self.playerlList loadFrom:file];
@@ -373,7 +391,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
     if (file)
     {
-        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playStatus << self.fontHeight ;
+        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playState << self.fontHeight << self.playTime ;
         
         [self.playerlList saveTo:file];
         
@@ -385,3 +403,6 @@ NSArray *loadTrackInfoArray(FILE &file)
 }
 
 @end
+
+
+

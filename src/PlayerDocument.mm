@@ -28,6 +28,7 @@
         self.windowName = NSLocalizedString(@"uPlayer windows name", nil);
         self.playerlList = [[PlayerlList alloc]init];
         self.resumeAtReboot = 1;
+        self.playTime = -1;
     }
     
     return self;

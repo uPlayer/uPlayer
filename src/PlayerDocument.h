@@ -16,9 +16,10 @@
 @property (nonatomic) int resumeAtReboot;
 @property (nonatomic) int volume;
 @property (nonatomic) int playOrder; //enum PlayOrder
-@property (nonatomic) int playStatus;//enum PlayStatus
+@property (nonatomic) int playState;//enum PlayStatus
 @property (nonatomic) int fontHeight;
 
+@property (nonatomic) NSTimeInterval playTime;
 
 @property (nonatomic,strong) PlayerlList *playerlList;
 
@@ -26,9 +27,6 @@
 /// value not need to ==>
 @property (nonatomic,strong) NSString *windowName;
 /// value not need to <==
-
-
-
 
 
 @end

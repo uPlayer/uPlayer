@@ -15,6 +15,7 @@
 
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
+@property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
 
 @end
 
@@ -23,15 +24,16 @@
 @implementation AppDelegate
 
 - (IBAction)cmdPlayPause:(id)sender {
-    bool isPaused =  [player().engine isPaused];
     
-    if ([player().engine isPlaying])
-    {
-        //postEvent(EventID_to_, nil);
-    }
+    PlayerEngine *e = player().engine;
     
-    postEvent(EventID_to_play_selected_track, nil);
+    bool isPaused =  [e isPaused];
     
+    if( [ e isStopped])
+        postEvent(EventID_to_play_selected_track, nil);
+    else
+        postEvent(EventID_to_play_pause_resume, nil);
+        
     
     NSMenuItem *item = (NSMenuItem *)sender;
     item.title =   NSLocalizedString( (isPaused ?@"Pause" :@"Play") , nil);
@@ -86,7 +88,6 @@
 - (IBAction)cmdFind:(id)sender
 {
     NSLog(@"command: Find");
-
 }
 
 - (IBAction)cmdShowPlayingItem:(id)sender
@@ -111,14 +112,22 @@
     
     
     self.menuOpenDirectory.enabled = [d.playerlList count]>0;
-    self.menuOpenDirectory.enabled =  false;
+    if( [player().engine isPlaying]  )
+        self.menuPlayOrPause.title =NSLocalizedString( @"Pause" ,nil );
+    else
+        self.menuPlayOrPause.title = NSLocalizedString( @"Play",nil);
+        
 }
+
+
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    [player().engine stop];
+    
+    collectInfo( player().document , player().engine);
     
     [player().document save];
+    
 }
 
 -(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender

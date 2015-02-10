@@ -117,3 +117,12 @@ void playTrack(PlayerList *list,PlayerTrack *track)
     
 }
 
+
+
+void collectInfo(PlayerDocument *d , PlayerEngine *e)
+    {
+        PlayStateTime st = [e close];
+        d.playTime = st.time;
+        d.playState = st.state;
+    }
+
