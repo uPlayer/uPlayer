@@ -81,7 +81,7 @@
             
             [list  addTrackInfoItems: enumAudioFiles(fileName)];
             
-            postEvent(EventID_to_reload_tracklist, nil);
+            postEvent(EventID_to_reload_tracklist, list);
         }
     }
     
