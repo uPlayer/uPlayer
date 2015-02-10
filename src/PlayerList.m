@@ -111,6 +111,21 @@
     return self.playerlList[index];
 }
 
+-(void)setSelectItem:(PlayerList*)list
+{
+    NSUInteger index = [self.playerlList indexOfObject:list];
+    if ( index == NSNotFound) {
+#ifdef DEBUG
+        assert(false);
+#endif
+    }
+    else
+    {
+        _selectIndex = (int)index;
+    }
+    
+}
+
 -(PlayerList*)getSelectedList
 {
     if (_selectIndex == -1)

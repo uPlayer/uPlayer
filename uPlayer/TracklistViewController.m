@@ -41,51 +41,95 @@ typedef enum
 }
 
 
-
-
+/// @see EventID_to_reload_tracklist
 -(void)reloadTrackList:(NSNotification*)n
 {
-    /// @todo save top index.
-    
-    
     [self.tableView reloadData];
     
     [self.tableView resignFirstResponder];
     
     PlayerList *list =  n.object; // the selected
     
+    int targetIndex = -1;
     if ( list == nil) // then reload playing.
-        list =  [self.playerlList getPlayList] ;
+    {
+        int index = self.playerlList.playIndex ;
+        list = [self.playerlList getItem: index];
+        [self.playerlList setSelectIndex:index];
+        
+        targetIndex = list.playIndex;
+        [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: targetIndex] byExtendingSelection:YES];
+        [self scrollRowToCenter:targetIndex];
+    }
+    else if (list == [self.playerlList getSelectedList])
+    {
+        
+    }
+    else
+    {
+        [self.playerlList getSelectedList].topIndex = [self getRowOnTableTop];
+        
+        [self.playerlList setSelectItem: list];
+        if (list.selectIndex >= 0)
+        {
+            targetIndex = list.selectIndex;
+            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: targetIndex] byExtendingSelection:YES];
+            [self scrollRowToCenter:targetIndex];
+        }
+        else
+        {
+            targetIndex = list.topIndex;
+            [self scrollRowToTop:targetIndex];
+        }
+        
+    }
     
-    int row = list.playIndex;
     
-    if (row == -1)
-        return;
-    
+}
+
+
+-(int)getRowOnTableTop
+{
+    NSRange rg = [self.tableView rowsInRect:self.tableView.visibleRect];
+    return  (int) rg.location;
+}
+
+-(void)scrollRowToTop:(int)targetIndex
+{
     int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
     
-    NSRange rg = [self.tableView rowsInRect:self.tableView.visibleRect];
-    int topIndex = (int) rg.location;
+    int topIndex = [self getRowOnTableTop];
+    
+    if ( targetIndex > topIndex )
+        targetIndex +=  rowsPerPage ;
+    
+    [self.tableView scrollRowToVisible: targetIndex ];
+}
+
+-(void)scrollRowToCenter:(int)targetIndex
+{
+    int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
+    
+    int topIndex = [self getRowOnTableTop];
     
     int target;
-    if ( row < topIndex )
+    if ( targetIndex < topIndex )
     {
-        target = row - rowsPerPage / 2;
+        target = targetIndex - rowsPerPage / 2;
         if (target < 0)
             target = 0;
     }
     else
     {
-        int count = (int) [list count];
-        target = row + rowsPerPage /2;
+        int count = (int) [self numberOfRowsInTableView:self.tableView];
+        target = targetIndex + rowsPerPage /2;
         if (target > count - 1)
             target = count - 1;
     }
     
     [self.tableView scrollRowToVisible: target ];
-    
-    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
 }
+
 
 -(void)viewDidAppear
 {

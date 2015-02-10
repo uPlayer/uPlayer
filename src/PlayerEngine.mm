@@ -219,7 +219,7 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     }
     
     
-    postEvent(EventID_track_paused, nil);
+    postEvent(EventID_track_state_changed, nil);
     
 }
 

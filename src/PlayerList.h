@@ -33,6 +33,8 @@
 
 
 -(PlayerList*)getItem:(int)index;
+
+-(void)setSelectItem:(PlayerList*)list;
 -(PlayerList*)getSelectedList;
 -(PlayerList*)getPlayList;
 -(size_t)count;

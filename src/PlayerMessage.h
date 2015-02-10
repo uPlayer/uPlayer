@@ -20,6 +20,9 @@ typedef enum : NSUInteger {
     EventID_track_progress_changed ,
     EventID_playerqueue_changed ,
     EventID_player_document_loaded , // 使配置生效
+    
+    /// param: PlayerList* list , if list is nil , then go to the playing item.
+    /// else reload the list at list.topitem. and list is selected.
     EventID_to_reload_tracklist ,
     EventID_to_save_config,
     EventID_to_reload_lyrics,

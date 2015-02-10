@@ -51,7 +51,9 @@
     PlayerDocument *document = player().document;
     PlayerlList *lList = document.playerlList;
     
-    [lList newPlayerList];
+    PlayerList *list = [lList newPlayerList];
+    
+    postEvent(EventID_to_reload_tracklist, list );
     
     self.menuOpenDirectory.enabled=true;
 }

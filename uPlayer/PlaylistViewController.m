@@ -94,9 +94,7 @@
 -(void)doubleClicked
 {
     int selectedRow = (int) self.tableView.selectedRow;
-    [self.playerlList setSelectIndex:selectedRow];
-    PlayerList *l = [self.playerlList getSelectedList];
-    
+    PlayerList *l = [self.playerlList getItem:selectedRow];
     
     postEvent(EventID_to_reload_tracklist, l );
 }

@@ -38,11 +38,7 @@
     
     [self.playOrderBtn addItemsWithTitles: kPlayOrder];
     
-    addObserverForEvent(self , @selector(setWindowTitle), EventID_track_started);
-    
-    addObserverForEvent(self , @selector(setWindowTitle), EventID_track_paused);
-    
-    addObserverForEvent(self , @selector(trackStopped), EventID_track_stopped);
+    addObserverForEvent(self , @selector(updateUI), EventID_track_state_changed);
     
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
     
@@ -50,8 +46,8 @@
 }
 
 
-- (IBAction)actionOrderChanged:(id)sender {
-    
+- (IBAction)actionOrderChanged:(id)sender
+{
     player().document.playOrder = (PlayOrder)self.playOrderBtn.indexOfSelectedItem;
 }
 
@@ -91,7 +87,7 @@
     
 }
 
--(void)setWindowTitle
+-(void)updateUI
 {
     PlayerlList *ll = player().document.playerlList;
     PlayerTrack *track = [[ll getPlayList] getPlayItem];
@@ -100,26 +96,30 @@
     
     NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
     
-    if ([player().engine isPaused])
+    BOOL stopped = [player().engine isStopped];
+    BOOL playing = [player().engine isPlaying];
+    BOOL paused = [player().engine isPaused];
+    
+    if ( paused )
     {
-       self.window.title = [title stringByAppendingFormat:@" (%@)", NSLocalizedString(@"Paused" ,nil) ];
+       self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
     }
     else
     {
         self.window.title = title;
     }
     
-    self.progressSlider.enabled = YES;
+    self.progressSlider.enabled = !stopped;
 }
 
--(void)trackStopped
-{
-    NSLog(@"track stopped.");
-    
-    self.window.title = player().document.windowName;
-    
-    self.progressSlider.enabled = false;
-}
+//-(void)trackStopped
+//{
+//    NSLog(@"track stopped.");
+//    
+//    self.window.title = player().document.windowName;
+//    
+//    self.progressSlider.enabled = false;
+//}
 
 
 

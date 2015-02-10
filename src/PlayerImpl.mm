@@ -89,6 +89,7 @@ NSArray* enumAudioFiles(NSString* path)
         [self playURL:[NSURL fileURLWithPath:track.path] pauseAfterInit:pfi];
     }
     
+    
 }
 @end
 
@@ -96,11 +97,15 @@ NSArray* enumAudioFiles(NSString* path)
 void playTrack(PlayerList *list,PlayerTrack *track)
 {
     if (track)
+    {
+        PlayerlList *llist = player().document.playerlList;
+        llist.playIndex = (int) [llist.playerlList indexOfObject:list];
+        list.playIndex = (int) [list.playerTrackList indexOfObject:track];
+        
         [player().engine playTrackInfo:track.info pauseAfterInit: FALSE ];
+    }
     
-    PlayerlList *llist = player().document.playerlList;
-    llist.playIndex = (int) [llist.playerlList indexOfObject:list];
-    list.playIndex = (int) [list.playerTrackList indexOfObject:track];
+    
 }
 
 void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track)
