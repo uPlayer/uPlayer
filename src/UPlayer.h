@@ -21,18 +21,22 @@
 @property (nonatomic,strong) PlayerEngine *engine;
 @end
 
-
+@interface PlayerEngine (playTrack)
+-(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi;
+@end
 
 #if defined(__cplusplus)
 extern "C" {
 #endif /* defined(__cplusplus) */
     
-UPlayer *player(); // the global and only instance.
+    UPlayer *player(); // the global and only instance.
 
 
-void playTrack(PlayerList *list,PlayerTrack *track);
-
-void collectInfo(PlayerDocument *d , PlayerEngine *e);
+    void playTrack(PlayerList *list,PlayerTrack *track);
+    
+    void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track);
+    
+    void collectInfo(PlayerDocument *d , PlayerEngine *e);
     
 #if defined(__cplusplus)
 }

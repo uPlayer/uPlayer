@@ -40,16 +40,15 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 -(void)needResumePlayAtBoot
 {
     PlayerDocument *doc = player().document;
-    if (doc.resumeAtReboot)
+    if (doc.resumeAtReboot && doc.playState != playstate_stopped )
     {
-        if ( 1) // isplaying
-        {
+        if ( doc.playState == playstate_playing )
             playTrack( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
-            
-            if (doc.playTime > 0)
-                [self seekToTime:doc.playTime];
-            
-        }
+        else
+            playTrackPauseAfterInit( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
+        
+        if (doc.playTime > 0)
+            [self seekToTime:doc.playTime];
     }
 }
 
@@ -204,11 +203,12 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 }
 
 
-- (void) playPause
+-(void)playPause
 {
     if (self.isPlaying) {
         [_player pause];
         _state = playstate_paused ;
+        postEvent(EventID_track_paused, nil);
     }
     else if (self.isPaused)
     {
@@ -217,6 +217,9 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         _playTimeEnded = FALSE;
         postEvent(EventID_track_resumed, nil);
     }
+    
+    
+    postEvent(EventID_track_paused, nil);
     
 }
 
@@ -232,13 +235,25 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     return time.value / time.timescale;
 }
 
-- (BOOL) playURL:(NSURL *)url
+-(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
 {
-    AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL: url];
+     AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL: url];
     [_player replaceCurrentItemWithPlayerItem: item ];
-    [_player play];
+    
+    if (pfi == false)
+        [_player play];
+
     _playTimeEnded = FALSE;
+    
+    postEvent(EventID_track_started, nil);
+    postEvent(EventID_track_state_changed, nil);
+    
     return 1;
+}
+
+-(BOOL)playURL:(NSURL *)url
+{
+    return [self playURL:url pauseAfterInit:false];
 }
 
 
@@ -247,6 +262,8 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
+    
+    postEvent(EventID_track_paused, nil);
 }
 
 -(PlayStateTime)close

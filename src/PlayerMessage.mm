@@ -14,9 +14,11 @@ const char *arrEvent[] =
 {
     "track_started",
     "track_stopped",
-    "track_stopped_playnext",
     "track_paused",
     "track_resumed",
+    
+    "track_state_changed",
+    
     "track_selected",
     "track_progress_changed",
     "playerqueue_changed",
@@ -25,11 +27,12 @@ const char *arrEvent[] =
     "to_save_config",
     "to_reload_lyrics",
     "to_center_item",
-    "to_change_player_title",
     "to_play_selected_track",
     "to_show_playlist",
+    
     "to_play_pause_resume",
     "to_stop",
+    "track_stopped_playnext",
     "to_play_next"
 };
 

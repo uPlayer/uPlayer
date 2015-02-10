@@ -15,6 +15,7 @@
 #import "UPlayer.h"
 #import "PlayerMessage.h"
 
+
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
@@ -75,54 +76,43 @@ NSArray* enumAudioFiles(NSString* path)
 
 
 
-void playTrack(TrackInfo *track)
+@implementation PlayerEngine (playTrack)
+-(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi
 {
     static int playUuid = -1;
     
-    PlayerEngine *e =player().engine;
-    
     if (playUuid == [track uuid])
-    {
-
         [player().engine playPause];
-        if ([e isPlaying])
-            postEvent(EventID_track_resumed, track.title);
-        else
-            postEvent(EventID_track_paused, track.title);
-        
-    }
     else
     {
-        [e playURL: [NSURL fileURLWithPath:track.path]];
-        postEvent(EventID_to_change_player_title, track.title);
+        playUuid = [track uuid];
+        [self playURL:[NSURL fileURLWithPath:track.path] pauseAfterInit:pfi];
     }
     
 }
+@end
+
 
 void playTrack(PlayerList *list,PlayerTrack *track)
 {
-#ifdef DEBUG
-    
-#endif
-    
     if (track)
-    {
-        playTrack(track.info);
-        postEvent(EventID_track_started, nil);
-    }
+        [player().engine playTrackInfo:track.info pauseAfterInit: FALSE ];
     
     PlayerlList *llist = player().document.playerlList;
     llist.playIndex = (int) [llist.playerlList indexOfObject:list];
     list.playIndex = (int) [list.playerTrackList indexOfObject:track];
-    
 }
 
-
+void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track)
+{
+    if (track)
+        [player().engine playTrackInfo:track.info pauseAfterInit: TRUE ];
+}
 
 void collectInfo(PlayerDocument *d , PlayerEngine *e)
-    {
-        PlayStateTime st = [e close];
-        d.playTime = st.time;
-        d.playState = st.state;
-    }
+{
+    PlayStateTime st = [e close];
+    d.playTime = st.time;
+    d.playState = st.state;
+}
 

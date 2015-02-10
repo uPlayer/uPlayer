@@ -11,9 +11,11 @@
 typedef enum : NSUInteger {
     EventID_track_started = 0,
     EventID_track_stopped ,
-    EventID_track_stopped_playnext ,
     EventID_track_paused ,
     EventID_track_resumed ,
+    
+    EventID_track_state_changed,
+    
     EventID_track_selected ,
     EventID_track_progress_changed ,
     EventID_playerqueue_changed ,
@@ -22,12 +24,13 @@ typedef enum : NSUInteger {
     EventID_to_save_config,
     EventID_to_reload_lyrics,
     EventID_to_center_item,
-    EventID_to_change_player_title,
     EventID_to_play_selected_track,
     EventID_to_show_playlist,
+    
     EventID_to_play_pause_resume,
     EventID_to_stop,
-    EventID_to_play_next
+    EventID_track_stopped_playnext , // play next by track ended.
+    EventID_to_play_next // play next by user
 } EventID;
 
 

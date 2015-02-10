@@ -18,7 +18,8 @@
 ///This property is persistent.
 @property float volume;
 
-- (BOOL) playURL:(NSURL *)url;
+-(BOOL)playURL:(NSURL *)url;
+-(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi;
 
 -(enum PlayState)getPlayState;
 
@@ -39,6 +40,10 @@
 /// save info and stop.
 -(struct PlayStateTime)close;
 @end
+
+
+
+
 
 /// @todo nsprogress ?
 

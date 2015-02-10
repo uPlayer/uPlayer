@@ -23,8 +23,7 @@
 
 
 
-@interface WindowController ()
-<NSToolbarDelegate>
+@interface WindowController () <NSToolbarDelegate>
 @property (weak) IBOutlet NSPopUpButton *playOrderBtn;
 @property (weak) IBOutlet NSSlider *progressSlider;
 @property (weak) IBOutlet NSSlider *volumnSlider;
@@ -32,6 +31,25 @@
 @end
 
 @implementation WindowController
+
+-(void)awakeFromNib
+{
+    self.window.title=player().document.windowName;
+    
+    [self.playOrderBtn addItemsWithTitles: kPlayOrder];
+    
+    addObserverForEvent(self , @selector(setWindowTitle), EventID_track_started);
+    
+    addObserverForEvent(self , @selector(setWindowTitle), EventID_track_paused);
+    
+    addObserverForEvent(self , @selector(trackStopped), EventID_track_stopped);
+    
+    addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
+    
+    addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
+}
+
+
 - (IBAction)actionOrderChanged:(id)sender {
     
     player().document.playOrder = (PlayOrder)self.playOrderBtn.indexOfSelectedItem;
@@ -48,13 +66,15 @@
 }
 
 
-- (IBAction)actionProgressSlider:(id)sender {
+- (IBAction)actionProgressSlider:(id)sender
+{
     [player().engine seekToTime:[sender floatValue]];
 }
 
-- (IBAction)actionVolumnSlider:(id)sender {
+- (IBAction)actionVolumnSlider:(id)sender
+{
+    
 }
-
 
 -(void)updateProgressInfo:(NSNotification*)n
 {
@@ -71,11 +91,23 @@
     
 }
 
--(void)setWindowTitle:(NSNotification*)n
+-(void)setWindowTitle
 {
-    NSAssert([n.object isKindOfClass:[NSString class]],nil);
+    PlayerlList *ll = player().document.playerlList;
+    PlayerTrack *track = [[ll getPlayList] getPlayItem];
     
-    self.window.title=n.object;
+    assert(track);
+    
+    NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
+    
+    if ([player().engine isPaused])
+    {
+       self.window.title = [title stringByAppendingFormat:@" (%@)", NSLocalizedString(@"Paused" ,nil) ];
+    }
+    else
+    {
+        self.window.title = title;
+    }
     
     self.progressSlider.enabled = YES;
 }
@@ -99,28 +131,14 @@
 
 
 
--(void)awakeFromNib
-{
-    /// @todo remove the progress bar thumb when stopped.
-    
-    self.window.title=player().document.windowName;
-    
-    [self.playOrderBtn addItemsWithTitles: kPlayOrder];
-    
 
-    addObserverForEvent(self , @selector(setWindowTitle:), EventID_to_change_player_title);
-    
-    addObserverForEvent(self , @selector(trackStopped), EventID_track_stopped);
-    
-    addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
-    
-    addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
-}
 
 -(void)initCtrls
 {
-     [self.playOrderBtn selectItemAtIndex: player().document.playOrder ];
+    [self.playOrderBtn selectItemAtIndex: player().document.playOrder ];
+    
+    self.progressSlider.enabled = player().document.playState != playstate_stopped;
+    
 }
 
 @end
-
