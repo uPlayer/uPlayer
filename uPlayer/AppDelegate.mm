@@ -13,6 +13,23 @@
 
 #import "AppPreferences.h"
 
+typedef void (^JobBlock)();
+typedef void (^JobBlockDone)();
+void dojobInBkgnd(JobBlock job ,JobBlockDone done)
+{
+    dispatch_queue_t  _dispatchQueue  = dispatch_queue_create("KxSMBProvider", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(_dispatchQueue, ^{
+        job();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            done();
+        });
+    });
+    
+}
+
+
+
+
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
@@ -22,6 +39,8 @@
 
 
 @implementation AppDelegate
+- (IBAction)cmdStop:(id)sender {
+}
 
 - (IBAction)cmdPlayPause:(id)sender {
     
@@ -33,7 +52,7 @@
         postEvent(EventID_to_play_selected_track, nil);
     else
         postEvent(EventID_to_play_pause_resume, nil);
-        
+    
     
     NSMenuItem *item = (NSMenuItem *)sender;
     item.title =   NSLocalizedString( (isPaused ?@"Pause" :@"Play") , nil);
@@ -79,9 +98,14 @@
             PlayerDocument *document = player().document;
             PlayerList *list = [document.playerlList getSelectedList];
             
-            [list  addTrackInfoItems: enumAudioFiles(fileName)];
+            dojobInBkgnd(
+                         ^{
+                             [list  addTrackInfoItems: enumAudioFiles(fileName)];
+                         } ,
+                         ^{
+                             postEvent(EventID_to_reload_tracklist, list);
+                         });
             
-            postEvent(EventID_to_reload_tracklist, list);
         }
     }
     
@@ -118,7 +142,31 @@
         self.menuPlayOrPause.title =NSLocalizedString( @"Pause" ,nil );
     else
         self.menuPlayOrPause.title = NSLocalizedString( @"Play",nil);
+    
+    
+    if ([d.playerlList count] == 0)
+    {
+        ///
+        NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
         
+        NSString *userMusic = arr.firstObject;
+        
+        [self cmdNewPlayerList:nil];
+        
+        PlayerList *list = [d.playerlList getSelectedList];
+        
+        dojobInBkgnd(
+                     ^{
+                         [list  addTrackInfoItems: enumAudioFiles( userMusic )];
+                     } ,
+                     ^{
+                         postEvent(EventID_to_reload_tracklist, list);
+                     });
+        
+        
+    }
+    
+    
 }
 
 

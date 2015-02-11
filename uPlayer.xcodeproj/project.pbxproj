@@ -74,11 +74,11 @@
 		1E169A8A1A78E715003D3D01 /* windowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = windowController.h; sourceTree = "<group>"; };
 		1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMessage.h; sourceTree = "<group>"; };
 		1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMessage.mm; sourceTree = "<group>"; };
+		1E16D53B1A8B0F8A00C844ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEngine.h; sourceTree = "<group>"; };
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
-		1E5F9EC71A7A2607000360D7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1E5F9EC81A7A2DB2000360D7 /* serialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = serialize.mm; sourceTree = "<group>"; };
 		1E5F9EC91A7A2DB2000360D7 /* serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serialize.h; sourceTree = "<group>"; };
 		1ED021A81A7B3383008526E8 /* PlayerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerList.h; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1EDE8FB21A773D810086677B /* Base */,
-				1E5F9EC71A7A2607000360D7 /* zh-Hans */,
+				1E16D53B1A8B0F8A00C844ED /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
