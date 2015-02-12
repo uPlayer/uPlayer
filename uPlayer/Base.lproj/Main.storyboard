@@ -315,12 +315,12 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
-                    <window key="window" title="uPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" identifier="uPlayerWindow" title="uPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="718" y="383" width="900" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                         <value key="minSize" type="size" width="900" height="500"/>
-                        <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
+                        <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" explicitIdentifier="uPlayerToolbar" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="1EA40979-1EA8-4323-90CE-40495BAE45D6" label="Play Order" paletteLabel="Play Order" id="c2Z-N4-MTP">
                                     <nil key="toolTip"/>
@@ -397,6 +397,9 @@
                             </connections>
                         </toolbar>
                         <contentBorderThickness minY="22"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="jj0-vX-29J"/>
+                        </connections>
                     </window>
                     <connections>
                         <outlet property="playOrderBtn" destination="sfz-rD-LJX" id="cgF-0l-BFK"/>

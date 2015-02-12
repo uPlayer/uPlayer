@@ -173,8 +173,17 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    
     collectInfo( player().document , player().engine);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     [player().document save];
     

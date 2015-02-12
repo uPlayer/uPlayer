@@ -19,3 +19,4 @@
 -(void)drawKnob:(NSRect)knobRect;
 @end
 
+

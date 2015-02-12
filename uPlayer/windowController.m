@@ -11,7 +11,9 @@
 #import "UPlayer.h"
 #import "PlayerMessage.h"
 
+#import "AppDelegate.h"
 
+#define uPlayerWinPos @"uPlayerWinPos"
 
 @implementation NSSliderCellHideThumbWhenDisable
 -(void)drawKnob:(NSRect)knobRect
@@ -43,6 +45,7 @@
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
     
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
+    
 }
 
 
@@ -149,6 +152,23 @@
     
     self.progressSlider.enabled = player().document.playState != playstate_stopped;
     
+
 }
 
+-(void)windowDidLoad
+{
+    [super windowDidLoad];
+    
+    [self.window setFrameUsingName: uPlayerWinPos];
+    [self.window setFrameAutosaveName:uPlayerWinPos];
+    
+}
+
+
+
 @end
+
+
+
+
+

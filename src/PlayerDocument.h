@@ -24,6 +24,8 @@
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 
+
+
 /// value not need to ==>
 @property (nonatomic,strong) NSString *windowName;
 /// value not need to <==

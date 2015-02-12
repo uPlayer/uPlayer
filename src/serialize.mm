@@ -134,7 +134,6 @@ NSString *getDocumentFilePath()
         NSLog(@"%@",error);
     }
     
-    path = [path stringByAppendingPathComponent:@"uPlayer.document"];
     
     
     return path;
@@ -352,13 +351,16 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 
 
-
+#define docFileName  @"core.cfg"
+#define layoutFileName  @"ui.cfg"
 
 @implementation PlayerDocument (serialize)
 
 -(bool)load
 {
-    FILE *file = fopen(getDocumentFilePath().UTF8String, "r");
+    
+    FILE *file = fopen([getDocumentFilePath()  stringByAppendingPathComponent: docFileName ].UTF8String, "r");
+    
     if (file)
     {
         int resumeAtReboot, volume ,playOrder ,playState , fontHeight ;
@@ -388,7 +390,8 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(bool)save
 {
-    FILE *file = fopen(getDocumentFilePath().UTF8String, "w");
+    FILE *file = fopen([getDocumentFilePath() stringByAppendingPathComponent: docFileName].UTF8String, "w");
+    
     if (file)
     {
         *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playState << self.fontHeight << self.playTime ;
@@ -405,4 +408,35 @@ NSArray *loadTrackInfoArray(FILE &file)
 @end
 
 
+@implementation PlayerLayout (serialize)
+-(bool)save
+{
+    FILE *file = fopen([getDocumentFilePath() stringByAppendingPathComponent: layoutFileName].UTF8String, "w");
+    
+    if (file)
+    {
+        
+        fclose(file);
+        return true;
+    }
+    
+    return false;
+}
 
+-(bool)load
+{
+    FILE *file = fopen([getDocumentFilePath()  stringByAppendingPathComponent: layoutFileName ].UTF8String, "r");
+    
+    if (file)
+    {
+
+        
+        
+        fclose(file);
+        
+        return true;
+    }
+    
+    return false;
+}
+@end

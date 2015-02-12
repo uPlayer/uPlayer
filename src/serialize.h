@@ -19,6 +19,8 @@
 #import "PlayerList.h"
 #import "PlayerTrack.h"
 #import "PlayerDocument.h"
+#import "PlayerLayout.h"
+
 using namespace std;
 
 
@@ -82,7 +84,10 @@ FILE& operator>>(FILE& f,vector<T> &t);
 -(bool)load;
 @end
 
-
+@interface PlayerLayout (serialize)
+-(bool)save;
+-(bool)load;
+@end
 
 @class TrackInfo;
 
