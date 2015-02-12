@@ -123,9 +123,9 @@ FILE& operator>>(FILE& f,vector<T> &t)
 
 NSString *getDocumentFilePath()
 {
-    NSString *path = NSHomeDirectoryForUser (NSFullUserName() );
-   
-    path = [path stringByAppendingPathComponent:@".uPlayer"];
+    NSString *path = NSSearchPathForDirectoriesInDomains( NSApplicationSupportDirectory, NSUserDomainMask, true ).firstObject;
+    
+    path = [path stringByAppendingPathComponent:@"uPlayer"];
     
     NSError *error;
     [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
@@ -133,8 +133,6 @@ NSString *getDocumentFilePath()
     if (error) {
         NSLog(@"%@",error);
     }
-    
-    
     
     return path;
 }
