@@ -67,17 +67,24 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
         
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
+        
+        addObserverForEvent(self, @selector(playNext), EventID_to_play_next);
+        
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
        
+        addObserverForEvent(self, @selector(stop), EventID_to_stop);
         addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
+        
+        addObserverForEvent(self, @selector(playRandom), EventID_to_play_random);
+        
+        
+        
         
         
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
         
         [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         
-
-
         // Update the UI 5 times per second
         _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
         dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 2, NSEC_PER_SEC / 3);
@@ -202,6 +209,31 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     return _state == playstate_pending;
 }
 
+-(void)playRandom
+{
+    PlayerDocument *d = player().document;
+    PlayerList *list = [d.playerlList getPlayList];
+    
+    if (!list)
+        list = [d.playerlList getSelectedList];
+    
+    assert(list);
+    
+    int count = (int)[list count];
+    
+    static int s=0;
+    if(s++==0)
+        srand((uint )time(NULL));
+    
+    int indexNext =rand() % (count) - 1;
+    
+    PlayerTrack* next = nil;
+    
+    if ( indexNext > 0 && indexNext < [list count] )
+        next = [list getItem: indexNext ];
+    
+    playTrack(list,next);
+}
 
 -(void)playPause
 {
@@ -255,8 +287,6 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 {
     return [self playURL:url pauseAfterInit:false];
 }
-
-
 
 - (void)stop
 {

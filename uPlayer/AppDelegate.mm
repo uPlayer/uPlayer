@@ -39,7 +39,18 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 
 
 @implementation AppDelegate
+- (IBAction)cmdRandom:(id)sender {
+    postEvent(EventID_to_play_random, nil);
+    postEvent(EventID_to_reload_tracklist, nil);
+}
+
+- (IBAction)cmdNext:(id)sender {
+        postEvent(EventID_to_play_next, nil);
+        postEvent(EventID_to_reload_tracklist, nil);
+}
+
 - (IBAction)cmdStop:(id)sender {
+        postEvent(EventID_to_stop, nil);
 }
 
 - (IBAction)cmdPlayPause:(id)sender {
@@ -138,10 +149,11 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     
     
     self.menuOpenDirectory.enabled = [d.playerlList count]>0;
-    if( [player().engine isPlaying]  )
-        self.menuPlayOrPause.title =NSLocalizedString( @"Pause" ,nil );
+    
+    if( [player().engine isPlaying] )
+        self.menuPlayOrPause.title =NSLocalizedString(@"Pause" ,nil);
     else
-        self.menuPlayOrPause.title = NSLocalizedString( @"Play",nil);
+        self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
     
     
     if ([d.playerlList count] == 0)

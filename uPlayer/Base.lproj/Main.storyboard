@@ -195,23 +195,30 @@
                                         </menuItem>
                                         <menuItem title="Next" id="SEU-9f-99W">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdNext:" target="Voe-Tx-rLC" id="3Ly-UC-af0"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem title="Previous" id="b1E-Dm-zWD">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="BDv-wV-U2h"/>
-                                        <menuItem title="Random" keyEquivalent="d" id="GkQ-Nl-Oqr"/>
-                                        <menuItem isSeparatorItem="YES" id="GQy-4g-JWh"/>
-                                        <menuItem title="Go to current song" tag="1" keyEquivalent="l" id="8Op-6c-njz">
+                                        <menuItem title="Random" keyEquivalent="d" id="GkQ-Nl-Oqr">
                                             <connections>
-                                                <action selector="cmdShowPlayingItem:" target="Voe-Tx-rLC" id="Lnb-kH-0YG"/>
+                                                <action selector="cmdRandom:" target="Voe-Tx-rLC" id="KLR-CZ-cKS"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="GQy-4g-JWh"/>
                                         <menuItem title="Show PlayList" id="erA-OL-DYs">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="cmdShowPlayList:" target="Voe-Tx-rLC" id="89h-I4-xY4"/>
                                                 <segue destination="Qif-73-RE2" kind="show" id="R4p-LB-EyP"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Go to current song" tag="1" keyEquivalent="l" id="8Op-6c-njz">
+                                            <connections>
+                                                <action selector="cmdShowPlayingItem:" target="Voe-Tx-rLC" id="Lnb-kH-0YG"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -502,6 +509,7 @@
                                             <connections>
                                                 <outlet property="dataSource" destination="Qif-73-RE2" id="Hbc-N2-jcq"/>
                                                 <outlet property="delegate" destination="Qif-73-RE2" id="Iv5-Q0-dEm"/>
+                                                <outlet property="menu" destination="DMc-cp-qNK" id="Tzr-LZ-ZKM"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -518,6 +526,9 @@
                                 <tableHeaderView key="headerView" id="UNq-A6-I6m">
                                     <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <connections>
+                                        <outlet property="menu" destination="DMc-cp-qNK" id="XQP-Wc-OlN"/>
+                                    </connections>
                                 </tableHeaderView>
                             </scrollView>
                         </subviews>
@@ -533,6 +544,19 @@
                     </connections>
                 </viewController>
                 <customObject id="8rv-Tv-eeI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menuItem title="Menu" id="seX-dT-agi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="tablePopup" id="DMc-cp-qNK">
+                        <items>
+                            <menuItem title="Item" id="Bbw-mj-ihb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="PopupItem" id="p3Y-5m-0cF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
             </objects>
             <point key="canvasLocation" x="-179.5" y="-139"/>
         </scene>

@@ -138,7 +138,7 @@ typedef enum
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     CGFloat bottomBarHeight = 22.0;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
@@ -149,6 +149,7 @@ typedef enum
     self.tableView = [[NSTableView alloc]initWithFrame:tableContainer.bounds];
     self.tableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;;
     self.tableView.rowHeight = 40.;
+    
     
     //CGFloat heightHeader = 32;
     

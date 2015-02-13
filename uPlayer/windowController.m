@@ -125,16 +125,6 @@
     
 }
 
-//-(void)trackStopped
-//{
-//    NSLog(@"track stopped.");
-//    
-//    self.window.title = player().document.windowName;
-//    
-//    self.progressSlider.enabled = false;
-//}
-
-
 
 -(void)dealloc
 {
@@ -142,16 +132,11 @@
 }
 
 
-
-
-
-
 -(void)initCtrls
 {
     [self.playOrderBtn selectItemAtIndex: player().document.playOrder ];
     
     self.progressSlider.enabled = player().document.playState != playstate_stopped;
-    
 
 }
 
@@ -164,11 +149,4 @@
     
 }
 
-
-
 @end
-
-
-
-
-

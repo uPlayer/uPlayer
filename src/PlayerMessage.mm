@@ -33,7 +33,8 @@ const char *arrEvent[] =
     "to_play_pause_resume",
     "to_stop",
     "track_stopped_playnext",
-    "to_play_next"
+    "to_play_next",
+    "to_play_random"
 };
 
 
