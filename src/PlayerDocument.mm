@@ -27,8 +27,9 @@
     {
         self.windowName = NSLocalizedString(@"uPlayer windows name", nil);
         self.playerlList = [[PlayerlList alloc]init];
-        self.resumeAtReboot = 1;
+        self.resumeAtReboot = TRUE;
         self.playTime = -1;
+        self.trackSongsWhenPlayStarted = TRUE;
     }
     
     return self;

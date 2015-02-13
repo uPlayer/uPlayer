@@ -14,6 +14,7 @@
 
 /// value need to searialize.
 @property (nonatomic) int resumeAtReboot;
+@property (nonatomic) int trackSongsWhenPlayStarted;
 @property (nonatomic) int volume;
 @property (nonatomic) int playOrder; //enum PlayOrder
 @property (nonatomic) int playState;//enum PlayStatus

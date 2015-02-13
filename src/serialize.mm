@@ -352,12 +352,13 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
-        int resumeAtReboot, volume ,playOrder ,playState , fontHeight ;
+        int resumeAtReboot , trackSongsWhenPlayStarted, volume ,playOrder ,playState , fontHeight ;
         NSTimeInterval playTime;
         
-        *file >> resumeAtReboot  >> volume >> playOrder >>playState >> fontHeight >> playTime;
+        *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> playTime;
         
         self.resumeAtReboot=resumeAtReboot;
+        self.trackSongsWhenPlayStarted = trackSongsWhenPlayStarted;
         self.volume=volume;
         self.playOrder=playOrder;
         self.playState=playState;
@@ -383,7 +384,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
-        *file << self.resumeAtReboot  << self.volume << self.playOrder << self.playState << self.fontHeight << self.playTime ;
+        *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.playTime ;
         
         [self.playerlList saveTo:file];
         

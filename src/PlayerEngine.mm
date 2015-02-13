@@ -162,6 +162,10 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         next = [list getItem: indexNext ];
  
     playTrack(list,next);
+    
+    if( d.trackSongsWhenPlayStarted)
+        postEvent(EventID_to_reload_tracklist, nil);
+    
 }
 
 -(void)dealloc
