@@ -60,7 +60,6 @@ FILE& operator>>(FILE& f,string &str)
     return f;
 }
 
-#pragma mark NSTimeInterval
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {
     fwrite(&t, sizeof(NSTimeInterval), 1, &f);
@@ -120,6 +119,8 @@ FILE& operator>>(FILE& f,vector<T> &t)
 
 #pragma mark -
 
+#define docFileName  @"core.cfg"
+#define layoutFileName  @"ui.cfg"
 
 NSString *getDocumentFilePath()
 {
@@ -136,14 +137,6 @@ NSString *getDocumentFilePath()
     
     return path;
 }
-
-
-
-
-
-
-
-
 
 void saveTrackInfo(FILE &file , TrackInfo *info)
 {
@@ -246,8 +239,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     return array;
 }
 
-
-
+#pragma mark -
 
 @implementation PlayerTrack (serialize)
 
@@ -349,8 +341,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 
 
-#define docFileName  @"core.cfg"
-#define layoutFileName  @"ui.cfg"
+
 
 @implementation PlayerDocument (serialize)
 
@@ -405,6 +396,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 @end
 
+#pragma mark -
 
 @implementation PlayerLayout (serialize)
 -(bool)save

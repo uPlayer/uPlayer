@@ -21,6 +21,8 @@
     self = [super init];
     if (self) {
         _selectIndex = -1;
+        _playIndex = -1;
+        _topIndex = 0;
         self.playerTrackList= [NSMutableArray array];
     }
     return self;

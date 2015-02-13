@@ -17,16 +17,16 @@
     assert(self.playerlistOriginal);
     
     //search title first.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.info.title contains[c] %@",key,key,key];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.info.title contains[c] %@",key];
     
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF.info.artist contains[c] %@ ||SELF.info.album contains[c] %@",key,key,key];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF.info.artist contains[c] %@ ||SELF.info.album contains[c] %@",key,key];
     
     NSArray *dataOld = [_playerlistOriginal.playerTrackList copy];
     
     NSMutableArray *dataNew = [ NSMutableArray array];
     [dataNew addObjectsFromArray: [dataOld filteredArrayUsingPredicate:predicate]];
     
-    [dataNew arrayByAddingObjectsFromArray:[dataOld filteredArrayUsingPredicate: predicate2]];
+    [dataNew addObjectsFromArray:[dataOld filteredArrayUsingPredicate: predicate2]];
     
     if(!_dicFilterToOrginal)
         _dicFilterToOrginal = [NSMutableDictionary dictionary];
