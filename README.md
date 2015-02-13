@@ -9,9 +9,13 @@ But uPlayer's font it bigger than those two.
 
 If you're looking for a audio player in windows , ==> [uPlayer windows version](http://liaogang.github.io/player)  
 
+##Download  
+
+[latest releases](https://github.com/uPlayer/uPlayer/releases/latest)  
+
 ##Requirement  
 
-[taglib](https://taglib.github.io/)  
 
 ##System  
 Only tested in OS X 10.10 Yosemite  
+
