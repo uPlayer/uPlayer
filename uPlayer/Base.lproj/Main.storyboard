@@ -419,7 +419,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="195" y="548"/>
+            <point key="canvasLocation" x="62" y="492"/>
         </scene>
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
@@ -509,7 +509,6 @@
                                             <connections>
                                                 <outlet property="dataSource" destination="Qif-73-RE2" id="Hbc-N2-jcq"/>
                                                 <outlet property="delegate" destination="Qif-73-RE2" id="Iv5-Q0-dEm"/>
-                                                <outlet property="menu" destination="DMc-cp-qNK" id="Tzr-LZ-ZKM"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -527,7 +526,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <connections>
-                                        <outlet property="menu" destination="DMc-cp-qNK" id="XQP-Wc-OlN"/>
+                                        <outlet property="menu" destination="0L1-7k-cmQ" id="e8q-uI-Ax3"/>
                                     </connections>
                                 </tableHeaderView>
                             </scrollView>
@@ -538,25 +537,38 @@
                             <constraint firstAttribute="bottom" secondItem="Sof-Yj-DjO" secondAttribute="bottom" id="cdC-dh-wlX"/>
                             <constraint firstItem="Sof-Yj-DjO" firstAttribute="leading" secondItem="QTd-9G-JUC" secondAttribute="leading" id="jJV-FN-1pE"/>
                         </constraints>
+                        <connections>
+                            <outlet property="menu" destination="zlW-gU-OyA" id="PwV-XX-E52"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="1Gu-As-ZBl" id="N1d-4w-0RW"/>
                     </connections>
                 </viewController>
                 <customObject id="8rv-Tv-eeI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <menuItem title="Menu" id="seX-dT-agi">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="tablePopup" id="DMc-cp-qNK">
-                        <items>
-                            <menuItem title="Item" id="Bbw-mj-ihb">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="PopupItem" id="p3Y-5m-0cF">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
+                <menu id="0L1-7k-cmQ">
+                    <items>
+                        <menuItem title="Item 1" id="N5v-Ri-pz6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 2" id="h61-UG-gb8">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 3" id="y8M-pL-2Ja">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="zlW-gU-OyA">
+                    <items>
+                        <menuItem title="Active" id="49j-iI-dvk">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Delete" id="cKz-al-MiT">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-179.5" y="-139"/>
         </scene>
@@ -567,11 +579,31 @@
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="900" height="478"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="menu" destination="GUD-5I-IFb" id="QE5-e3-f3x"/>
+                        </connections>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="GUD-5I-IFb">
+                    <items>
+                        <menuItem title="Play" id="11Z-4N-8B4">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Add to play queue" id="CGf-NP-DLA">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="bz6-mc-lgT"/>
+                        <menuItem title="Show in Finder" id="WHJ-kh-lq3">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdShowInFinder:" target="XfG-lQ-9wD" id="hY6-1j-2TP"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
-            <point key="canvasLocation" x="195" y="1173"/>
+            <point key="canvasLocation" x="62" y="1186"/>
         </scene>
     </scenes>
 </document>

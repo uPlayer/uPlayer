@@ -149,9 +149,11 @@ typedef enum
     self.tableView = [[NSTableView alloc]initWithFrame:tableContainer.bounds];
     self.tableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;;
     self.tableView.rowHeight = 40.;
+    self.tableView.allowsMultipleSelection = TRUE;
     
-    
-    //CGFloat heightHeader = 32;
+    // disable table header's menu.
+    NSMenu *menu = [[NSMenu alloc] init];
+    self.tableView.headerView.menu = menu;
     
     self.columnNames = [NSArray arrayWithObjects:@"#",@"artist",@"title",@"album",@"genre",@"year", nil];
     self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
@@ -253,6 +255,12 @@ typedef enum
         return  [self.playerlList count];
 }
 
+-(PlayerTrack*)getSelectedItem:(NSInteger)row
+{
+    PlayerTrack *track = self.displaymode == displayMode_tracklist_search? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
+    return track;
+}
+
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     NSInteger column = [self.tableView.tableColumns indexOfObject:tableColumn];
@@ -271,10 +279,8 @@ typedef enum
         textField.identifier=identifier;
     }
 
-
-    PlayerTrack *track = self.displaymode == displayMode_tracklist_search? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
     
-    TrackInfo *info = track.info;
+    TrackInfo *info = [self getSelectedItem:row].info;
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
@@ -320,4 +326,21 @@ typedef enum
         
     }
 }
+
+- (IBAction)cmdShowInFinder:(id)sender
+{
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    if ( rows.count > 0)
+    {
+        NSMutableArray *urlArr=[NSMutableArray array];
+        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            TrackInfo *info = [self getSelectedItem:idx].info;
+            [urlArr addObject: [NSURL fileURLWithPath: info.path]];
+            
+        }];
+        
+        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs: urlArr ];
+    }
+}
+
 @end

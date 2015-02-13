@@ -116,6 +116,10 @@ NSTimeInterval CMTime_NSTime( CMTime time )
     [self stop];
     
     postEvent(EventID_track_stopped_playnext, nil);
+    
+    if( player().document.trackSongsWhenPlayStarted)
+        postEvent(EventID_to_reload_tracklist, nil);
+    
 }
 
 -(void)playNext
@@ -162,9 +166,6 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         next = [list getItem: indexNext ];
  
     playTrack(list,next);
-    
-    if( d.trackSongsWhenPlayStarted)
-        postEvent(EventID_to_reload_tracklist, nil);
     
 }
 

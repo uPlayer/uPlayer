@@ -63,6 +63,7 @@
 											<string key="NSFrame">{{365, 12}, {100, 26}}</string>
 											<reference key="NSSuperview" ref="370694332"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSPopUpButtonCell" key="NSCell" id="281066667">
 												<int key="NSCellFlags">-2076180416</int>
@@ -139,23 +140,23 @@
 											<string key="NSFrame">{{19, 218}, {443, 26}}</string>
 											<reference key="NSSuperview" ref="370694332"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="895590816"/>
+											<reference key="NSNextKeyView" ref="170321557"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="518757689">
 												<int key="NSCellFlags">-2080374784</int>
 												<int key="NSCellFlags2">268435456</int>
-												<string key="NSContents">Resume On Reboot</string>
+												<string key="NSContents">Resume on reboot</string>
 												<reference key="NSSupport" ref="119222951"/>
 												<string key="NSCellIdentifier">_NS:9</string>
 												<reference key="NSControlView" ref="631067775"/>
 												<int key="NSButtonFlags">1211912448</int>
 												<int key="NSButtonFlags2">2</int>
-												<object class="NSCustomResource" key="NSNormalImage" id="711438975">
+												<object class="NSCustomResource" key="NSNormalImage" id="1038977264">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSSwitch</string>
 												</object>
-												<object class="NSButtonImageSource" key="NSAlternateImage" id="1038893227">
+												<object class="NSButtonImageSource" key="NSAlternateImage" id="401577724">
 													<string key="NSImageName">NSSwitch</string>
 												</object>
 												<string key="NSAlternateContents"/>
@@ -165,7 +166,7 @@
 											</object>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										</object>
-										<object class="NSButton" id="895590816">
+										<object class="NSButton" id="170321557">
 											<reference key="NSNextResponder" ref="370694332"/>
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{17, 184}, {445, 18}}</string>
@@ -174,17 +175,17 @@
 											<reference key="NSNextKeyView" ref="967243918"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
-											<object class="NSButtonCell" key="NSCell" id="942485119">
+											<object class="NSButtonCell" key="NSCell" id="54097011">
 												<int key="NSCellFlags">-2080374784</int>
 												<int key="NSCellFlags2">268435456</int>
 												<string key="NSContents">Track songs when play started  (scroll and select it in playlist)</string>
 												<reference key="NSSupport" ref="119222951"/>
 												<string key="NSCellIdentifier">_NS:9</string>
-												<reference key="NSControlView" ref="895590816"/>
+												<reference key="NSControlView" ref="170321557"/>
 												<int key="NSButtonFlags">1211912448</int>
 												<int key="NSButtonFlags2">2</int>
-												<reference key="NSNormalImage" ref="711438975"/>
-												<reference key="NSAlternateImage" ref="1038893227"/>
+												<reference key="NSNormalImage" ref="1038977264"/>
+												<reference key="NSAlternateImage" ref="401577724"/>
 												<string key="NSAlternateContents"/>
 												<string key="NSKeyEquivalent"/>
 												<int key="NSPeriodicDelay">200</int>
@@ -279,7 +280,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">trackSongsWhenPlayStarted</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="895590816"/>
+						<reference key="destination" ref="170321557"/>
 					</object>
 					<int key="connectionID">19</int>
 				</object>
@@ -287,7 +288,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">actionTrackSongsWhenPlayStarted:</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="895590816"/>
+						<reference key="destination" ref="170321557"/>
 					</object>
 					<int key="connectionID">20</int>
 				</object>
@@ -339,7 +340,7 @@
 						<reference key="object" ref="409715635"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="631067775"/>
-							<reference ref="895590816"/>
+							<reference ref="170321557"/>
 							<reference ref="967243918"/>
 						</array>
 						<reference key="parent" ref="1006"/>
@@ -400,16 +401,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
-						<reference key="object" ref="895590816"/>
+						<reference key="object" ref="170321557"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="942485119"/>
+							<reference ref="54097011"/>
 						</array>
 						<reference key="parent" ref="409715635"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="942485119"/>
-						<reference key="parent" ref="895590816"/>
+						<reference key="object" ref="54097011"/>
+						<reference key="parent" ref="170321557"/>
 					</object>
 				</array>
 			</object>
