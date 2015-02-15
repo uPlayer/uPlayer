@@ -14,14 +14,7 @@
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
 
-NSTimeInterval CMTime_NSTime( CMTime time )
-{
-    if (time.timescale == 0) {
-        return 0;
-    }
-    
-    return time.value / time.timescale;
-}
+
 
 
 
@@ -66,6 +59,7 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         self.player = [[AVPlayer alloc]init];
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
         
+        
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
         
         addObserverForEvent(self, @selector(playNext), EventID_to_play_next);
@@ -76,8 +70,6 @@ NSTimeInterval CMTime_NSTime( CMTime time )
         addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
         
         addObserverForEvent(self, @selector(playRandom), EventID_to_play_random);
-        
-        
         
         
         
@@ -95,8 +87,7 @@ NSTimeInterval CMTime_NSTime( CMTime time )
                 {
                     ProgressInfo *info=[[ProgressInfo alloc]init];
                     info.current =  [self currentTime];
-                    info.total = CMTime_NSTime( _player.currentItem.duration );
-                    info.fractionComplete= info.current / info.total;
+                    info.total = CMTimeGetSeconds( _player.currentItem.duration );
                     
                     postEvent(EventID_track_progress_changed, info);
                 }
@@ -269,12 +260,17 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 -(NSTimeInterval)currentTime
 {
    	CMTime time = _player.currentTime;
-    return CMTime_NSTime(time);
+    return CMTimeGetSeconds(time);
 }
 
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
 {
-     AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL: url];
+    AVURLAsset *asset = [AVURLAsset assetWithURL: url];
+    Float64 duration = CMTimeGetSeconds(asset.duration);
+    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
+    
+    // AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL: url];
+    
     [_player replaceCurrentItemWithPlayerItem: item ];
     
     if (pfi == false)
@@ -282,11 +278,16 @@ NSTimeInterval CMTime_NSTime( CMTime time )
 
     _playTimeEnded = FALSE;
     
-    postEvent(EventID_track_started, nil);
+    ProgressInfo *info = [[ProgressInfo alloc]init];
+    info.total =  duration;
+    postEvent(EventID_track_started, info);
+    
     postEvent(EventID_track_state_changed, nil);
     
     return 1;
 }
+
+
 
 -(BOOL)playURL:(NSURL *)url
 {
