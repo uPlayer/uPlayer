@@ -22,6 +22,12 @@
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* serialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* serialize.mm */; };
+		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */; };
+		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
+		1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */; };
+		1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */; };
+		1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */; };
+		1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */; };
 		1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.m */; };
 		1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.mm */; };
@@ -81,6 +87,13 @@
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
 		1E5F9EC81A7A2DB2000360D7 /* serialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = serialize.mm; sourceTree = "<group>"; };
 		1E5F9EC91A7A2DB2000360D7 /* serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serialize.h; sourceTree = "<group>"; };
+		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
+		1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPreferences.m; sourceTree = "<group>"; };
+		1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = AccountPreferences.nib; sourceTree = "<group>"; };
+		1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountPreferences.png; sourceTree = "<group>"; };
+		1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AccountPreferences@2x.png"; sourceTree = "<group>"; };
+		1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LastFMLogo.png; sourceTree = "<group>"; };
+		1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LastFMLogo@2x.png"; sourceTree = "<group>"; };
 		1ED021A81A7B3383008526E8 /* PlayerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerList.h; sourceTree = "<group>"; };
 		1ED021A91A7B3383008526E8 /* PlayerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerList.m; sourceTree = "<group>"; };
 		1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerachMng.h; sourceTree = "<group>"; };
@@ -120,10 +133,8 @@
 		1E04435C1A7B747A00B644D8 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				1E0443641A7B75EE00B644D8 /* GeneralPreferences.h */,
-				1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */,
-				1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */,
-				1E0443691A7B787D00B644D8 /* GeneralPreferences.png */,
+				1ECEB7631A9053AB006E8C23 /* General */,
+				1ECEB7641A9053BB006E8C23 /* Account */,
 				1E04435D1A7B747A00B644D8 /* AppPreferences.h */,
 				1E04435E1A7B747A00B644D8 /* AppPreferences.m */,
 				1E04435F1A7B747A00B644D8 /* NSPreferences.h */,
@@ -164,6 +175,31 @@
 			children = (
 			);
 			path = res;
+			sourceTree = "<group>";
+		};
+		1ECEB7631A9053AB006E8C23 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				1E0443641A7B75EE00B644D8 /* GeneralPreferences.h */,
+				1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */,
+				1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */,
+				1E0443691A7B787D00B644D8 /* GeneralPreferences.png */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
+		1ECEB7641A9053BB006E8C23 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */,
+				1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */,
+				1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */,
+				1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */,
+				1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */,
+				1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */,
+				1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */,
+			);
+			name = Account;
 			sourceTree = "<group>";
 		};
 		1EDE8F991A773D810086677B = {
@@ -295,11 +331,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */,
+				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
+				1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */,
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
 				1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */,
+				1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */,
 				1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */,
 				1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
+				1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +371,7 @@
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,
 				1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */,
+				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

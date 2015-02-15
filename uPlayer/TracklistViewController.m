@@ -17,7 +17,6 @@ typedef enum
 {
    displayMode_tracklist,
    displayMode_tracklist_search,
-   displayMode_playlist
 } displayMode;
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
@@ -44,6 +43,10 @@ typedef enum
 /// @see EventID_to_reload_tracklist
 -(void)reloadTrackList:(NSNotification*)n
 {
+    // quit search mode.
+    if (self.displaymode == displayMode_tracklist_search)
+        self.displaymode = displayMode_tracklist;
+    
     [self.tableView reloadData];
     
     [self.tableView resignFirstResponder];

@@ -9,6 +9,7 @@
 #import "AppPreferences.h"
 #import "GeneralPreferences.h"
 //#import "HotKeyPreferences.h"
+#import "AccountPreferences.h"
 
 @implementation AppPreferences
 
@@ -18,6 +19,7 @@
 	self = [super init];
     
 	[self addPreferenceNamed: @"General" owner: [GeneralPreferences sharedInstance]];
+	[self addPreferenceNamed: @"Account" owner: [AccountPreferences sharedInstance]];
 	//[self addPreferenceNamed: @"HotKeys" owner: [HotKeyPreferences sharedInstance]];
 	 return self;
 }
