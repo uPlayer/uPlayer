@@ -47,12 +47,12 @@
     if (user->isConnected)
     {
         self.labelLastFmName.stringValue = [NSString stringWithUTF8String: user->name.c_str()];
-        self.btnConnect.stringValue = NSLocalizedString(@"disconnect",nil);
+        self.btnConnect.title = NSLocalizedString(@"disconnect",nil);
     }
     else
     {
         self.labelLastFmName.stringValue =  @"";
-        self.btnConnect.stringValue = NSLocalizedString(@"connect", nil);
+        self.btnConnect.title = NSLocalizedString(@"connect", nil);
     }
     
 }
@@ -73,8 +73,30 @@
 
 - (IBAction)actionConnect:(id)sender
 {
-    if (auth( *_user , true ) )
+    if (_user->isConnected)
     {
+        NSAlert *alert = [[NSAlert alloc] init];
+        
+        [alert addButtonWithTitle:@"OK"];
+        
+        [alert addButtonWithTitle:@"Cancel"];
+        
+        [alert setMessageText:@"Disconnect the session?"];
+        
+        [alert setInformativeText:@"The session connection needs login in on web browser."];
+        
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        if ([alert runModal] == NSAlertFirstButtonReturn)
+        {
+            clearSession(* _user );
+        }
+    }
+    else
+    {
+        if (auth( *_user , true ) )
+        {
+        }
     }
     
     [self updateUIUser: _user];
@@ -82,25 +104,7 @@
 
 - (IBAction)actionDisconnect:(id)sender
 {
-    NSAlert *alert = [[NSAlert alloc] init];
-    
-    [alert addButtonWithTitle:@"OK"];
-    
-    [alert addButtonWithTitle:@"Cancel"];
-    
-    [alert setMessageText:@"Disconnect the session?"];
-    
-    [alert setInformativeText:@"The session connection needs login in on web browser."];
-    
-    [alert setAlertStyle:NSWarningAlertStyle];
-    
-    if ([alert runModal] == NSAlertFirstButtonReturn) {
-        
-        // OK clicked, delete the record
-        clearSession(* _user );
-        
-        [self updateUIUser: _user];
-    }
+
 }
 
 @end
