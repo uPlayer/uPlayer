@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 typedef enum : NSUInteger {
-    EventID_track_started = 0,
+    EventID_track_started = 0, // param: ProgressInfo *info
     EventID_track_stopped ,
     EventID_track_paused ,
     EventID_track_resumed ,
@@ -17,7 +17,7 @@ typedef enum : NSUInteger {
     EventID_track_state_changed,
     
     EventID_track_selected ,
-    EventID_track_progress_changed ,
+    EventID_track_progress_changed , // param : ProgressInfo *info.
     EventID_playerqueue_changed ,
     EventID_player_document_loaded , // 使配置生效
     

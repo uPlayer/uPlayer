@@ -9,19 +9,21 @@
 #import "AppDelegate.h"
 #import "UPlayer.h"
 #import "PlayerMessage.h"
-#import "serialize.h"
-
+#import "PlayerSerialize.h"
 #import "AppPreferences.h"
+#include "Last_fm_user.h"
+#include "Last_fm_api.h"
 
 typedef void (^JobBlock)();
 typedef void (^JobBlockDone)();
 void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 {
-    dispatch_queue_t  _dispatchQueue  = dispatch_queue_create("KxSMBProvider", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t  _dispatchQueue  = dispatch_queue_create("uPlayer", DISPATCH_QUEUE_SERIAL);
     dispatch_async(_dispatchQueue, ^{
         job();
         dispatch_async(dispatch_get_main_queue(), ^{
-            done();
+            if (done)
+                done();
         });
     });
     
@@ -31,9 +33,12 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 
 
 @interface AppDelegate ()
+{
+    LFUser _user;
+}
+
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
-
 @end
 
 
@@ -155,10 +160,9 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     else
         self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
     
-    
+    // add ~/music to a default playerlist, if is none.
     if ([d.playerlList count] == 0)
     {
-        ///
         NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
         
         NSString *userMusic = arr.firstObject;
@@ -179,6 +183,13 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     }
     
     
+    //
+    
+    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
+    
+    // connect to Last.fm
+    auth(_user);
+    
 }
 
 
@@ -187,23 +198,55 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 {
     collectInfo( player().document , player().engine);
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     [player().document save];
-    
 }
 
 -(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return TRUE;
 }
+
+
+-(void)scrobblerSong:(TrackInfo*)info
+{
+    dojobInBkgnd(^{
+        string artist(info.artist.UTF8String);
+        string track(info.title.UTF8String);
+        
+        if (track_scrobble(_user.sessionKey, artist, track) )
+        {
+            
+        }
+        
+    },nil);
+}
+
+-(void)scrobbler:(NSNotification*)n
+{
+    if (_user.isConnected)
+    {
+        TrackInfo *info = [[player().document.playerlList getPlayList] getPlayItem].info;
+        
+       
+        string artist(info.artist.UTF8String);
+        string track(info.title.UTF8String);
+        track_updateNowPlaying(_user.sessionKey, artist, track);
+        
+        
+        // scrobble a song when played half time of above 40 seconds.
+        ProgressInfo *progress= n.object;
+        NSAssert([progress isKindOfClass:[ProgressInfo class]], nil);
+        NSTimeInterval t = progress.total;
+        if (t > 40)
+            t = 40;
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        
+        [self performSelector:@selector(scrobblerSong:) withObject:info afterDelay:t];
+        
+    }
+    
+}
+
 
 @end

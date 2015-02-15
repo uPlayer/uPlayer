@@ -10,6 +10,12 @@
 	<string>uPlayer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>
+		<string>https://github.com/liaogang/Last.fm.git</string>
+		<key>1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708</key>
+		<string>/Users/liaogang/%E5%BF%AB%E7%9B%98/git/serialize.git</string>
+		<key>2C404F14CD435FC66D96BF9AF27ABC55394B0C65</key>
+		<string>/Users/liaogang/%E5%BF%AB%E7%9B%98/git/socketTool.git</string>
 		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
 		<string>https://github.com/uPlayer/uPlayer.git</string>
 		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
@@ -19,6 +25,12 @@
 	<string>uPlayer.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>
+		<string>../../Last.fm/</string>
+		<key>1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708</key>
+		<string>../../Last.fm/serialize/</string>
+		<key>2C404F14CD435FC66D96BF9AF27ABC55394B0C65</key>
+		<string>../../Last.fm/socketTool/</string>
 		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
 		<string>../..</string>
 		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
@@ -32,6 +44,30 @@
 	<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Last.fm</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708</string>
+			<key>IDESourceControlWCCName</key>
+			<string>serialize</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2C404F14CD435FC66D96BF9AF27ABC55394B0C65</string>
+			<key>IDESourceControlWCCName</key>
+			<string>socketTool</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

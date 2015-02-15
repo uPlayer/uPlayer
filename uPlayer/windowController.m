@@ -42,6 +42,8 @@
     
     addObserverForEvent(self , @selector(updateUI), EventID_track_state_changed);
     
+    addObserverForEvent(self , @selector(trackStarted:), EventID_track_started);
+    
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
     
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
@@ -82,12 +84,17 @@
         ProgressInfo *info = n.object;
         
         NSAssert([info isKindOfClass:[ProgressInfo class]], nil);
-        
-        [self.progressSlider setMinValue:0];
         [self.progressSlider setMaxValue:info.total];
         [self.progressSlider setDoubleValue:info.current];
     }
     
+}
+
+-(void)trackStarted:(NSNotification*)n
+{
+    ProgressInfo *info = n.object;
+    NSAssert([info isKindOfClass:[ProgressInfo class]], nil);
+    [self.progressSlider setMaxValue:info.total];
 }
 
 -(void)updateUI
@@ -137,7 +144,6 @@
     [self.playOrderBtn selectItemAtIndex: player().document.playOrder ];
     
     self.progressSlider.enabled = player().document.playState != playstate_stopped;
-
 }
 
 -(void)windowDidLoad

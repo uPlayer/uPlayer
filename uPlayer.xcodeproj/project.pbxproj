@@ -21,13 +21,21 @@
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
-		1E5F9ECA1A7A2DB2000360D7 /* serialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* serialize.mm */; };
+		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
 		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */; };
 		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
 		1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */; };
 		1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */; };
 		1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */; };
 		1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */; };
+		1ECEB76E1A90582B006E8C23 /* Last_fm_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7661A90582B006E8C23 /* Last_fm_api.cpp */; };
+		1ECEB76F1A90582B006E8C23 /* Last_fm_local_record.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7681A90582B006E8C23 /* Last_fm_local_record.cpp */; };
+		1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB76A1A90582B006E8C23 /* Last_fm_user.cpp */; };
+		1ECEB7711A90582B006E8C23 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB76C1A90582B006E8C23 /* md5.cpp */; };
+		1ECEB7751A905874006E8C23 /* socketTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7731A905874006E8C23 /* socketTool.cpp */; };
+		1ECEB7781A9059A5006E8C23 /* Last_fm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7761A9059A5006E8C23 /* Last_fm.cpp */; };
+		1ECEB7851A90621D006E8C23 /* Last_fm_serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7831A90621D006E8C23 /* Last_fm_serialize.cpp */; };
+		1ECEB7891A906231006E8C23 /* serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7871A906231006E8C23 /* serialize.cpp */; };
 		1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.m */; };
 		1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.mm */; };
@@ -85,8 +93,8 @@
 		1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEngine.h; sourceTree = "<group>"; };
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
-		1E5F9EC81A7A2DB2000360D7 /* serialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = serialize.mm; sourceTree = "<group>"; };
-		1E5F9EC91A7A2DB2000360D7 /* serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serialize.h; sourceTree = "<group>"; };
+		1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerSerialize.mm; sourceTree = "<group>"; };
+		1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerialize.h; sourceTree = "<group>"; };
 		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
 		1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPreferences.m; sourceTree = "<group>"; };
 		1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = AccountPreferences.nib; sourceTree = "<group>"; };
@@ -94,6 +102,22 @@
 		1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AccountPreferences@2x.png"; sourceTree = "<group>"; };
 		1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LastFMLogo.png; sourceTree = "<group>"; };
 		1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LastFMLogo@2x.png"; sourceTree = "<group>"; };
+		1ECEB7661A90582B006E8C23 /* Last_fm_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Last_fm_api.cpp; path = Last.fm/Last.fm/Last_fm_api.cpp; sourceTree = "<group>"; };
+		1ECEB7671A90582B006E8C23 /* Last_fm_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Last_fm_api.h; path = Last.fm/Last.fm/Last_fm_api.h; sourceTree = "<group>"; };
+		1ECEB7681A90582B006E8C23 /* Last_fm_local_record.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Last_fm_local_record.cpp; path = Last.fm/Last.fm/Last_fm_local_record.cpp; sourceTree = "<group>"; };
+		1ECEB7691A90582B006E8C23 /* Last_fm_local_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Last_fm_local_record.h; path = Last.fm/Last.fm/Last_fm_local_record.h; sourceTree = "<group>"; };
+		1ECEB76A1A90582B006E8C23 /* Last_fm_user.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Last_fm_user.cpp; path = Last.fm/Last.fm/Last_fm_user.cpp; sourceTree = "<group>"; };
+		1ECEB76B1A90582B006E8C23 /* Last_fm_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Last_fm_user.h; path = Last.fm/Last.fm/Last_fm_user.h; sourceTree = "<group>"; };
+		1ECEB76C1A90582B006E8C23 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = md5.cpp; path = Last.fm/Last.fm/md5.cpp; sourceTree = "<group>"; };
+		1ECEB76D1A90582B006E8C23 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = Last.fm/Last.fm/md5.h; sourceTree = "<group>"; };
+		1ECEB7731A905874006E8C23 /* socketTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socketTool.cpp; sourceTree = "<group>"; };
+		1ECEB7741A905874006E8C23 /* socketTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socketTool.h; sourceTree = "<group>"; };
+		1ECEB7761A9059A5006E8C23 /* Last_fm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Last_fm.cpp; path = Last.fm/Last.fm/Last_fm.cpp; sourceTree = "<group>"; };
+		1ECEB7771A9059A5006E8C23 /* Last_fm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Last_fm.h; path = Last.fm/Last.fm/Last_fm.h; sourceTree = "<group>"; };
+		1ECEB7831A90621D006E8C23 /* Last_fm_serialize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Last_fm_serialize.cpp; path = Last.fm/Last.fm/Last_fm_serialize.cpp; sourceTree = "<group>"; };
+		1ECEB7841A90621D006E8C23 /* Last_fm_serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Last_fm_serialize.h; path = Last.fm/Last.fm/Last_fm_serialize.h; sourceTree = "<group>"; };
+		1ECEB7871A906231006E8C23 /* serialize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serialize.cpp; sourceTree = "<group>"; };
+		1ECEB7881A906231006E8C23 /* serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serialize.h; sourceTree = "<group>"; };
 		1ED021A81A7B3383008526E8 /* PlayerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerList.h; sourceTree = "<group>"; };
 		1ED021A91A7B3383008526E8 /* PlayerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerList.m; sourceTree = "<group>"; };
 		1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerachMng.h; sourceTree = "<group>"; };
@@ -146,8 +170,8 @@
 		1E0B2BEC1A77536800B4FE14 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				1E5F9EC91A7A2DB2000360D7 /* serialize.h */,
-				1E5F9EC81A7A2DB2000360D7 /* serialize.mm */,
+				1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */,
+				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
 				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
 				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
 				1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */,
@@ -202,9 +226,51 @@
 			name = Account;
 			sourceTree = "<group>";
 		};
+		1ECEB7651A9057E1006E8C23 /* Last.fm */ = {
+			isa = PBXGroup;
+			children = (
+				1ECEB7761A9059A5006E8C23 /* Last_fm.cpp */,
+				1ECEB7771A9059A5006E8C23 /* Last_fm.h */,
+				1ECEB7661A90582B006E8C23 /* Last_fm_api.cpp */,
+				1ECEB7671A90582B006E8C23 /* Last_fm_api.h */,
+				1ECEB7681A90582B006E8C23 /* Last_fm_local_record.cpp */,
+				1ECEB7691A90582B006E8C23 /* Last_fm_local_record.h */,
+				1ECEB76A1A90582B006E8C23 /* Last_fm_user.cpp */,
+				1ECEB76B1A90582B006E8C23 /* Last_fm_user.h */,
+				1ECEB7831A90621D006E8C23 /* Last_fm_serialize.cpp */,
+				1ECEB7841A90621D006E8C23 /* Last_fm_serialize.h */,
+				1ECEB76C1A90582B006E8C23 /* md5.cpp */,
+				1ECEB76D1A90582B006E8C23 /* md5.h */,
+			);
+			name = Last.fm;
+			sourceTree = "<group>";
+		};
+		1ECEB7721A905874006E8C23 /* socketTool */ = {
+			isa = PBXGroup;
+			children = (
+				1ECEB7731A905874006E8C23 /* socketTool.cpp */,
+				1ECEB7741A905874006E8C23 /* socketTool.h */,
+			);
+			name = socketTool;
+			path = Last.fm/socketTool;
+			sourceTree = "<group>";
+		};
+		1ECEB7861A906231006E8C23 /* serialize */ = {
+			isa = PBXGroup;
+			children = (
+				1ECEB7871A906231006E8C23 /* serialize.cpp */,
+				1ECEB7881A906231006E8C23 /* serialize.h */,
+			);
+			name = serialize;
+			path = Last.fm/serialize;
+			sourceTree = "<group>";
+		};
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1ECEB7861A906231006E8C23 /* serialize */,
+				1ECEB7721A905874006E8C23 /* socketTool */,
+				1ECEB7651A9057E1006E8C23 /* Last.fm */,
 				1E9085501A80B84A006144F7 /* res */,
 				1E04435C1A7B747A00B644D8 /* Preferences */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
@@ -352,24 +418,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */,
+				1ECEB76E1A90582B006E8C23 /* Last_fm_api.cpp in Sources */,
 				1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */,
 				1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */,
+				1ECEB7891A906231006E8C23 /* serialize.cpp in Sources */,
 				1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */,
+				1ECEB7851A90621D006E8C23 /* Last_fm_serialize.cpp in Sources */,
 				1EDE8FAE1A773D810086677B /* TracklistViewController.m in Sources */,
+				1ECEB7781A9059A5006E8C23 /* Last_fm.cpp in Sources */,
 				1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */,
 				1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */,
-				1E5F9ECA1A7A2DB2000360D7 /* serialize.mm in Sources */,
+				1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */,
 				1EDE8FAB1A773D810086677B /* main.m in Sources */,
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
 				1E169A891A78E701003D3D01 /* windowController.m in Sources */,
 				1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */,
 				1E0443611A7B747A00B644D8 /* AppPreferences.m in Sources */,
+				1ECEB76F1A90582B006E8C23 /* Last_fm_local_record.cpp in Sources */,
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
 				1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */,
+				1ECEB7751A905874006E8C23 /* socketTool.cpp in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */,
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,
+				1ECEB7711A90582B006E8C23 /* md5.cpp in Sources */,
+				1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */,
 				1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */,
 				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.m in Sources */,
 			);
@@ -495,7 +569,10 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = "-ltag";
+				OTHER_LDFLAGS = (
+					"-ltag",
+					"-ljson",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
 			};
@@ -520,7 +597,10 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = "-ltag";
+				OTHER_LDFLAGS = (
+					"-ltag",
+					"-ljson",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
 			};
