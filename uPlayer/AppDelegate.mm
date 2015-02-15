@@ -152,6 +152,7 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     
     postEvent(EventID_player_document_loaded, nil);
     
+    player().engine.volume = player().document.volume;
     
     self.menuOpenDirectory.enabled = [d.playerlList count]>0;
     

@@ -115,5 +115,5 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
     PlayStateTime st = [e close];
     d.playTime = st.time;
     d.playState = st.state;
+    d.volume = st.volume;
 }
-

@@ -242,7 +242,9 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
-        int resumeAtReboot , trackSongsWhenPlayStarted, volume ,playOrder ,playState , fontHeight ,lastFmEnabled ;
+        int resumeAtReboot , trackSongsWhenPlayStarted ;
+        float volume ;
+        int playOrder ,playState , fontHeight ,lastFmEnabled ;
         NSTimeInterval playTime;
         
         *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> lastFmEnabled >> playTime;

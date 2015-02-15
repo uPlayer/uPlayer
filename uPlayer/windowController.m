@@ -73,7 +73,7 @@
 
 - (IBAction)actionVolumnSlider:(id)sender
 {
-    
+    [player().engine setVolume:[sender floatValue]];
 }
 
 -(void)updateProgressInfo:(NSNotification*)n
@@ -102,34 +102,34 @@
     PlayerlList *ll = player().document.playerlList;
     PlayerTrack *track = [[ll getPlayList] getPlayItem];
     
-    assert(track);
-    
-    NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
-    
-    BOOL stopped = [player().engine isStopped];
-    //BOOL playing = [player().engine isPlaying];
-    BOOL paused = [player().engine isPaused];
-    
-    if (stopped)
-    {
-        self.window.title = player().document.windowName;
-        self.progressSlider.enabled = false;
-    }
-    else
-    {
-        if ( paused )
+
+        BOOL stopped = [player().engine isStopped];
+        //BOOL playing = [player().engine isPlaying];
+        BOOL paused = [player().engine isPaused];
+        
+        if (stopped)
         {
-            self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
+            self.window.title = player().document.windowName;
+            self.progressSlider.enabled = false;
         }
         else
         {
-            self.window.title = title;
+            if (track)
+            {
+                NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
+                if ( paused )
+                {
+                    self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
+                }
+                else
+                {
+                    self.window.title = title;
+                }
+            }
+            
+            self.progressSlider.enabled = true;
         }
         
-        self.progressSlider.enabled = true;
-    }
-    
-    
 }
 
 
@@ -144,6 +144,8 @@
     [self.playOrderBtn selectItemAtIndex: player().document.playOrder ];
     
     self.progressSlider.enabled = player().document.playState != playstate_stopped;
+    
+    self.volumnSlider.doubleValue = player().document.volume;
 }
 
 -(void)windowDidLoad

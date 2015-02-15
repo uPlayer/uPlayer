@@ -31,6 +31,7 @@
         self.playTime = -1;
         self.trackSongsWhenPlayStarted = TRUE;
         self.lastFmEnabled =FALSE;
+        self.volume = 1.0;
     }
     
     return self;

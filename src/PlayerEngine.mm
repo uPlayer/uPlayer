@@ -309,6 +309,7 @@
     PlayStateTime st;
     st.time =[self currentTime];
     st.state = [self getPlayState];
+    st.volume = self.volume;
     [self stop];
     return st;
 }

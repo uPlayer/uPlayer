@@ -359,14 +359,14 @@
                                         </connections>
                                     </slider>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="A92D386B-6596-4220-9333-3C61F944BF15" label="" paletteLabel="Volumn" id="1U9-cg-qxf">
+                                <toolbarItem implicitItemIdentifier="A92D386B-6596-4220-9333-3C61F944BF15" label="Volumn" paletteLabel="Volumn" id="1U9-cg-qxf">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="21"/>
                                     <size key="maxSize" width="96" height="21"/>
                                     <slider key="view" verticalHuggingPriority="750" id="mlb-Ky-CB6">
                                         <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="flZ-HD-eeR"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="flZ-HD-eeR"/>
                                         <connections>
                                             <action selector="actionVolumnSlider:" target="B8D-0N-5wS" id="NVI-7U-07C"/>
                                         </connections>
@@ -396,6 +396,7 @@
                             <defaultToolbarItems>
                                 <toolbarItem reference="c2Z-N4-MTP"/>
                                 <toolbarItem reference="pmD-eR-0dO"/>
+                                <toolbarItem reference="1U9-cg-qxf"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
                             </defaultToolbarItems>
@@ -419,7 +420,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62" y="492"/>
+            <point key="canvasLocation" x="20" y="438"/>
         </scene>
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">

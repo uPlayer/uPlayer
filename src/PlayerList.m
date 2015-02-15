@@ -106,6 +106,7 @@
     }
     return self;
 }
+
 -(PlayerList*)getItem:(int)index
 {
     assert(index>=0 && index < self.playerlList.count);

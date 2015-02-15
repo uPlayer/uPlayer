@@ -36,5 +36,6 @@ struct PlayStateTime
 {
     enum PlayState state;
     NSTimeInterval time;
+    CGFloat volume;
 };
 
