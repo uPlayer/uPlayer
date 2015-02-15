@@ -296,15 +296,12 @@
 
 - (void)stop
 {
-    if ([self getPlayState] != playstate_stopped)
-    {
-        [_player pause];
-        [_player replaceCurrentItemWithPlayerItem:nil];
-        self.playUuid = -1;
-        
-        postEvent(EventID_track_stopped, nil);
-        postEvent(EventID_track_state_changed, nil);
-    }
+    [_player pause];
+    [_player replaceCurrentItemWithPlayerItem:nil];
+    self.playUuid = -1;
+    
+    postEvent(EventID_track_stopped, nil);
+    postEvent(EventID_track_state_changed, nil);
 }
 
 -(PlayStateTime)close
