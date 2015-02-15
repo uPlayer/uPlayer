@@ -14,6 +14,7 @@
 #include "Last_fm_user.h"
 #include "Last_fm_api.h"
 
+
 typedef void (^JobBlock)();
 typedef void (^JobBlockDone)();
 void dojobInBkgnd(JobBlock job ,JobBlockDone done)
@@ -32,11 +33,8 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 
 
 
-@interface AppDelegate ()
-{
-    LFUser _user;
-}
 
+@interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
 @end
@@ -142,6 +140,7 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     postEvent(EventID_to_show_playlist, nil);
 }
 
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     PlayerDocument *d = player().document;
@@ -149,8 +148,9 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     if( [d load] )
     {
         postEvent(EventID_to_reload_tracklist, nil);
-        postEvent(EventID_player_document_loaded, nil);
     }
+    
+    postEvent(EventID_player_document_loaded, nil);
     
     
     self.menuOpenDirectory.enabled = [d.playerlList count]>0;
@@ -186,13 +186,8 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     //
     
     addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
-    
-    // connect to Last.fm
-    auth(_user);
-    
+
 }
-
-
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
@@ -203,7 +198,7 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 
 -(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
-    return TRUE;
+    return YES;
 }
 
 
@@ -213,7 +208,8 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
         string artist(info.artist.UTF8String);
         string track(info.title.UTF8String);
         
-        if (track_scrobble(_user.sessionKey, artist, track) )
+        LFUser *user = lastFmUser() ;
+        if (track_scrobble(user->sessionKey, artist, track) )
         {
             
         }
@@ -223,14 +219,15 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 
 -(void)scrobbler:(NSNotification*)n
 {
-    if (_user.isConnected)
+    LFUser *user = lastFmUser();
+    if (user->isConnected)
     {
         TrackInfo *info = [[player().document.playerlList getPlayList] getPlayItem].info;
         
        
         string artist(info.artist.UTF8String);
         string track(info.title.UTF8String);
-        track_updateNowPlaying(_user.sessionKey, artist, track);
+        track_updateNowPlaying(user->sessionKey, artist, track);
         
         
         // scrobble a song when played half time of above 40 seconds.

@@ -7,9 +7,8 @@
 //
 
 #import "PlayerSerialize.h"
-
 #import "serialize.h"
-
+#import "UPlayer.h"
 
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {
@@ -28,21 +27,6 @@ FILE& operator>>(FILE& f,NSTimeInterval& t)
 #define docFileName  @"core.cfg"
 #define layoutFileName  @"ui.cfg"
 
-NSString *getDocumentFilePath()
-{
-    NSString *path = NSSearchPathForDirectoriesInDomains( NSApplicationSupportDirectory, NSUserDomainMask, true ).firstObject;
-    
-    path = [path stringByAppendingPathComponent:@"uPlayer"];
-    
-    NSError *error;
-    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-    
-    if (error) {
-        NSLog(@"%@",error);
-    }
-    
-    return path;
-}
 
 void saveTrackInfo(FILE &file , TrackInfo *info)
 {
@@ -254,14 +238,14 @@ NSArray *loadTrackInfoArray(FILE &file)
 -(bool)load
 {
     
-    FILE *file = fopen([getDocumentFilePath()  stringByAppendingPathComponent: docFileName ].UTF8String, "r");
+    FILE *file = fopen([ApplicationSupportDirectory()  stringByAppendingPathComponent: docFileName ].UTF8String, "r");
     
     if (file)
     {
-        int resumeAtReboot , trackSongsWhenPlayStarted, volume ,playOrder ,playState , fontHeight ;
+        int resumeAtReboot , trackSongsWhenPlayStarted, volume ,playOrder ,playState , fontHeight ,lastFmEnabled ;
         NSTimeInterval playTime;
         
-        *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> playTime;
+        *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> lastFmEnabled >> playTime;
         
         self.resumeAtReboot=resumeAtReboot;
         self.trackSongsWhenPlayStarted = trackSongsWhenPlayStarted;
@@ -269,6 +253,7 @@ NSArray *loadTrackInfoArray(FILE &file)
         self.playOrder=playOrder;
         self.playState=playState;
         self.fontHeight=fontHeight;
+        self.lastFmEnabled = lastFmEnabled;
         self.playTime = playTime;
         
         
@@ -286,11 +271,11 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(bool)save
 {
-    FILE *file = fopen([getDocumentFilePath() stringByAppendingPathComponent: docFileName].UTF8String, "w");
+    FILE *file = fopen([ApplicationSupportDirectory() stringByAppendingPathComponent: docFileName].UTF8String, "w");
     
     if (file)
     {
-        *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.playTime ;
+        *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playTime ;
         
         [self.playerlList saveTo:file];
         
@@ -308,7 +293,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 @implementation PlayerLayout (serialize)
 -(bool)save
 {
-    FILE *file = fopen([getDocumentFilePath() stringByAppendingPathComponent: layoutFileName].UTF8String, "w");
+    FILE *file = fopen([ApplicationSupportDirectory() stringByAppendingPathComponent: layoutFileName].UTF8String, "w");
     
     if (file)
     {
@@ -322,7 +307,7 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(bool)load
 {
-    FILE *file = fopen([getDocumentFilePath()  stringByAppendingPathComponent: layoutFileName ].UTF8String, "r");
+    FILE *file = fopen([ApplicationSupportDirectory()  stringByAppendingPathComponent: layoutFileName ].UTF8String, "r");
     
     if (file)
     {

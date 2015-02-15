@@ -47,7 +47,6 @@
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
     
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
-    
 }
 
 
@@ -95,6 +94,7 @@
     ProgressInfo *info = n.object;
     NSAssert([info isKindOfClass:[ProgressInfo class]], nil);
     [self.progressSlider setMaxValue:info.total];
+    [self.progressSlider setDoubleValue:0];
 }
 
 -(void)updateUI

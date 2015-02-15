@@ -30,6 +30,7 @@
         self.resumeAtReboot = TRUE;
         self.playTime = -1;
         self.trackSongsWhenPlayStarted = TRUE;
+        self.lastFmEnabled =FALSE;
     }
     
     return self;

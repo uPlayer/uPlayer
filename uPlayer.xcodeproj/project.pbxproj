@@ -22,7 +22,7 @@
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
-		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */; };
+		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */; };
 		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
 		1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */; };
 		1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */; };
@@ -96,7 +96,7 @@
 		1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerSerialize.mm; sourceTree = "<group>"; };
 		1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerialize.h; sourceTree = "<group>"; };
 		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
-		1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPreferences.m; sourceTree = "<group>"; };
+		1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccountPreferences.mm; sourceTree = "<group>"; };
 		1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = AccountPreferences.nib; sourceTree = "<group>"; };
 		1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountPreferences.png; sourceTree = "<group>"; };
 		1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AccountPreferences@2x.png"; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */,
-				1ECEB7571A9052AD006E8C23 /* AccountPreferences.m */,
+				1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */,
 				1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */,
 				1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */,
 				1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */,
@@ -445,7 +445,7 @@
 				1ECEB7711A90582B006E8C23 /* md5.cpp in Sources */,
 				1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */,
 				1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */,
-				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.m in Sources */,
+				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

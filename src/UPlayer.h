@@ -15,15 +15,22 @@
 #import "PlayerEngine.h"
 #import "PlayerList.h"
 
+
 @interface UPlayer : NSObject
+
 @property (nonatomic,strong) PlayerDocument *document;
 @property (nonatomic,strong) PlayerLayout *layout;
 @property (nonatomic,strong) PlayerEngine *engine;
+
 @end
 
 @interface PlayerEngine (playTrack)
 -(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi;
 @end
+
+
+
+
 
 #if defined(__cplusplus)
 extern "C" {
@@ -31,12 +38,15 @@ extern "C" {
     
     UPlayer *player(); // the global and only instance.
 
-
     void playTrack(PlayerList *list,PlayerTrack *track);
     
     void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track);
     
     void collectInfo(PlayerDocument *d , PlayerEngine *e);
+    
+    /// ~/Library/Application Support/uPlayer
+    NSString *ApplicationSupportDirectory();
+    
     
 #if defined(__cplusplus)
 }

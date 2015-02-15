@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
     EventID_track_selected ,
     EventID_track_progress_changed , // param : ProgressInfo *info.
     EventID_playerqueue_changed ,
-    EventID_player_document_loaded , // 使配置生效
+    EventID_player_document_loaded , // 使配置生效 , loaded failed , or successed.
     
     /// param: PlayerList* list , if list is nil , then go to the playing item.
     /// else reload the list at list.topitem. and list is selected.

@@ -19,7 +19,7 @@
 @property (nonatomic) int playOrder; //enum PlayOrder
 @property (nonatomic) int playState;//enum PlayStatus
 @property (nonatomic) int fontHeight;
-
+@property (nonatomic) int lastFmEnabled;
 @property (nonatomic) NSTimeInterval playTime;
 
 @property (nonatomic,strong) PlayerlList *playerlList;
