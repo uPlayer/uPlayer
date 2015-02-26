@@ -6,4 +6,42 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "ThreadJob.h"
+
+typedef void (^JobBlock)();
+typedef void (^JobBlockDone)();
+
+dispatch_queue_t  _dispatchQueue  = nil;
+
+void dojobInBkgnd(JobBlock job ,JobBlockDone done)
+{
+    if(_dispatchQueue == nil)
+       _dispatchQueue = dispatch_queue_create("uPlayer", DISPATCH_QUEUE_SERIAL);
+    
+    dispatch_async(_dispatchQueue, ^{
+        job();
+        if (done)
+            dispatch_async(dispatch_get_main_queue(), ^{
+                done();
+        });
+    });
+    
+}
+
+/// ~/Library/Application Support/uPlayer
+NSString *ApplicationSupportDirectory()
+{
+    NSString *path = NSSearchPathForDirectoriesInDomains( NSApplicationSupportDirectory, NSUserDomainMask, true ).firstObject;
+    
+    path = [path stringByAppendingPathComponent:@"uPlayer"];
+    
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (error) {
+        NSLog(@"%@",error);
+        return nil;
+    }
+    
+    return path;
+}

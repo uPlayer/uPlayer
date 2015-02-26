@@ -1,13 +1,14 @@
-#include "stdafx.h"
+
 #include "shortcutKey.h"
-#include "funcCmd.h"
+
 #include <json/json.h>
 #include <iostream>
 #include <fstream>
-#include "Util1.h"
 
-#pragma once
-
+#import "ThreadJob.h"
+#import <Carbon/Carbon.h>
+#include "PlayerMessage.h"
+#import <LLHotKeyRecorder-Functions.h>
 using namespace std;
 
 
@@ -15,8 +16,8 @@ Json::Value root;
 Json::Value rootLocal ;
 Json::Value rootGlobal ;
 
-char filepath[MAX_PATH];
-//const char *filepath = NULL ;
+
+NSString *filepath = nil;
 
 /// return file loaded.
 bool verifyLoadFileShortcutKey()
@@ -28,17 +29,13 @@ bool verifyLoadFileShortcutKey()
 	{
 		loaded = true;
 	
-		const char *mpath = ChangeCurDir2ModulePathA();
-
-		strcpy(filepath,mpath);
-		strcat(filepath,"\\keymaps.cfg");
+		filepath = [ApplicationSupportDirectory() stringByAppendingPathComponent:@"keymaps.json"];
 
 
 		Json::Reader reader;
 
-
 		std::filebuf fb;
-		if (fb.open( filepath , std::ios::in))
+		if (fb.open( filepath.UTF8String , std::ios::in))
 		{		
 			fileLoaded = true;
 			std::istream is(&fb);
@@ -63,7 +60,7 @@ bool verifyLoadFileShortcutKey()
 void saveFileShortcutKey()
 {
 	std::filebuf fb;
-    if (fb.open ( filepath ,std::ios::out))
+    if (fb.open ( filepath.UTF8String ,std::ios::out))
     {
         std::ostream out(&fb);
             
@@ -99,7 +96,8 @@ bool shortcutKeyPressed(string shortcutKey, bool bGlobal)
 
 	if (!value.isNull())
 	{
-		performCommand(value.asString());
+        postEventByString( [NSString stringWithUTF8String: value.asString().c_str()] , nil);
+//		performCommand(value.asString());
 		return true;
 	}
 
@@ -113,6 +111,8 @@ string msgKeytoString(bool ctrl, bool super, bool shift, bool alt, unsigned int 
 {
 	string r;
 
+//    NSString *aa = LLHotKeyStringForKeyCode(vk);
+    
 	const int vkmapLen = 254;
 	static const char *vkstrmap[vkmapLen];
 	static bool vkStrMapInit = false;
@@ -120,23 +120,23 @@ string msgKeytoString(bool ctrl, bool super, bool shift, bool alt, unsigned int 
 	{
 		vkStrMapInit = true;
 
-		vkstrmap[VK_F1] = "f1";
-		vkstrmap[VK_F2] = "f2";
-		vkstrmap[VK_F3] = "f3";
-		vkstrmap[VK_F4] = "f4";
-		vkstrmap[VK_F5] = "f5";
-		vkstrmap[VK_F6] = "f6";
-		vkstrmap[VK_F7] = "f7";
-		vkstrmap[VK_F8] = "f8";
-		vkstrmap[VK_F9] = "f9";
-		vkstrmap[VK_F10] = "f10";
-		vkstrmap[VK_F11] = "f11";
-		vkstrmap[VK_F12] = "f12";
+		vkstrmap[kVK_F1] = "f1";
+		vkstrmap[kVK_F2] = "f2";
+		vkstrmap[kVK_F3] = "f3";
+		vkstrmap[kVK_F4] = "f4";
+		vkstrmap[kVK_F5] = "f5";
+		vkstrmap[kVK_F6] = "f6";
+		vkstrmap[kVK_F7] = "f7";
+		vkstrmap[kVK_F8] = "f8";
+		vkstrmap[kVK_F9] = "f9";
+		vkstrmap[kVK_F10] = "f10";
+		vkstrmap[kVK_F11] = "f11";
+		vkstrmap[kVK_F12] = "f12";
 
-		vkstrmap[VK_OEM_PLUS] = "+";
-		vkstrmap[VK_OEM_COMMA] = ",";
-		vkstrmap[VK_OEM_MINUS] = "-";
-		vkstrmap[VK_OEM_PERIOD] = ".";
+//		vkstrmap[kVK_OEM_PLUS] = "+";
+//		vkstrmap[kVK_OEM_COMMA] = ",";
+//		vkstrmap[kVK_OEM_MINUS] = "-";
+//		vkstrmap[kVK_OEM_PERIOD] = ".";
 	}
 
 	if (ctrl)

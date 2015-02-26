@@ -48,20 +48,37 @@
 		1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCF1A7740DC0086677B /* threadpool.cpp */; };
 		1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */; };
 		1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */; };
+		1EFD42B91A91A9EF009D65B5 /* LLHotKeyRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; };
+		1EFD42BF1A91ABFF009D65B5 /* HotKeyPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42BC1A91ABFF009D65B5 /* HotKeyPreferences.m */; };
+		1EFD42C01A91ABFF009D65B5 /* HotKeyPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD42BD1A91ABFF009D65B5 /* HotKeyPreferences.nib */; };
+		1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */; };
+		1EFD42CD1A91E826009D65B5 /* ThreadJob.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */; };
+		1EFD42DE1A91EE85009D65B5 /* shortcutKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		1EDE8FDC1A77419B0086677B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+/* Begin PBXContainerItemProxy section */
+		1EFD42B31A91A986009D65B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6D05D92C191560F200CAF7AF;
+			remoteInfo = LLHotKeyRecorder;
 		};
-/* End PBXCopyFilesBuildPhase section */
+		1EFD42B51A91A986009D65B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6D05D943191560F200CAF7AF;
+			remoteInfo = Tests;
+		};
+		1EFD42B71A91A9B2009D65B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D05D92B191560F200CAF7AF;
+			remoteInfo = LLHotKeyRecorder;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E04435D1A7B747A00B644D8 /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
@@ -139,6 +156,15 @@
 		1EDE8FD01A7740DC0086677B /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threadpool.h; path = lyricsFetcher/src/threadpool.h; sourceTree = "<group>"; };
 		1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLHotKeyRecorder.xcodeproj; path = LLHotKeyRecorder/LLHotKeyRecorder.xcodeproj; sourceTree = "<group>"; };
+		1EFD42BB1A91ABFF009D65B5 /* HotKeyPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotKeyPreferences.h; sourceTree = "<group>"; };
+		1EFD42BC1A91ABFF009D65B5 /* HotKeyPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKeyPreferences.m; sourceTree = "<group>"; };
+		1EFD42BD1A91ABFF009D65B5 /* HotKeyPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = HotKeyPreferences.nib; sourceTree = "<group>"; };
+		1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HotKeyPreferences.png; sourceTree = "<group>"; };
+		1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ThreadJob.mm; sourceTree = "<group>"; };
+		1EFD42CE1A91E847009D65B5 /* ThreadJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadJob.h; sourceTree = "<group>"; };
+		1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = shortcutKey.mm; sourceTree = "<group>"; };
+		1EFD42DC1A91EE85009D65B5 /* shortcutKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shortcutKey.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EFD42B91A91A9EF009D65B5 /* LLHotKeyRecorder.framework in Frameworks */,
 				1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */,
 				1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */,
 			);
@@ -159,6 +186,7 @@
 			children = (
 				1ECEB7631A9053AB006E8C23 /* General */,
 				1ECEB7641A9053BB006E8C23 /* Account */,
+				1EFD42BA1A91ABBD009D65B5 /* HotKey */,
 				1E04435D1A7B747A00B644D8 /* AppPreferences.h */,
 				1E04435E1A7B747A00B644D8 /* AppPreferences.m */,
 				1E04435F1A7B747A00B644D8 /* NSPreferences.h */,
@@ -258,8 +286,8 @@
 		1ECEB7861A906231006E8C23 /* serialize */ = {
 			isa = PBXGroup;
 			children = (
-				1ECEB7871A906231006E8C23 /* serialize.cpp */,
 				1ECEB7881A906231006E8C23 /* serialize.h */,
+				1ECEB7871A906231006E8C23 /* serialize.cpp */,
 			);
 			name = serialize;
 			path = Last.fm/serialize;
@@ -268,6 +296,8 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
+				1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */,
 				1ECEB7861A906231006E8C23 /* serialize */,
 				1ECEB7721A905874006E8C23 /* socketTool */,
 				1ECEB7651A9057E1006E8C23 /* Last.fm */,
@@ -294,6 +324,8 @@
 			children = (
 				1EDE8FA71A773D810086677B /* AppDelegate.h */,
 				1EDE8FA81A773D810086677B /* AppDelegate.mm */,
+				1EFD42CE1A91E847009D65B5 /* ThreadJob.h */,
+				1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */,
 				1E169A8A1A78E715003D3D01 /* windowController.h */,
 				1E169A881A78E701003D3D01 /* windowController.m */,
 				1EDE8FAC1A773D810086677B /* TracklistViewController.h */,
@@ -339,6 +371,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */,
+			);
+			name = HotKeyRecorder;
+			sourceTree = "<group>";
+		};
+		1EFD42AF1A91A985009D65B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */,
+				1EFD42B61A91A986009D65B5 /* Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1EFD42BA1A91ABBD009D65B5 /* HotKey */ = {
+			isa = PBXGroup;
+			children = (
+				1EFD42BB1A91ABFF009D65B5 /* HotKeyPreferences.h */,
+				1EFD42BC1A91ABFF009D65B5 /* HotKeyPreferences.m */,
+				1EFD42BD1A91ABFF009D65B5 /* HotKeyPreferences.nib */,
+				1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */,
+			);
+			name = HotKey;
+			sourceTree = "<group>";
+		};
+		1EFD42D81A91EE85009D65B5 /* ShortCutcmd */ = {
+			isa = PBXGroup;
+			children = (
+				1EFD42DC1A91EE85009D65B5 /* shortcutKey.h */,
+				1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */,
+			);
+			path = ShortCutcmd;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -349,11 +418,11 @@
 				1EDE8F9E1A773D810086677B /* Sources */,
 				1EDE8F9F1A773D810086677B /* Frameworks */,
 				1EDE8FA01A773D810086677B /* Resources */,
-				1EDE8FDC1A77419B0086677B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1EFD42B81A91A9B2009D65B5 /* PBXTargetDependency */,
 			);
 			name = uPlayer;
 			productName = uPlayer;
@@ -385,12 +454,35 @@
 			mainGroup = 1EDE8F991A773D810086677B;
 			productRefGroup = 1EDE8FA31A773D810086677B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1EFD42AF1A91A985009D65B5 /* Products */;
+					ProjectRef = 1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1EDE8FA11A773D810086677B /* uPlayer */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LLHotKeyRecorder.framework;
+			remoteRef = 1EFD42B31A91A986009D65B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1EFD42B61A91A986009D65B5 /* Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Tests.xctest;
+			remoteRef = 1EFD42B51A91A986009D65B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1EDE8FA01A773D810086677B /* Resources */ = {
@@ -399,8 +491,10 @@
 			files = (
 				1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */,
 				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
+				1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */,
 				1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */,
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
+				1EFD42C01A91ABFF009D65B5 /* HotKeyPreferences.nib in Resources */,
 				1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */,
 				1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */,
 				1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */,
@@ -434,6 +528,7 @@
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
 				1E169A891A78E701003D3D01 /* windowController.m in Sources */,
 				1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */,
+				1EFD42CD1A91E826009D65B5 /* ThreadJob.mm in Sources */,
 				1E0443611A7B747A00B644D8 /* AppPreferences.m in Sources */,
 				1ECEB76F1A90582B006E8C23 /* Last_fm_local_record.cpp in Sources */,
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
@@ -443,6 +538,8 @@
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,
 				1ECEB7711A90582B006E8C23 /* md5.cpp in Sources */,
+				1EFD42BF1A91ABFF009D65B5 /* HotKeyPreferences.m in Sources */,
+				1EFD42DE1A91EE85009D65B5 /* shortcutKey.mm in Sources */,
 				1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */,
 				1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */,
 				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */,
@@ -450,6 +547,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1EFD42B81A91A9B2009D65B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LLHotKeyRecorder;
+			targetProxy = 1EFD42B71A91A9B2009D65B5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1E169A7F1A78D05D003D3D01 /* Localizable.strings */ = {
@@ -565,6 +670,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					"\"$(SRCROOT)/LLHotKeyRecorder/LLHotKeyRecorder\"",
 				);
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -593,6 +699,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					"\"$(SRCROOT)/LLHotKeyRecorder/LLHotKeyRecorder\"",
 				);
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

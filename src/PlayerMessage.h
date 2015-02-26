@@ -45,6 +45,9 @@ typedef enum : NSUInteger {
 extern "C" {
 #endif /* defined(__cplusplus) */
 
+    inline int getEventCount();
+    
+    const char *eventID2String(EventID et);
     
     void addObserverForEvent(id observer , SEL sel, EventID et);
     
@@ -53,6 +56,8 @@ extern "C" {
     void removeObserver(id observer);
     
     void postEvent(EventID et , id object);
+    
+    void postEventByString( NSString *strEvent , id object);
     
 #if defined(__cplusplus)
 }

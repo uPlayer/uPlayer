@@ -13,24 +13,12 @@
 #import "AppPreferences.h"
 #include "Last_fm_user.h"
 #include "Last_fm_api.h"
+#import <LLHotKey.h>
+#import <LLHotKeyCenter.h>
+#import <Carbon/Carbon.h>
 
-
-typedef void (^JobBlock)();
-typedef void (^JobBlockDone)();
-void dojobInBkgnd(JobBlock job ,JobBlockDone done)
-{
-    dispatch_queue_t  _dispatchQueue  = dispatch_queue_create("uPlayer", DISPATCH_QUEUE_SERIAL);
-    dispatch_async(_dispatchQueue, ^{
-        job();
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (done)
-                done();
-        });
-    });
-    
-}
-
-
+#import "shortcutKey.h"
+#import "ThreadJob.h"
 
 
 
@@ -140,6 +128,12 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     postEvent(EventID_to_show_playlist, nil);
 }
 
+-(void)hotKeyTriggered:(LLHotKey*)hotKey
+{
+    NSUInteger m = hotKey.modifierFlags;
+    std::string s = msgKeytoString( m & NSControlKeyMask, m & NSCommandKeyMask, m & NSShiftKeyMask, m & NSAlternateKeyMask, hotKey.keyCode);
+    shortcutKeyPressed( s, false);
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -187,21 +181,30 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     //
     
     addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
-
+    
+    
+    LLHotKey *hotKey = [LLHotKey hotKeyWithKeyCode:kVK_ANSI_R modifierFlags:NSCommandKeyMask];
+    [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
+    
+    verifyLoadFileShortcutKey();
+    
 }
+
+
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     collectInfo( player().document , player().engine);
     
     [player().document save];
+    
+    saveFileShortcutKey();
 }
 
 -(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return YES;
 }
-
 
 -(void)scrobblerSong:(TrackInfo*)info
 {
@@ -245,6 +248,5 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     }
     
 }
-
 
 @end

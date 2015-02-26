@@ -9,6 +9,7 @@
 #import "UPlayer.h"
 #include "Last_fm_user.h"
 #include "Last_fm_api.h"
+#import "ThreadJob.h"
 
 void initLastFm()
 {
@@ -57,23 +58,7 @@ UPlayer *player()
 }
 
 
-/// ~/Library/Application Support/uPlayer
-NSString *ApplicationSupportDirectory()
-{
-    NSString *path = NSSearchPathForDirectoriesInDomains( NSApplicationSupportDirectory, NSUserDomainMask, true ).firstObject;
-    
-    path = [path stringByAppendingPathComponent:@"uPlayer"];
-    
-    NSError *error;
-    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-    
-    if (error) {
-        NSLog(@"%@",error);
-        return nil;
-    }
-    
-    return path;
-}
+
 
 
 

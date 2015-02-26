@@ -8,7 +8,7 @@
 
 #import "AppPreferences.h"
 #import "GeneralPreferences.h"
-//#import "HotKeyPreferences.h"
+#import "HotKeyPreferences.h"
 #import "AccountPreferences.h"
 
 @implementation AppPreferences
@@ -18,9 +18,9 @@
 	_nsBeginNSPSupport();			// MUST come before [super init]
 	self = [super init];
     
-	[self addPreferenceNamed: @"General" owner: [GeneralPreferences sharedInstance]];
-	[self addPreferenceNamed: @"Account" owner: [AccountPreferences sharedInstance]];
-	//[self addPreferenceNamed: @"HotKeys" owner: [HotKeyPreferences sharedInstance]];
+	[self addPreferenceNamed: NSLocalizedString( @"General",nil) owner: [GeneralPreferences sharedInstance]];
+	[self addPreferenceNamed: NSLocalizedString(@"Account",nil) owner: [AccountPreferences sharedInstance]];
+	[self addPreferenceNamed: NSLocalizedString(@"HotKeys",nil) owner: [HotKeyPreferences sharedInstance]];
 	 return self;
 }
 

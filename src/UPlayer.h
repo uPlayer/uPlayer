@@ -44,10 +44,6 @@ extern "C" {
     
     void collectInfo(PlayerDocument *d , PlayerEngine *e);
     
-    /// ~/Library/Application Support/uPlayer
-    NSString *ApplicationSupportDirectory();
-    
-    
 #if defined(__cplusplus)
 }
 #endif /* defined(__cplusplus) */

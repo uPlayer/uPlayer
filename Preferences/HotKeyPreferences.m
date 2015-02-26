@@ -7,8 +7,32 @@
 //
 
 #import "HotKeyPreferences.h"
+#import "LLHotKeyControl.h"
 
+@interface HotKeyPreferences ()
+@property (weak) IBOutlet LLHotKeyControl *btnPlayPause;
+@property (weak) IBOutlet LLHotKeyControl *btnNext;
+@property (weak) IBOutlet LLHotKeyControl *btnRandom;
+
+@end
 
 @implementation HotKeyPreferences
+- (BOOL)isResizable
+{
+    return NO;
+}
+
+- (IBAction)PlayPause:(id)sender
+{
+    
+}
+
+- (IBAction)Next:(id)sender
+{
+}
+
+- (IBAction)Random:(id)sender
+{
+}
 
 @end

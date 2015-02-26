@@ -8,7 +8,7 @@
 
 #import "PlayerSerialize.h"
 #import "serialize.h"
-#import "UPlayer.h"
+#import "ThreadJob.h"
 
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {

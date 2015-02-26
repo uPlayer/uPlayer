@@ -18,3 +18,7 @@
 "connect" = "连接";
 
 "disconnect" = "断开";
+
+"General" = "通用";
+"Account" = "账户";
+"HotKeys" = "热键";

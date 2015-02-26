@@ -10,6 +10,7 @@
 #import "UPlayer.h"
 #import "Last_fm_user.h"
 #import "Last_fm_api.h"
+#import "ThreadJob.h"
 
 @interface AccountPreferences ()
 @property (weak) IBOutlet NSButton *btnConnect;
@@ -90,21 +91,26 @@
         if ([alert runModal] == NSAlertFirstButtonReturn)
         {
             clearSession(* _user );
+            
+            [self updateUIUser: _user];
         }
+        
+        
     }
     else
     {
-        if (auth( *_user , true ) )
-        {
-        }
+        dojobInBkgnd(^{
+            if (auth( *_user , true ) )
+            {
+            }
+            
+        } , ^{
+            [self updateUIUser: _user];
+        });
+
     }
     
-    [self updateUIUser: _user];
-}
-
-- (IBAction)actionDisconnect:(id)sender
-{
-
+    
 }
 
 @end

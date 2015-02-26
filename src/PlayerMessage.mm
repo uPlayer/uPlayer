@@ -38,11 +38,20 @@ const char *arrEvent[] =
 };
 
 
+inline int getEventCount()
+{
+    return sizeof(arrEvent)/sizeof(arrEvent[1]);
+}
+
 NSString *eventIDtoString(EventID et)
 {
     return [NSString stringWithUTF8String: arrEvent[et]];
 }
 
+const char *eventID2String(EventID et)
+{
+    return arrEvent[et];
+}
 
 void addObserverForEvent(id observer , SEL sel, EventID et)
 {
@@ -73,5 +82,10 @@ void postEvent(EventID et , id object)
 //    NSLog(@"%@",a);
     
     [d postNotificationName: eventIDtoString(et) object:object];
-    
+}
+
+void postEventByString( NSString *strEvent , id object)
+{
+    NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
+    [d postNotificationName: strEvent object:object];
 }
