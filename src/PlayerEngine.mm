@@ -229,6 +229,9 @@
         next = [list getItem: indexNext ];
     
     playTrack(list,next);
+    
+    if( player().document.trackSongsWhenPlayStarted)
+        postEvent(EventID_to_reload_tracklist, nil);
 }
 
 -(void)playPause
@@ -268,8 +271,6 @@
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
     Float64 duration = CMTimeGetSeconds(asset.duration);
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
-    
-    // AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL: url];
     
     [_player replaceCurrentItemWithPlayerItem: item ];
     

@@ -102,34 +102,34 @@
     PlayerlList *ll = player().document.playerlList;
     PlayerTrack *track = [[ll getPlayList] getPlayItem];
     
-
-        BOOL stopped = [player().engine isStopped];
-        //BOOL playing = [player().engine isPlaying];
-        BOOL paused = [player().engine isPaused];
-        
-        if (stopped)
+    
+    BOOL stopped = [player().engine isStopped];
+    //BOOL playing = [player().engine isPlaying];
+    BOOL paused = [player().engine isPaused];
+    
+    if (stopped)
+    {
+        self.window.title = player().document.windowName;
+        self.progressSlider.enabled = false;
+    }
+    else
+    {
+        if (track)
         {
-            self.window.title = player().document.windowName;
-            self.progressSlider.enabled = false;
-        }
-        else
-        {
-            if (track)
+            NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
+            if ( paused )
             {
-                NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
-                if ( paused )
-                {
-                    self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
-                }
-                else
-                {
-                    self.window.title = title;
-                }
+                self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
             }
-            
-            self.progressSlider.enabled = true;
+            else
+            {
+                self.window.title = title;
+            }
         }
         
+        self.progressSlider.enabled = true;
+    }
+    
 }
 
 

@@ -128,6 +128,8 @@
     postEvent(EventID_to_show_playlist, nil);
 }
 
+#pragma mark -
+
 -(void)hotKeyTriggered:(LLHotKey*)hotKey
 {
     NSUInteger m = hotKey.modifierFlags;
@@ -179,17 +181,19 @@
     
     
     //
-    
     addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
     
-    
-    LLHotKey *hotKey = [LLHotKey hotKeyWithKeyCode:kVK_ANSI_R modifierFlags:NSCommandKeyMask];
-    [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
-    
+    // register hotkeys from cache file.
     verifyLoadFileShortcutKey();
     
+    NSArray *hotKeys = localHotKeysLoaded();
+    
+    for (LLHotKey *hotKey in hotKeys) {
+        [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
+    }
+    
+    
 }
-
 
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

@@ -101,7 +101,6 @@ void playTrack(PlayerList *list,PlayerTrack *track)
         [player().engine playTrackInfo:track.info pauseAfterInit: FALSE ];
     }
     
-    
 }
 
 void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track)

@@ -41,8 +41,3 @@
 
 -(PlayerList*)newPlayerList;
 @end
-
-
-
-
-
