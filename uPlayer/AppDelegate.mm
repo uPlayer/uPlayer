@@ -228,11 +228,11 @@
     {
         TrackInfo *info = [[player().document.playerlList getPlayList] getPlayItem].info;
         
-       
-        string artist(info.artist.UTF8String);
-        string track(info.title.UTF8String);
-        track_updateNowPlaying(user->sessionKey, artist, track);
-        
+        dojobInBkgnd(^{
+            string artist(info.artist.UTF8String);
+            string track(info.title.UTF8String);
+            track_updateNowPlaying(user->sessionKey, artist, track);
+        }, nil);
         
         // scrobble a song when played half time of above 40 seconds.
         ProgressInfo *progress= n.object;
