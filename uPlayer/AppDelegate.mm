@@ -194,7 +194,7 @@
     // register hotkeys from cache file.
     verifyLoadFileShortcutKey();
     
-    NSArray *hotKeys = localHotKeysLoaded();
+    NSArray *hotKeys = globalHotKeysLoaded();
     
     for (LLHotKey *hotKey in hotKeys) {
         [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];

@@ -20,5 +20,4 @@ std::string msgKeytoString(bool ctrl, bool super, bool shift, bool alt, unsigned
 std::string msgKeytoString(bool ctrl, unsigned int vk);
 
 /// LLHotKey
-NSArray * localHotKeysLoaded();
 NSArray * globalHotKeysLoaded();

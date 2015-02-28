@@ -272,8 +272,6 @@ CGKeyCode keyCodeFormKeyString(NSString *keyString)
 
 
 Json::Value root;
-Json::Value rootLocal ;
-Json::Value rootGlobal ;
 
 
 NSString *filepath = nil;
@@ -300,8 +298,6 @@ bool verifyLoadFileShortcutKey()
 			std::istream is(&fb);
 			reader.parse(is, root);
 
-			rootLocal = root["local"];
-			rootGlobal = root["Global"];
 
 			fb.close();
 		}
@@ -348,10 +344,9 @@ bool shortcutKeyPressed(string shortcutKey, bool bGlobal)
 
 
 	Json::Value value;
-	if (bGlobal)
-		value = rootGlobal[shortcutKey];
-	else
-		value = rootLocal[shortcutKey];
+
+    value = root[shortcutKey];
+
 
 	if (!value.isNull())
 	{
@@ -432,12 +427,8 @@ NSArray* hotKeysLoaded(Json::Value &_root)
     return nil;
 }
 
-NSArray* localHotKeysLoaded()
-{
-    return hotKeysLoaded(rootLocal);
-}
 
 NSArray* globalHotKeysLoaded()
 {
-    return hotKeysLoaded(rootGlobal);
+    return hotKeysLoaded(root);
 }
