@@ -26,6 +26,9 @@
                                                 <action selector="showPreferences:" target="Voe-Tx-rLC" id="MLN-YL-cIT"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Key Blindings" id="6Of-OG-Yan">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -212,8 +215,7 @@
                                         <menuItem title="Show PlayList" id="erA-OL-DYs">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="cmdShowPlayList:" target="Voe-Tx-rLC" id="89h-I4-xY4"/>
-                                                <segue destination="Qif-73-RE2" kind="show" id="R4p-LB-EyP"/>
+                                                <segue destination="Qif-73-RE2" kind="show" identifier="ShowPlayListViewerSegue" id="R4p-LB-EyP"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Go to current song" tag="1" keyEquivalent="l" id="8Op-6c-njz">
@@ -316,7 +318,7 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="kwZ-C4-vB6"/>
             </objects>
-            <point key="canvasLocation" x="142.5" y="-422"/>
+            <point key="canvasLocation" x="-289.5" y="-612"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -425,7 +427,7 @@
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
             <objects>
-                <viewController title="PlayList Viewer" id="Qif-73-RE2" customClass="PlaylistViewController" sceneMemberID="viewController">
+                <viewController title="PlayList Viewer" storyboardIdentifier="PlaylistViewController" id="Qif-73-RE2" customClass="PlaylistViewController" sceneMemberID="viewController">
                     <view key="view" id="QTd-9G-JUC">
                         <rect key="frame" x="0.0" y="0.0" width="463" height="304"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -456,7 +458,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="a50-0L-eBb">
-                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="115.56548164592736" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
@@ -474,7 +476,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="playlistColumnName" width="339" minWidth="40" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="playlistColumnName" width="338.74232079777369" minWidth="40" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -488,7 +490,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="120" y="1" width="339" height="17"/>
+                                                            <rect key="frame" x="119.56548164592736" y="1" width="338.11678803861304" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
@@ -515,11 +517,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZMn-x1-68y">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.5" horizontal="YES" id="ZMn-x1-68y">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="HeK-Oj-WBQ">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.0138043022960422" horizontal="NO" id="HeK-Oj-WBQ">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -571,7 +573,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="-179.5" y="-139"/>
+            <point key="canvasLocation" x="-325.5" y="-149"/>
         </scene>
         <!--Tracklist Viewer-->
         <scene sceneID="hIz-AP-VOD">

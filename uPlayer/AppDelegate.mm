@@ -19,7 +19,7 @@
 
 #import "shortcutKey.h"
 #import "ThreadJob.h"
-
+#import "PlaylistViewController.h"
 
 
 @interface AppDelegate ()
@@ -130,6 +130,8 @@
 
 #pragma mark -
 
+
+
 -(void)hotKeyTriggered:(LLHotKey*)hotKey
 {
     NSUInteger m = hotKey.modifierFlags;
@@ -191,7 +193,6 @@
     for (LLHotKey *hotKey in hotKeys) {
         [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
     }
-    
     
 }
 

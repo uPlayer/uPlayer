@@ -10,8 +10,8 @@
 #import "TracklistViewController.h"
 #import "UPlayer.h"
 #import "PlayerMessage.h"
-
 #import "AppDelegate.h"
+#import "PlaylistViewController.h"
 
 #define uPlayerWinPos @"uPlayerWinPos"
 
@@ -47,8 +47,20 @@
     addObserverForEvent(self, @selector(updateProgressInfo:), EventID_track_progress_changed);
     
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
+    
+    addObserverForEvent(self, @selector(showPlaylistManager), EventID_to_show_playlist);
+    
 }
 
+-(void)showPlaylistManager
+{
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    PlaylistViewController *plc = [storyboard instantiateControllerWithIdentifier:@"PlaylistViewController"];
+    
+    NSWindow *w = [NSWindow windowWithContentViewController:plc];
+    
+    [self.window addChildWindow:w ordered:NSWindowAbove];
+}
 
 - (IBAction)actionOrderChanged:(id)sender
 {

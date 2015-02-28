@@ -43,6 +43,7 @@ typedef enum
 /// @see EventID_to_reload_tracklist
 -(void)reloadTrackList:(NSNotification*)n
 {
+    
     [self.tableView becomeFirstResponder];
     
     // quit search mode.

@@ -26,11 +26,9 @@
     
     
 //    addObserverForEvent(self, @selector(showPlayList), EventID_to_show_playlist);
-    
+//    NSStoryboardShowSegueTemplate *s;
     self.playerlList = player().document.playerlList;
 }
-
-
 
 
 -(void)reloadTrackList

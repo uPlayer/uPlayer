@@ -520,14 +520,14 @@ NSArray* hotKeysLoaded(Json::Value &_root)
 
             keycode = keyCodeFormKeyString( [NSString stringWithFormat:@"%c",l] );
             
-            NSLog(@"%c",l);
-            NSLog(@"%s", ((__bridge NSString*)createStringForKey(keycode)).UTF8String );
+//            NSLog(@"%c",l);
+//            NSLog(@"%s", ((__bridge NSString*)createStringForKey(keycode)).UTF8String );
             
             LLHotKey *hotkey=[LLHotKey hotKeyWithKeyCode:keycode modifierFlags:modifierFlags];
             [hotkeyArr addObject:hotkey];
         }
         
-        NSLog(@"%@",hotkeyArr);
+//        NSLog(@"%@",hotkeyArr);
         return hotkeyArr;
     }
     
