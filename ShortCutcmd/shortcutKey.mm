@@ -363,110 +363,9 @@ bool shortcutKeyPressed(string shortcutKey, bool bGlobal)
 	return false;
 }
 
-/* Returns string representation of key, if it is printable.
- * Ownership follows the Create Rule; that is, it is the caller's
- * responsibility to release the returned object. */
-CFStringRef createStringForKey(CGKeyCode keyCode)
-{
-    TISInputSourceRef currentKeyboard = TISCopyCurrentKeyboardInputSource();
-    CFDataRef layoutData =
-    (CFDataRef)TISGetInputSourceProperty(currentKeyboard,
-                              kTISPropertyUnicodeKeyLayoutData);
-    const UCKeyboardLayout *keyboardLayout =
-    (const UCKeyboardLayout *)CFDataGetBytePtr(layoutData);
-    
-    UInt32 keysDown = 0;
-    UniChar chars[4];
-    UniCharCount realLength;
-    
-    UCKeyTranslate(keyboardLayout,
-                   keyCode,
-                   kUCKeyActionDisplay,
-                   0,
-                   LMGetKbdType(),
-                   kUCKeyTranslateNoDeadKeysBit,
-                   &keysDown,
-                   sizeof(chars) / sizeof(chars[0]),
-                   &realLength,
-                   chars);
-    CFRelease(currentKeyboard);
-    
-    return CFStringCreateWithCharacters(kCFAllocatorDefault, chars, 1);
-}
-
-
-/* Returns key code for given character via the above function, or UINT16_MAX
- * on error. */
-
-//CGKeyCode keyCodeForChar(const char c)
-//{
-//    static CFMutableDictionaryRef charToCodeDict = NULL;
-//    CGKeyCode code;
-//    UniChar character = c;
-//    CFStringRef charStr = NULL;
-//    
-//    /* Generate table of keycodes and characters. */
-//    if (charToCodeDict == NULL) {
-//        size_t i;
-//        charToCodeDict = CFDictionaryCreateMutable(kCFAllocatorDefault,
-//                                                   128,
-//                                                   &kCFCopyStringDictionaryKeyCallBacks,
-//                                                   NULL);
-//        if (charToCodeDict == NULL) return UINT16_MAX;
-//        
-//        /* Loop through every keycode (0 - 127) to find its current mapping. */
-//        for (i = 0; i < 128; ++i) {
-//            CFStringRef string = createStringForKey((CGKeyCode)i);
-//            if (string != NULL) {
-//                CFDictionaryAddValue(charToCodeDict, string, (const void *)i);
-//                CFRelease(string);
-//            }
-//        }
-//    }
-//    
-//    charStr = CFStringCreateWithCharacters(kCFAllocatorDefault, &character, 1);
-//    
-//    /* Our values may be NULL (0), so we need to use this function. */
-//    if (!CFDictionaryGetValueIfPresent(charToCodeDict, charStr,
-//                                       (const void **)&code)) {
-//        code = UINT16_MAX;
-//    }
-//    
-//    CFRelease(charStr);
-//    return code;
-//}
-
 ///super: windows key or apple key
 string msgKeytoString(bool ctrl, bool super, bool shift, bool alt, unsigned int vk)
 {
-
-    
-	const int vkmapLen = 254;
-	static const char *vkstrmap[vkmapLen];
-	static bool vkStrMapInit = false;
-	if (vkStrMapInit == false)
-	{
-		vkStrMapInit = true;
-
-		vkstrmap[kVK_F1] = "f1";
-		vkstrmap[kVK_F2] = "f2";
-		vkstrmap[kVK_F3] = "f3";
-		vkstrmap[kVK_F4] = "f4";
-		vkstrmap[kVK_F5] = "f5";
-		vkstrmap[kVK_F6] = "f6";
-		vkstrmap[kVK_F7] = "f7";
-		vkstrmap[kVK_F8] = "f8";
-		vkstrmap[kVK_F9] = "f9";
-		vkstrmap[kVK_F10] = "f10";
-		vkstrmap[kVK_F11] = "f11";
-		vkstrmap[kVK_F12] = "f12";
-
-//		vkstrmap[kVK_OEM_PLUS] = "+";
-//		vkstrmap[kVK_OEM_COMMA] = ",";
-//		vkstrmap[kVK_OEM_MINUS] = "-";
-//		vkstrmap[kVK_OEM_PERIOD] = ".";
-	}
-
 	string r;
 	if (ctrl)
 		r += ("ctrl+");
@@ -477,7 +376,8 @@ string msgKeytoString(bool ctrl, bool super, bool shift, bool alt, unsigned int 
 	if (alt)
 		r += ("alt+");
 
-    NSString *key = (__bridge NSString *) createStringForKey( vk );
+    NSString *key = keyStringFormKeyCode(vk);
+    
     r += key.UTF8String;
 
 	return r;
@@ -521,14 +421,11 @@ NSArray* hotKeysLoaded(Json::Value &_root)
 
             keycode = keyCodeFormKeyString( [NSString stringWithFormat:@"%c",l] );
             
-//            NSLog(@"%c",l);
-//            NSLog(@"%s", ((__bridge NSString*)createStringForKey(keycode)).UTF8String );
             
             LLHotKey *hotkey=[LLHotKey hotKeyWithKeyCode:keycode modifierFlags:modifierFlags];
             [hotkeyArr addObject:hotkey];
         }
-        
-//        NSLog(@"%@",hotkeyArr);
+
         return hotkeyArr;
     }
     

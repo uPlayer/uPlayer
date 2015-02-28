@@ -188,7 +188,7 @@
                                 <menu key="submenu" title="Control" id="MZE-Pa-qt8">
                                     <items>
                                         <menuItem title="Play" keyEquivalent=" " id="2hd-wS-naf">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                             <connections>
                                                 <action selector="cmdPlayPause:" target="Voe-Tx-rLC" id="Yhj-Jh-wUo"/>
                                             </connections>
@@ -461,7 +461,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="a50-0L-eBb">
-                                                            <rect key="frame" x="1" y="1" width="115.56548164592736" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
@@ -493,7 +493,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="119.56548164592736" y="1" width="338.11678803861304" height="17"/>
+                                                            <rect key="frame" x="120" y="1" width="338" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">

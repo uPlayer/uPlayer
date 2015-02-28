@@ -22,6 +22,7 @@
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
+		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
 		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */; };
 		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
@@ -80,6 +81,19 @@
 			remoteInfo = LLHotKeyRecorder;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1E89285B1AA1B05600CF0634 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E04435D1A7B747A00B644D8 /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
@@ -422,6 +436,7 @@
 				1EDE8F9E1A773D810086677B /* Sources */,
 				1EDE8F9F1A773D810086677B /* Frameworks */,
 				1EDE8FA01A773D810086677B /* Resources */,
+				1E89285B1AA1B05600CF0634 /* CopyFiles */,
 			);
 			buildRules = (
 			);
