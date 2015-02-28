@@ -28,6 +28,9 @@
                                         </menuItem>
                                         <menuItem title="Key Blindings" id="6Of-OG-Yan">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdOpenKeyBlindings:" target="Voe-Tx-rLC" id="dHe-Q7-t87"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">

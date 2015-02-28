@@ -7,6 +7,7 @@
 
 #import "ThreadJob.h"
 #import "PlayerMessage.h"
+#import "PlayerTypeDefines.h"
 
 using namespace std;
 
@@ -287,7 +288,7 @@ bool verifyLoadFileShortcutKey()
 	{
 		loaded = true;
 	
-		filepath = [ApplicationSupportDirectory() stringByAppendingPathComponent:@"keymaps.json"];
+		filepath = [ApplicationSupportDirectory() stringByAppendingPathComponent: keyblindingFileName ];
 
 
 		Json::Reader reader;

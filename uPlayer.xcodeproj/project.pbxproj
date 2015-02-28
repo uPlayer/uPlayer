@@ -201,9 +201,9 @@
 		1E0B2BEC1A77536800B4FE14 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
 				1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */,
 				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
-				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
 				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
 				1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */,
 				1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */,

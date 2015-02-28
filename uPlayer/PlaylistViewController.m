@@ -133,7 +133,8 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    //printf("key pressed: %s\n", [[theEvent description] cString]);
+    NSLog(@"%@",self);
+    printf("key pressed: %s\n", [[theEvent description] cString]);
     
     if (theEvent.characters ) {
         

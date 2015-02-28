@@ -39,3 +39,7 @@ struct PlayStateTime
     CGFloat volume;
 };
 
+#define docFileName  @"core.cfg"
+#define layoutFileName  @"ui.cfg"
+#define keyblindingFileName @"keymaps.json"
+

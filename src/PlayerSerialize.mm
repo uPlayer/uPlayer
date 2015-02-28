@@ -9,6 +9,7 @@
 #import "PlayerSerialize.h"
 #import "serialize.h"
 #import "ThreadJob.h"
+#import "PlayerTypeDefines.h"
 
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {
@@ -24,8 +25,7 @@ FILE& operator>>(FILE& f,NSTimeInterval& t)
 
 #pragma mark -
 
-#define docFileName  @"core.cfg"
-#define layoutFileName  @"ui.cfg"
+
 
 
 void saveTrackInfo(FILE &file , TrackInfo *info)

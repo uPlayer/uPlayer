@@ -20,7 +20,7 @@
 #import "shortcutKey.h"
 #import "ThreadJob.h"
 #import "PlaylistViewController.h"
-
+#import "PlayerTypeDefines.h"
 
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
@@ -42,6 +42,12 @@
 
 - (IBAction)cmdStop:(id)sender {
         postEvent(EventID_to_stop, nil);
+}
+
+- (IBAction)cmdOpenKeyBlindings:(id)sender
+{
+    NSArray *urlArr = [NSArray arrayWithObject: [NSURL fileURLWithPath:  [ApplicationSupportDirectory() stringByAppendingPathComponent: keyblindingFileName ]] ];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs: urlArr ];
 }
 
 - (IBAction)cmdPlayPause:(id)sender {
