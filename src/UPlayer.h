@@ -38,7 +38,7 @@ extern "C" {
     
     UPlayer *player(); // the global and only instance.
 
-    void playTrack(PlayerList *list,PlayerTrack *track);
+    void playTrack(PlayerTrack *track);
     
     void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track);
     

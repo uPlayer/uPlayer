@@ -36,7 +36,7 @@
     if (doc.resumeAtReboot && doc.playState != playstate_stopped )
     {
         if ( doc.playState == playstate_playing )
-            playTrack( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
+            playTrack( [[doc.playerlList getPlayList] getPlayItem]);
         else
             playTrackPauseAfterInit( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
         
@@ -117,46 +117,59 @@
 {
     PlayerDocument *d = player().document;
     
+    PlayerQueue *queue = d.playerQueue;
+    
     PlayerList *list = [d.playerlList getPlayList];
-    PlayerTrack *track = [list getPlayItem];
+    PlayerTrack *track;
     
-    assert(list);
-    
-    int index = track.index;
-    int count = (int)[list count];
-    int indexNext =-1;
-    PlayOrder order = (PlayOrder)d.playOrder;
-    
-    if (order == playorder_single) {
-        [self stop];
-    }
-    else if (order == playorder_default)
+    if ((track = [queue pop] ))
     {
-        indexNext = index +1;
-    }
-    else if(order == playorder_random)
-    {
-        static int s=0;
-        if(s++==0)
-            srand((uint )time(NULL));
         
-        indexNext =rand() % (count) - 1;
-    }else if(order == playorder_repeat_single)
+    }
+    else
     {
-        indexNext = index;
-    }else if(order == playorder_repeat_list)
-    {
-        indexNext = index + 1;
-        if (indexNext == count - 1)
-            indexNext = 0;
+        track = [list getPlayItem];
+        
+        assert(list);
+        
+        int index = track.index;
+        int count = (int)[list count];
+        int indexNext =-1;
+        PlayOrder order = (PlayOrder)d.playOrder;
+        
+        if (order == playorder_single) {
+            [self stop];
+        }
+        else if (order == playorder_default)
+        {
+            indexNext = index +1;
+        }
+        else if(order == playorder_random)
+        {
+            static int s=0;
+            if(s++==0)
+                srand((uint )time(NULL));
+            
+            indexNext =rand() % (count) - 1;
+        }else if(order == playorder_repeat_single)
+        {
+            indexNext = index;
+        }else if(order == playorder_repeat_list)
+        {
+            indexNext = index + 1;
+            if (indexNext == count - 1)
+                indexNext = 0;
+        }
+        
+        PlayerTrack* next = nil;
+        
+        if ( indexNext > 0 && indexNext < [list count] )
+            next = [list getItem: indexNext ];
+        
+        track = next;
     }
     
-    PlayerTrack* next = nil;
-    
-    if ( indexNext > 0 && indexNext < [list count] )
-        next = [list getItem: indexNext ];
- 
-    playTrack(list,next);
+    playTrack(track);
     
 }
 
@@ -228,7 +241,7 @@
     if ( indexNext > 0 && indexNext < [list count] )
         next = [list getItem: indexNext ];
     
-    playTrack(list,next);
+    playTrack(next);
     
     if( player().document.trackSongsWhenPlayStarted)
         postEvent(EventID_to_reload_tracklist, nil);

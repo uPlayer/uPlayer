@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PlayerList.h"
+#import "PlayerQueue.h"
 
 @interface PlayerDocument : NSObject
 
@@ -22,6 +23,7 @@
 @property (nonatomic) int lastFmEnabled;
 @property (nonatomic) NSTimeInterval playTime;
 
+@property (nonatomic,strong) PlayerQueue *playerQueue;
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 

@@ -90,8 +90,10 @@ NSArray* enumAudioFiles(NSString* path)
 @end
 
 
-void playTrack(PlayerList *list,PlayerTrack *track)
+void playTrack(PlayerTrack *track)
 {
+    PlayerList *list = track.list;
+    
     if (track)
     {
         PlayerlList *llist = player().document.playerlList;

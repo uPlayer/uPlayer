@@ -182,7 +182,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     *file >> count;
     NSMutableArray *arr = [NSMutableArray array];
     while (count-- > 0) {
-        PlayerTrack *track = [[PlayerTrack alloc]init];
+        PlayerTrack *track = [[PlayerTrack alloc]init:self];
         [track loadFrom:file];
         [arr addObject:track];
     }

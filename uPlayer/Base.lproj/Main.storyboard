@@ -524,7 +524,7 @@
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.0138043022960422" horizontal="NO" id="HeK-Oj-WBQ">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="HeK-Oj-WBQ">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -598,6 +598,9 @@
                         </menuItem>
                         <menuItem title="Add to play queue" id="CGf-NP-DLA">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdAddToPlayQueue:" target="XfG-lQ-9wD" id="U6D-Tj-r7i"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="bz6-mc-lgT"/>
                         <menuItem title="Show in Finder" id="WHJ-kh-lq3">

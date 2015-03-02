@@ -23,6 +23,7 @@
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
 		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */; };
 		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
@@ -127,6 +128,8 @@
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
 		1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerSerialize.mm; sourceTree = "<group>"; };
 		1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerialize.h; sourceTree = "<group>"; };
+		1E8F702F1AA4707F0012402E /* PlayerQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerQueue.h; sourceTree = "<group>"; };
+		1E8F70311AA470950012402E /* PlayerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerQueue.m; sourceTree = "<group>"; };
 		1E8FF13A1AA084A900EA0A89 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
 		1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccountPreferences.mm; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
+				1E8F702F1AA4707F0012402E /* PlayerQueue.h */,
+				1E8F70311AA470950012402E /* PlayerQueue.m */,
 				1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */,
 				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
 				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
@@ -542,6 +547,7 @@
 				1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */,
 				1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */,
 				1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */,
+				1E8F70321AA470950012402E /* PlayerQueue.m in Sources */,
 				1EDE8FAB1A773D810086677B /* main.m in Sources */,
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,

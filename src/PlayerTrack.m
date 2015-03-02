@@ -49,6 +49,13 @@ static int guuid = 0;
 
 @implementation PlayerTrack
 
-
+-(instancetype)init:(PlayerList*)list
+{
+    self =[ super init];
+    if (self) {
+        self.list=list;
+    }
+    return self;
+}
 
 @end

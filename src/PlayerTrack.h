@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+@class PlayerList;
 
 @interface TrackInfo: NSObject
 @property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
@@ -26,7 +26,9 @@
 ///
 //
 /// value not need to searialize.
+@property (nonatomic,weak) PlayerList *list;
 
+-(instancetype)init:(PlayerList*)list;
 @end
 
 

@@ -19,6 +19,24 @@ typedef enum
    displayMode_tracklist_search,
 } displayMode;
 
+@interface NSTableView (rc)
+/// select item at right click.
+-(NSMenu *)menuForEvent:(NSEvent *)event;
+@end
+
+@implementation NSTableView (rc)
+-(NSMenu *)menuForEvent:(NSEvent *)event
+{
+    // what row are we at?
+    NSInteger row = [self rowAtPoint: [self convertPoint: [event
+                                                     locationInWindow] fromView: nil]];
+    if (row != -1) {
+        [self selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
+    }
+    return [super menu]; // use what we've got
+}
+@end
+
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
@@ -239,7 +257,7 @@ typedef enum
             [list setSelectIndex:row];
         }
 
-        playTrack(list, track);
+        playTrack(track);
     }
  
 }
@@ -247,6 +265,8 @@ typedef enum
 -(void)doubleClicked
 {
     //postEvent(EventID_to_play_selected_track, nil);
+    
+    [player().document.playerQueue clear];
     
     [self playSelctedTrack];
 }
@@ -348,6 +368,18 @@ typedef enum
         
         [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs: urlArr ];
     }
+}
+
+- (IBAction)cmdAddToPlayQueue:(id)sender
+{
+    auto i = self.tableView.selectedRow;
+    if (i > 0)
+    {
+        PlayerTrack *track = [self getSelectedItem: i ];
+        
+        [player().document.playerQueue push:track];
+    }
+    
 }
 
 @end

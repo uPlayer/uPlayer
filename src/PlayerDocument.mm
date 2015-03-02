@@ -32,6 +32,7 @@
         self.trackSongsWhenPlayStarted = TRUE;
         self.lastFmEnabled =FALSE;
         self.volume = 1.0;
+        self.playerQueue=[[PlayerQueue alloc]init];
     }
     
     return self;
