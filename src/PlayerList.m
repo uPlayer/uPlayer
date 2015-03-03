@@ -80,7 +80,7 @@
         
         NSMutableArray *arr = [NSMutableArray array];
         for (TrackInfo *info in items) {
-            PlayerTrack *track = [[PlayerTrack alloc]init];
+            PlayerTrack *track = [[PlayerTrack alloc]init:self];
             track.info=info;
             track.index=index;
             [arr addObject:track];

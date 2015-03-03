@@ -67,6 +67,7 @@
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
        
         addObserverForEvent(self, @selector(stop), EventID_to_stop);
+        
         addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
         
         addObserverForEvent(self, @selector(playRandom), EventID_to_play_random);

@@ -49,6 +49,12 @@ static int guuid = 0;
 
 @implementation PlayerTrack
 
+-(instancetype)init
+{
+    NSAssert(false, nil);
+    return nil;
+}
+
 -(instancetype)init:(PlayerList*)list
 {
     self =[ super init];
