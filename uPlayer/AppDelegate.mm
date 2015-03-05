@@ -149,6 +149,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
+    
+    addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
+    
     PlayerDocument *d = player().document;
     
     if( [d load] )
@@ -190,8 +194,6 @@
     }
     
     
-    //
-    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
     
     // register hotkeys from cache file.
     verifyLoadFileShortcutKey();
@@ -218,17 +220,55 @@
     NSArray *array;
     if ([[NSBundle mainBundle]  loadNibNamed:@"StatusMenu" owner:self topLevelObjects:&array] )
     {
-        NSMenu *menu = array.firstObject;
-        
-        NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
-        
-        [_statusItem setMenu: menu];
+        for (id arrItem in array)
+        {
+            if ([arrItem isKindOfClass:[NSMenu class]])
+            {
+                NSMenu *menu = arrItem;
+                NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
+                [_statusItem setMenu: menu];
+                break;
+            }
+        }
     }
-    
     
     
 }
 
+
+-(void)track_state_changed
+{
+    PlayerlList *ll = player().document.playerlList;
+    PlayerTrack *track = [[ll getPlayList] getPlayItem];
+    
+    
+    BOOL stopped = [player().engine isStopped];
+    //BOOL playing = [player().engine isPlaying];
+    BOOL paused = [player().engine isPaused];
+    
+    if (stopped)
+    {
+    }
+    else
+    {
+        if (track)
+        {
+            NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
+            NSString *wTitle;
+            if ( paused )
+            {
+                wTitle = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
+            }
+            else
+            {
+                wTitle = title;
+            }
+            
+            [[_statusItem.menu itemAtIndex:0] setTitle:wTitle];
+            
+        }
+    }
+}
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {

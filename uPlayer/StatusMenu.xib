@@ -9,14 +9,17 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="o3K-xN-Dd4">
             <items>
-                <menuItem title="Play/Pause" id="HAF-10-dUa" userLabel="Play">
+                <menuItem id="ysd-uG-fMq">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="jeg-VW-wuD"/>
+                <menuItem title="Play/Pause" keyEquivalent=" " id="HAF-10-dUa" userLabel="Play">
+                    <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                     <connections>
                         <action selector="cmdPlayPause:" target="-2" id="idU-tn-XMz"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Next" id="zRD-Z2-fak">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="Next" keyEquivalent="n" id="zRD-Z2-fak">
                     <connections>
                         <action selector="cmdNext:" target="-2" id="KRR-wg-dfF"/>
                     </connections>
@@ -29,8 +32,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="M9L-oc-J6c"/>
-                <menuItem title="Random" id="DfF-kB-LZJ">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="Random" keyEquivalent="d" id="DfF-kB-LZJ">
                     <connections>
                         <action selector="cmdRandom:" target="-2" id="gAa-y9-fLO"/>
                     </connections>

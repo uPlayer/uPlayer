@@ -129,16 +129,19 @@
         if (track)
         {
             NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
+            NSString *wTitle;
             if ( paused )
             {
-                self.window.title = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
+                wTitle = [title stringByAppendingFormat:@"  (%@)", NSLocalizedString(@"Paused" ,nil) ];
             }
             else
             {
-                self.window.title = title;
+                wTitle = title;
             }
+            
+            self.window.title = wTitle;
+            
         }
-        
         self.progressSlider.enabled = true;
     }
     
