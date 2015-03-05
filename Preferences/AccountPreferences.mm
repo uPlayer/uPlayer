@@ -58,7 +58,7 @@
     
 }
 
-- (BOOL)isResizable
+-(BOOL)isResizable
 {
 	return NO;
 }

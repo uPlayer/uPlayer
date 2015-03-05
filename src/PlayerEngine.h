@@ -55,4 +55,3 @@
 @property (nonatomic) double current,
 total;
 @end
-

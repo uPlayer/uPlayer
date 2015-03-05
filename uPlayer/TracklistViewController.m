@@ -347,7 +347,7 @@ typedef enum
 - (void)keyDown:(NSEvent *)theEvent
 {
     NSLog(@"%@",self);
-    printf("key pressed: %s\n", [[theEvent description] cString]);
+//    printf("key pressed: %s\n", [[theEvent description] cString]);
     
     if (theEvent.characters ) {
         
@@ -372,7 +372,7 @@ typedef enum
 
 - (IBAction)cmdAddToPlayQueue:(id)sender
 {
-    auto i = self.tableView.selectedRow;
+    NSInteger i = self.tableView.selectedRow;
     if (i > 0)
     {
         PlayerTrack *track = [self getSelectedItem: i ];

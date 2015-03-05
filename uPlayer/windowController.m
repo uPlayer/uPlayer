@@ -175,7 +175,7 @@
 -(void)keyDown:(NSEvent *)theEvent
 {
     NSLog(@"%@",self);
-    printf("key pressed: %s\n", [[theEvent description] cString]);
+//    printf("key pressed: %s\n", [[theEvent description] cString]);
 }
 
 

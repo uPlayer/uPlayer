@@ -56,10 +56,3 @@ UPlayer *player()
 {
     return _player?_player:(_player=[[UPlayer alloc]init]);
 }
-
-
-
-
-
-
-

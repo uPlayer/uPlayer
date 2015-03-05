@@ -8,11 +8,12 @@
 
 #import "AppDelegate.h"
 #import "UPlayer.h"
+#import "PlayerTypeDefines.h"
 #import "PlayerMessage.h"
 #import "PlayerSerialize.h"
 #import "AppPreferences.h"
-#include "Last_fm_user.h"
-#include "Last_fm_api.h"
+#import "Last_fm_user.h"
+#import "Last_fm_api.h"
 #import <LLHotKey.h>
 #import <LLHotKeyCenter.h>
 #import <Carbon/Carbon.h>
@@ -20,10 +21,10 @@
 #import "shortcutKey.h"
 #import "ThreadJob.h"
 #import "PlaylistViewController.h"
-#import "PlayerTypeDefines.h"
 
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
+
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
 
 @property (nonatomic,strong) NSStatusItem *statusItem;

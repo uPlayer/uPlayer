@@ -42,4 +42,3 @@ struct PlayStateTime
 #define docFileName  @"core.cfg"
 #define layoutFileName  @"ui.cfg"
 #define keyblindingFileName @"keymaps.json"
-
