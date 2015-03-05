@@ -149,62 +149,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
-    
-    addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
-    
-    PlayerDocument *d = player().document;
-    
-    if( [d load] )
-    {
-        postEvent(EventID_to_reload_tracklist, nil);
-    }
-    
-    postEvent(EventID_player_document_loaded, nil);
-    
-    player().engine.volume = player().document.volume;
-    
-    self.menuOpenDirectory.enabled = [d.playerlList count]>0;
-    
-    if( [player().engine isPlaying] )
-        self.menuPlayOrPause.title =NSLocalizedString(@"Pause" ,nil);
-    else
-        self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
-    
-    // add ~/music to a default playerlist, if is none.
-    if ([d.playerlList count] == 0)
-    {
-        NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
-        
-        NSString *userMusic = arr.firstObject;
-        
-        [self cmdNewPlayerList:nil];
-        
-        PlayerList *list = [d.playerlList getSelectedList];
-        
-        dojobInBkgnd(
-                     ^{
-                         [list  addTrackInfoItems: enumAudioFiles( userMusic )];
-                     } ,
-                     ^{
-                         postEvent(EventID_to_reload_tracklist, list);
-                     });
-        
-        
-    }
-    
-    
-    
-    // register hotkeys from cache file.
-    verifyLoadFileShortcutKey();
-    
-    NSArray *hotKeys = globalHotKeysLoaded();
-    
-    for (LLHotKey *hotKey in hotKeys) {
-        [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
-    }
-    
-    
     // set up status bar
     
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
@@ -231,6 +175,69 @@
             }
         }
     }
+    
+    // add observers
+    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
+    
+    addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
+    
+    // locad config files.
+    PlayerDocument *d = player().document;
+    
+    if( [d load] )
+    {
+        postEvent(EventID_to_reload_tracklist, nil);
+    }
+    
+    postEvent(EventID_player_document_loaded, nil);
+    
+    player().engine.volume = player().document.volume;
+    
+    self.menuOpenDirectory.enabled = [d.playerlList count]>0;
+    
+    if( [player().engine isPlaying] )
+        self.menuPlayOrPause.title =NSLocalizedString(@"Pause" ,nil);
+    else
+        self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
+    
+    
+    // register hotkeys from cache file.
+    verifyLoadFileShortcutKey();
+    
+    NSArray *hotKeys = globalHotKeysLoaded();
+    
+    for (LLHotKey *hotKey in hotKeys) {
+        [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
+    }
+    
+    // add ~/music to a default playerlist, if is none.
+    if ([d.playerlList count] == 0)
+    {
+        NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
+        
+        NSString *userMusic = arr.firstObject;
+        
+        [self cmdNewPlayerList:nil];
+        
+        PlayerList *list = [d.playerlList getSelectedList];
+        
+        dojobInBkgnd(
+                     ^{
+                         [list  addTrackInfoItems: enumAudioFiles( userMusic )];
+                     } ,
+                     ^{
+                         postEvent(EventID_to_reload_tracklist, list);
+                     });
+        
+        
+    }
+    
+    
+    
+
+    
+    
+
     
     
 }
