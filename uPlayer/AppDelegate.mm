@@ -25,6 +25,8 @@
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
+
+@property (nonatomic,strong) NSStatusItem *statusItem;
 @end
 
 
@@ -199,6 +201,31 @@
     for (LLHotKey *hotKey in hotKeys) {
         [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
     }
+    
+    
+    // set up status bar
+    
+    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    
+    _statusItem.title = @"";
+    
+    _statusItem.image = [NSImage imageNamed:@"player"];
+    
+    _statusItem.alternateImage = [NSImage imageNamed:@"player"];
+    
+    _statusItem.highlightMode = YES;
+    
+    NSArray *array;
+    if ([[NSBundle mainBundle]  loadNibNamed:@"StatusMenu" owner:self topLevelObjects:&array] )
+    {
+        NSMenu *menu = array.firstObject;
+        
+        NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
+        
+        [_statusItem setMenu: menu];
+    }
+    
+    
     
 }
 

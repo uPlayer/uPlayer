@@ -25,6 +25,11 @@
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
+		1EB207BD1AA801E3007968C8 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207BC1AA801E3007968C8 /* StatusMenu.xib */; };
+		1EB207C41AA80995007968C8 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C21AA80995007968C8 /* player.png */; };
+		1EB207C51AA80995007968C8 /* player@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C31AA80995007968C8 /* player@2.png */; };
+		1EB207C71AA80AF1007968C8 /* icon1.ico in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C61AA80AF1007968C8 /* icon1.ico */; };
+		1EB207C91AA80EA5007968C8 /* player.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C81AA80EA5007968C8 /* player.icns */; };
 		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */; };
 		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
 		1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */; };
@@ -131,6 +136,11 @@
 		1E8F702F1AA4707F0012402E /* PlayerQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerQueue.h; sourceTree = "<group>"; };
 		1E8F70311AA470950012402E /* PlayerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerQueue.m; sourceTree = "<group>"; };
 		1E8FF13A1AA084A900EA0A89 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		1EB207BC1AA801E3007968C8 /* StatusMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusMenu.xib; sourceTree = "<group>"; };
+		1EB207C21AA80995007968C8 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
+		1EB207C31AA80995007968C8 /* player@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player@2.png"; sourceTree = "<group>"; };
+		1EB207C61AA80AF1007968C8 /* icon1.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = icon1.ico; sourceTree = "<group>"; };
+		1EB207C81AA80EA5007968C8 /* player.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = player.icns; sourceTree = "<group>"; };
 		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
 		1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccountPreferences.mm; sourceTree = "<group>"; };
 		1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = AccountPreferences.nib; sourceTree = "<group>"; };
@@ -244,9 +254,13 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		1E9085501A80B84A006144F7 /* res */ = {
+		1EB207C11AA80995007968C8 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				1EB207C81AA80EA5007968C8 /* player.icns */,
+				1EB207C61AA80AF1007968C8 /* icon1.ico */,
+				1EB207C21AA80995007968C8 /* player.png */,
+				1EB207C31AA80995007968C8 /* player@2.png */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -318,12 +332,12 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1EB207C11AA80995007968C8 /* res */,
 				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
 				1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */,
 				1ECEB7861A906231006E8C23 /* serialize */,
 				1ECEB7721A905874006E8C23 /* socketTool */,
 				1ECEB7651A9057E1006E8C23 /* Last.fm */,
-				1E9085501A80B84A006144F7 /* res */,
 				1E04435C1A7B747A00B644D8 /* Preferences */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
 				1EDE8FD41A7740EC0086677B /* lyricsFetcher */,
@@ -355,6 +369,7 @@
 				1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */,
 				1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */,
 				1EDE8FB11A773D810086677B /* Main.storyboard */,
+				1EB207BC1AA801E3007968C8 /* StatusMenu.xib */,
 				1EDE8FAF1A773D810086677B /* Images.xcassets */,
 				1EDE8FA51A773D810086677B /* Supporting Files */,
 			);
@@ -513,7 +528,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EB207C41AA80995007968C8 /* player.png in Resources */,
 				1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */,
+				1EB207C51AA80995007968C8 /* player@2.png in Resources */,
 				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
 				1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */,
 				1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */,
@@ -523,6 +540,9 @@
 				1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */,
 				1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */,
 				1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */,
+				1EB207C71AA80AF1007968C8 /* icon1.ico in Resources */,
+				1EB207BD1AA801E3007968C8 /* StatusMenu.xib in Resources */,
+				1EB207C91AA80EA5007968C8 /* player.icns in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
 				1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */,
 			);
