@@ -16,6 +16,22 @@ using namespace std;
 #define kShift "shift"
 #define kAlt "alt"
 
+void copyDefaultKeymapsToIfNotExists(NSString *dstPath)
+{
+    if( ![[NSFileManager defaultManager] fileExistsAtPath: dstPath] )
+    {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"keymaps" ofType:@"json"];
+        
+        NSError *error;
+        
+        [[NSFileManager defaultManager] copyItemAtPath:path toPath:dstPath error:&error];
+        
+        if ( error ) {
+            NSLog(@"%@",error);
+        }
+    }
+    
+}
 
 NSString *keyStringFormKeyCode(CGKeyCode keyCode)
 {
@@ -287,8 +303,10 @@ bool verifyLoadFileShortcutKey()
 		loaded = true;
 	
 		filepath = [ApplicationSupportDirectory() stringByAppendingPathComponent: keyblindingFileName ];
+        
+        copyDefaultKeymapsToIfNotExists(filepath);
 
-
+        
 		Json::Reader reader;
 
 		std::filebuf fb;
@@ -432,3 +450,4 @@ NSArray* globalHotKeysLoaded()
 {
     return hotKeysLoaded(root);
 }
+

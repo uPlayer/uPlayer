@@ -35,13 +35,31 @@ NSString *ApplicationSupportDirectory()
     
     path = [path stringByAppendingPathComponent:@"uPlayer"];
     
-    NSError *error;
-    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    BOOL isExist;
+    BOOL isDirectory;
+    isExist = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
     
-    if (error) {
-        NSLog(@"%@",error);
-        return nil;
+    if (isExist )
+    {
+        if (!isDirectory)
+        {
+           /// @todo: remove this file.
+           // isExist = false;
+        }
     }
+
+    if (!isExist)
+    {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        if (error) {
+            NSLog(@"%@",error);
+            return nil;
+        }
+    }
+    
+
     
     return path;
 }
