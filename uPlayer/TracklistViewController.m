@@ -8,7 +8,6 @@
 
 #import "TracklistViewController.h"
 #import "UPlayer.h"
-
 #import "PlayerMessage.h"
 #import "PlayerSerachMng.h"
 
@@ -40,7 +39,7 @@ typedef enum
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
-@property (nonatomic) displayMode displaymode;
+@property (nonatomic,assign) displayMode displaymode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
 @end
@@ -51,7 +50,7 @@ typedef enum
 {
     addObserverForEvent(self, @selector(reloadTrackList:), EventID_to_reload_tracklist);
     
-    addObserverForEvent(self, @selector(playSelctedTrack), EventID_to_play_selected_track);
+    addObserverForEvent(self, @selector(playSelectedTrack), EventID_to_play_selected_track);
     
     
     self.playerlList = player().document.playerlList;
@@ -74,7 +73,7 @@ typedef enum
     
     PlayerList *list =  n.object; // the selected
     
-    int targetIndex = -1;
+    NSInteger targetIndex = -1;
     if ( list == nil) // then reload playing.
     {
         int index = self.playerlList.playIndex ;
@@ -118,7 +117,7 @@ typedef enum
     return  (int) rg.location;
 }
 
--(void)scrollRowToTop:(int)targetIndex
+-(void)scrollRowToTop:(NSInteger)targetIndex
 {
     int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
     
@@ -130,13 +129,13 @@ typedef enum
     [self.tableView scrollRowToVisible: targetIndex ];
 }
 
--(void)scrollRowToCenter:(int)targetIndex
+-(void)scrollRowToCenter:(NSInteger)targetIndex
 {
     int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
     
     int topIndex = [self getRowOnTableTop];
     
-    int target;
+    NSInteger target;
     if ( targetIndex < topIndex )
     {
         target = targetIndex - rowsPerPage / 2;

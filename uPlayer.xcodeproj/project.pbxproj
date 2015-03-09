@@ -360,10 +360,10 @@
 		1EDE8FA41A773D810086677B /* uPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				1EDE8FA71A773D810086677B /* AppDelegate.h */,
-				1EDE8FA81A773D810086677B /* AppDelegate.mm */,
 				1EFD42CE1A91E847009D65B5 /* ThreadJob.h */,
 				1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */,
+				1EDE8FA71A773D810086677B /* AppDelegate.h */,
+				1EDE8FA81A773D810086677B /* AppDelegate.mm */,
 				1E169A8A1A78E715003D3D01 /* windowController.h */,
 				1E169A881A78E701003D3D01 /* windowController.m */,
 				1EDE8FAC1A773D810086677B /* TracklistViewController.h */,

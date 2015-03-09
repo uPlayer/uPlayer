@@ -28,7 +28,7 @@
     return self;
 }
 
--(PlayerTrack*)getItem:(int)index
+-(PlayerTrack*)getItem:(NSInteger)index
 {
     assert(index>=0 && index < self.playerTrackList.count);
     

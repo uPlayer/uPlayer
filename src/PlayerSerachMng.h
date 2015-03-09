@@ -20,7 +20,7 @@
 
 -(void)search:(NSString*)key;
 
--(PlayerTrack*)getOrginalByIndex:(int)index;
+-(PlayerTrack*)getOrginalByIndex:(NSInteger)index;
 @end
 
 

@@ -47,9 +47,9 @@
     
 }
 
--(PlayerTrack*)getOrginalByIndex:(int)index
+-(PlayerTrack*)getOrginalByIndex:(NSInteger)index
 {
-    NSNumber *numNew = [NSNumber numberWithInt:index];
+    NSNumber *numNew = [NSNumber numberWithInteger:index];
     return (PlayerTrack*) self.dicFilterToOrginal[numNew];
 }
 

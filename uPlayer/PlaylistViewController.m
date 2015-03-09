@@ -40,17 +40,17 @@
     [self.tableView resignFirstResponder];
     
     PlayerList *list = [self.playerlList getPlayList];
-    int row = list.playIndex;
+    NSInteger row = list.playIndex;
     
     if (row == -1)
         return;
     
-    int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
+    NSInteger rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
     
     NSRange rg = [self.tableView rowsInRect:self.tableView.visibleRect];
     int topIndex = (int) rg.location;
     
-    int target;
+    NSInteger target;
     if ( row < topIndex )
     {
         target = row - rowsPerPage / 2;

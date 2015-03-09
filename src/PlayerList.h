@@ -13,11 +13,11 @@
 
 @interface PlayerList: NSObject
 @property (nonatomic,strong) NSString *name;
-@property (nonatomic) int selectIndex,playIndex,topIndex;
+@property (nonatomic) NSInteger selectIndex,playIndex,topIndex;
 @property (nonatomic,strong) NSMutableArray *playerTrackList;//PlayerTrack
 
 
--(PlayerTrack*)getItem:(int)index;
+-(PlayerTrack*)getItem:(NSInteger)index;
 -(size_t)count;
 -(PlayerTrack*)getSelectedItem;
 -(PlayerTrack*)getPlayItem;
