@@ -11,6 +11,8 @@
 #import "ThreadJob.h"
 #import "PlayerTypeDefines.h"
 
+const int max_path = 256;
+
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {
     fwrite(&t, sizeof(NSTimeInterval), 1, &f);
@@ -22,6 +24,13 @@ FILE& operator>>(FILE& f,NSTimeInterval& t)
     fread(&t, sizeof(NSTimeInterval), 1, &f);
     return f;
 }
+
+
+FILE& operator<<(FILE& f,const NSString *t)
+{
+   return f << t.UTF8String;
+}
+
 
 #pragma mark -
 
@@ -50,6 +59,8 @@ TrackInfo *loadTrackInfo(FILE &file)
     
     return info;
 }
+
+
 
 NSString *loadString(FILE &file)
 {
@@ -154,77 +165,141 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 
 @implementation PlayerList (serialize)
--(void)saveTo:(FILE*)file
+-(void)saveTo:(NSString*)path
 {
-    saveString(*file, self.name);
-    
-    *file << self.selectIndex << self.playIndex << self.topIndex;
-    
-    int count = (int) self.playerTrackList.count;
-    *file << count;
-    
-    for (PlayerTrack *track in self.playerTrackList) {
-        [track saveTo:file];
+    FILE *file = fopen(path.UTF8String, "w");
+    if (file)
+    {
+//        saveString(*file, self.name);
+        
+        *file << self.selectIndex << self.playIndex << self.topIndex;
+        
+        int count = (int) self.playerTrackList.count;
+        *file << count;
+        
+        for (PlayerTrack *track in self.playerTrackList) {
+            [track saveTo:file];
+        }
+        fclose(file);
     }
+    
 }
 
 
--(void)loadFrom:(FILE*)file
+-(void)loadFrom:(NSString*)path
 {
-    self.name = loadString(*file);
-    int selectIndex,playIndex,topIndex;
-    *file >> selectIndex >> playIndex >> topIndex;
-    self.selectIndex=selectIndex;
-    self.playIndex = playIndex;
-    self.topIndex=topIndex;
-    
-    int count = -1;
-    *file >> count;
-    NSMutableArray *arr = [NSMutableArray array];
-    while (count-- > 0) {
-        PlayerTrack *track = [[PlayerTrack alloc]init:self];
-        [track loadFrom:file];
-        [arr addObject:track];
+    FILE *file = fopen(path.UTF8String, "r");
+    if (file)
+    {
+//        self.name = loadString(*file);
+        int selectIndex,playIndex,topIndex;
+        *file >> selectIndex >> playIndex >> topIndex;
+        self.selectIndex=selectIndex;
+        self.playIndex = playIndex;
+        self.topIndex=topIndex;
+        
+        int count = 0;
+        *file >> count;
+        NSMutableArray *arr = [NSMutableArray array];
+        while (count-- > 0) {
+            PlayerTrack *track = [[PlayerTrack alloc]init:self];
+            [track loadFrom:file];
+            [arr addObject:track];
+        }
+        
+        self.playerTrackList = arr;
+        fclose(file);
     }
-    
-    self.playerTrackList = arr;
     
 }
 @end
 
 
 @implementation PlayerlList (serialize)
--(void)saveTo:(FILE*)file
+-(void)save:(NSString*)applicationDirectory
 {
-    *file << self.selectIndex << self.playIndex ;
+    NSString *playlistDirectory = [applicationDirectory  stringByAppendingPathComponent: playlistDirectoryName ];
     
-    int count = (int) self.playerlList.count;
-    *file << count;
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:playlistDirectory isDirectory:nil];
     
-    for ( PlayerList *list in self.playerlList) {
-        [list saveTo:file];
+    if (!isExist)
+        [[NSFileManager defaultManager] createDirectoryAtPath:playlistDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    NSString *path = [playlistDirectory stringByAppendingPathComponent: playlistIndexFileName];
+    
+    FILE *file = fopen(path.UTF8String, "w");
+    if (file)
+    {
+        *file << self.selectIndex << self.playIndex ;
+        
+        int count = (int) self.playerlList.count;
+        *file << count;
+        
+        for (int i = 0; i < count; i++)
+        {
+            int index = i + 1;
+            
+            char path2[max_path];
+            
+            sprintf(path2,"%08d.upl",index);
+            
+            PlayerList *list = self.playerlList[i];
+            [list saveTo: [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2 ]] ];
+            
+            *file << index << list.name;
+        }
+        
+        fclose(file);
     }
+    
     
 }
 
--(void)loadFrom:(FILE*)file
+-(void)load:(NSString*)applicationDirectory
 {
-    int si,pi;
-    *file >> si >> pi;
-    self.selectIndex = si;
-    self.playIndex = pi;
+    NSString *playlistDirectory = [applicationDirectory  stringByAppendingPathComponent: playlistDirectoryName ];
     
-    int count = -1;
-    *file >> count;
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:playlistDirectory isDirectory:nil];
     
-    NSMutableArray *arr = [NSMutableArray array];
-    while (count-- > 0) {
-        PlayerList *list = [[PlayerList alloc]init];
-        [list loadFrom:file];
-        [arr addObject: list];
+    if (!isExist)
+        [[NSFileManager defaultManager] createDirectoryAtPath:playlistDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    
+    NSString *path = [playlistDirectory stringByAppendingPathComponent: playlistIndexFileName];
+    
+    FILE *file = fopen(path.UTF8String, "r");
+    if (file)
+    {
+        int si,pi;
+        *file >> si >> pi;
+        self.selectIndex = si;
+        self.playIndex = pi;
+        
+        // load all playlist indexs.
+        int count = 0;
+        *file >> count;
+        
+        NSMutableArray *arr = [NSMutableArray array];
+        while (count-->0)
+        {
+            int index ;
+            NSString *playlistName;
+            *file >> index ;
+            playlistName = loadString(*file);
+            
+            char path2[max_path];
+            sprintf(path2,"%08d.upl",index);
+            
+            PlayerList *list = [[PlayerList alloc]init];
+            list.name = playlistName;
+            [list loadFrom:[playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ]];
+            [arr addObject: list];
+        }
+        
+        self.playerlList = arr;
+        
+        fclose(file);
     }
-    
-    self.playerlList = arr;
 }
 
 @end
@@ -237,8 +312,9 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(bool)load
 {
+    NSString *appSupportDir = ApplicationSupportDirectory();
     
-    FILE *file = fopen([ApplicationSupportDirectory()  stringByAppendingPathComponent: docFileName ].UTF8String, "r");
+    FILE *file = fopen([appSupportDir  stringByAppendingPathComponent: docFileName ].UTF8String, "r");
     
     if (file)
     {
@@ -260,7 +336,7 @@ NSArray *loadTrackInfoArray(FILE &file)
         
         
         assert(self.playerlList);
-        [self.playerlList loadFrom:file];
+        [self.playerlList load:appSupportDir];
         
         
         fclose(file);
@@ -273,13 +349,14 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(bool)save
 {
-    FILE *file = fopen([ApplicationSupportDirectory() stringByAppendingPathComponent: docFileName].UTF8String, "w");
+    NSString *appSupportDir = ApplicationSupportDirectory();
+    FILE *file = fopen([appSupportDir stringByAppendingPathComponent: docFileName].UTF8String, "w");
     
     if (file)
     {
         *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playTime ;
         
-        [self.playerlList saveTo:file];
+        [self.playerlList save:appSupportDir];
         
         fclose(file);
         return true;

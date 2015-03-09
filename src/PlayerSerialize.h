@@ -31,13 +31,13 @@ using namespace std;
 @end
 
 @interface PlayerList (serialize)
--(void)saveTo:(FILE*)file;
--(void)loadFrom:(FILE*)file;
+-(void)saveTo:(NSString*)path;
+-(void)loadFrom:(NSString*)path;
 @end
 
 @interface PlayerlList (serialize)
--(void)saveTo:(FILE*)file;
--(void)loadFrom:(FILE*)file;
+-(void)save:(NSString*)applicationDirectory;
+-(void)load:(NSString*)applicationDirectory;
 @end
 
 

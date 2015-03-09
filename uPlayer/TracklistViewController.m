@@ -76,13 +76,16 @@ typedef enum
     NSInteger targetIndex = -1;
     if ( list == nil) // then reload playing.
     {
-        int index = self.playerlList.playIndex ;
-        list = [self.playerlList getItem: index];
-        [self.playerlList setSelectIndex:index];
-        
-        targetIndex = list.playIndex;
-        [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: targetIndex] byExtendingSelection:YES];
-        [self scrollRowToCenter:targetIndex];
+        int index = self.playerlList.playIndex;
+        if (index >= 0)
+        {
+            list = [self.playerlList getItem: index];
+            [self.playerlList setSelectIndex:index];
+            
+            targetIndex = list.playIndex;
+            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: targetIndex] byExtendingSelection:YES];
+            [self scrollRowToCenter:targetIndex];
+        }
     }
     else if (list == [self.playerlList getSelectedList])
     {

@@ -42,3 +42,6 @@ struct PlayStateTime
 #define docFileName  @"core.cfg"
 #define layoutFileName  @"ui.cfg"
 #define keyblindingFileName @"keymaps.json"
+#define playlistDirectoryName @"playlist"
+#define playlistIndexFileName @"index.cfg"
+

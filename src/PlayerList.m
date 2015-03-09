@@ -102,6 +102,7 @@
     self = [super init];
     if (self) {
         _selectIndex = -1;
+        _playIndex = -1;
         self.playerlList = [NSMutableArray array];
     }
     return self;

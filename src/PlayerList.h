@@ -13,7 +13,7 @@
 
 @interface PlayerList: NSObject
 @property (nonatomic,strong) NSString *name;
-@property (nonatomic) NSInteger selectIndex,playIndex,topIndex;
+@property (nonatomic) int selectIndex,playIndex,topIndex;
 @property (nonatomic,strong) NSMutableArray *playerTrackList;//PlayerTrack
 
 
