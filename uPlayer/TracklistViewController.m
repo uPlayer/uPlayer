@@ -230,11 +230,10 @@ typedef enum
     [self.tableView reloadData];
 }
 
--(void)playSelctedTrack
+
+-(void)playTrack:(NSInteger)index
 {
-     //int col = self.tableView.clickedColumn;
-    int row = (int) self.tableView.clickedRow;
-    
+    NSInteger row = index;
     
     if ( row >= 0)
     {
@@ -256,10 +255,21 @@ typedef enum
             track = [list getItem:row];
             [list setSelectIndex:row];
         }
-
+        
         playTrack(track);
     }
+    
  
+}
+
+-(void)playClickedTrack
+{
+    [self playTrack: self.tableView.clickedRow];
+}
+
+-(void)playSelectedTrack
+{
+    [self playTrack:self.tableView.selectedRow];
 }
 
 -(void)doubleClicked
@@ -268,7 +278,7 @@ typedef enum
     
     [player().document.playerQueue clear];
     
-    [self playSelctedTrack];
+    [self playClickedTrack];
 }
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -349,8 +359,9 @@ typedef enum
     NSLog(@"%@",self);
 //    printf("key pressed: %s\n", [[theEvent description] cString]);
     
-    if (theEvent.characters ) {
-        
+    // press 'Enter' to play item.
+    if ([theEvent.characters isEqualToString:@"\r" ] ) {
+        [self playSelectedTrack];
     }
 }
 
