@@ -178,5 +178,9 @@
 //    printf("key pressed: %s\n", [[theEvent description] cString]);
 }
 
+-(void)activeSearchControl
+{
+    [_searchField becomeFirstResponder];
+}
 
 @end

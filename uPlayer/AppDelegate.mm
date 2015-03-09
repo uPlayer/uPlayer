@@ -21,6 +21,7 @@
 #import "shortcutKey.h"
 #import "ThreadJob.h"
 #import "PlaylistViewController.h"
+#import "windowController.h"
 
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
@@ -124,7 +125,9 @@
 
 - (IBAction)cmdFind:(id)sender
 {
-    NSLog(@"command: Find");
+    WindowController *vc = [NSApplication sharedApplication].mainWindow.windowController;
+    
+    [vc activeSearchControl];
 }
 
 - (IBAction)cmdShowPlayingItem:(id)sender

@@ -12,6 +12,7 @@
 
 @property (weak) IBOutlet NSToolbar *toolBar;
 
+-(void)activeSearchControl;
 @end
 
 
