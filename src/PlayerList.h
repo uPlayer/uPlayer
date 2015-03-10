@@ -40,4 +40,8 @@
 -(size_t)count;
 
 -(PlayerList*)newPlayerList;
+
+// return the nearest one before or after the deleted.
+-(PlayerList*)deleteItem:(NSInteger)index;
+
 @end

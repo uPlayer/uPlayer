@@ -30,6 +30,8 @@
 @property (weak) IBOutlet NSSlider *progressSlider;
 @property (weak) IBOutlet NSSlider *volumnSlider;
 @property (weak) IBOutlet NSSearchField *searchField;
+
+@property (strong,nonatomic) PlaylistViewController* playlistManager;
 @end
 
 @implementation WindowController
@@ -54,12 +56,24 @@
 
 -(void)showPlaylistManager
 {
-    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    PlaylistViewController *plc = [storyboard instantiateControllerWithIdentifier:@"PlaylistViewController"];
+    NSWindow *wnd;
     
-    NSWindow *w = [NSWindow windowWithContentViewController:plc];
+    if (!_playlistManager)
+    {
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+       self.playlistManager = [storyboard instantiateControllerWithIdentifier:@"PlaylistViewController"];
+    }
     
-    [self.window addChildWindow:w ordered:NSWindowAbove];
+    wnd = _playlistManager.view.window;
+    if (!wnd)
+        wnd = [NSWindow windowWithContentViewController:_playlistManager];
+    
+    if (wnd.parentWindow)
+        [wnd makeKeyWindow];
+    else
+        [self.window addChildWindow:wnd ordered:NSWindowAbove];
+    
 }
 
 - (IBAction)actionOrderChanged:(id)sender

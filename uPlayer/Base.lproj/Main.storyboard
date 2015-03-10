@@ -218,7 +218,7 @@
                                         <menuItem title="Show PlayList" id="erA-OL-DYs">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <segue destination="Qif-73-RE2" kind="show" identifier="ShowPlayListViewerSegue" id="R4p-LB-EyP"/>
+                                                <action selector="cmdShowPlayList:" target="Voe-Tx-rLC" id="cq1-Jm-cS8"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Go to current song" tag="1" keyEquivalent="l" id="8Op-6c-njz">
@@ -569,9 +569,15 @@
                     <items>
                         <menuItem title="Active" id="49j-iI-dvk">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdActiveItem:" target="Qif-73-RE2" id="P4s-vm-ueq"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Delete" id="cKz-al-MiT">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdDeleteItem:" target="Qif-73-RE2" id="xr8-zQ-6Q6"/>
+                            </connections>
                         </menuItem>
                     </items>
                 </menu>

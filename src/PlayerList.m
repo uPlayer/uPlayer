@@ -160,4 +160,25 @@
     return list;
 }
 
+-(PlayerList*)deleteItem:(NSInteger)index
+{
+    NSInteger count = self.playerlList.count;
+    
+    if(count == 1)
+    {
+        NSAssert( index == 0, @"");
+        [self.playerlList removeObjectAtIndex:0];
+        return nil;
+    }
+    else
+    {
+        NSAssert(-1 < index && index < count, @"index beyond ..");
+        [self.playerlList removeObjectAtIndex:index];
+        
+        NSInteger r = index == count - 1? index - 1 : index;
+        
+        return [self getItem:(int)r];
+    }
+}
+
 @end
