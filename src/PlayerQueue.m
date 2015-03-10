@@ -39,6 +39,14 @@
     [_queue addObject:item];
 }
 
+-(void)push2:(NSArray*)items
+{
+    for (PlayerTrack *item in items)
+    {
+        [self push:item];
+    }
+}
+
 -(void)remove:(PlayerTrack*)item
 {
     [_queue removeObject:item];

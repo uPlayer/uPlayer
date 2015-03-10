@@ -71,12 +71,13 @@
     }
 }
 
--(void)addTrackInfoItems:(NSArray*)items
+-(NSArray*)addTrackInfoItems:(NSArray*)items
 {
-     int count = (int) items.count;
-    if (count > 0) {
+    int count = (int) items.count;
+    if (count > 0)
+    {
         assert( [items.firstObject isKindOfClass:[TrackInfo class] ]);
-         int index = (int)self.playerTrackList.count;
+        int index = (int)self.playerTrackList.count;
         
         NSMutableArray *arr = [NSMutableArray array];
         for (TrackInfo *info in items) {
@@ -89,7 +90,10 @@
         
         [self.playerTrackList addObjectsFromArray: arr];
         
+        return arr;
     }
+    
+    return nil;
 }
 @end
 

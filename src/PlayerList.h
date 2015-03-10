@@ -22,7 +22,12 @@
 -(PlayerTrack*)getSelectedItem;
 -(PlayerTrack*)getPlayItem;
 -(void)addItems:(NSArray*)items;
--(void)addTrackInfoItems:(NSArray*)items;
+
+/**
+ @param items: array of TrackInfo*
+ @return :array of PlayerTrack *.
+ */
+-(NSArray*)addTrackInfoItems:(NSArray*)items;
 @end
 
 

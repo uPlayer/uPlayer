@@ -34,7 +34,8 @@ const char *arrEvent[] =
     "to_stop",
     "track_stopped_playnext",
     "to_play_next",
-    "to_play_random"
+    "to_play_random",
+    "to_play_item"
 };
 
 
@@ -77,9 +78,9 @@ void postEvent(EventID et , id object)
 {
     NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
 
-//    NSLog(@"%d: ",(int)et);
-//    NSString *a = eventIDtoString(et);
-//    NSLog(@"%@",a);
+    NSLog(@"%d: ",(int)et);
+    NSString *a = eventIDtoString(et);
+    NSLog(@"%@",a);
     
     [d postNotificationName: eventIDtoString(et) object:object];
 }

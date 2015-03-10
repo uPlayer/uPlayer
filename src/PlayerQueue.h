@@ -15,6 +15,8 @@
 
 -(void)push:(PlayerTrack*)item;
 
+-(void)push2:(NSArray*)items;
+
 -(void)remove:(PlayerTrack*)item;
 
 -(void)clear;

@@ -53,22 +53,61 @@ typedef enum
 @end
 
 @implementation TracklistViewController
-
--(void)awakeFromNib
+-(instancetype)initWithCoder:(NSCoder *)coder
 {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self initLoad];
+    }
+    
+    return self;
+}
+
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self initLoad];
+    }
+    
+    return self;
+}
+
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self initLoad];
+    }
+    
+    return self;
+}
+
+-(void)dealloc
+{
+    
+}
+-(void)initLoad
+{
+    NSLog(@"self: %@",self);
+    
     addObserverForEvent(self, @selector(reloadTrackList:), EventID_to_reload_tracklist);
     
     addObserverForEvent(self, @selector(playSelectedTrack), EventID_to_play_selected_track);
     
+    addObserverForEvent(self, @selector(playTrackItem:), EventID_to_play_item);
     
     self.playerlList = player().document.playerlList;
+}
+
+-(void)awakeFromNib
+{
 }
 
 
 /// @see EventID_to_reload_tracklist
 -(void)reloadTrackList:(NSNotification*)n
 {
-    
     [self.tableView becomeFirstResponder];
     
     // quit search mode.
@@ -240,7 +279,7 @@ typedef enum
     [self.tableView reloadData];
 }
 
-
+// play item in this playlist.
 -(void)playTrack:(NSInteger)index
 {
     NSInteger row = index;
@@ -290,6 +329,25 @@ typedef enum
     
     [self playClickedTrack];
 }
+
+// play track in or not in selecting playlist.
+-(void)playTrackItem:(NSNotification*)n
+{
+    NSLog(@"aaaaaaaaa:%@",self);
+    
+    PlayerTrack * track = n.object;
+    
+    NSAssert([track isKindOfClass:[PlayerTrack class]], @"asdf");
+    
+    playTrack(track);
+    
+    postEvent(EventID_to_reload_tracklist, track.list);
+    
+    NSLog(@"bbbbbbbbb");
+}
+
+
+#pragma mark -
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
@@ -393,12 +451,16 @@ typedef enum
 
 - (IBAction)cmdAddToPlayQueue:(id)sender
 {
-    NSInteger i = self.tableView.selectedRow;
-    if (i > 0)
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    if ( rows.count > 0)
     {
-        PlayerTrack *track = [self getSelectedItem: i ];
-        
-        [player().document.playerQueue push:track];
+        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
+        {
+            PlayerTrack *track = [self getSelectedItem:idx];
+            
+            [player().document.playerQueue push:track];
+        }];
+
     }
     
 }

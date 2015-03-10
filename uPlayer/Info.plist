@@ -30,5 +30,20 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeIconFile</key>
+			<string>iTunes-mp3.icns</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSIsAppleDefaultForType</key>
+			<string>Yes</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.mp3</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

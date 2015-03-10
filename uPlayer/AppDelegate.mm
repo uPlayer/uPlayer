@@ -151,77 +151,135 @@
     shortcutKeyPressed( s, false);
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+-(void)initApp
 {
-    // set up status bar
-    
-    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    
-    _statusItem.title = @"";
-    
-    _statusItem.image = [NSImage imageNamed:@"player"];
-    
-    _statusItem.alternateImage = [NSImage imageNamed:@"player"];
-    
-    _statusItem.highlightMode = YES;
-    
-    NSArray *array;
-    if ([[NSBundle mainBundle]  loadNibNamed:@"StatusMenu" owner:self topLevelObjects:&array] )
+    static bool init = false;
+    if (init == false)
     {
-        for (id arrItem in array)
+        init = true;
+    
+        
+        // set up status bar
+        
+        _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+        
+        _statusItem.title = @"";
+        
+        _statusItem.image = [NSImage imageNamed:@"player"];
+        
+        _statusItem.alternateImage = [NSImage imageNamed:@"player"];
+        
+        _statusItem.highlightMode = YES;
+        
+        NSArray *array;
+        if ([[NSBundle mainBundle]  loadNibNamed:@"StatusMenu" owner:self topLevelObjects:&array] )
         {
-            if ([arrItem isKindOfClass:[NSMenu class]])
+            for (id arrItem in array)
             {
-                NSMenu *menu = arrItem;
-                NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
-                [_statusItem setMenu: menu];
-                break;
+                if ([arrItem isKindOfClass:[NSMenu class]])
+                {
+                    NSMenu *menu = arrItem;
+                    NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
+                    [_statusItem setMenu: menu];
+                    break;
+                }
             }
         }
+        
+        // add observers
+        addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
+        
+        addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
+        
+        // locad config files.
+        PlayerDocument *d = player().document;
+        
+        if( [d load] )
+        {
+            postEvent(EventID_to_reload_tracklist, nil);
+        }
+        
+        postEvent(EventID_player_document_loaded, nil);
+        
+        player().engine.volume = player().document.volume;
+        
+        self.menuOpenDirectory.enabled = [d.playerlList count]>0;
+        
+        if( [player().engine isPlaying] )
+            self.menuPlayOrPause.title =NSLocalizedString(@"Pause" ,nil);
+        else
+            self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
+        
+        
+        // register hotkeys from cache file.
+        verifyLoadFileShortcutKey();
+        
+        NSArray *hotKeys = globalHotKeysLoaded();
+        
+        for (LLHotKey *hotKey in hotKeys) {
+            [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
+        }
+        
+        // add a default playlist
+        [self cmdNewPlayerList:nil];
+        
+       
     }
+}
+
+- (void)applicationWillFinishLaunching:(NSNotification *)notification
+{
+    [self initApp];
+}
+
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
+{
+    NSLog(@"%@",filename);
+    return YES;
+}
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
+{
+    NSLog(@"%@",filenames);
     
-    // add observers
-    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
     
-    addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
-    
-    // locad config files.
-    PlayerDocument *d = player().document;
-    
-    if( [d load] )
+    NSMutableArray *trackInfos = [NSMutableArray array];
+    for(NSString *filename in filenames)
     {
-        postEvent(EventID_to_reload_tracklist, nil);
+        TrackInfo *trackInfo = getId3Info( filename );
+        trackInfo.path=filename;
+        [trackInfos addObject:trackInfo];
     }
     
-    postEvent(EventID_player_document_loaded, nil);
     
-    player().engine.volume = player().document.volume;
+    PlayerDocument *d = player().document;
+    PlayerList *list = [d.playerlList getSelectedList];
     
-    self.menuOpenDirectory.enabled = [d.playerlList count]>0;
+    NSMutableArray *tracks = (NSMutableArray*)[list addTrackInfoItems: trackInfos];
+
+    postEvent(EventID_to_play_item, tracks.firstObject);
     
-    if( [player().engine isPlaying] )
-        self.menuPlayOrPause.title =NSLocalizedString(@"Pause" ,nil);
-    else
-        self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
+    /// todo add else to player queue.
+    
+    [tracks removeObjectAtIndex:0];
+    
+    for (PlayerTrack *track in tracks)
+        [d.playerQueue push:track];
+    
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    [self initApp];
     
     
-    // register hotkeys from cache file.
-    verifyLoadFileShortcutKey();
-    
-    NSArray *hotKeys = globalHotKeysLoaded();
-    
-    for (LLHotKey *hotKey in hotKeys) {
-        [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
-    }
-    
+    PlayerDocument *d = player().document;
     // add ~/music to a default playerlist, if is none.
-    if ([d.playerlList count] == 0)
+    if ( [d.playerlList count] == 1 && [d.playerlList getSelectedList].count == 0)
     {
         NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
         
         NSString *userMusic = arr.firstObject;
-        
-        [self cmdNewPlayerList:nil];
         
         PlayerList *list = [d.playerlList getSelectedList];
         
@@ -232,20 +290,9 @@
                      ^{
                          postEvent(EventID_to_reload_tracklist, list);
                      });
-        
-        
     }
     
-    
-    
-
-    
-    
-
-    
-    
 }
-
 
 -(void)track_state_changed
 {
