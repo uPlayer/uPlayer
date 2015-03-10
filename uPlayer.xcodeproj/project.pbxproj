@@ -16,6 +16,7 @@
 		1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF21A77536800B4FE14 /* UPlayer.mm */; };
 		1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */; };
 		1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */; };
+		1E154DF61AAEFA8A0000A3B1 /* keycode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E154DF51AAEFA8A0000A3B1 /* keycode.mm */; };
 		1E169A7D1A78D05D003D3D01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E169A7F1A78D05D003D3D01 /* Localizable.strings */; };
 		1E169A891A78E701003D3D01 /* windowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.m */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
@@ -121,6 +122,8 @@
 		1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTrack.m; sourceTree = "<group>"; };
 		1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerImpl.mm; sourceTree = "<group>"; };
 		1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTypeDefines.h; sourceTree = "<group>"; };
+		1E154DF51AAEFA8A0000A3B1 /* keycode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = keycode.mm; sourceTree = "<group>"; };
+		1E154DF81AAEFA9E0000A3B1 /* keycode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keycode.h; sourceTree = "<group>"; };
 		1E169A7E1A78D05D003D3D01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1E169A841A78D295003D3D01 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1E169A881A78E701003D3D01 /* windowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = windowController.m; sourceTree = "<group>"; };
@@ -445,6 +448,8 @@
 				1EFD42DC1A91EE85009D65B5 /* shortcutKey.h */,
 				1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */,
 				1E7A78371AA974D9004E9DDC /* keymaps.json */,
+				1E154DF81AAEFA9E0000A3B1 /* keycode.h */,
+				1E154DF51AAEFA8A0000A3B1 /* keycode.mm */,
 			);
 			path = ShortCutcmd;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E154DF61AAEFA8A0000A3B1 /* keycode.mm in Sources */,
 				1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */,
 				1ECEB76E1A90582B006E8C23 /* Last_fm_api.cpp in Sources */,
 				1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */,

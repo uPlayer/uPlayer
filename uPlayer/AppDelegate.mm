@@ -220,10 +220,10 @@
             [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
         }
         
-        // add a default playlist
-        [self cmdNewPlayerList:nil];
+        // add a default playlist if have not
+        if( [d.playerlList count] == 0)
+            [self cmdNewPlayerList:nil];
         
-       
     }
 }
 

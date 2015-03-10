@@ -78,9 +78,9 @@ void postEvent(EventID et , id object)
 {
     NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
 
-    NSLog(@"%d: ",(int)et);
-    NSString *a = eventIDtoString(et);
-    NSLog(@"%@",a);
+//    NSLog(@"%d: ",(int)et);
+//    NSString *a = eventIDtoString(et);
+//    NSLog(@"%@",a);
     
     [d postNotificationName: eventIDtoString(et) object:object];
 }

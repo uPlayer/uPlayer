@@ -10,7 +10,7 @@
 #import "UPlayer.h"
 #import "PlayerMessage.h"
 #import "PlayerSerachMng.h"
-
+#import "keycode.h"
 
 typedef enum
 {
@@ -428,9 +428,21 @@ typedef enum
 //    printf("key pressed: %s\n", [[theEvent description] cString]);
     
     // press 'Enter' to play item.
-    if ([theEvent.characters isEqualToString:@"\r" ] ) {
+    if ([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"RETURN" ] )
+    {
         [self playSelectedTrack];
     }
+    
+    if (self.displaymode == displayMode_tracklist_search)
+    {
+        if([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"ESCAPE"])
+        {
+            self.displaymode = displayMode_tracklist;
+            
+            [self.tableView reloadData];
+        }
+    }
+   
 }
 
 - (IBAction)cmdShowInFinder:(id)sender
