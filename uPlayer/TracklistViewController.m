@@ -29,18 +29,12 @@ typedef enum
     // what row are we at?
     NSInteger row = [self rowAtPoint: [self convertPoint: [event locationInWindow] fromView: nil]];
     
-    if (row == -1)
-    {
-        [self deselectAll:nil];
-    }
-    else
-    {
-        [self selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
-        
-        return [super menu]; // use what we've got
-    }
+    [self deselectAll:nil];
     
-    return nil;
+    if (row != -1)
+        [self selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
+    
+    return [super menu]; // use what we've got
 }
 @end
 
