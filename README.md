@@ -1,4 +1,6 @@
 
+# uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)
+
 ##Brief
 
 This is a lightweight audio player for Mac.  
