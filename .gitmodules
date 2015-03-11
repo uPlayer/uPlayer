@@ -1,6 +1,6 @@
 [submodule "lyricsFetcher"]
 	path = lyricsFetcher
-	url = /Users/liaogang/快盘/git/lyricsFetcher.git
+url=https://github.com/liaogang/lyricsFetcher.git
 [submodule "Last.fm"]
 	path = Last.fm
 	url = https://github.com/liaogang/Last.fm.git
