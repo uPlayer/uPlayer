@@ -19,5 +19,15 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
 
 
 ##System  
+
 Only tested in OS X 10.10 Yosemite  
+
+##License  
+
+[![by](https://creativecommons.org/images/deed/by.png)![](https://creativecommons.org/images/deed/nc.png)![](https://creativecommons.org/images/deed/sa.png)](http://creativecommons.org/licenses/by-nc-sa/3.0)
+
+  
+
+
+
 
