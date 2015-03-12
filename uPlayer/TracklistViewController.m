@@ -81,10 +81,9 @@ typedef enum
 {
     
 }
+
 -(void)initLoad
 {
-    NSLog(@"self: %@",self);
-    
     addObserverForEvent(self, @selector(reloadTrackList:), EventID_to_reload_tracklist);
     
     addObserverForEvent(self, @selector(playSelectedTrack), EventID_to_play_selected_track);
@@ -92,10 +91,6 @@ typedef enum
     addObserverForEvent(self, @selector(playTrackItem:), EventID_to_play_item);
     
     self.playerlList = player().document.playerlList;
-}
-
--(void)awakeFromNib
-{
 }
 
 /// @see EventID_to_reload_tracklist
@@ -382,26 +377,20 @@ typedef enum
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
         textField.editable = false;
-        
     }
-    else if(column == 1)
-    {
+    else if(column == 1) {
         textField.stringValue = info.artist;
     }
-    else if(column == 2)
-    {
+    else if(column == 2) {
         textField.stringValue = info.title ;
     }
-    else if(column == 3)
-    {
+    else if(column == 3) {
         textField.stringValue = info.album;
     }
-    else if(column == 4)
-    {
+    else if(column == 4) {
         textField.stringValue = info.genre;
     }
-    else if(column == 5)
-    {
+    else if(column == 5) {
         textField.stringValue = info.year;
     }
     
@@ -418,7 +407,7 @@ typedef enum
 - (void)keyDown:(NSEvent *)theEvent
 {
     NSLog(@"%@",self);
-//    printf("key pressed: %s\n", [[theEvent description] cString]);
+    //printf("key pressed: %s\n", [[theEvent description] cString]);
     
     // press 'Enter' to play item.
     if ([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"RETURN" ] )
@@ -433,6 +422,8 @@ typedef enum
             self.displaymode = displayMode_tracklist;
             
             [self.tableView reloadData];
+            
+            [self reloadTrackList:nil];
         }
     }
    

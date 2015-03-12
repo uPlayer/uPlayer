@@ -234,19 +234,17 @@
 			isa = PBXGroup;
 			children = (
 				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
-				1E8F702F1AA4707F0012402E /* PlayerQueue.h */,
-				1E8F70311AA470950012402E /* PlayerQueue.m */,
+				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
 				1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */,
 				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
-				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
+				1E8F702F1AA4707F0012402E /* PlayerQueue.h */,
+				1E8F70311AA470950012402E /* PlayerQueue.m */,
 				1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */,
 				1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */,
-				1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */,
-				1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */,
-				1ED021A81A7B3383008526E8 /* PlayerList.h */,
-				1ED021A91A7B3383008526E8 /* PlayerList.m */,
 				1E0B2BF91A7754D000B4FE14 /* PlayerTrack.h */,
 				1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */,
+				1ED021A81A7B3383008526E8 /* PlayerList.h */,
+				1ED021A91A7B3383008526E8 /* PlayerList.m */,
 				1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */,
 				1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */,
 				1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */,
@@ -255,6 +253,8 @@
 				1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */,
 				1E0B2BF11A77536800B4FE14 /* UPlayer.h */,
 				1E0B2BF21A77536800B4FE14 /* UPlayer.mm */,
+				1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */,
+				1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */,
 			);
 			path = src;
 			sourceTree = "<group>";

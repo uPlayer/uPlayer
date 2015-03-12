@@ -281,6 +281,8 @@
         
         NSString *userMusic = arr.firstObject;
         
+        userMusic = [userMusic stringByAppendingPathComponent:@"iTunes/iTunes Media/Music"];
+        
         PlayerList *list = [d.playerlList getSelectedList];
         
         dojobInBkgnd(
