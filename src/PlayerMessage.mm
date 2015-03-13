@@ -25,6 +25,9 @@ const char *arrEvent[] =
     "track_progress_changed",
     "playerqueue_changed",
     "player_document_loaded",
+    
+    "play_error_happened",
+    
     "to_reload_tracklist",
     "to_save_config",
     "to_reload_lyrics",
@@ -37,7 +40,8 @@ const char *arrEvent[] =
     "track_stopped_playnext",
     "to_play_next",
     "to_play_random",
-    "to_play_item"
+    "to_play_item",
+
 };
 
 NSNotificationCenter *sCenter ;
@@ -64,7 +68,7 @@ const char *eventID2String(EventID et)
 
 void addObserverForEvent(id observer , SEL sel, EventID et)
 {
-    MAAssert( sCenter , @"sCenter is nil , call `initPlayerMessage`.");
+    MAAssert( sCenter , @"sCenter is nil , call `initPlayerMessage` before `addObserver` .");
     
     [sCenter addObserver:observer selector:sel name: eventIDtoString(et) object:nil];
 }

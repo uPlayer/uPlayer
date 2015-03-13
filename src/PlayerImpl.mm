@@ -14,6 +14,7 @@
 
 #import "UPlayer.h"
 #import "PlayerMessage.h"
+#import "PlayerError.h"
 
 
 TrackInfo* getId3Info(NSString *filename)
@@ -79,13 +80,12 @@ NSArray* enumAudioFiles(NSString* path)
 @implementation PlayerEngine (playTrack)
 -(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi
 {
-    if (self.playUuid == [track uuid])
-        [player().engine playPause];
-    else
-    {
-        self.playUuid = [track uuid];
+    
+   if ([[NSFileManager defaultManager] fileExistsAtPath:track.path])
         [self playURL:[NSURL fileURLWithPath:track.path] pauseAfterInit:pfi];
-    }
+    else
+        postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile:track.path]);
+    
 }
 @end
 

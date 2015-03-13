@@ -36,6 +36,16 @@
 
 
 @implementation AppDelegate
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        initPlayerMessage();
+    }
+    
+    return self;
+}
+
 - (IBAction)cmdRandom:(id)sender {
     postEvent(EventID_to_play_random, nil);
     postEvent(EventID_to_reload_tracklist, nil);
@@ -160,8 +170,6 @@
     {
         init = true;
     
-        initPlayerMessage();
-        
         // set up status bar
         
         _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
@@ -400,7 +408,6 @@
     NSLog(@"%@",error);
     
     [[NSAlert alertWithError:error] runModal];
-    
 }
 
 @end

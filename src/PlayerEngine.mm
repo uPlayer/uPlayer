@@ -13,7 +13,6 @@
 #import "PlayerMessage.h"
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
-#import "PlayerError.h"
 
 
 @interface PlayerEngine ()
@@ -281,11 +280,6 @@
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
 {
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
-    
-    if (!asset) {
-        postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile:url]);
-        return FALSE;
-    }
     
     Float64 duration = CMTimeGetSeconds(asset.duration);
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];

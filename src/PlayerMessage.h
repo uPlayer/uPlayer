@@ -21,6 +21,10 @@ typedef enum : NSUInteger {
     EventID_playerqueue_changed ,
     EventID_player_document_loaded , // 使配置生效 , loaded failed , or successed.
     
+    EventID_play_error_happened,// PlayerError *error;
+ 
+    
+    
     /// param: PlayerList* list , if list is nil , then go to the playing item.
     /// else reload the list at list.topitem. and list is selected.
     EventID_to_reload_tracklist ,
@@ -35,7 +39,7 @@ typedef enum : NSUInteger {
     EventID_track_stopped_playnext , // play next by track ended.
     EventID_to_play_next, // play next by user
     EventID_to_play_random,
-    EventID_to_play_item //PlayerTrack* item;
+    EventID_to_play_item, //PlayerTrack* item;
 } EventID;
 
 

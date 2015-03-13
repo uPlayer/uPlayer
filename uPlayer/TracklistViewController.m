@@ -321,17 +321,13 @@ typedef enum
 // play track in or not in selecting playlist.
 -(void)playTrackItem:(NSNotification*)n
 {
-    NSLog(@"aaaaaaaaa:%@",self);
-    
     PlayerTrack * track = n.object;
     
-    NSAssert([track isKindOfClass:[PlayerTrack class]], @"asdf");
+    NSAssert([track isKindOfClass:[PlayerTrack class]], @"");
     
     playTrack(track);
     
     postEvent(EventID_to_reload_tracklist, track.list);
-    
-    NSLog(@"bbbbbbbbb");
 }
 
 

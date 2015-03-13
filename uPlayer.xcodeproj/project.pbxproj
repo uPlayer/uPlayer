@@ -27,6 +27,8 @@
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
+		1E9047F91AB2CA190000ED86 /* MAAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047F81AB2CA190000ED86 /* MAAssert.m */; };
+		1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047FB1AB2CB110000ED86 /* PlayerError.m */; };
 		1EB207BD1AA801E3007968C8 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207BC1AA801E3007968C8 /* StatusMenu.xib */; };
 		1EB207C41AA80995007968C8 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C21AA80995007968C8 /* player.png */; };
 		1EB207C51AA80995007968C8 /* player@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C31AA80995007968C8 /* player@2.png */; };
@@ -141,6 +143,10 @@
 		1E8F702F1AA4707F0012402E /* PlayerQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerQueue.h; sourceTree = "<group>"; };
 		1E8F70311AA470950012402E /* PlayerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerQueue.m; sourceTree = "<group>"; };
 		1E8FF13A1AA084A900EA0A89 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		1E9047F71AB2CA190000ED86 /* MAAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAssert.h; sourceTree = "<group>"; };
+		1E9047F81AB2CA190000ED86 /* MAAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAssert.m; sourceTree = "<group>"; };
+		1E9047FB1AB2CB110000ED86 /* PlayerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerError.m; sourceTree = "<group>"; };
+		1E9047FD1AB2CB240000ED86 /* PlayerError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerError.h; sourceTree = "<group>"; };
 		1EB207BC1AA801E3007968C8 /* StatusMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusMenu.xib; sourceTree = "<group>"; };
 		1EB207C21AA80995007968C8 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		1EB207C31AA80995007968C8 /* player@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player@2.png"; sourceTree = "<group>"; };
@@ -239,6 +245,8 @@
 				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
 				1E8F702F1AA4707F0012402E /* PlayerQueue.h */,
 				1E8F70311AA470950012402E /* PlayerQueue.m */,
+				1E9047FD1AB2CB240000ED86 /* PlayerError.h */,
+				1E9047FB1AB2CB110000ED86 /* PlayerError.m */,
 				1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */,
 				1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */,
 				1E0B2BF91A7754D000B4FE14 /* PlayerTrack.h */,
@@ -257,6 +265,15 @@
 				1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		1E9047F61AB2CA190000ED86 /* MAAssert */ = {
+			isa = PBXGroup;
+			children = (
+				1E9047F71AB2CA190000ED86 /* MAAssert.h */,
+				1E9047F81AB2CA190000ED86 /* MAAssert.m */,
+			);
+			path = MAAssert;
 			sourceTree = "<group>";
 		};
 		1EB207C11AA80995007968C8 /* res */ = {
@@ -337,6 +354,7 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1E9047F61AB2CA190000ED86 /* MAAssert */,
 				1EB207C11AA80995007968C8 /* res */,
 				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
 				1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */,
@@ -565,6 +583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E154DF61AAEFA8A0000A3B1 /* keycode.mm in Sources */,
+				1E9047F91AB2CA190000ED86 /* MAAssert.m in Sources */,
 				1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */,
 				1ECEB76E1A90582B006E8C23 /* Last_fm_api.cpp in Sources */,
 				1EDE8FD21A7740DC0086677B /* fileCtrl.cpp in Sources */,
@@ -596,6 +615,7 @@
 				1EFD42BF1A91ABFF009D65B5 /* HotKeyPreferences.m in Sources */,
 				1EFD42DE1A91EE85009D65B5 /* shortcutKey.mm in Sources */,
 				1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */,
+				1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */,
 				1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */,
 				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */,
 			);
