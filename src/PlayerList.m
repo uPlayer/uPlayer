@@ -95,6 +95,17 @@
     
     return nil;
 }
+
+-(void)removeTrack:(NSInteger)index
+{
+    [self.playerTrackList removeObjectAtIndex:index];
+}
+
+-(void)removeTracks:(NSIndexSet*)indexs
+{
+    [self.playerTrackList removeObjectsAtIndexes: indexs];
+}
+
 @end
 
 

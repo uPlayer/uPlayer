@@ -28,6 +28,9 @@
  @return :array of PlayerTrack *.
  */
 -(NSArray*)addTrackInfoItems:(NSArray*)items;
+
+-(void)removeTracks:(NSIndexSet*)indexs;
+-(void)removeTrack:(NSInteger)index;
 @end
 
 

@@ -12,6 +12,7 @@
 #import "PlayerSerachMng.h"
 #import "keycode.h"
 #import "MAAssert.h"
+#import "windowController.h"
 
 typedef enum
 {
@@ -136,14 +137,12 @@ typedef enum
         }
         else
         {
-            
             list = n.object;
             
             // current is not showing. reload it.
             if (list != [self.playerlList getSelectedList])
             {
                 [self.playerlList setSelectItem:list];
-                [self.tableView reloadData];
                 
                 target = list.topIndex;
                 toCenter = false;
@@ -153,7 +152,7 @@ typedef enum
     else
     {
         // then reload playing.
-        [self.playerlList setSelectItem:list];
+        list = [self.playerlList getPlayList];
         
         target = list.playIndex;
     }
@@ -165,9 +164,9 @@ typedef enum
         listOld.topIndex = [self getRowOnTableTop];
         
         [self.playerlList setSelectItem:list];
-        
-        [self.tableView reloadData];
     }
+    
+    [self.tableView reloadData];
     
     if (toCenter)
         [self scrollRowToCenter: target];
@@ -452,6 +451,9 @@ typedef enum
             [self.tableView reloadData];
             
             postEvent(EventID_to_reload_tracklist, track);
+            
+            WindowController *w = self.view.window.windowController;
+            [w clearSearchControl];
         }
     }
    

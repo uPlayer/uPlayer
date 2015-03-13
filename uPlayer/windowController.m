@@ -15,6 +15,12 @@
 
 #define uPlayerWinPos @"uPlayerWinPos"
 
+
+
+@interface NSSliderCellHideThumbWhenDisable : NSSliderCell
+-(void)drawKnob:(NSRect)knobRect;
+@end
+
 @implementation NSSliderCellHideThumbWhenDisable
 -(void)drawKnob:(NSRect)knobRect
 {
@@ -30,6 +36,8 @@
 @property (weak) IBOutlet NSSlider *progressSlider;
 @property (weak) IBOutlet NSSlider *volumnSlider;
 @property (weak) IBOutlet NSSearchField *searchField;
+
+@property (nonatomic,strong) NSString *searchKeys;
 
 @property (strong,nonatomic) PlaylistViewController* playlistManager;
 @end
@@ -195,6 +203,15 @@
 -(void)activeSearchControl
 {
     [_searchField becomeFirstResponder];
+    
+    if (_searchKeys )
+        _searchField.stringValue = _searchKeys;
+}
+
+-(void)clearSearchControl
+{
+    _searchKeys = _searchField.stringValue;
+    _searchField.stringValue = @"";
 }
 
 @end

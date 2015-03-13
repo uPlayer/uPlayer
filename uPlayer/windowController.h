@@ -13,11 +13,10 @@
 @property (weak) IBOutlet NSToolbar *toolBar;
 
 -(void)activeSearchControl;
+
+-(void)clearSearchControl;
+
 @end
 
-
-@interface NSSliderCellHideThumbWhenDisable : NSSliderCell
--(void)drawKnob:(NSRect)knobRect;
-@end
 
 

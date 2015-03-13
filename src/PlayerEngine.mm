@@ -242,7 +242,7 @@
     playTrack(next);
     
     if( player().document.trackSongsWhenPlayStarted)
-        postEvent(EventID_to_reload_tracklist, nil);
+        postEvent(EventID_to_reload_tracklist, next );
 }
 
 -(void)playPause
