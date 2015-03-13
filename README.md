@@ -22,7 +22,7 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
 	 Something it may be a good thing.  
    Seeing the lyrics may change the taste of a good song. ~_~  
 * 监视文件夹.(时间不够了)
-
+* Add Vim Mode
 
 ##System  
 
