@@ -159,11 +159,13 @@ typedef enum
 
     
     PlayerList *listOld = [self.playerlList getSelectedList];
-    if (list != listOld)
+    if ( list != listOld)
     {
-        listOld.topIndex = [self getRowOnTableTop];
+        if (listOld)
+            listOld.topIndex = [self getRowOnTableTop];
         
-        [self.playerlList setSelectItem:list];
+        if (list)
+            [self.playerlList setSelectItem:list];
     }
     
     [self.tableView reloadData];
@@ -438,6 +440,9 @@ typedef enum
         [self playSelectedTrack];
         PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
         postEvent(EventID_to_reload_tracklist, track);
+        
+        WindowController *w = self.view.window.windowController;
+        [w clearSearchControl];
     }
     
     

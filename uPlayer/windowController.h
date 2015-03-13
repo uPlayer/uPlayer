@@ -12,11 +12,10 @@
 
 @property (weak) IBOutlet NSToolbar *toolBar;
 
+/// active and reload the search field key words.
 -(void)activeSearchControl;
 
+/// clear and save the search field key words.
 -(void)clearSearchControl;
 
 @end
-
-
-
