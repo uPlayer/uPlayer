@@ -11,6 +11,8 @@
 #import "PlayerTypeDefines.h"
 #import "PlayerMessage.h"
 #import "PlayerSerialize.h"
+#import "PlayerError.h"
+
 #import "AppPreferences.h"
 #import "Last_fm_user.h"
 #import "Last_fm_api.h"
@@ -158,6 +160,7 @@
     {
         init = true;
     
+        initPlayerMessage();
         
         // set up status bar
         
@@ -187,6 +190,9 @@
         }
         
         // add observers
+        
+        addObserverForEvent(self, @selector(playerErrorHandler:), EventID_play_error_happened);
+        
         addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
         
         addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
@@ -384,6 +390,16 @@
         [self performSelector:@selector(scrobblerSong:) withObject:info afterDelay:t];
         
     }
+    
+}
+
+-(void)playerErrorHandler:(NSNotification*)n
+{
+    PlayerError *error = n.object;
+    
+    NSLog(@"%@",error);
+    
+    [[NSAlert alertWithError:error] runModal];
     
 }
 
