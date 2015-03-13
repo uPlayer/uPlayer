@@ -1,5 +1,5 @@
 //
-//  windowController.m
+//  windowController.h
 //  uPlayer
 //
 //  Created by liaogang on 15/1/28.

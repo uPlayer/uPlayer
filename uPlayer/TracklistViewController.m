@@ -105,7 +105,8 @@ typedef enum
 
 -(void)reloadTrackList:(NSNotification*)n
 {
-    [self.tableView becomeFirstResponder];
+    [self.view.window makeFirstResponder:self.tableView];
+    
     
     // quit search mode.
     if (self.displaymode == displayMode_tracklist_search)
@@ -292,10 +293,12 @@ typedef enum
     else
     {
         self.displaymode = displayMode_tracklist;
-        
     }
     
     [self.tableView reloadData];
+    
+    //select the first item by default.
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: 0] byExtendingSelection:YES];
 }
 
 // play item in this playlist.
@@ -428,14 +431,14 @@ typedef enum
     // Update the view, if already loaded.
 }
 
-
 - (void)keyDown:(NSEvent *)theEvent
 {
-    NSLog(@"%@",self);
     //printf("key pressed: %s\n", [[theEvent description] cString]);
     
+    NSString *keyString = keyStringFormKeyCode(theEvent.keyCode);
+    
     // press 'Enter' to play item.
-    if ([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"RETURN" ] )
+    if ([keyString isEqualToString:@"RETURN" ] )
     {
         [self playSelectedTrack];
         PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
@@ -445,10 +448,12 @@ typedef enum
         [w clearSearchControl];
     }
     
+
+    
     
     if (self.displaymode == displayMode_tracklist_search)
     {
-        if([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"ESCAPE"])
+        if([keyString isEqualToString:@"ESCAPE"])
         {
             PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
             
@@ -531,7 +536,6 @@ typedef enum
    
         if ([defaults boolForKey: alertSuppressionKey])
         {
-            NSLog (@"Alert suppressed");
             [self removeItemsToTrash: rows];
         } else
         {

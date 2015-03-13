@@ -100,8 +100,6 @@ void playTrack(PlayerTrack *track)
         llist.playIndex = (int) [llist.playerlList indexOfObject:list];
         list.playIndex = (int) [list.playerTrackList indexOfObject:track];
         
-        NSLog(@"playTrack: %@",track);
-        
         [player().engine playTrackInfo:track.info pauseAfterInit: FALSE ];
     }
     
