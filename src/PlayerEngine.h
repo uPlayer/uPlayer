@@ -41,7 +41,7 @@
 -(struct PlayStateTime)close;
 
 
-@property int playUuid;
+//@property int playUuid;
 
 @end
 

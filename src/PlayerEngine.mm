@@ -13,7 +13,7 @@
 #import "PlayerMessage.h"
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
-
+#import "PlayerError.h"
 
 
 @interface PlayerEngine ()
@@ -52,7 +52,7 @@
         
         _state = playstate_stopped;
         
-        _playUuid = -1;
+//        _playUuid = -1;
         
         self.player = [[AVPlayer alloc]init];
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
@@ -281,6 +281,12 @@
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
 {
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
+    
+    if (!asset) {
+        postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile:url]);
+        return FALSE;
+    }
+    
     Float64 duration = CMTimeGetSeconds(asset.duration);
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
     
@@ -311,7 +317,7 @@
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
-    self.playUuid = -1;
+//    self.playUuid = -1;
     
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_state_changed, nil);
