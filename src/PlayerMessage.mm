@@ -10,6 +10,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+#import "MAAssert.h"
+
 const char *arrEvent[] =
 {
     "track_started",
@@ -38,6 +40,12 @@ const char *arrEvent[] =
     "to_play_item"
 };
 
+NSNotificationCenter *sCenter ;
+
+void initPlayerMessage()
+{
+    sCenter = [[NSNotificationCenter alloc]init];
+}
 
 inline int getEventCount()
 {
@@ -56,37 +64,33 @@ const char *eventID2String(EventID et)
 
 void addObserverForEvent(id observer , SEL sel, EventID et)
 {
-    NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
+    MAAssert( sCenter , @"sCenter is nil , call `initPlayerMessage`.");
     
-    [d addObserver:observer selector:sel name: eventIDtoString(et) object:nil];
+    [sCenter addObserver:observer selector:sel name: eventIDtoString(et) object:nil];
 }
 
 void removeObserverForEvent(id observer , SEL sel, EventID et)
 {
-    NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
-    [d removeObserver:observer name:eventIDtoString(et) object:nil];
+    [sCenter removeObserver:observer name:eventIDtoString(et) object:nil];
 }
 
 void removeObserver(id observer)
 {
-    NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
-    [d removeObserver:observer];
+    [sCenter removeObserver:observer];
 }
 
 
 void postEvent(EventID et , id object)
 {
-    NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
 
 //    NSLog(@"%d: ",(int)et);
 //    NSString *a = eventIDtoString(et);
 //    NSLog(@"%@",a);
     
-    [d postNotificationName: eventIDtoString(et) object:object];
+    [sCenter postNotificationName: eventIDtoString(et) object:object];
 }
 
 void postEventByString( NSString *strEvent , id object)
 {
-    NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
-    [d postNotificationName: strEvent object:object];
+    [sCenter postNotificationName: strEvent object:object];
 }

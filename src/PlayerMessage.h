@@ -46,6 +46,8 @@ typedef enum : NSUInteger {
 extern "C" {
 #endif /* defined(__cplusplus) */
 
+    void initPlayerMessage();
+    
     inline int getEventCount();
     
     const char *eventID2String(EventID et);
