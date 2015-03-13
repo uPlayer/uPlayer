@@ -3,11 +3,11 @@
 
 ##Brief
 
-This is a lightweight audio player for Mac.  
+This is a lightweight audio player for Mac Os x.  
 
 Before you try uPlayer , take a look at iTunes and Pinna.  
 
-But uPlayer's simpler and it font it bigger. 
+But uPlayer's simpler and it UI is clear. 
 
 If you're looking for a audio player in windows , [uPlayer windows version](http://liaogang.github.io/player)  
 
@@ -15,7 +15,13 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
 
 [latest releases](https://github.com/uPlayer/uPlayer/releases/latest)  
 
-##Requirement  
+
+##ToDo
+
+* The lyrics showing thing.  
+	 Something it may be a good thing.  
+   Seeing the lyrics may change the taste of a good song. ~_~  
+* 监视文件夹.(时间不够了)
 
 
 ##System  
