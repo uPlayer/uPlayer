@@ -11,6 +11,7 @@
 #import "PlayerMessage.h"
 #import "PlayerSerachMng.h"
 #import "keycode.h"
+#import "MAAssert.h"
 
 typedef enum
 {
@@ -29,9 +30,9 @@ typedef enum
     // what row are we at?
     NSInteger row = [self rowAtPoint: [self convertPoint: [event locationInWindow] fromView: nil]];
     
-    [self deselectAll:nil];
-    
-    if (row != -1)
+    if( row == -1)
+        [self deselectAll:nil];
+    else
         [self selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
     
     return [super menu]; // use what we've got
@@ -93,7 +94,14 @@ typedef enum
     self.playerlList = player().document.playerlList;
 }
 
-/// @see EventID_to_reload_tracklist
+/**
+ @see EventID_to_reload_tracklist
+ 
+ if n.object is `nil` , then will located to the playing track.
+ if n.object is `PlayerList* list` , then will located to the list's top item.
+ if n.object is `PlayerTrack *track`, then the track.
+ */
+
 -(void)reloadTrackList:(NSNotification*)n
 {
     [self.tableView becomeFirstResponder];
@@ -102,50 +110,72 @@ typedef enum
     if (self.displaymode == displayMode_tracklist_search)
         self.displaymode = displayMode_tracklist;
     
-    [self.tableView reloadData];
+    PlayerList *list;
+    int target = 0;
+    // scroll target index to center or top?
+    bool toCenter = YES;
     
-    [self.tableView resignFirstResponder];
-    
-    PlayerList *list =  n.object; // the selected
-    
-    NSInteger targetIndex = -1;
-    if ( list == nil) // then reload playing.
+    if (n.object)
     {
-        int index = self.playerlList.playIndex;
-        if (index >= 0)
+        MAAssert( [n.object isKindOfClass:[PlayerTrack class]] || [n.object isKindOfClass:[PlayerList class]]  );
+
+        if ([n.object isKindOfClass:[PlayerTrack class] ])
         {
-            list = [self.playerlList getItem: index];
-            [self.playerlList setSelectIndex:index];
+            PlayerTrack *track;
+            track = n.object;
             
-            targetIndex = list.playIndex;
-            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: targetIndex] byExtendingSelection:YES];
-            [self scrollRowToCenter:targetIndex];
-        }
-    }
-    else if (list == [self.playerlList getSelectedList])
-    {
-        
-    }
-    else
-    {
-        [self.playerlList getSelectedList].topIndex = [self getRowOnTableTop];
-        
-        [self.playerlList setSelectItem: list];
-        if (list.selectIndex >= 0)
-        {
-            targetIndex = list.selectIndex;
-            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: targetIndex] byExtendingSelection:YES];
-            [self scrollRowToCenter:targetIndex];
+            list = track.list;
+            
+            if (list != [self.playerlList getSelectedList])
+            {
+                [self.playerlList setSelectItem:list];
+                [self.tableView reloadData];
+            }
+
+            target = track.index;
         }
         else
         {
-            targetIndex = list.topIndex;
-            [self scrollRowToTop:targetIndex];
+            
+            list = n.object;
+            
+            // current is not showing. reload it.
+            if (list != [self.playerlList getSelectedList])
+            {
+                [self.playerlList setSelectItem:list];
+                [self.tableView reloadData];
+                
+                target = list.topIndex;
+                toCenter = false;
+            }
         }
+    }
+    else
+    {
+        // then reload playing.
+        [self.playerlList setSelectItem:list];
         
+        target = list.playIndex;
+    }
+
+    
+    PlayerList *listOld = [self.playerlList getSelectedList];
+    if (list != listOld)
+    {
+        listOld.topIndex = [self getRowOnTableTop];
+        
+        [self.playerlList setSelectItem:list];
+        
+        [self.tableView reloadData];
     }
     
+    if (toCenter)
+        [self scrollRowToCenter: target];
+    else
+        [self scrollRowToTop: target];
     
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: target] byExtendingSelection:YES];
+
 }
 
 
@@ -327,7 +357,7 @@ typedef enum
     
     playTrack(track);
     
-    postEvent(EventID_to_reload_tracklist, track.list);
+    postEvent(EventID_to_reload_tracklist, track);
 }
 
 
@@ -337,10 +367,8 @@ typedef enum
 {
     if ( self.displaymode == displayMode_tracklist_search)
         return   [self.searchMng.playerlistFilter count ];
-    else if ( self.displaymode == displayMode_tracklist)
-        return   [[self.playerlList getSelectedList] count];
     else
-        return  [self.playerlList count];
+        return   [[self.playerlList getSelectedList] count];
 }
 
 -(PlayerTrack*)getSelectedItem:(NSInteger)row
@@ -409,17 +437,21 @@ typedef enum
     if ([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"RETURN" ] )
     {
         [self playSelectedTrack];
+        PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
+        postEvent(EventID_to_reload_tracklist, track);
     }
+    
     
     if (self.displaymode == displayMode_tracklist_search)
     {
         if([keyStringFormKeyCode(theEvent.keyCode) isEqualToString:@"ESCAPE"])
         {
-            self.displaymode = displayMode_tracklist;
+            PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
             
+            self.displaymode = displayMode_tracklist;
             [self.tableView reloadData];
             
-            [self reloadTrackList:nil];
+            postEvent(EventID_to_reload_tracklist, track);
         }
     }
    
@@ -452,6 +484,70 @@ typedef enum
             
             [player().document.playerQueue push:track];
         }];
+
+    }
+    
+}
+
+- (IBAction)cmdRemoveRefrence:(id)sender {
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    if ( rows.count > 0)
+    {
+        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            [[self.playerlList getSelectedList] removeTrack: idx ];
+        }];
+    }
+    
+    
+}
+
+-(void)removeItemsToTrash:(NSIndexSet*)set
+{
+    PlayerList *list = [self.playerlList getSelectedList];
+    
+    [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        PlayerTrack *track = [list getItem: idx ];
+        [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath: track.info.path] resultingItemURL:nil error:nil];
+    }];
+    
+    [[self.playerlList getSelectedList] removeTracks: set ];
+    [self.tableView reloadData];
+}
+
+- (IBAction)cmdRemoveToTrash:(id)sender {
+    
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    if ( rows.count > 0)
+    {
+        NSString *alertSuppressionKey = @"RemoveItemToTrashConfirm";
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   
+        if ([defaults boolForKey: alertSuppressionKey])
+        {
+            NSLog (@"Alert suppressed");
+            [self removeItemsToTrash: rows];
+        } else
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText = [NSString stringWithFormat: NSLocalizedString(@"Remove %d items to Trash", nil ) , rows.count ];
+            alert.alertStyle=NSWarningAlertStyle;
+            [alert addButtonWithTitle:NSLocalizedString(@"Continue",nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+            alert.showsSuppressionButton = YES; // Uses default checkbox title
+            
+            if( [alert runModal] == NSAlertFirstButtonReturn)
+            {
+                [self removeItemsToTrash: rows];
+            }
+            
+
+            
+            if (alert.suppressionButton.state == NSOnState) {
+                // Suppress this alert from now on
+                [defaults setBool: YES forKey: alertSuppressionKey];
+            }
+        }
+        
 
     }
     
