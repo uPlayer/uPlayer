@@ -425,11 +425,7 @@ typedef enum
     return textField;
 }
 
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
 
-    // Update the view, if already loaded.
-}
 
 - (void)keyDown:(NSEvent *)theEvent
 {
@@ -441,11 +437,13 @@ typedef enum
     if ([keyString isEqualToString:@"RETURN" ] )
     {
         [self playSelectedTrack];
-        PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
-        postEvent(EventID_to_reload_tracklist, track);
         
         WindowController *w = self.view.window.windowController;
         [w clearSearchControl];
+        
+        PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
+        postEvent(EventID_to_reload_tracklist, track);
+        
     }
     
 

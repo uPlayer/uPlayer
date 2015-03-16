@@ -20,7 +20,15 @@ typedef NS_ENUM(int, PlayOrder)
     playorder_single
 };
 
-#define kPlayOrder (  @[@"default" ,@"random" ,@"repeat_single" , @"repeat_list" , @"shuffle", @"single"])
+
+#define kPlayOrder (  @[ \
+NSLocalizedString(@"default", nil),\
+NSLocalizedString(@"random" ,nil),\
+NSLocalizedString(@"repeat-single" ,nil),\
+NSLocalizedString(@"repeat-list" ,nil),\
+NSLocalizedString(@"shuffle",nil),\
+NSLocalizedString(@"single",nil),\
+])
 
 
 enum PlayState

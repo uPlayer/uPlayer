@@ -22,3 +22,11 @@
 "General" = "通用";
 "Account" = "账户";
 "HotKeys" = "热键";
+
+
+"default" = "默认";
+"random" = "随机";
+"repeat-single" = "重复-单个";
+"repeat-list" = "重复-列表";
+"shuffle" = "乱序";
+"single" = "单个";

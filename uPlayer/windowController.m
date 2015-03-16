@@ -12,6 +12,7 @@
 #import "PlayerMessage.h"
 #import "AppDelegate.h"
 #import "PlaylistViewController.h"
+#import "keycode.h"
 
 #define uPlayerWinPos @"uPlayerWinPos"
 
@@ -48,7 +49,7 @@
 {
     self.window.title=player().document.windowName;
     
-    [self.playOrderBtn addItemsWithTitles: kPlayOrder];
+    [self.playOrderBtn addItemsWithTitles:  kPlayOrder];
     
     addObserverForEvent(self , @selector(updateUI), EventID_track_state_changed);
     
@@ -59,6 +60,7 @@
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
     
     addObserverForEvent(self, @selector(showPlaylistManager), EventID_to_show_playlist);
+    
     
 }
 
@@ -202,16 +204,40 @@
 
 -(void)activeSearchControl
 {
-    [_searchField becomeFirstResponder];
+    [self.window makeFirstResponder:_searchField];
     
     if (_searchKeys )
         _searchField.stringValue = _searchKeys;
+    
 }
+
+
 
 -(void)clearSearchControl
 {
     _searchKeys = _searchField.stringValue;
     _searchField.stringValue = @"";
+    
+    CGKeyCode keyCode = keyCodeFormKeyString(@"ESCAPE");
+    
+    
+    NSEvent *event = [NSEvent keyEventWithType:NSKeyDown location:NSMakePoint(0, 0) modifierFlags:0 timestamp:[[NSProcessInfo processInfo] systemUptime] windowNumber:self.window.windowNumber context:nil characters:@"ESCAPE" charactersIgnoringModifiers:nil isARepeat:NO keyCode:keyCode];
+                      
+//    [[NSApplication sharedApplication] sendEvent:event];
+    
+    
+    if([_searchField abortEditing] )
+    {
+        NSLog(@"123");
+    }
+    [self.window endEditingFor:_searchField];
+    _searchField.editable = false;
+    _searchField.selectable=false;
+    [[_searchField window] makeFirstResponder:self];
+    [_searchField abortEditing];
+    _searchField.editable = true;
+    _searchField.selectable = true;
+    
 }
 
 @end
