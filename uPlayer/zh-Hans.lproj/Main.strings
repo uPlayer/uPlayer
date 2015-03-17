@@ -2,118 +2,92 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "109-ro-5qv"; */
 "109-ro-5qv.title" = "Table View Cell";
 
+/* Class = "NSMenuItem"; title = "Play"; ObjectID = "11Z-4N-8B4"; */
+"11Z-4N-8B4.title" = "Play";
+
+/* Class = "NSToolbarItem"; label = "Volumn"; ObjectID = "1U9-cg-qxf"; */
+"1U9-cg-qxf.label" = "音量";
+
 /* Class = "NSToolbarItem"; paletteLabel = "Volumn"; ObjectID = "1U9-cg-qxf"; */
 "1U9-cg-qxf.paletteLabel" = "音量";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1UK-8n-QPP"; */
 "1UK-8n-QPP.title" = "自定义工具栏…";
 
-/* Class = "NSMenuItem"; title = "uPlayer播放器"; ObjectID = "1Xt-HY-uBw"; */
-"1Xt-HY-uBw.title" = "uPlayer播放器";
-
-/* Class = "NSMenu"; title = "查找"; ObjectID = "1b7-l0-nxx"; */
-"1b7-l0-nxx.title" = "查找";
-
-/* Class = "NSMenuItem"; title = "Lower"; ObjectID = "1tx-W0-xDw"; */
-"1tx-W0-xDw.title" = "Lower";
-
-/* Class = "NSMenuItem"; title = "Raise"; ObjectID = "2h7-ER-AoG"; */
-"2h7-ER-AoG.title" = "Raise";
+/* Class = "NSMenuItem"; title = "uPlayer"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "uPlayer";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "2hd-wS-naf"; */
 "2hd-wS-naf.title" = "播放";
 
-/* Class = "NSMenuItem"; title = "Use Default"; ObjectID = "3Om-Ey-2VK"; */
-"3Om-Ey-2VK.title" = "Use Default";
-
-/* Class = "NSMenuItem"; title = "Tighten"; ObjectID = "46P-cB-AYj"; */
-"46P-cB-AYj.title" = "Tighten";
-
-/* Class = "NSMenuItem"; title = "Find"; ObjectID = "4EN-yA-p0u"; */
-"4EN-yA-p0u.title" = "Find";
+/* Class = "NSMenuItem"; title = "Active"; ObjectID = "49j-iI-dvk"; */
+"49j-iI-dvk.title" = "激活";
 
 /* Class = "NSMenuItem"; title = "Quit uPlayer"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "退出 uPlayer";
 
-/* Class = "NSMenuItem"; title = "编辑"; ObjectID = "5QF-Oa-p0T"; */
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
 "5QF-Oa-p0T.title" = "编辑";
-
-/* Class = "NSMenuItem"; title = "Copy Style"; ObjectID = "5Vv-lz-BsD"; */
-"5Vv-lz-BsD.title" = "Copy Style";
 
 /* Class = "NSMenuItem"; title = "About uPlayer"; ObjectID = "5kV-Vb-QxS"; */
 "5kV-Vb-QxS.title" = "关于 uPlayer";
 
-/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
-"6dh-zS-Vam.title" = "Redo";
+/* Class = "NSMenuItem"; title = "Key Blindings..."; ObjectID = "6Of-OG-Yan"; */
+"6Of-OG-Yan.title" = "按键绑定...";
+
+
+/* Class = "NSMenuItem"; title = "Remove"; ObjectID = "8Ng-b4-bmx"; */
+"8Ng-b4-bmx.title" = "移动";
 
 /* Class = "NSMenuItem"; title = "Go to current song"; ObjectID = "8Op-6c-njz"; */
 "8Op-6c-njz.title" = "前往当前歌曲";
 
-/* Class = "NSMenu"; title = "Writing Direction"; ObjectID = "8mr-sm-Yjd"; */
-"8mr-sm-Yjd.title" = "Writing Direction";
-
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜单";
 
-/* Class = "NSMenuItem"; title = "偏好设置…"; ObjectID = "BOF-NM-1cW"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "偏好设置…";
 
-/* Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "BgM-ve-c93"; */
-"BgM-ve-c93.title" = "\tLeft to Right";
-
-/* Class = "NSMenuItem"; title = "另存为…"; ObjectID = "Bw7-FT-i3A"; */
+/* Class = "NSMenuItem"; title = "Save As…"; ObjectID = "Bw7-FT-i3A"; */
 "Bw7-FT-i3A.title" = "另存为…";
 
-/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "Dv1-io-Yv7"; */
-"Dv1-io-Yv7.title" = "拼写和语法";
+/* Class = "NSMenuItem"; title = "Add to play queue"; ObjectID = "CGf-NP-DLA"; */
+"CGf-NP-DLA.title" = "添加到播放列队";
 
-/* Class = "NSMenu"; title = "帮助"; ObjectID = "F2S-fz-NVQ"; */
+/* Class = "NSMenuItem"; title = "Exit"; ObjectID = "DVo-aG-piG"; */
+"DVo-aG-piG.title" = "退出";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "帮助";
 
 /* Class = "NSMenuItem"; title = "uPlayer 帮助"; ObjectID = "FKE-Sm-Kum"; */
 "FKE-Sm-Kum.title" = "uPlayer 帮助";
 
-/* Class = "NSMenuItem"; title = "Text"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "Text";
-
 /* Class = "NSMenuItem"; title = "New PlayerList"; ObjectID = "Fxj-BS-OlW"; */
 "Fxj-BS-OlW.title" = "新建播放列表";
 
-/* Class = "NSMenuItem"; title = "Bold"; ObjectID = "GB9-OM-e27"; */
-"GB9-OM-e27.title" = "粗体";
-
 /* Class = "NSMenu"; title = "格式"; ObjectID = "GEO-Iw-cKr"; */
 "GEO-Iw-cKr.title" = "格式";
-
-/* Class = "NSMenuItem"; title = "Use Default"; ObjectID = "GUa-eO-cwY"; */
-"GUa-eO-cwY.title" = "用户默认";
 
 /* Class = "NSMenuItem"; title = "Font"; ObjectID = "Gi5-1S-RQB"; */
 "Gi5-1S-RQB.title" = "字体";
 
 /* Class = "NSMenuItem"; title = "Random"; ObjectID = "GkQ-Nl-Oqr"; */
-"GkQ-Nl-Oqr.title" = "Random";
+"GkQ-Nl-Oqr.title" = "随机";
 
-/* Class = "NSMenuItem"; title = "Writing Direction"; ObjectID = "H1b-Si-o9J"; */
-"H1b-Si-o9J.title" = "Writing Direction";
-
-/* Class = "NSMenuItem"; title = "视图"; ObjectID = "H8h-7b-M4v"; */
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "视图";
 
-/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "HFo-cy-zxI"; */
-"HFo-cy-zxI.title" = "显示拼写和语法";
+/* Class = "NSMenuItem"; title = "Stop"; ObjectID = "Hbi-YC-Aao"; */
+"Hbi-YC-Aao.title" = "停止";
 
-/* Class = "NSMenu"; title = "视图"; ObjectID = "HyV-fh-RgO"; */
+/* Class = "NSMenu"; title = "View"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "视图";
-
-/* Class = "NSMenuItem"; title = "Subscript"; ObjectID = "I0S-gh-46l"; */
-"I0S-gh-46l.title" = "Subscript";
 
 /* Class = "NSMenuItem"; title = "Import Directory... Directory"; ObjectID = "ICK-h2-7oe"; */
 "ICK-h2-7oe.title" = "导入目录...";
 
-/* Class = "(null)"; title = "uPlayer"; ObjectID = "IQv-IB-iLA"; */
+/* Class = "NSWindow"; title = "uPlayer"; ObjectID = "IQv-IB-iLA"; */
 "IQv-IB-iLA.title" = "uPlayer";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
@@ -122,35 +96,20 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "前置所有窗口";
 
-/* Class = "NSMenuItem"; title = "Paste Ruler"; ObjectID = "LVM-kO-fVI"; */
-"LVM-kO-fVI.title" = "Paste Ruler";
-
-/* Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "Lbh-J2-qVU"; */
-"Lbh-J2-qVU.title" = "\tLeft to Right";
-
 /* Class = "NSMenu"; title = "Control"; ObjectID = "MZE-Pa-qt8"; */
 "MZE-Pa-qt8.title" = "控制";
 
-/* Class = "NSMenuItem"; title = "Copy Ruler"; ObjectID = "MkV-Pr-PK5"; */
-"MkV-Pr-PK5.title" = "Copy Ruler";
+/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "N5v-Ri-pz6"; */
+"N5v-Ri-pz6.title" = "Item 1";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "服务";
 
-/* Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "Nop-cj-93Q"; */
-"Nop-cj-93Q.title" = "\t默认";
-
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
 "OY7-WF-poV.title" = "最小化";
 
-/* Class = "NSMenuItem"; title = "Baseline"; ObjectID = "OaQ-X3-Vso"; */
-"OaQ-X3-Vso.title" = "Baseline";
-
 /* Class = "NSMenuItem"; title = "Hide uPlayer"; ObjectID = "Olw-nP-bQN"; */
 "Olw-nP-bQN.title" = "隐藏 uPlayer";
-
-/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV"; */
-"OwM-mh-QMV.title" = "查找上一个";
 
 /* Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL"; */
 "Ptp-SP-VEL.title" = "更大";
@@ -162,94 +121,52 @@
 "QYP-aE-oTi.headerCell.title" = "#";
 
 /* Class = "IBNSViewController"; title = "PlayList Viewer"; ObjectID = "Qif-73-RE2"; */
-"Qif-73-RE2.title" = "PlayList Viewer";
+"Qif-73-RE2.title" = "播放列表查看";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "缩放";
 
-/* Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "RB4-Sm-HuC"; */
-"RB4-Sm-HuC.title" = "\tRight to Left";
-
-/* Class = "NSMenuItem"; title = "Superscript"; ObjectID = "Rqc-34-cIF"; */
-"Rqc-34-cIF.title" = "Superscript";
-
-/* Class = "NSMenuItem"; title = "全选"; ObjectID = "Ruw-6m-B2m"; */
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m"; */
 "Ruw-6m-B2m.title" = "全选";
-
-/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "S0p-oC-mLd"; */
-"S0p-oC-mLd.title" = "跳转到选中";
 
 /* Class = "NSMenuItem"; title = "Next"; ObjectID = "SEU-9f-99W"; */
 "SEU-9f-99W.title" = "下一个";
 
-/* Class = "NSToolbarItem"; label = "搜索"; ObjectID = "T1d-Pw-hE4"; */
+/* Class = "NSToolbarItem"; label = "Search"; ObjectID = "T1d-Pw-hE4"; */
 "T1d-Pw-hE4.label" = "搜索";
 
-/* Class = "NSToolbarItem"; paletteLabel = "Custom View"; ObjectID = "T1d-Pw-hE4"; */
-"T1d-Pw-hE4.paletteLabel" = "自定义视图";
+/* Class = "NSToolbarItem"; paletteLabel = "Search"; ObjectID = "T1d-Pw-hE4"; */
+"T1d-Pw-hE4.paletteLabel" = "搜索";
 
-/* Class = "NSMenu"; title = "窗口"; ObjectID = "Td7-aD-5lo"; */
+/* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "窗口";
-
-/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG"; */
-"UEZ-Bs-lqG.title" = "Capitalize";
-
-/* Class = "NSMenuItem"; title = "Center"; ObjectID = "VIY-Ag-zcb"; */
-"VIY-Ag-zcb.title" = "Center";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "隐藏其它";
 
-/* Class = "NSMenuItem"; title = "Italic"; ObjectID = "Vjx-xi-njq"; */
-"Vjx-xi-njq.title" = "Italic";
-
-/* Class = "NSMenu"; title = "编辑"; ObjectID = "W48-6f-4Dl"; */
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl"; */
 "W48-6f-4Dl.title" = "编辑";
 
-/* Class = "NSMenuItem"; title = "Underline"; ObjectID = "WRG-CD-K1S"; */
-"WRG-CD-K1S.title" = "Underline";
+/* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "WHJ-kh-lq3"; */
+"WHJ-kh-lq3.title" = "在Finder中显示";
 
-/* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "WeT-3V-zwk"; */
-"WeT-3V-zwk.title" = "Paste and Match Style";
+/* Class = "NSViewController"; title = "Tracklist Viewer"; ObjectID = "XfG-lQ-9wD"; */
+"XfG-lQ-9wD.title" = "Tracklist Viewer";
 
-/* Class = "NSMenuItem"; title = "查找…"; ObjectID = "Xz5-n4-O0W"; */
-"Xz5-n4-O0W.title" = "查找…";
-
-/* Class = "NSMenuItem"; title = "查找和替换…"; ObjectID = "YEy-JH-Tfz"; */
-"YEy-JH-Tfz.title" = "查找和替换…";
-
-/* Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "YGs-j5-SAR"; */
-"YGs-j5-SAR.title" = "\t默认";
-
-/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "Ynk-f8-cLZ"; */
-"Ynk-f8-cLZ.title" = "Start Speaking";
-
-/* Class = "NSMenuItem"; title = "左对齐"; ObjectID = "ZM1-6Q-yy1"; */
-"ZM1-6Q-yy1.title" = "左对齐";
-
-/* Class = "NSMenuItem"; title = "Paragraph"; ObjectID = "ZvO-Gk-QUH"; */
-"ZvO-Gk-QUH.title" = "Paragraph";
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "XxM-of-WlE"; */
+"XxM-of-WlE.title" = "Table View Cell";
 
 /* Class = "NSMenuItem"; title = "窗口"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "窗口";
 
-/* Class = "NSMenu"; title = "字体"; ObjectID = "aXa-aM-Jaq"; */
+/* Class = "NSMenu"; title = "Font"; ObjectID = "aXa-aM-Jaq"; */
 "aXa-aM-Jaq.title" = "字体";
 
-/* Class = "NSMenuItem"; title = "Use Default"; ObjectID = "agt-UL-0e3"; */
-"agt-UL-0e3.title" = "Use Default";
-
 /* Class = "NSMenuItem"; title = "Previous"; ObjectID = "b1E-Dm-zWD"; */
-"b1E-Dm-zWD.title" = "Previous";
+"b1E-Dm-zWD.title" = "上一个";
 
-/* Class = "NSMenuItem"; title = "Show Colors"; ObjectID = "bgn-CT-cEk"; */
-"bgn-CT-cEk.title" = "显示颜色";
-
-/* Class = "NSMenu"; title = "文件"; ObjectID = "bib-Uj-vzu"; */
+/* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "文件";
-
-/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "buJ-ug-pKt"; */
-"buJ-ug-pKt.title" = "Use Selection for Find";
 
 /* Class = "NSToolbarItem"; label = "Play Order"; ObjectID = "c2Z-N4-MTP"; */
 "c2Z-N4-MTP.label" = "播放次序";
@@ -257,19 +174,13 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Play Order"; ObjectID = "c2Z-N4-MTP"; */
 "c2Z-N4-MTP.paletteLabel" = "播放次序";
 
-/* Class = "NSMenuItem"; title = "Use None"; ObjectID = "cDB-IK-hbR"; */
-"cDB-IK-hbR.title" = "Use None";
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "cKz-al-MiT"; */
+"cKz-al-MiT.title" = "删除";
 
-/* Class = "NSMenuItem"; title = "Selection"; ObjectID = "cqv-fj-IhA"; */
-"cqv-fj-IhA.title" = "Selection";
-
-/* Class = "NSMenu"; title = "Text"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "文字";
-
-/* Class = "NSMenuItem"; title = "文件"; ObjectID = "dMs-cI-mzQ"; */
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "文件";
 
-/* Class = "NSMenuItem"; title = "撤消"; ObjectID = "dRJ-4n-Yzg"; */
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
 "dRJ-4n-Yzg.title" = "撤消";
 
 /* Class = "NSMenuItem"; title = "Show PlayList"; ObjectID = "erA-OL-DYs"; */
@@ -281,35 +192,23 @@
 /* Class = "NSTableColumn"; headerCell.title = "name"; ObjectID = "h2V-xq-zdE"; */
 "h2V-xq-zdE.headerCell.title" = "名字";
 
+/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "h61-UG-gb8"; */
+"h61-UG-gb8.title" = "Item 2";
+
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "hLo-7s-qNo"; */
 "hLo-7s-qNo.title" = "Text Cell";
 
-/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv"; */
-"hQb-2v-fYv.title" = "Smart Quotes";
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "Services";
 
 /* Class = "NSMenuItem"; title = "Smaller"; ObjectID = "i1d-Er-qST"; */
-"i1d-Er-qST.title" = "Smaller";
-
-/* Class = "NSMenu"; title = "Baseline"; ObjectID = "ijk-EB-dga"; */
-"ijk-EB-dga.title" = "Baseline";
-
-/* Class = "NSMenuItem"; title = "Kern"; ObjectID = "jBQ-r6-VK2"; */
-"jBQ-r6-VK2.title" = "Kern";
-
-/* Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "jFq-tB-4Kx"; */
-"jFq-tB-4Kx.title" = "\tRight to Left";
+"i1d-Er-qST.title" = "更小";
 
 /* Class = "NSMenuItem"; title = "Format"; ObjectID = "jxT-CU-nIS"; */
 "jxT-CU-nIS.title" = "Format";
 
 /* Class = "NSMenuItem"; title = "Control"; ObjectID = "kRn-79-x4d"; */
 "kRn-79-x4d.title" = "Control";
-
-/* Class = "NSMenuItem"; title = "Ligatures"; ObjectID = "o6e-r0-MWq"; */
-"o6e-r0-MWq.title" = "Ligatures";
-
-/* Class = "NSMenuItem"; title = "Loosen"; ObjectID = "ogc-rX-tC1"; */
-"ogc-rX-tC1.title" = "Loosen";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
 "pa3-QI-u2k.title" = "删除";
@@ -320,26 +219,11 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Progress"; ObjectID = "pmD-eR-0dO"; */
 "pmD-eR-0dO.paletteLabel" = "进度";
 
-/* Class = "NSMenuItem"; title = "查找下一个"; ObjectID = "q09-fT-Sye"; */
-"q09-fT-Sye.title" = "查找下一个";
-
-/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "qIS-W8-SiK"; */
-"qIS-W8-SiK.title" = "Page Setup…";
-
-/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "rbD-Rh-wIN"; */
-"rbD-Rh-wIN.title" = "Check Spelling While Typing";
-
-/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "rgM-f4-ycn"; */
-"rgM-f4-ycn.title" = "Smart Dashes";
+/* Class = "NSMenuItem"; title = "Save…"; ObjectID = "pxx-59-PXV"; */
+"pxx-59-PXV.title" = "保存…";
 
 /* Class = "NSMenuItem"; title = "显示工具栏"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "显示工具栏";
-
-/* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "tRr-pd-1PS"; */
-"tRr-pd-1PS.title" = "Data Detectors";
-
-/* Class = "NSMenu"; title = "Kern"; ObjectID = "tlD-Oa-oAM"; */
-"tlD-Oa-oAM.title" = "Kern";
 
 /* Class = "NSMenu"; title = "uPlayer"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "uPlayer";
@@ -347,26 +231,20 @@
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
 "uRl-iY-unG.title" = "剪切";
 
-/* Class = "NSMenuItem"; title = "Paste Style"; ObjectID = "vKC-jM-MkH"; */
-"vKC-jM-MkH.title" = "Paste Style";
-
-/* Class = "NSMenuItem"; title = "Show Ruler"; ObjectID = "vLm-3I-IUL"; */
-"vLm-3I-IUL.title" = "Show Ruler";
-
-/* Class = "NSMenu"; title = "Ligatures"; ObjectID = "w0m-vy-SC9"; */
-"w0m-vy-SC9.title" = "Ligatures";
-
-/* Class = "NSMenuItem"; title = "Align Right"; ObjectID = "wb2-vD-lq4"; */
-"wb2-vD-lq4.title" = "Align Right";
-
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
-"wpr-3q-Mcd.title" = "Help";
+"wpr-3q-Mcd.title" = "帮助";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU"; */
-"x3v-GG-iWU.title" = "Copy";
+"x3v-GG-iWU.title" = "复制";
 
-/* Class = "NSMenuItem"; title = "Use All"; ObjectID = "xQD-1f-W4t"; */
-"xQD-1f-W4t.title" = "Use All";
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "xcS-hC-CVo"; */
+"xcS-hC-CVo.title" = "查找…";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "y8M-pL-2Ja"; */
+"y8M-pL-2Ja.title" = "Item 3";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "y8a-Ne-yKc"; */
 "y8a-Ne-yKc.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Remove to Trash"; ObjectID = "zLH-oQ-QxW"; */
+"zLH-oQ-QxW.title" = "删除到回收站";

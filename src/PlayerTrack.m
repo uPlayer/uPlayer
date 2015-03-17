@@ -9,11 +9,15 @@
 
 #import "PlayerTrack.h"
 
-static int guuid = 0;
+#ifdef DEBUG
+#import "PlayerList.h"
+#endif
+
+//static int guuid = 0;
 
 @interface TrackInfo()
 {
-    int uuid;
+//    int uuid;
 }
 @end
 
@@ -25,7 +29,7 @@ static int guuid = 0;
     self = [super init];
     if (self) {
         
-        uuid = guuid++;
+//        uuid = guuid++;
     }
     
     return self;
@@ -38,16 +42,21 @@ static int guuid = 0;
     return 0;
 }
 
--(int)uuid
-{
-    return uuid;
-}
+//-(int)uuid
+//{
+//    return uuid;
+//}
 
 @end
 
 
 
 @implementation PlayerTrack
+
+-(NSInteger)getIndex
+{
+    return [self.list getIndex:self];
+}
 
 -(instancetype)init
 {

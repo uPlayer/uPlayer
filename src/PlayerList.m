@@ -28,6 +28,11 @@
     return self;
 }
 
+-(NSInteger)getIndex:(PlayerTrack*)track
+{
+    return [self.playerTrackList indexOfObject: track];
+}
+
 -(PlayerTrack*)getItem:(NSInteger)index
 {
     assert(index>=0 && index < self.playerTrackList.count);
@@ -60,13 +65,6 @@
         assert( [items.firstObject isKindOfClass:[PlayerTrack class] ]);
         
         
-        int index = (int) self.playerTrackList.count;
-        
-        for (PlayerTrack *track in items) {
-            track.index=index;
-            index++;
-        }
-        
         [self.playerTrackList addObjectsFromArray: items];
     }
 }
@@ -77,15 +75,12 @@
     if (count > 0)
     {
         assert( [items.firstObject isKindOfClass:[TrackInfo class] ]);
-        int index = (int)self.playerTrackList.count;
         
         NSMutableArray *arr = [NSMutableArray array];
         for (TrackInfo *info in items) {
             PlayerTrack *track = [[PlayerTrack alloc]init:self];
             track.info=info;
-            track.index=index;
             [arr addObject:track];
-            index++;
         }
         
         [self.playerTrackList addObjectsFromArray: arr];

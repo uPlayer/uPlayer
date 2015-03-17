@@ -23,10 +23,18 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
    Seeing the lyrics may change the taste of a good song. ~_~  
 * 监视文件夹.(时间不够了)
 * Add Vim Mode
+* Change a better application's icon.
 
 ##System  
 
 Only tested in OS X 10.10 Yosemite  
+
+##Draft a new release 
+
+1. Change the `bundle version` to v0.a.x and `Bundle version string,short` to 0.a.x
+2. Create a new git tag  0.a.x
+2. Draft a new release in github with title `uPlayer-0.a.x`.
+
 
 ##License  
 

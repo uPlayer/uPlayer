@@ -15,12 +15,15 @@
 @property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
 @property (nonatomic,strong)NSString *path;
 
--(int)uuid;
+//-(int)uuid;
 @end
 
 
 @interface PlayerTrack : NSObject
-@property (nonatomic) int index;
+
+-(NSInteger)getIndex;
+@property (nonatomic,readonly,getter=getIndex) NSInteger index;
+
 @property (nonatomic,strong) TrackInfo *info;
 
 ///

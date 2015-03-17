@@ -18,6 +18,7 @@
 
 
 -(PlayerTrack*)getItem:(NSInteger)index;
+-(NSInteger)getIndex:(PlayerTrack*)track;
 -(size_t)count;
 -(PlayerTrack*)getSelectedItem;
 -(PlayerTrack*)getPlayItem;

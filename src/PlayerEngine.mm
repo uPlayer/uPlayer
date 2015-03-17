@@ -128,6 +128,7 @@
     {
         track = [list getPlayItem];
         
+        
         assert(list);
         
         int index = track.index;
@@ -151,7 +152,9 @@
             indexNext =rand() % (count) - 1;
         }else if(order == playorder_repeat_single)
         {
-            indexNext = index;
+            playTrack(track);
+            return;
+            
         }else if(order == playorder_repeat_list)
         {
             indexNext = index + 1;
@@ -159,12 +162,11 @@
                 indexNext = 0;
         }
         
-        PlayerTrack* next = nil;
         
+        track = nil;
         if ( indexNext > 0 && indexNext < [list count] )
-            next = [list getItem: indexNext ];
+            track = [list getItem: indexNext ];
         
-        track = next;
     }
     
     playTrack(track);

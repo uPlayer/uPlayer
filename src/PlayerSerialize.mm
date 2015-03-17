@@ -144,19 +144,13 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(void)saveTo:(FILE*)file
 {
-    *file << self.index;
     saveTrackInfo(*file, self.info);
 }
 
 -(void)loadFrom:(FILE*)file
 {
-    int index;
-    *file >> index;
-    self.index = index;
-    
     TrackInfo *info = loadTrackInfo(*file);
     self.info = info;
-    
 }
 @end
 
