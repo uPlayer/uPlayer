@@ -10,11 +10,22 @@
 #import <Foundation/Foundation.h>
 #import "PlayerSerachMng.h"
 
+@interface PlayerSearchMng ()
+@property (nonatomic,strong) NSString *searchKey;
+@end
+
 @implementation PlayerSearchMng
+
+-(void)research
+{
+    [self search:self.searchKey];
+}
 
 -(void)search:(NSString *)key
 {
     assert(self.playerlistOriginal);
+    
+    self.searchKey = key;
     
     //search title first.
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.info.title contains[c] %@",key];

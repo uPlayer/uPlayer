@@ -14,13 +14,16 @@
 
 
 @interface PlayerSearchMng : NSObject
-@property (nonatomic,strong) NSString *searchKey;
 @property (nonatomic,strong) PlayerList *playerlistOriginal,*playerlistFilter;
 @property (nonatomic,strong) NSMutableDictionary *dicFilterToOrginal;//index
 
 -(void)search:(NSString*)key;
 
+///Refresh search result if the original playlist content is changed.
+-(void)research;
+
 -(PlayerTrack*)getOrginalByIndex:(NSInteger)index;
+
 @end
 
 

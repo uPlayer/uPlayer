@@ -70,8 +70,6 @@
     
     PlayerEngine *e = player().engine;
     
-    bool isPaused =  [e isPaused];
-    
     if( [ e isStopped])
         postEvent(EventID_to_play_selected_track, nil);
     else
@@ -395,8 +393,6 @@
 -(void)playerErrorHandler:(NSNotification*)n
 {
     PlayerError *error = n.object;
-    
-    NSLog(@"%@",error);
     
     [[NSAlert alertWithError:error] runModal];
 }

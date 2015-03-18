@@ -13,11 +13,7 @@
 #import "keycode.h"
 #import "MAAssert.h"
 
-typedef enum
-{
-   displayMode_tracklist,
-   displayMode_tracklist_search,
-} displayMode;
+
 
 @interface NSTableView (rc)
 /// select item at right click.
@@ -42,7 +38,7 @@ typedef enum
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,assign) NSArray *columnNames,*columnWidths;
-@property (nonatomic,assign) displayMode displaymode;
+@property (nonatomic,assign) bool isSearchMode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
 @end
@@ -107,8 +103,9 @@ typedef enum
     [self.view.window makeFirstResponder:self.tableView];
     
     // quit search mode.
-    if (self.displaymode == displayMode_tracklist_search)
-        self.displaymode = displayMode_tracklist;
+    if(self.isSearchMode)
+        self.isSearchMode = false;
+    
     
     PlayerList *list;
     int target = 0;
@@ -280,7 +277,8 @@ typedef enum
 {
     if (key.length > 0)
     {
-        self.displaymode= displayMode_tracklist_search;
+        self.isSearchMode = true;
+        
         if (self.searchMng == nil)
             self.searchMng = [[PlayerSearchMng alloc]init];
         
@@ -290,7 +288,7 @@ typedef enum
     }
     else
     {
-        self.displaymode = displayMode_tracklist;
+        self.isSearchMode = false;
     }
     
     [self.tableView reloadData];
@@ -309,7 +307,7 @@ typedef enum
         PlayerList *list ;
         
         PlayerTrack *track;
-        if (self.displaymode == displayMode_tracklist_search)
+        if (self.isSearchMode )
         {
             list = self.searchMng.playerlistFilter ;
             
@@ -367,7 +365,7 @@ typedef enum
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    if ( self.displaymode == displayMode_tracklist_search)
+    if ( self.isSearchMode )
         return   [self.searchMng.playerlistFilter count ];
     else
         return   [[self.playerlList getSelectedList] count];
@@ -375,7 +373,7 @@ typedef enum
 
 -(PlayerTrack*)getSelectedItem:(NSInteger)row
 {
-    PlayerTrack *track = self.displaymode == displayMode_tracklist_search? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
+    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
     return track;
 }
 
@@ -435,10 +433,13 @@ typedef enum
     if ([keyString isEqualToString:@"RETURN" ]||
         [keyString isEqualToString:@"ENTER" ])
     {
-        [self playSelectedTrack];
-        
-        PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
-        postEvent(EventID_to_reload_tracklist, track);
+        if ( self.tableView.selectedRow != -1)
+        {
+            [self playSelectedTrack];
+            
+            PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
+            postEvent(EventID_to_reload_tracklist, track);
+        }
     }
     // 'Space' to play/pause item.
     else if ( [keyString isEqualToString:@"SPACE"] )
@@ -448,14 +449,13 @@ typedef enum
     
     
     
-    if (self.displaymode == displayMode_tracklist_search)
+    if (self.isSearchMode )
     {
         if([keyString isEqualToString:@"ESCAPE"])
         {
-            
-            self.displaymode = displayMode_tracklist;
+            self.isSearchMode = false;
             [self.tableView reloadData];
-            if (self.tableView.selectedRow)
+            if (self.tableView.selectedRow != -1)
             {
                 PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
                 postEvent(EventID_to_reload_tracklist, track);
@@ -530,10 +530,24 @@ typedef enum
         NSString *alertSuppressionKey = @"RemoveItemToTrashConfirm";
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
    
+        
+        if (self.isSearchMode)
+        {
+            NSMutableIndexSet *rowsOrginal = [NSMutableIndexSet indexSet];
+            
+            [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+                NSUInteger d = [self.searchMng getOrginalByIndex:idx].index;
+                [rowsOrginal addIndex:d];
+            }];
+            
+            rows = rowsOrginal;
+        }
+        
         if ([defaults boolForKey: alertSuppressionKey])
         {
             [self removeItemsToTrash: rows];
-        } else
+        }
+        else
         {
             NSAlert *alert = [[NSAlert alloc] init];
             alert.messageText = [NSString stringWithFormat: NSLocalizedString(@"Remove %d items to Trash", nil ) , rows.count ];
@@ -543,19 +557,20 @@ typedef enum
             alert.showsSuppressionButton = YES; // Uses default checkbox title
             
             if( [alert runModal] == NSAlertFirstButtonReturn)
-            {
                 [self removeItemsToTrash: rows];
-            }
             
-
-            
-            if (alert.suppressionButton.state == NSOnState) {
-                // Suppress this alert from now on
+            // Suppress this alert from now on
+            if (alert.suppressionButton.state == NSOnState)
                 [defaults setBool: YES forKey: alertSuppressionKey];
-            }
+            
         }
         
-
+        if (self.isSearchMode)
+        {
+            //refresh the search result.
+            [self.searchMng research];
+            [self.tableView reloadData];
+        }
     }
     
 }
