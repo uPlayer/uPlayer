@@ -558,6 +558,9 @@
                     <items>
                         <menuItem title="Play" id="11Z-4N-8B4">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdPlayClickedTrack:" target="XfG-lQ-9wD" id="n1l-j7-3Fj"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Add to play queue" id="CGf-NP-DLA">
                             <modifierMask key="keyEquivalentModifierMask"/>

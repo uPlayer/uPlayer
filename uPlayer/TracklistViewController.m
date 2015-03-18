@@ -329,6 +329,8 @@
  
 }
 
+
+
 -(void)playClickedTrack
 {
     [self playTrack: self.tableView.clickedRow];
@@ -337,6 +339,11 @@
 -(void)playSelectedTrack
 {
     [self playTrack:self.tableView.selectedRow];
+}
+
+- (IBAction)cmdPlayClickedTrack:(id)sender
+{
+    [self playSelectedTrack];
 }
 
 -(void)doubleClicked

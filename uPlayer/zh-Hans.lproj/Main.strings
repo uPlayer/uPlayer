@@ -3,7 +3,7 @@
 "109-ro-5qv.title" = "Table View Cell";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "11Z-4N-8B4"; */
-"11Z-4N-8B4.title" = "Play";
+"11Z-4N-8B4.title" = "播放";
 
 /* Class = "NSToolbarItem"; label = "Volumn"; ObjectID = "1U9-cg-qxf"; */
 "1U9-cg-qxf.label" = "音量";
