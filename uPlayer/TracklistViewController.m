@@ -12,7 +12,6 @@
 #import "PlayerSerachMng.h"
 #import "keycode.h"
 #import "MAAssert.h"
-#import "windowController.h"
 
 typedef enum
 {
@@ -107,7 +106,6 @@ typedef enum
 {
     [self.view.window makeFirstResponder:self.tableView];
     
-    
     // quit search mode.
     if (self.displaymode == displayMode_tracklist_search)
         self.displaymode = displayMode_tracklist;
@@ -134,7 +132,7 @@ typedef enum
                 [self.tableView reloadData];
             }
 
-            target = track.index;
+            target = (int)track.index;
         }
         else
         {
@@ -316,7 +314,7 @@ typedef enum
             list = self.searchMng.playerlistFilter ;
             
             track = [self.searchMng getOrginalByIndex:row];
-            [list setSelectIndex:row];
+            [list setSelectIndex:(int)row];
             
             list = self.searchMng.playerlistOriginal;
         }
@@ -324,7 +322,7 @@ typedef enum
         {
             list = [_playerlList getSelectedList];
             track = [list getItem:row];
-            [list setSelectIndex:row];
+            [list setSelectIndex:(int)row];
         }
         
         playTrack(track);
@@ -429,24 +427,25 @@ typedef enum
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    //printf("key pressed: %s\n", [[theEvent description] cString]);
+    printf("key pressed: %s\n", [[theEvent description] cString]);
     
     NSString *keyString = keyStringFormKeyCode(theEvent.keyCode);
     
-    // press 'Enter' to play item.
-    if ([keyString isEqualToString:@"RETURN" ] )
+    // press 'Enter' to start play item.
+    if ([keyString isEqualToString:@"RETURN" ]||
+        [keyString isEqualToString:@"ENTER" ])
     {
         [self playSelectedTrack];
         
-        WindowController *w = self.view.window.windowController;
-        [w clearSearchControl];
-        
         PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
         postEvent(EventID_to_reload_tracklist, track);
-        
+    }
+    // 'Space' to play/pause item.
+    else if ( [keyString isEqualToString:@"SPACE"] )
+    {
+        [player().engine playPause];
     }
     
-
     
     
     if (self.displaymode == displayMode_tracklist_search)
@@ -460,8 +459,6 @@ typedef enum
             
             postEvent(EventID_to_reload_tracklist, track);
             
-            WindowController *w = self.view.window.windowController;
-            [w clearSearchControl];
         }
     }
    

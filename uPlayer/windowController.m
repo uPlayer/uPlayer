@@ -32,13 +32,11 @@
 
 
 
-@interface WindowController () <NSToolbarDelegate>
+@interface WindowController () <NSTextFieldDelegate>
 @property (weak) IBOutlet NSPopUpButton *playOrderBtn;
 @property (weak) IBOutlet NSSlider *progressSlider;
 @property (weak) IBOutlet NSSlider *volumnSlider;
 @property (weak) IBOutlet NSSearchField *searchField;
-
-@property (nonatomic,strong) NSString *searchKeys;
 
 @property (strong,nonatomic) PlaylistViewController* playlistManager;
 @end
@@ -60,8 +58,6 @@
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
     
     addObserverForEvent(self, @selector(showPlaylistManager), EventID_to_show_playlist);
-    
-    
 }
 
 -(void)showPlaylistManager
@@ -202,42 +198,20 @@
 //    printf("key pressed: %s\n", [[theEvent description] cString]);
 }
 
+
+#pragma mark - NSTextFieldDelegate
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+    _searchField.stringValue = @"";
+    return YES;
+}
+
+#pragma mark - 
+
 -(void)activeSearchControl
 {
     [self.window makeFirstResponder:_searchField];
-    
-    if (_searchKeys )
-        _searchField.stringValue = _searchKeys;
-    
-}
-
-
-
--(void)clearSearchControl
-{
-    _searchKeys = _searchField.stringValue;
-    _searchField.stringValue = @"";
-    
-    CGKeyCode keyCode = keyCodeFormKeyString(@"ESCAPE");
-    
-    
-    NSEvent *event = [NSEvent keyEventWithType:NSKeyDown location:NSMakePoint(0, 0) modifierFlags:0 timestamp:[[NSProcessInfo processInfo] systemUptime] windowNumber:self.window.windowNumber context:nil characters:@"ESCAPE" charactersIgnoringModifiers:nil isARepeat:NO keyCode:keyCode];
-                      
-//    [[NSApplication sharedApplication] sendEvent:event];
-    
-    
-    if([_searchField abortEditing] )
-    {
-        NSLog(@"123");
-    }
-    [self.window endEditingFor:_searchField];
-    _searchField.editable = false;
-    _searchField.selectable=false;
-    [[_searchField window] makeFirstResponder:self];
-    [_searchField abortEditing];
-    _searchField.editable = true;
-    _searchField.selectable = true;
-    
 }
 
 @end

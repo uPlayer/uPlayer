@@ -347,6 +347,7 @@
                                         </searchFieldCell>
                                         <connections>
                                             <action selector="actionSearch:" target="B8D-0N-5wS" id="Eje-gm-xKb"/>
+                                            <outlet property="delegate" destination="B8D-0N-5wS" id="Dlo-Xm-jsZ"/>
                                         </connections>
                                     </searchField>
                                 </toolbarItem>

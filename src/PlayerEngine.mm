@@ -131,7 +131,7 @@
         
         assert(list);
         
-        int index = track.index;
+        int index = (int)track.index;
         int count = (int)[list count];
         int indexNext =-1;
         PlayOrder order = (PlayOrder)d.playOrder;

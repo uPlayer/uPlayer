@@ -37,7 +37,7 @@
 
 
 /* Class = "NSMenuItem"; title = "Remove"; ObjectID = "8Ng-b4-bmx"; */
-"8Ng-b4-bmx.title" = "移动";
+"8Ng-b4-bmx.title" = "删除";
 
 /* Class = "NSMenuItem"; title = "Go to current song"; ObjectID = "8Op-6c-njz"; */
 "8Op-6c-njz.title" = "前往当前歌曲";
