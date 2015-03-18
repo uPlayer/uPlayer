@@ -76,10 +76,6 @@
         postEvent(EventID_to_play_selected_track, nil);
     else
         postEvent(EventID_to_play_pause_resume, nil);
-    
-    
-    NSMenuItem *item = (NSMenuItem *)sender;
-    item.title =   NSLocalizedString( (isPaused ?@"Pause" :@"Play") , nil);
 }
 
 
@@ -218,11 +214,6 @@
         player().engine.volume = player().document.volume;
         
         self.menuOpenDirectory.enabled = [d.playerlList count]>0;
-        
-        if( [player().engine isPlaying] )
-            self.menuPlayOrPause.title =NSLocalizedString(@"Pause" ,nil);
-        else
-            self.menuPlayOrPause.title = NSLocalizedString(@"Play",nil);
         
         
         // register hotkeys from cache file.

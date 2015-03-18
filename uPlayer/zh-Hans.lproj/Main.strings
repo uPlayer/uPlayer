@@ -17,8 +17,8 @@
 /* Class = "NSMenuItem"; title = "uPlayer"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "uPlayer";
 
-/* Class = "NSMenuItem"; title = "Play"; ObjectID = "2hd-wS-naf"; */
-"2hd-wS-naf.title" = "播放";
+/* Class = "NSMenuItem"; title = "Play/Pause"; ObjectID = "2hd-wS-naf"; */
+"2hd-wS-naf.title" = "播放/暂停";
 
 /* Class = "NSMenuItem"; title = "Active"; ObjectID = "49j-iI-dvk"; */
 "49j-iI-dvk.title" = "激活";

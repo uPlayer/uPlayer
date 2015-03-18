@@ -143,7 +143,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Control" id="MZE-Pa-qt8">
                                     <items>
-                                        <menuItem title="Play" keyEquivalent=" " id="2hd-wS-naf">
+                                        <menuItem title="Play/Pause" keyEquivalent=" " id="2hd-wS-naf">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                             <connections>
                                                 <action selector="cmdPlayPause:" target="Voe-Tx-rLC" id="Yhj-Jh-wUo"/>

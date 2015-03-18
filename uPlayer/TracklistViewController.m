@@ -427,7 +427,7 @@ typedef enum
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    printf("key pressed: %s\n", [[theEvent description] cString]);
+    //printf("key pressed: %s\n", [[theEvent description] UTF8String]);
     
     NSString *keyString = keyStringFormKeyCode(theEvent.keyCode);
     
@@ -452,13 +452,14 @@ typedef enum
     {
         if([keyString isEqualToString:@"ESCAPE"])
         {
-            PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
             
             self.displaymode = displayMode_tracklist;
             [self.tableView reloadData];
-            
-            postEvent(EventID_to_reload_tracklist, track);
-            
+            if (self.tableView.selectedRow)
+            {
+                PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
+                postEvent(EventID_to_reload_tracklist, track);
+            }
         }
     }
    
