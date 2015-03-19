@@ -1,0 +1,9 @@
+
+/* Class = "NSButtonCell"; title = "Track songs when play started  (scroll and select it in playlist)"; ObjectID = "GcW-dJ-svQ"; */
+"GcW-dJ-svQ.title" = "自动切换至开始播放的歌曲";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "V5M-yN-V0d"; */
+"V5M-yN-V0d.title" = "Window";
+
+/* Class = "NSButtonCell"; title = "Resume playing on reboot"; ObjectID = "hYm-UP-zKO"; */
+"hYm-UP-zKO.title" = "重启时恢复播放";

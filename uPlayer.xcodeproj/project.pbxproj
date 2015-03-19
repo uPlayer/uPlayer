@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E0443611A7B747A00B644D8 /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E04435E1A7B747A00B644D8 /* AppPreferences.m */; };
 		1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */; };
-		1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */; };
 		1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0443691A7B787D00B644D8 /* GeneralPreferences.png */; };
 		1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */; };
 		1E0B2BF41A77536800B4FE14 /* PlayerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */; };
@@ -28,13 +27,11 @@
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
 		1E9047F91AB2CA190000ED86 /* MAAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047F81AB2CA190000ED86 /* MAAssert.m */; };
 		1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047FB1AB2CB110000ED86 /* PlayerError.m */; };
-		1EB207BD1AA801E3007968C8 /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207BC1AA801E3007968C8 /* StatusMenu.xib */; };
 		1EB207C41AA80995007968C8 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C21AA80995007968C8 /* player.png */; };
 		1EB207C51AA80995007968C8 /* player@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C31AA80995007968C8 /* player@2.png */; };
 		1EB207C71AA80AF1007968C8 /* icon1.ico in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C61AA80AF1007968C8 /* icon1.ico */; };
 		1EB207C91AA80EA5007968C8 /* player.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1EB207C81AA80EA5007968C8 /* player.icns */; };
 		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */; };
-		1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */; };
 		1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */; };
 		1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */; };
 		1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */; };
@@ -60,9 +57,12 @@
 		1EDE8FD31A7740DC0086677B /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCF1A7740DC0086677B /* threadpool.cpp */; };
 		1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */; };
 		1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */; };
+		1EFBB8A91ABADDB4008F8B7B /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFBB8AB1ABADDB4008F8B7B /* StatusMenu.xib */; };
+		1EFBB8BD1ABAE045008F8B7B /* AccountPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFBB8BF1ABAE045008F8B7B /* AccountPreferences.xib */; };
+		1EFBB8E11ABAEBAC008F8B7B /* GeneralPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFBB8E31ABAEBAC008F8B7B /* GeneralPreferences.xib */; };
+		1EFBB8E61ABAEBB1008F8B7B /* HotKeyPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFBB8E81ABAEBB1008F8B7B /* HotKeyPreferences.xib */; };
 		1EFD42B91A91A9EF009D65B5 /* LLHotKeyRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; };
 		1EFD42BF1A91ABFF009D65B5 /* HotKeyPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42BC1A91ABFF009D65B5 /* HotKeyPreferences.m */; };
-		1EFD42C01A91ABFF009D65B5 /* HotKeyPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD42BD1A91ABFF009D65B5 /* HotKeyPreferences.nib */; };
 		1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */; };
 		1EFD42CD1A91E826009D65B5 /* ThreadJob.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */; };
 		1EFD42DE1A91EE85009D65B5 /* shortcutKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */; };
@@ -112,7 +112,6 @@
 		1E0443601A7B747A00B644D8 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
 		1E0443641A7B75EE00B644D8 /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
 		1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferences.m; sourceTree = "<group>"; };
-		1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = GeneralPreferences.nib; sourceTree = "<group>"; };
 		1E0443691A7B787D00B644D8 /* GeneralPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralPreferences.png; sourceTree = "<group>"; };
 		1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDocument.h; sourceTree = "<group>"; };
 		1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerDocument.mm; sourceTree = "<group>"; };
@@ -145,14 +144,12 @@
 		1E9047F81AB2CA190000ED86 /* MAAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAssert.m; sourceTree = "<group>"; };
 		1E9047FB1AB2CB110000ED86 /* PlayerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerError.m; sourceTree = "<group>"; };
 		1E9047FD1AB2CB240000ED86 /* PlayerError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerError.h; sourceTree = "<group>"; };
-		1EB207BC1AA801E3007968C8 /* StatusMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusMenu.xib; sourceTree = "<group>"; };
 		1EB207C21AA80995007968C8 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		1EB207C31AA80995007968C8 /* player@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player@2.png"; sourceTree = "<group>"; };
 		1EB207C61AA80AF1007968C8 /* icon1.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = icon1.ico; sourceTree = "<group>"; };
 		1EB207C81AA80EA5007968C8 /* player.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = player.icns; sourceTree = "<group>"; };
 		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
 		1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccountPreferences.mm; sourceTree = "<group>"; };
-		1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = AccountPreferences.nib; sourceTree = "<group>"; };
 		1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountPreferences.png; sourceTree = "<group>"; };
 		1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AccountPreferences@2x.png"; sourceTree = "<group>"; };
 		1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LastFMLogo.png; sourceTree = "<group>"; };
@@ -196,10 +193,17 @@
 		1EDE8FD01A7740DC0086677B /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threadpool.h; path = lyricsFetcher/src/threadpool.h; sourceTree = "<group>"; };
 		1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1EFBB8AA1ABADDB4008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
+		1EFBB8AE1ABADDB6008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
+		1EFBB8BE1ABAE045008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AccountPreferences.xib; sourceTree = "<group>"; };
+		1EFBB8E21ABAEBAC008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GeneralPreferences.xib; sourceTree = "<group>"; };
+		1EFBB8E71ABAEBB1008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HotKeyPreferences.xib; sourceTree = "<group>"; };
+		1EFBB8EA1ABAEBB3008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HotKeyPreferences.strings"; sourceTree = "<group>"; };
+		1EFBB8EC1ABAEBF9008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GeneralPreferences.strings"; sourceTree = "<group>"; };
+		1EFBB8F01ABAEE00008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AccountPreferences.strings"; sourceTree = "<group>"; };
 		1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLHotKeyRecorder.xcodeproj; path = LLHotKeyRecorder/LLHotKeyRecorder.xcodeproj; sourceTree = "<group>"; };
 		1EFD42BB1A91ABFF009D65B5 /* HotKeyPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotKeyPreferences.h; sourceTree = "<group>"; };
 		1EFD42BC1A91ABFF009D65B5 /* HotKeyPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKeyPreferences.m; sourceTree = "<group>"; };
-		1EFD42BD1A91ABFF009D65B5 /* HotKeyPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = HotKeyPreferences.nib; sourceTree = "<group>"; };
 		1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HotKeyPreferences.png; sourceTree = "<group>"; };
 		1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ThreadJob.mm; sourceTree = "<group>"; };
 		1EFD42CE1A91E847009D65B5 /* ThreadJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadJob.h; sourceTree = "<group>"; };
@@ -290,9 +294,9 @@
 		1ECEB7631A9053AB006E8C23 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				1EFBB8E31ABAEBAC008F8B7B /* GeneralPreferences.xib */,
 				1E0443641A7B75EE00B644D8 /* GeneralPreferences.h */,
 				1E0443651A7B75EE00B644D8 /* GeneralPreferences.m */,
-				1E0443671A7B766A00B644D8 /* GeneralPreferences.nib */,
 				1E0443691A7B787D00B644D8 /* GeneralPreferences.png */,
 			);
 			name = General;
@@ -301,9 +305,9 @@
 		1ECEB7641A9053BB006E8C23 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				1EFBB8BF1ABAE045008F8B7B /* AccountPreferences.xib */,
 				1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */,
 				1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */,
-				1ECEB7581A9052AD006E8C23 /* AccountPreferences.nib */,
 				1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */,
 				1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */,
 				1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */,
@@ -393,7 +397,7 @@
 				1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */,
 				1EDAAD471AB6F17E009DB36A /* Localizable.strings */,
 				1EDE8FB11A773D810086677B /* Main.storyboard */,
-				1EB207BC1AA801E3007968C8 /* StatusMenu.xib */,
+				1EFBB8AB1ABADDB4008F8B7B /* StatusMenu.xib */,
 				1EDE8FAF1A773D810086677B /* Images.xcassets */,
 				1EDE8FA51A773D810086677B /* Supporting Files */,
 			);
@@ -452,9 +456,9 @@
 		1EFD42BA1A91ABBD009D65B5 /* HotKey */ = {
 			isa = PBXGroup;
 			children = (
+				1EFBB8E81ABAEBB1008F8B7B /* HotKeyPreferences.xib */,
 				1EFD42BB1A91ABFF009D65B5 /* HotKeyPreferences.h */,
 				1EFD42BC1A91ABFF009D65B5 /* HotKeyPreferences.m */,
-				1EFD42BD1A91ABFF009D65B5 /* HotKeyPreferences.nib */,
 				1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */,
 			);
 			name = HotKey;
@@ -555,20 +559,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EB207C41AA80995007968C8 /* player.png in Resources */,
-				1ECEB75C1A9052AD006E8C23 /* AccountPreferences.nib in Resources */,
+				1EFBB8E11ABAEBAC008F8B7B /* GeneralPreferences.xib in Resources */,
 				1EB207C51AA80995007968C8 /* player@2.png in Resources */,
 				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
 				1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */,
 				1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */,
 				1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */,
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
-				1EFD42C01A91ABFF009D65B5 /* HotKeyPreferences.nib in Resources */,
 				1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */,
 				1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */,
-				1E0443681A7B766A00B644D8 /* GeneralPreferences.nib in Resources */,
+				1EFBB8BD1ABAE045008F8B7B /* AccountPreferences.xib in Resources */,
 				1EB207C71AA80AF1007968C8 /* icon1.ico in Resources */,
+				1EFBB8E61ABAEBB1008F8B7B /* HotKeyPreferences.xib in Resources */,
 				1EDAAD451AB6F17E009DB36A /* Localizable.strings in Resources */,
-				1EB207BD1AA801E3007968C8 /* StatusMenu.xib in Resources */,
+				1EFBB8A91ABADDB4008F8B7B /* StatusMenu.xib in Resources */,
 				1EB207C91AA80EA5007968C8 /* player.icns in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
 				1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */,
@@ -648,6 +652,45 @@
 				1E16D53B1A8B0F8A00C844ED /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1EFBB8AB1ABADDB4008F8B7B /* StatusMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1EFBB8AA1ABADDB4008F8B7B /* Base */,
+				1EFBB8AE1ABADDB6008F8B7B /* zh-Hans */,
+			);
+			name = StatusMenu.xib;
+			sourceTree = "<group>";
+		};
+		1EFBB8BF1ABAE045008F8B7B /* AccountPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1EFBB8BE1ABAE045008F8B7B /* Base */,
+				1EFBB8F01ABAEE00008F8B7B /* zh-Hans */,
+			);
+			name = AccountPreferences.xib;
+			path = ../uPlayer;
+			sourceTree = "<group>";
+		};
+		1EFBB8E31ABAEBAC008F8B7B /* GeneralPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1EFBB8E21ABAEBAC008F8B7B /* Base */,
+				1EFBB8EC1ABAEBF9008F8B7B /* zh-Hans */,
+			);
+			name = GeneralPreferences.xib;
+			path = ../uPlayer;
+			sourceTree = "<group>";
+		};
+		1EFBB8E81ABAEBB1008F8B7B /* HotKeyPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1EFBB8E71ABAEBB1008F8B7B /* Base */,
+				1EFBB8EA1ABAEBB3008F8B7B /* zh-Hans */,
+			);
+			name = HotKeyPreferences.xib;
+			path = ../uPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

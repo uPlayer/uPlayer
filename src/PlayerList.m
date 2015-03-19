@@ -48,7 +48,7 @@
 
 -(PlayerTrack*)getPlayItem
 {
-    if (_playIndex == -1)
+    if (_playIndex == -1 || _playIndex >= _playerTrackList.count)
         return nil;
     
     return [self getItem:_playIndex];

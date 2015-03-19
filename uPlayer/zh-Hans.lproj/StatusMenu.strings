@@ -1,0 +1,12 @@
+
+/* Class = "NSMenuItem"; title = "Random"; ObjectID = "DfF-kB-LZJ"; */
+"DfF-kB-LZJ.title" = "Random";
+
+/* Class = "NSMenuItem"; title = "Play/Pause"; ObjectID = "HAF-10-dUa"; */
+"HAF-10-dUa.title" = "Play/Pause";
+
+/* Class = "NSMenuItem"; title = "Stop"; ObjectID = "mWM-vJ-71g"; */
+"mWM-vJ-71g.title" = "停止";
+
+/* Class = "NSMenuItem"; title = "Next"; ObjectID = "zRD-Z2-fak"; */
+"zRD-Z2-fak.title" = "下一个";

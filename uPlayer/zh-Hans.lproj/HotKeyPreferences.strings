@@ -1,0 +1,12 @@
+
+/* Class = "NSTextFieldCell"; title = "Next"; ObjectID = "4pn-0S-AuE"; */
+"4pn-0S-AuE.title" = "下一个";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "FyF-yB-2G6"; */
+"FyF-yB-2G6.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Play/Pause"; ObjectID = "Y95-pd-6Oi"; */
+"Y95-pd-6Oi.title" = "播放/暂停";
+
+/* Class = "NSTextFieldCell"; title = "Random"; ObjectID = "oZZ-l7-cig"; */
+"oZZ-l7-cig.title" = "随机";

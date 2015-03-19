@@ -78,13 +78,13 @@
     {
         NSAlert *alert = [[NSAlert alloc] init];
         
-        [alert addButtonWithTitle:@"OK"];
+        [alert addButtonWithTitle: NSLocalizedString(@"OK",nil) ];
         
-        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle: NSLocalizedString(@"Cancel",nil) ];
         
-        [alert setMessageText:@"Disconnect the session?"];
+        [alert setMessageText: NSLocalizedString(@"Disconnect the session?",nil ) ];
         
-        [alert setInformativeText:@"The session connection needs login in on web browser."];
+        [alert setInformativeText: NSLocalizedString(@"The session connection needs login in on web browser.",nil) ];
         
         [alert setAlertStyle:NSWarningAlertStyle];
         

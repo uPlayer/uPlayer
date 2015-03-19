@@ -6,6 +6,11 @@
   Copyright (c) 2015年 liaogang. All rights reserved.
 */
 
+"OK" = "确定";
+
+"Cancel" = "取消";
+
+
 
 "uPlayer windows name"="uPlayer播放器";
 
@@ -39,3 +44,6 @@
 "genre" = "流派";
 "year" = "年份";
 
+"Disconnect the session?" = "断开会话?";
+
+"The session connection needs login in on web browser." = "会话需要在浏览器里登录";
