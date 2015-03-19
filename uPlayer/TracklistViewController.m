@@ -106,7 +106,7 @@
     if(self.isSearchMode)
         self.isSearchMode = false;
     
-    
+    PlayerList *listOld = [self.playerlList getSelectedList]; 
     PlayerList *list;
     int target = 0;
     // scroll target index to center or top?
@@ -154,7 +154,7 @@
     }
 
     
-    PlayerList *listOld = [self.playerlList getSelectedList];
+
     if ( list != listOld)
     {
         if (listOld)
