@@ -17,12 +17,22 @@ typedef enum : NSUInteger {
     EventID_track_state_changed,
     
     EventID_track_selected ,
-    EventID_track_progress_changed , // param : ProgressInfo *info.
-    EventID_playerqueue_changed ,
-    EventID_player_document_loaded , // 使配置生效 , loaded failed , or successed.
     
-    EventID_play_error_happened,// PlayerError *error;
- 
+    /// param : ProgressInfo *info.
+    EventID_track_progress_changed ,
+    EventID_playerqueue_changed ,
+    
+    /// 使配置生效 , loaded failed , or successed.
+    EventID_player_document_loaded ,
+    
+    /// @param: PlayerError *error;
+    EventID_play_error_happened,
+    
+    /// A PlayerList's track number changed. @param: PlayerList *list;
+    EventID_tracks_changed,
+    
+    /// playerlist added or removed. @param: none.
+    EventID_list_changed,
     
     
     /// param: PlayerList* list , if list is nil , then go to the playing item.

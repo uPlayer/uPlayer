@@ -1,5 +1,5 @@
 //
-//  UPlayer.m
+//  PlayerTrack.h
 //  uPlayer
 //
 //  Created by liaogang on 15/1/27.
@@ -15,7 +15,6 @@
 @property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
 @property (nonatomic,strong)NSString *path;
 
-//-(int)uuid;
 @end
 
 
@@ -26,8 +25,6 @@
 
 @property (nonatomic,strong) TrackInfo *info;
 
-///
-//
 /// value not need to searialize.
 @property (nonatomic,weak) PlayerList *list;
 

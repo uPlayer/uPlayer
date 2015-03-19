@@ -256,19 +256,16 @@
     
     
     PlayerDocument *d = player().document;
-    PlayerList *list = [d.playerlList getSelectedList];
+    PlayerList *list = [d.playerlList tempPlayerList];
     
     NSMutableArray *tracks = (NSMutableArray*)[list addTrackInfoItems: trackInfos];
 
     postEvent(EventID_to_play_item, tracks.firstObject);
     
-    /// todo add else to player queue.
-    
+    /// add others to player queue.
     [tracks removeObjectAtIndex:0];
     
-    for (PlayerTrack *track in tracks)
-        [d.playerQueue push:track];
-    
+    [d.playerQueue push2:tracks];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -364,30 +361,32 @@
 
 -(void)scrobbler:(NSNotification*)n
 {
-    LFUser *user = lastFmUser();
-    if (user->isConnected)
+    if( player().document.lastFmEnabled)
     {
-        TrackInfo *info = [[player().document.playerlList getPlayList] getPlayItem].info;
-        
-        dojobInBkgnd(^{
-            string artist(info.artist.UTF8String);
-            string track(info.title.UTF8String);
-            track_updateNowPlaying(user->sessionKey, artist, track);
-        }, nil);
-        
-        // scrobble a song when played half time of above 40 seconds.
-        ProgressInfo *progress= n.object;
-        NSAssert([progress isKindOfClass:[ProgressInfo class]], nil);
-        NSTimeInterval t = progress.total;
-        if (t > 40)
-            t = 40;
-        
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-        
-        [self performSelector:@selector(scrobblerSong:) withObject:info afterDelay:t];
-        
+        LFUser *user = lastFmUser();
+        if (user->isConnected)
+        {
+            TrackInfo *info = [[player().document.playerlList getPlayList] getPlayItem].info;
+            
+            dojobInBkgnd(^{
+                string artist(info.artist.UTF8String);
+                string track(info.title.UTF8String);
+                track_updateNowPlaying(user->sessionKey, artist, track);
+            }, nil);
+            
+            // scrobble a song when played half time of above 40 seconds.
+            ProgressInfo *progress= n.object;
+            NSAssert([progress isKindOfClass:[ProgressInfo class]], nil);
+            NSTimeInterval t = progress.total;
+            if (t > 40)
+                t = 40;
+            
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
+            
+            [self performSelector:@selector(scrobblerSong:) withObject:info afterDelay:t];
+            
+        }
     }
-    
 }
 
 -(void)playerErrorHandler:(NSNotification*)n

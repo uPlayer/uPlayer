@@ -28,6 +28,9 @@ const char *arrEvent[] =
     
     "play_error_happened",
     
+    "tracks_changed",
+    "list_changed",
+    
     "to_reload_tracklist",
     "to_save_config",
     "to_reload_lyrics",

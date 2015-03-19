@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  TracklistViewController.m
 //  uPlayer
 //
 //  Created by liaogang on 15/1/27.
@@ -243,7 +243,14 @@
     NSMenu *menu = [[NSMenu alloc] init];
     self.tableView.headerView.menu = menu;
     
-    self.columnNames = [NSArray arrayWithObjects:@"#",@"artist",@"title",@"album",@"genre",@"year", nil];
+    self.columnNames = [NSArray arrayWithObjects:
+                        NSLocalizedString(@"#", nil),
+                        NSLocalizedString(@"artist", nil),
+                        NSLocalizedString(@"title", nil),
+                        NSLocalizedString(@"album", nil),
+                        NSLocalizedString(@"genre", nil),
+                        NSLocalizedString(@"year", nil),nil];
+    
     self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
     
     for (int i = 0; i < self.columnNames.count; i++)
@@ -367,8 +374,13 @@
     postEvent(EventID_to_reload_tracklist, track);
 }
 
+-(PlayerTrack*)getSelectedItem:(NSInteger)row
+{
+    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
+    return track;
+}
 
-#pragma mark -
+#pragma mark - NSTableViewDataSource
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
@@ -378,11 +390,8 @@
         return   [[self.playerlList getSelectedList] count];
 }
 
--(PlayerTrack*)getSelectedItem:(NSInteger)row
-{
-    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
-    return track;
-}
+
+#pragma mark - NSTableViewDelegate
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
@@ -402,11 +411,12 @@
         textField.identifier=identifier;
     }
 
-    
-    TrackInfo *info = [self getSelectedItem:row].info;
+    PlayerTrack *track = [self getSelectedItem:row];
+    TrackInfo *info = track.info;
     
     if (column == 0) {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
+        
         textField.editable = false;
     }
     else if(column == 1) {
@@ -429,6 +439,7 @@
 }
 
 
+#pragma mark - key event
 
 - (void)keyDown:(NSEvent *)theEvent
 {
@@ -472,6 +483,8 @@
    
 }
 
+#pragma mark - context menu command
+
 - (IBAction)cmdShowInFinder:(id)sender
 {
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
@@ -513,7 +526,7 @@
         }];
     }
     
-    
+    [self.tableView reloadData];
 }
 
 -(void)removeItemsToTrash:(NSIndexSet*)set

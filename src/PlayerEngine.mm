@@ -1,5 +1,5 @@
 //
-//  UPlayer.m
+//  PlayerEngine.mm
 //  uPlayer
 //
 //  Created by liaogang on 15/1/27.
@@ -50,8 +50,6 @@
         _playTimeEnded = TRUE;
         
         _state = playstate_stopped;
-        
-//        _playUuid = -1;
         
         self.player = [[AVPlayer alloc]init];
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
@@ -186,16 +184,15 @@
     }
     else
     {
-        if (_player.rate == 0.0) {
+        if (_player.rate == 0.0)
+        {
             return playstate_paused;
         }
-        else //if(_player.rate == 1.0 )
+        else
         {
             return playstate_playing;
         }
     }
-    
-    //return playstate_stopped;
 }
 
 -(BOOL)isPlaying
@@ -313,7 +310,6 @@
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
-//    self.playUuid = -1;
     
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_state_changed, nil);

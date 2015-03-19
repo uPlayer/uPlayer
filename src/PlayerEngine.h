@@ -1,5 +1,5 @@
 //
-//  UPlayer.m
+//  PlayerEngine.h
 //  uPlayer
 //
 //  Created by liaogang on 15/1/27.
@@ -41,7 +41,6 @@
 -(struct PlayStateTime)close;
 
 
-//@property int playUuid;
 
 @end
 
@@ -49,7 +48,6 @@
 
 
 
-/// @todo nsprogress ?
 
 @interface ProgressInfo : NSObject
 @property (nonatomic) double current,

@@ -164,7 +164,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     {
 //        saveString(*file, self.name);
         
-        *file << self.selectIndex << self.playIndex << self.topIndex;
+        *file << self.selectIndex << self.playIndex << self.topIndex << (int)self.type;
         
         int count = (int) self.playerTrackList.count;
         *file << count;
@@ -184,11 +184,12 @@ NSArray *loadTrackInfoArray(FILE &file)
     if (file)
     {
 //        self.name = loadString(*file);
-        int selectIndex,playIndex,topIndex;
-        *file >> selectIndex >> playIndex >> topIndex;
+        int selectIndex,playIndex,topIndex,type;
+        *file >> selectIndex >> playIndex >> topIndex >>type;
         self.selectIndex=selectIndex;
         self.playIndex = playIndex;
         self.topIndex=topIndex;
+        self.type = (enum PlayerListType)type;
         
         int count = 0;
         *file >> count;
@@ -286,6 +287,9 @@ NSArray *loadTrackInfoArray(FILE &file)
             list.name = playlistName;
             [list loadFrom:[playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ]];
             [arr addObject: list];
+            
+            if (list.type == type_temporary)
+                [self setTempPlayerList:list];
         }
         
         self.playerlList = arr;

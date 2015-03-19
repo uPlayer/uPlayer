@@ -85,7 +85,12 @@
     self.tableView.usesAlternatingRowBackgroundColors = true;
     
     [self.tableView reloadData];
+    
+    addObserverForEvent( self.tableView , @selector(reloadData), EventID_tracks_changed);
+    addObserverForEvent( self.tableView , @selector(reloadData), EventID_list_changed);
+    
 }
+
 
 
 -(void)doubleClicked
@@ -112,13 +117,19 @@
 
     NSTextField *textField = [cellView subviews].firstObject;
     
+    PlayerList * list = [self.playerlList getItem:(int)row];
+    
     if (column == 0)
     {
         textField.stringValue = [NSNumber numberWithInt:(int)row].stringValue;
     }
+    else if (column == 1)
+    {
+        textField.stringValue = [NSString stringWithFormat:@"%zu", list.count];
+    }
     else
     {
-        textField.stringValue = [self.playerlList getItem:(int)row].name;
+        textField.stringValue = list.name;
     }
     
     return textField;

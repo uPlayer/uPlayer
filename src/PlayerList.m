@@ -1,5 +1,5 @@
 //
-//  UPlayer.m
+//  PlayerList.m
 //  uPlayer
 //
 //  Created by liaogang on 15/1/27.
@@ -8,9 +8,10 @@
 
 
 #import "PlayerList.h"
+#import "PlayerMessage.h"
+
 
 @interface PlayerList()
-
 @end
 
 
@@ -63,9 +64,9 @@
     int count = (int)items.count;
     if (count > 0) {
         assert( [items.firstObject isKindOfClass:[PlayerTrack class] ]);
-        
-        
         [self.playerTrackList addObjectsFromArray: items];
+        
+        postEvent(EventID_tracks_changed, self);
     }
 }
 
@@ -84,6 +85,7 @@
         }
         
         [self.playerTrackList addObjectsFromArray: arr];
+        postEvent(EventID_tracks_changed, self);
         
         return arr;
     }
@@ -94,15 +96,22 @@
 -(void)removeTrack:(NSInteger)index
 {
     [self.playerTrackList removeObjectAtIndex:index];
+    postEvent(EventID_tracks_changed, self);
 }
 
 -(void)removeTracks:(NSIndexSet*)indexs
 {
     [self.playerTrackList removeObjectsAtIndexes: indexs];
+    postEvent(EventID_tracks_changed, self);
 }
 
 @end
 
+
+
+@interface PlayerlList ()
+@property (nonatomic,strong) PlayerList *tempPlayerlist;
+@end
 
 
 @implementation PlayerlList
@@ -161,13 +170,38 @@
     return self.playerlList.count;
 }
 
--(PlayerList*)newPlayerList
+-(PlayerList*)newPlayerListWithName:(NSString*)name
 {
     PlayerList *list = [[PlayerList alloc]init];
-    list.name=@"unnamed playerlist";
+    list.name = name;
     [self.playerlList addObject:list];
     _selectIndex = (int)self.playerlList.count-1;
+    
+    postEvent(EventID_list_changed, nil);
+    
     return list;
+}
+
+-(PlayerList*)newPlayerList
+{
+    return [self newPlayerListWithName:@"unnamed playlist"];
+}
+
+-(PlayerList*)tempPlayerList
+{
+    if (!_tempPlayerlist)
+    {
+        self.tempPlayerlist = [self newPlayerListWithName:@"temporary playlist"];
+        _tempPlayerlist.type = type_temporary;
+    }
+    
+    return _tempPlayerlist;
+}
+
+-(void)setTempPlayerList:(PlayerList*)list
+{
+    self.tempPlayerlist = list;
+    list.type = type_temporary;
 }
 
 -(PlayerList*)deleteItem:(NSInteger)index

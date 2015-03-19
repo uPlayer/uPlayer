@@ -23,10 +23,19 @@
 "Account" = "账户";
 "HotKeys" = "热键";
 
-
+//play orders
 "default" = "默认";
 "random" = "随机";
 "repeat-single" = "重复-单个";
 "repeat-list" = "重复-列表";
 "shuffle" = "乱序";
 "single" = "单个";
+
+// column names
+"#" = "序号";
+"artist" = "艺术家";
+"title" = "标题";
+"album" = "专辑";
+"genre" = "流派";
+"year" = "年份";
+

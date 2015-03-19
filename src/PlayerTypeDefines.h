@@ -55,3 +55,10 @@ struct PlayStateTime
 #define playlistDirectoryName @"playlist"
 #define playlistIndexFileName @"index.cfg"
 
+
+enum PlayerListType
+{
+    type_normal,
+    type_temporary
+};
+
