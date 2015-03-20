@@ -29,6 +29,9 @@
 @property (nonatomic,weak) PlayerList *list;
 
 -(instancetype)init:(PlayerList*)list;
+
+-(void)markSelected;
+
 @end
 
 

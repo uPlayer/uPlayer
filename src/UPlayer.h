@@ -22,10 +22,12 @@
 @property (nonatomic,strong) PlayerLayout *layout;
 @property (nonatomic,strong) PlayerEngine *engine;
 
+
+@property (nonatomic,strong) PlayerTrack *playing;
 @end
 
 @interface PlayerEngine (playTrack)
--(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi;
+-(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi;
 @end
 
 

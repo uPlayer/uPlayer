@@ -16,6 +16,8 @@
 #import "PlayerMessage.h"
 #import "PlayerError.h"
 
+#import "PlayerSerialize.h"
+
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
@@ -77,15 +79,17 @@ NSArray* enumAudioFiles(NSString* path)
 
 
 @implementation PlayerEngine (playTrack)
--(void)playTrackInfo:(TrackInfo*)track pauseAfterInit:(BOOL)pfi
+-(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi
 {
+    NSString *path = track.info.path;
     
-   if ([[NSFileManager defaultManager] fileExistsAtPath:track.path])
+   if ([[NSFileManager defaultManager] fileExistsAtPath: path])
    {
-        [self playURL:[NSURL fileURLWithPath:track.path] pauseAfterInit:pfi];
+       player().playing = track;
+       [self playURL:[NSURL fileURLWithPath: path] pauseAfterInit:pfi];
    }
     else
-        postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile:track.path]);
+        postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile: path]);
     
 }
 @end
@@ -97,11 +101,11 @@ void playTrack(PlayerTrack *track)
     
     if (track)
     {
-        PlayerlList *llist = player().document.playerlList;
-        llist.playIndex = (int) [llist.playerlList indexOfObject:list];
-        list.playIndex = (int) [list.playerTrackList indexOfObject:track];
+//        PlayerlList *llist = player().document.playerlList;
+        //list.playIndex = (int) [list.playerTrackList indexOfObject:track];
+        player().playing = track;
         
-        [player().engine playTrackInfo:track.info pauseAfterInit: FALSE ];
+        [player().engine playTrackInfo:track pauseAfterInit: FALSE ];
     }
     
 }
@@ -109,7 +113,7 @@ void playTrack(PlayerTrack *track)
 void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track)
 {
     if (track)
-        [player().engine playTrackInfo:track.info pauseAfterInit: TRUE ];
+        [player().engine playTrackInfo:track pauseAfterInit: TRUE ];
 }
 
 void collectInfo(PlayerDocument *d , PlayerEngine *e)
@@ -119,3 +123,42 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
     d.playState = st.state;
     d.volume = st.volume;
 }
+
+
+
+
+@implementation PlayerDocument (documentLoaded)
+
+-(void)willSave
+{
+    PlayerTrack *track = player().playing;
+    self.playingIndexTrack = (int)track.index;
+    self.playingIndexList = [player().document.playerlList getIndex: track.list];
+    
+    [self.playerlList willSave];
+}
+
+-(void)didLoad
+{
+    [self.playerlList didLoad];
+    
+    if (self.playingIndexList >= 0 && self.playingIndexTrack >- 0)
+        player().playing = [[self.playerlList getItem: self.playingIndexList] getItem: self.playingIndexTrack];
+    
+}
+
+@end
+
+@implementation PlayerlList (documentLoaded)
+
+-(void)willSave
+{
+    self.selectIndex =  (int) [self getIndex:self.selectItem];
+}
+
+-(void)didLoad
+{
+    self.selectItem = [self getItem: self.selectIndex];
+}
+
+@end

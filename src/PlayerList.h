@@ -11,21 +11,27 @@
 #import "PlayerTrack.h"
 #import "PlayerTypeDefines.h"
 
-
+@class PlayerlList;
 
 
 @interface PlayerList: NSObject
 @property (nonatomic,strong) NSString *name;
-@property (nonatomic) int selectIndex,playIndex,topIndex;
+@property (nonatomic) int selectIndex,topIndex;
 @property (nonatomic,strong) NSMutableArray *playerTrackList;//class PlayerTrack
 
 @property (nonatomic) enum PlayerListType type;
 
+//
+-(instancetype)initWithOwner:(PlayerlList*)llist;
+@property (nonatomic) PlayerlList *llist;
+-(void)markSelected;
+
+
 -(PlayerTrack*)getItem:(NSInteger)index;
 -(NSInteger)getIndex:(PlayerTrack*)track;
 -(size_t)count;
--(PlayerTrack*)getSelectedItem;
--(PlayerTrack*)getPlayItem;
+//-(PlayerTrack*)getSelectedItem;
+//-(PlayerTrack*)getPlayItem;
 -(void)addItems:(NSArray*)items;
 
 /**
@@ -41,15 +47,21 @@
 
 /// list of player list.
 @interface PlayerlList : NSObject
-@property (nonatomic) int selectIndex,playIndex;
-@property (nonatomic,strong) NSMutableArray *playerlList;
 
+/// use selectItem at application's runtime. selectIndex when serialize.
+@property (nonatomic) int selectIndex;
+@property (nonatomic) PlayerList *selectItem;
+
+
+@property (nonatomic,strong) NSMutableArray *playerlList;
 
 -(PlayerList*)getItem:(int)index;
 
--(void)setSelectItem:(PlayerList*)list;
--(PlayerList*)getSelectedList;
--(PlayerList*)getPlayList;
+-(NSInteger)getIndex:(PlayerList*)list;
+
+//-(void)setSelectItem:(PlayerList*)list;
+//-(PlayerList*)getSelectedList;
+
 -(size_t)count;
 
 -(PlayerList*)newPlayerList;
@@ -60,4 +72,10 @@
 // return the nearest one before or after the deleted.
 -(PlayerList*)deleteItem:(NSInteger)index;
 
+@end
+
+@interface PlayerlList (documentLoaded)
+-(void)willSave;
+
+-(void)didLoad;
 @end

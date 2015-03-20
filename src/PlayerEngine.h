@@ -8,6 +8,8 @@
 
 #import "PlayerTypeDefines.h"
 
+@class PlayerTrack;
+
 @interface PlayerEngine : NSObject
 
 ///Whether or not the Player is playing.
@@ -39,8 +41,6 @@
 
 /// save info and stop.
 -(struct PlayStateTime)close;
-
-
 
 @end
 

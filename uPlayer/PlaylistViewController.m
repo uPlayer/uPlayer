@@ -39,8 +39,11 @@
     
     [self.tableView resignFirstResponder];
     
-    PlayerList *list = [self.playerlList getPlayList];
-    NSInteger row = list.playIndex;
+    PlayerTrack *track = player().playing;
+    
+    PlayerList *list = track.list;
+    
+    NSInteger row = track.index;
     
     if (row == -1)
         return;

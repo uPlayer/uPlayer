@@ -106,7 +106,7 @@
     if(self.isSearchMode)
         self.isSearchMode = false;
     
-    PlayerList *listOld = [self.playerlList getSelectedList]; 
+    PlayerList *listOld = self.playerlList.selectItem;
     PlayerList *list;
     int target = 0;
     // scroll target index to center or top?
@@ -123,7 +123,7 @@
             
             list = track.list;
             
-            if (list != [self.playerlList getSelectedList])
+            if (list != self.playerlList.selectItem)
             {
                 [self.playerlList setSelectItem:list];
                 [self.tableView reloadData];
@@ -136,7 +136,7 @@
             list = n.object;
             
             // current is not showing. reload it.
-            if (list != [self.playerlList getSelectedList])
+            if (list != self.playerlList.selectItem)
             {
                 [self.playerlList setSelectItem:list];
                 
@@ -148,9 +148,9 @@
     else
     {
         // then reload playing.
-        list = [self.playerlList getPlayList];
+        list = player().playing.list;
         
-        target = list.playIndex;
+        target = (int)player().playing.index;
     }
 
     
@@ -289,7 +289,7 @@
         if (self.searchMng == nil)
             self.searchMng = [[PlayerSearchMng alloc]init];
         
-        self.searchMng.playerlistOriginal = [self.playerlList getSelectedList];
+        self.searchMng.playerlistOriginal = self.playerlList.selectItem;
         
         [self.searchMng search:key];
     }
@@ -319,13 +319,18 @@
             list = self.searchMng.playerlistFilter ;
             
             track = [self.searchMng getOrginalByIndex:row];
-            [list setSelectIndex:(int)row];
+            
+            player().playing = track;
+            
+            [list markSelected];
+            
+            //[list setSelectIndex:(int)row];
             
             list = self.searchMng.playerlistOriginal;
         }
         else
         {
-            list = [_playerlList getSelectedList];
+            list = _playerlList.selectItem;
             track = [list getItem:row];
             [list setSelectIndex:(int)row];
         }
@@ -376,7 +381,7 @@
 
 -(PlayerTrack*)getSelectedItem:(NSInteger)row
 {
-    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedList] getItem: (int)row];
+    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [self.playerlList.selectItem  getItem: (int)row];
     return track;
 }
 
@@ -387,7 +392,7 @@
     if ( self.isSearchMode )
         return   [self.searchMng.playerlistFilter count ];
     else
-        return   [[self.playerlList getSelectedList] count];
+        return   [self.playerlList.selectItem count];
 }
 
 
@@ -522,7 +527,7 @@
     if ( rows.count > 0)
     {
         [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            [[self.playerlList getSelectedList] removeTrack: idx ];
+            [self.playerlList.selectItem removeTrack: idx ];
         }];
     }
     
@@ -531,14 +536,14 @@
 
 -(void)removeItemsToTrash:(NSIndexSet*)set
 {
-    PlayerList *list = [self.playerlList getSelectedList];
+    PlayerList *list = self.playerlList.selectItem;
     
     [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         PlayerTrack *track = [list getItem: idx ];
         [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath: track.info.path] resultingItemURL:nil error:nil];
     }];
     
-    [[self.playerlList getSelectedList] removeTracks: set ];
+    [list removeTracks: set ];
     [self.tableView reloadData];
 }
 

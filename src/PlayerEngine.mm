@@ -31,10 +31,13 @@
     PlayerDocument *doc = player().document;
     if (doc.resumeAtReboot && doc.playState != playstate_stopped )
     {
+        PlayerTrack *track = player().playing;
+        PlayerList *list = track.list;
+        
         if ( doc.playState == playstate_playing )
-            playTrack( [[doc.playerlList getPlayList] getPlayItem]);
+            playTrack( track );
         else
-            playTrackPauseAfterInit( [doc.playerlList getPlayList], [[doc.playerlList getPlayList] getPlayItem]);
+            playTrackPauseAfterInit( list, track );
         
         if (doc.playTime > 0)
             [self seekToTime:doc.playTime];
@@ -114,8 +117,9 @@
     
     PlayerQueue *queue = d.playerQueue;
     
-    PlayerList *list = [d.playerlList getPlayList];
-    PlayerTrack *track;
+    PlayerTrack *track = player().playing;
+    
+    PlayerList *list = track.list;
     
     if ((track = [queue pop] ))
     {
@@ -123,9 +127,6 @@
     }
     else
     {
-        track = [list getPlayItem];
-        
-        
         assert(list);
         
         int index = (int)track.index;
@@ -217,10 +218,13 @@
 -(void)playRandom
 {
     PlayerDocument *d = player().document;
-    PlayerList *list = [d.playerlList getPlayList];
+    
+    PlayerTrack *track = player().playing;
+    
+    PlayerList *list = track.list;
     
     if (!list)
-        list = [d.playerlList getSelectedList];
+        list = d.playerlList.selectItem ;
     
     assert(list);
     
@@ -260,7 +264,6 @@
     
     
     postEvent(EventID_track_state_changed, nil);
-    
 }
 
 

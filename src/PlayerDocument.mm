@@ -33,6 +33,8 @@
         self.lastFmEnabled =FALSE;
         self.volume = 1.0;
         self.playerQueue=[[PlayerQueue alloc]init];
+        self.playingIndexList = -1;
+        self.playingIndexTrack = -1;
     }
     
     return self;

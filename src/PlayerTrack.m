@@ -53,4 +53,9 @@
     return self;
 }
 
+-(void)markSelected
+{
+    _list.selectIndex = (int) self.index;
+}
+
 @end

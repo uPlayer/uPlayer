@@ -132,7 +132,8 @@
 -(void)updateUI
 {
     PlayerlList *ll = player().document.playerlList;
-    PlayerTrack *track = [[ll getPlayList] getPlayItem];
+    
+    PlayerTrack *track = player().playing;
     
     
     BOOL stopped = [player().engine isStopped];

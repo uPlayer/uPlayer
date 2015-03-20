@@ -164,7 +164,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     {
 //        saveString(*file, self.name);
         
-        *file << self.selectIndex << self.playIndex << self.topIndex << (int)self.type;
+        *file << self.selectIndex  << self.topIndex << (int)self.type;
         
         int count = (int) self.playerTrackList.count;
         *file << count;
@@ -184,10 +184,9 @@ NSArray *loadTrackInfoArray(FILE &file)
     if (file)
     {
 //        self.name = loadString(*file);
-        int selectIndex,playIndex,topIndex,type;
-        *file >> selectIndex >> playIndex >> topIndex >>type;
+        int selectIndex,topIndex,type;
+        *file >> selectIndex >> topIndex >>type;
         self.selectIndex=selectIndex;
-        self.playIndex = playIndex;
         self.topIndex=topIndex;
         self.type = (enum PlayerListType)type;
         
@@ -223,7 +222,7 @@ NSArray *loadTrackInfoArray(FILE &file)
     FILE *file = fopen(path.UTF8String, "w");
     if (file)
     {
-        *file << self.selectIndex << self.playIndex ;
+        *file << self.selectIndex ;
         
         int count = (int) self.playerlList.count;
         *file << count;
@@ -263,10 +262,9 @@ NSArray *loadTrackInfoArray(FILE &file)
     FILE *file = fopen(path.UTF8String, "r");
     if (file)
     {
-        int si,pi;
-        *file >> si >> pi;
+        int si;
+        *file >> si;
         self.selectIndex = si;
-        self.playIndex = pi;
         
         // load all playlist indexs.
         int count = 0;
@@ -306,6 +304,9 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 @implementation PlayerDocument (serialize)
 
+//@synthesize playingIndexList,playingIndexTrack;
+//@dynamic playingIndexTrack,playingIndexList;
+
 -(bool)load
 {
     NSString *appSupportDir = ApplicationSupportDirectory();
@@ -317,9 +318,10 @@ NSArray *loadTrackInfoArray(FILE &file)
         int resumeAtReboot , trackSongsWhenPlayStarted ;
         float volume ;
         int playOrder ,playState , fontHeight ,lastFmEnabled ;
+        int playingIndexList,playingIndexTrack;
         NSTimeInterval playTime;
         
-        *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> lastFmEnabled >> playTime;
+        *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> lastFmEnabled >>playingIndexList >> playingIndexTrack >> playTime;
         
         self.resumeAtReboot=resumeAtReboot;
         self.trackSongsWhenPlayStarted = trackSongsWhenPlayStarted;
@@ -328,6 +330,10 @@ NSArray *loadTrackInfoArray(FILE &file)
         self.playState=playState;
         self.fontHeight=fontHeight;
         self.lastFmEnabled = lastFmEnabled;
+        
+        self.playingIndexList = playingIndexList;
+        self.playingIndexTrack = playingIndexTrack;
+        
         self.playTime = playTime;
         
         
@@ -337,6 +343,8 @@ NSArray *loadTrackInfoArray(FILE &file)
         
         fclose(file);
         
+        [self didLoad];
+        
         return true;
     }
     
@@ -345,12 +353,14 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 -(bool)save
 {
+    [self willSave];
+    
     NSString *appSupportDir = ApplicationSupportDirectory();
     FILE *file = fopen([appSupportDir stringByAppendingPathComponent: docFileName].UTF8String, "w");
     
     if (file)
     {
-        *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playTime ;
+        *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playingIndexList << self.playingIndexTrack <<self.playTime ;
         
         [self.playerlList save:appSupportDir];
         

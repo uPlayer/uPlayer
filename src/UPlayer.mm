@@ -31,6 +31,8 @@ void initLastFm()
 
 @implementation UPlayer
 
+@synthesize playing;
+
 -(instancetype)init
 {
     self = [super init];

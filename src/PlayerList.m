@@ -17,12 +17,28 @@
 
 @implementation PlayerList
 
+-(instancetype)initWithOwner:(PlayerlList*)llist
+{
+    self = [super init];
+    if (self) {
+        _llist = llist;
+        _selectIndex = -1;
+        _topIndex = 0;
+        self.playerTrackList= [NSMutableArray array];
+    }
+    return self;
+}
+
+-(void)markSelected
+{
+    _llist.selectItem = self;
+}
+
 -(instancetype)init
 {
     self = [super init];
     if (self) {
         _selectIndex = -1;
-        _playIndex = -1;
         _topIndex = 0;
         self.playerTrackList= [NSMutableArray array];
     }
@@ -41,18 +57,12 @@
     return self.playerTrackList[index];
 }
 
+/*
 -(PlayerTrack*)getSelectedItem
 {
     return [self getItem: _selectIndex];
 }
-
--(PlayerTrack*)getPlayItem
-{
-    if (_playIndex == -1 || _playIndex >= _playerTrackList.count)
-        return nil;
-    
-    return [self getItem:_playIndex];
-}
+ */
 
 -(size_t)count
 {
@@ -120,8 +130,7 @@
 {
     self = [super init];
     if (self) {
-        _selectIndex = -1;
-        _playIndex = -1;
+//        _selectIndex = -1;
         self.playerlList = [NSMutableArray array];
     }
     return self;
@@ -134,6 +143,12 @@
     return self.playerlList[index];
 }
 
+-(NSInteger)getIndex:(PlayerList*)list
+{
+    return [_playerlList indexOfObject:list];
+}
+
+/*
 -(void)setSelectItem:(PlayerList*)list
 {
     NSUInteger index = [self.playerlList indexOfObject:list];
@@ -156,14 +171,16 @@
     
     return [self getItem:_selectIndex];
 }
+*/
 
+/*
 -(PlayerList*)getPlayList
 {
     if (_playIndex == -1)
         return nil;
     
     return [self getItem:_playIndex];
-}
+}*/
 
 -(size_t)count
 {
@@ -172,10 +189,10 @@
 
 -(PlayerList*)newPlayerListWithName:(NSString*)name
 {
-    PlayerList *list = [[PlayerList alloc]init];
+    PlayerList *list = [[PlayerList alloc]initWithOwner:self];
     list.name = name;
     [self.playerlList addObject:list];
-    _selectIndex = (int)self.playerlList.count-1;
+//    _selectIndex = (int)self.playerlList.count-1;
     
     postEvent(EventID_list_changed, nil);
     

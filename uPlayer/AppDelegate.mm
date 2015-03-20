@@ -114,7 +114,7 @@
             NSString* fileName =[(NSURL*)(files.firstObject) path];
             
             PlayerDocument *document = player().document;
-            PlayerList *list = [document.playerlList getSelectedList];
+            PlayerList *list = document.playerlList.selectItem;
             
             dojobInBkgnd(
                          ^{
@@ -275,7 +275,7 @@
     
     PlayerDocument *d = player().document;
     // add ~/music to a default playerlist, if is none.
-    if ( [d.playerlList count] == 1 && [d.playerlList getSelectedList].count == 0)
+    if ( [d.playerlList count] == 1 && d.playerlList.selectItem.count == 0)
     {
         NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
         
@@ -283,7 +283,7 @@
         
         userMusic = [userMusic stringByAppendingPathComponent:@"iTunes/iTunes Media/Music"];
         
-        PlayerList *list = [d.playerlList getSelectedList];
+        PlayerList *list = d.playerlList.selectItem;
         
         dojobInBkgnd(
                      ^{
@@ -298,8 +298,9 @@
 
 -(void)track_state_changed
 {
-    PlayerlList *ll = player().document.playerlList;
-    PlayerTrack *track = [[ll getPlayList] getPlayItem];
+//    PlayerlList *ll = player().document.playerlList;
+    
+    PlayerTrack *track = player().playing;
     
     
     BOOL stopped = [player().engine isStopped];
@@ -366,7 +367,7 @@
         LFUser *user = lastFmUser();
         if (user->isConnected)
         {
-            TrackInfo *info = [[player().document.playerlList getPlayList] getPlayItem].info;
+            TrackInfo *info =  player().playing.info;
             
             dojobInBkgnd(^{
                 string artist(info.artist.UTF8String);
