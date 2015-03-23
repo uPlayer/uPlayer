@@ -133,10 +133,7 @@
 
 -(void)updateUI
 {
-    PlayerlList *ll = player().document.playerlList;
-    
     PlayerTrack *track = player().playing;
-    
     
     BOOL stopped = [player().engine isStopped];
     //BOOL playing = [player().engine isPlaying];

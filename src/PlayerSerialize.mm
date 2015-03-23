@@ -8,8 +8,26 @@
 #import "serialize.h"
 #import "ThreadJob.h"
 #import "PlayerTypeDefines.h"
+#import "MAAssert.h"
 
 const int max_path = 256;
+
+
+
+
+#ifdef DEBUG
+#define assertBool(x) \
+MAAssert( (x) == 0 || (x) == 1)
+#else
+#endif
+
+
+
+
+
+
+
+
 
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {
@@ -304,8 +322,17 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 @implementation PlayerDocument (serialize)
 
-//@synthesize playingIndexList,playingIndexTrack;
-//@dynamic playingIndexTrack,playingIndexList;
+#ifdef DEBUG
+-(void)assertMembers
+{
+    assertBool(self.resumeAtReboot);
+    assertBool( self.resumeAtReboot );
+    assertBool( self.trackSongsWhenPlayStarted );
+    MAAssert( 0 <= self.volume && self.volume <= 1);
+    MAAssert( self.playOrder < kPlayOrder.count );
+    assertBool( self.lastFmEnabled );
+}
+#endif
 
 -(bool)load
 {
@@ -336,6 +363,7 @@ NSArray *loadTrackInfoArray(FILE &file)
         
         self.playTime = playTime;
         
+        [self assertMembers];
         
         assert(self.playerlList);
         [self.playerlList load:appSupportDir];
@@ -360,6 +388,8 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
+        [self assertMembers];
+        
         *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playingIndexList << self.playingIndexTrack <<self.playTime ;
         
         [self.playerlList save:appSupportDir];
@@ -382,7 +412,6 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
-        
         fclose(file);
         return true;
     }
@@ -396,9 +425,6 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
-
-        
-        
         fclose(file);
         
         return true;
