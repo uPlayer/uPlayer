@@ -41,6 +41,9 @@
 @property (strong,nonatomic) PlaylistViewController* playlistManager;
 
 @property (weak) IBOutlet NSButton *btnPlayPause;
+@property (weak) IBOutlet NSButton *btnNextTrack;
+@property (weak) IBOutlet NSButton *btnPlayRandom;
+
 @end
 
 @implementation WindowController
@@ -139,14 +142,11 @@
     //BOOL playing = [player().engine isPlaying];
     BOOL paused = [player().engine isPaused];
     
-    if (paused || stopped) {
+    if (paused || stopped)
         _btnPlayPause.image = [NSImage imageNamed:@"Play_Button"];
-        _btnPlayPause.alternateImage = [NSImage imageNamed:@"Play_ButtonPress"];
-    }
-    else {
+    else
         _btnPlayPause.image = [NSImage imageNamed:@"Pause_Button"];
-        _btnPlayPause.alternateImage = [NSImage imageNamed:@"Pause_ButtonPress"];
-    }
+
     
     
     if (stopped)
@@ -231,6 +231,16 @@
         postEvent(EventID_to_play_selected_track, nil);
     else
         postEvent(EventID_to_play_pause_resume, nil);
+}
+
+- (IBAction)cmdNextTrack:(id)sender {
+    postEvent(EventID_to_play_next, nil);
+    postEvent(EventID_to_reload_tracklist, nil);
+}
+
+- (IBAction)cmdPlayRandom:(id)sender {
+    postEvent(EventID_to_play_random, nil);
+    postEvent(EventID_to_reload_tracklist, nil);
 }
 
 @end

@@ -356,7 +356,7 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="Fm4-g3-JmQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Ml3-NW-m2V"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kVY-E4-A0e"/>
-                                <toolbarItem implicitItemIdentifier="B46D8AE7-7591-432B-A5A7-4C7D83701BC7" label="Custom View" paletteLabel="Custom View" image="Play_Button" id="jYN-9J-YTY">
+                                <toolbarItem implicitItemIdentifier="B46D8AE7-7591-432B-A5A7-4C7D83701BC7" label="Play/Pause" paletteLabel="Play/Pause" image="Play_Button" id="jYN-9J-YTY">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="40"/>
                                     <size key="maxSize" width="40" height="100"/>
@@ -364,11 +364,43 @@
                                         <rect key="frame" x="19" y="14" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Play_Button" imagePosition="only" alignment="center" alternateImage="Play_ButtonPressed" state="on" imageScaling="proportionallyDown" inset="2" id="cq8-Pp-xeD">
-                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="cmdPlayPause:" target="B8D-0N-5wS" id="5Ha-Lu-6Ra"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="30C69D9B-BA2E-4219-A399-45BFC6099BEB" label="NextTrack" paletteLabel="NextTrack" image="NextTrack_Button" id="g9V-H0-xAb">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="40"/>
+                                    <size key="maxSize" width="40" height="100"/>
+                                    <button key="view" id="LCs-lh-Moa">
+                                        <rect key="frame" x="19" y="14" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NextTrack_Button" imagePosition="only" alignment="center" alternateImage="NextTrack_ButtonPressed" state="on" imageScaling="proportionallyDown" inset="2" id="zFn-2z-yrL">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="cmdNextTrack:" target="B8D-0N-5wS" id="KMu-uQ-xai"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DCE09DD8-3DB4-4D0A-9F86-7BC983B6753A" label="PlayRandom" paletteLabel="PlayRandom" image="Play_Random" id="92u-z4-9TP">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="38"/>
+                                    <size key="maxSize" width="40" height="100"/>
+                                    <button key="view" id="hz0-8s-Bwn">
+                                        <rect key="frame" x="17" y="15" width="40" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Play_Random" imagePosition="only" alignment="center" alternateImage="Play_Random" state="on" imageScaling="proportionallyDown" inset="2" id="CBa-Bu-Hei">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="cmdPlayRandom:" target="B8D-0N-5wS" id="Usm-Nz-6Bs"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -377,7 +409,8 @@
                                 <toolbarItem reference="c2Z-N4-MTP"/>
                                 <toolbarItem reference="pmD-eR-0dO"/>
                                 <toolbarItem reference="jYN-9J-YTY"/>
-                                <toolbarItem reference="1U9-cg-qxf"/>
+                                <toolbarItem reference="g9V-H0-xAb"/>
+                                <toolbarItem reference="92u-z4-9TP"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
                             </defaultToolbarItems>
@@ -391,11 +424,12 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="btnNextTrack" destination="LCs-lh-Moa" id="9E9-ux-MG1"/>
                         <outlet property="btnPlayPause" destination="BDl-qT-HNp" id="CI2-ls-qLa"/>
+                        <outlet property="btnPlayRandom" destination="hz0-8s-Bwn" id="ysb-1Z-a8m"/>
                         <outlet property="playOrderBtn" destination="sfz-rD-LJX" id="cgF-0l-BFK"/>
                         <outlet property="progressSlider" destination="Wg7-DP-k7t" id="Kg9-SN-45h"/>
                         <outlet property="searchField" destination="3Z0-st-x37" id="J6V-hx-q0b"/>
-                        <outlet property="toolBar" destination="9tp-fk-1gk" id="Psb-IG-UHj"/>
                         <outlet property="volumnSlider" destination="mlb-Ky-CB6" id="gHg-e6-Jq3"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
@@ -656,7 +690,10 @@ CA
         </scene>
     </scenes>
     <resources>
+        <image name="NextTrack_Button" width="51" height="40"/>
+        <image name="NextTrack_ButtonPressed" width="51" height="40"/>
         <image name="Play_Button" width="45" height="44"/>
         <image name="Play_ButtonPressed" width="45" height="44"/>
+        <image name="Play_Random" width="32" height="32"/>
     </resources>
 </document>
