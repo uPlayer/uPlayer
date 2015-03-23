@@ -114,19 +114,18 @@
 -(void)playNext
 {
     PlayerDocument *d = player().document;
-    
     PlayerQueue *queue = d.playerQueue;
     
-    PlayerTrack *track = player().playing;
-    
-    PlayerList *list = track.list;
-    
-    if ((track = [queue pop] ))
+    PlayerTrack *trackQueue = [queue pop] ;
+    if ( trackQueue )
     {
-        
+        playTrack(trackQueue);
     }
     else
     {
+        PlayerTrack *track = player().playing;
+        PlayerList *list = track.list;
+        
         assert(list);
         
         int index = (int)track.index;
@@ -165,9 +164,8 @@
         if ( indexNext > 0 && indexNext < [list count] )
             track = [list getItem: indexNext ];
         
+        playTrack(track);
     }
-    
-    playTrack(track);
     
 }
 

@@ -31,8 +31,6 @@ void initLastFm()
 
 @implementation UPlayer
 
-@synthesize playing;
-
 -(instancetype)init
 {
     self = [super init];
@@ -43,9 +41,6 @@ void initLastFm()
         self.engine= [[PlayerEngine alloc] init];
        
         initLastFm();
-        
-        
-        
     }
     return self;
 }
