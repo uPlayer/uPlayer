@@ -39,6 +39,8 @@
 @property (weak) IBOutlet NSSearchField *searchField;
 
 @property (strong,nonatomic) PlaylistViewController* playlistManager;
+
+@property (weak) IBOutlet NSButton *btnPlayPause;
 @end
 
 @implementation WindowController
@@ -140,6 +142,16 @@
     //BOOL playing = [player().engine isPlaying];
     BOOL paused = [player().engine isPaused];
     
+    if (paused || stopped) {
+        _btnPlayPause.image = [NSImage imageNamed:@"Play_Button"];
+        _btnPlayPause.alternateImage = [NSImage imageNamed:@"Play_ButtonPress"];
+    }
+    else {
+        _btnPlayPause.image = [NSImage imageNamed:@"Pause_Button"];
+        _btnPlayPause.alternateImage = [NSImage imageNamed:@"Pause_ButtonPress"];
+    }
+    
+    
     if (stopped)
     {
         self.window.title = player().document.windowName;
@@ -216,15 +228,12 @@
 
 - (IBAction)cmdPlayPause:(id)sender
 {
+    PlayerEngine *e = player().engine;
     
-}
-
-- (NSImage *)playPauseButtonImage
-{
-    if ( [player().engine isPlaying] )
-        return [NSImage imageNamed:@"Pause_Button"];
+    if( [ e isStopped])
+        postEvent(EventID_to_play_selected_track, nil);
     else
-        return [NSImage imageNamed:@"Play_Button"];
+        postEvent(EventID_to_play_pause_resume, nil);
 }
 
 @end

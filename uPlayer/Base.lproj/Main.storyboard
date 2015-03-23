@@ -356,31 +356,27 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="Fm4-g3-JmQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Ml3-NW-m2V"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kVY-E4-A0e"/>
-                                <toolbarItem implicitItemIdentifier="1928FF56-A0A0-436B-8948-3C5E03F2EACE" label="Play/Pause" paletteLabel="Play/Pause" id="5ly-F9-qqa">
+                                <toolbarItem implicitItemIdentifier="B46D8AE7-7591-432B-A5A7-4C7D83701BC7" label="Custom View" paletteLabel="Custom View" id="jYN-9J-YTY">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="82" height="32"/>
-                                    <size key="maxSize" width="82" height="34"/>
-                                    <button key="view" verticalHuggingPriority="750" id="q6z-UG-Le3">
-                                        <rect key="frame" x="0.0" y="14" width="82" height="34"/>
+                                    <size key="minSize" width="44" height="23"/>
+                                    <size key="maxSize" width="115" height="100"/>
+                                    <button key="view" id="BDl-qT-HNp">
+                                        <rect key="frame" x="0.0" y="14" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="E1N-eF-Aao">
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="cq8-Pp-xeD">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-IA
-</string>
-                                            <connections>
-                                                <action selector="cmdPlayPause:" target="B8D-0N-5wS" id="hM0-rw-Dgs"/>
-                                                <binding destination="B8D-0N-5wS" name="image" keyPath="playPauseButtonImage" id="9JX-ZW-KSa"/>
-                                            </connections>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="cmdPlayPause:" target="B8D-0N-5wS" id="5Ha-Lu-6Ra"/>
+                                        </connections>
                                     </button>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="c2Z-N4-MTP"/>
                                 <toolbarItem reference="pmD-eR-0dO"/>
-                                <toolbarItem reference="5ly-F9-qqa"/>
+                                <toolbarItem reference="jYN-9J-YTY"/>
                                 <toolbarItem reference="1U9-cg-qxf"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
@@ -395,6 +391,7 @@ IA
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="btnPlayPause" destination="BDl-qT-HNp" id="CI2-ls-qLa"/>
                         <outlet property="playOrderBtn" destination="sfz-rD-LJX" id="cgF-0l-BFK"/>
                         <outlet property="progressSlider" destination="Wg7-DP-k7t" id="Kg9-SN-45h"/>
                         <outlet property="searchField" destination="3Z0-st-x37" id="J6V-hx-q0b"/>

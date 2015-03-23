@@ -138,7 +138,7 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 {
     [self.playerlList didLoad];
     
-    if (self.playingIndexList >= 0 && self.playingIndexTrack >- 0)
+    if (self.playingIndexList >= 0 && self.playingIndexTrack >= 0)
         player().playing = [[self.playerlList getItem: self.playingIndexList] getItem: self.playingIndexTrack];
     
 }

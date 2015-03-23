@@ -102,7 +102,7 @@
 {
     _playTimeEnded = TRUE;
     
-    [self stopForNext];
+    [self stopInner];
     
     postEvent(EventID_track_stopped_playnext, nil);
     
@@ -308,7 +308,7 @@
     return [self playURL:url pauseAfterInit:false];
 }
 
--(void)stopForNext
+-(void)stopInner
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
@@ -336,7 +336,7 @@
     st.time =[self currentTime];
     st.state = [self getPlayState];
     st.volume = self.volume;
-    [self stop];
+    [self stopInner];
     return st;
 }
 

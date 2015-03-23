@@ -235,12 +235,6 @@
     [self initApp];
 }
 
-- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
-{
-    NSLog(@"%@",filename);
-    return YES;
-}
-
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
     NSLog(@"%@",filenames);
