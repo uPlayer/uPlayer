@@ -35,12 +35,17 @@
 /* Class = "NSMenuItem"; title = "Key Blindings..."; ObjectID = "6Of-OG-Yan"; */
 "6Of-OG-Yan.title" = "按键绑定...";
 
-
 /* Class = "NSMenuItem"; title = "Remove"; ObjectID = "8Ng-b4-bmx"; */
 "8Ng-b4-bmx.title" = "删除";
 
 /* Class = "NSMenuItem"; title = "Go to current song"; ObjectID = "8Op-6c-njz"; */
 "8Op-6c-njz.title" = "前往当前歌曲";
+
+/* Class = "NSToolbarItem"; label = "PlayRandom"; ObjectID = "92u-z4-9TP"; */
+"92u-z4-9TP.label" = "播放随机";
+
+/* Class = "NSToolbarItem"; paletteLabel = "PlayRandom"; ObjectID = "92u-z4-9TP"; */
+"92u-z4-9TP.paletteLabel" = "播放随机";
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜单";
@@ -98,9 +103,6 @@
 
 /* Class = "NSMenu"; title = "Control"; ObjectID = "MZE-Pa-qt8"; */
 "MZE-Pa-qt8.title" = "控制";
-
-/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "N5v-Ri-pz6"; */
-"N5v-Ri-pz6.title" = "Item 1";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "服务";
@@ -168,6 +170,9 @@
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "文件";
 
+/* Class = "NSTableColumn"; headerCell.title = "song number"; ObjectID = "bvQ-OO-SUT"; */
+"bvQ-OO-SUT.headerCell.title" = "歌曲数";
+
 /* Class = "NSToolbarItem"; label = "Play Order"; ObjectID = "c2Z-N4-MTP"; */
 "c2Z-N4-MTP.label" = "播放次序";
 
@@ -179,9 +184,6 @@
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "文件";
-
-/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
-"dRJ-4n-Yzg.title" = "撤消";
 
 /* Class = "NSMenuItem"; title = "Show PlayList"; ObjectID = "erA-OL-DYs"; */
 "erA-OL-DYs.title" = "显示播放列表";
@@ -195,14 +197,23 @@
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "h61-UG-gb8"; */
 "h61-UG-gb8.title" = "Item 2";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "hLo-7s-qNo"; */
-"hLo-7s-qNo.title" = "Text Cell";
+/* Class = "NSTableColumn"; headerCell.title = "name"; ObjectID = "h2V-xq-zdE"; */
+"h2V-xq-zdE.headerCell.title" = "名字";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Services";
 
 /* Class = "NSMenuItem"; title = "Smaller"; ObjectID = "i1d-Er-qST"; */
 "i1d-Er-qST.title" = "更小";
+
+/* Class = "NSToolbarItem"; label = "Play/Pause"; ObjectID = "jYN-9J-YTY"; */
+"jYN-9J-YTY.label" = "播放/暂停";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Play/Pause"; ObjectID = "jYN-9J-YTY"; */
+"jYN-9J-YTY.paletteLabel" = "播放/暂停";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "jgL-sh-12X"; */
+"jgL-sh-12X.title" = "Table View Cell";
 
 /* Class = "NSMenuItem"; title = "Format"; ObjectID = "jxT-CU-nIS"; */
 "jxT-CU-nIS.title" = "Format";
@@ -225,6 +236,9 @@
 /* Class = "NSMenuItem"; title = "显示工具栏"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "显示工具栏";
 
+/* Class = "NSMenuItem"; title = "Clear Play Queue"; ObjectID = "tiA-Se-VSY"; */
+"tiA-Se-VSY.title" = "清空播放列表";
+
 /* Class = "NSMenu"; title = "uPlayer"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "uPlayer";
 
@@ -239,12 +253,6 @@
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "xcS-hC-CVo"; */
 "xcS-hC-CVo.title" = "查找…";
-
-/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "y8M-pL-2Ja"; */
-"y8M-pL-2Ja.title" = "Item 3";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "y8a-Ne-yKc"; */
-"y8a-Ne-yKc.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Remove to Trash"; ObjectID = "zLH-oQ-QxW"; */
 "zLH-oQ-QxW.title" = "删除到回收站";

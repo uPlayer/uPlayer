@@ -114,10 +114,15 @@
             }
             
         } , ^{
-            [(NSWindow *)alert.window close];
+            // Close the Alert...
+            NSPanel *panel = alert.window;
+            [panel orderOut:nil];
+            [panel close];
+            [NSApp endSheet: panel];
+            
             [self updateUIUser: _user];
         });
-
+        
         if ([alert runModal] == NSAlertFirstButtonReturn)
         {
             stopAuth = true;
