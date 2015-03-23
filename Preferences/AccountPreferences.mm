@@ -99,15 +99,32 @@
     }
     else
     {
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert setMessageText: NSLocalizedString(@"uPlayer is 'Waiting' for your authorization",nil ) ];
+        [alert setInformativeText: NSLocalizedString(@"Switch to the web instanse just opened and login in to allow uPlayer for scrobbling songs",nil) ];
+        [alert addButtonWithTitle: NSLocalizedString(@"Abort", nil)];
+        
+        __block bool stopAuth = false;
+        
         dojobInBkgnd(^{
-            if (auth( *_user , true ) )
+            
+            if (auth( *_user , true , stopAuth ) )
             {
+                
             }
             
         } , ^{
+            [(NSWindow *)alert.window close];
             [self updateUIUser: _user];
         });
 
+        if ([alert runModal] == NSAlertFirstButtonReturn)
+        {
+            stopAuth = true;
+            
+            [self updateUIUser: _user];
+        }
+        
     }
     
     

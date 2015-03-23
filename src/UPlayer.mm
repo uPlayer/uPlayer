@@ -22,7 +22,7 @@ void initLastFm()
     
     
     // Load Last.fm session locally
-    auth(* lastFmUser() , FALSE );
+    authLocal(* lastFmUser()  );
 }
 
 @interface UPlayer ()

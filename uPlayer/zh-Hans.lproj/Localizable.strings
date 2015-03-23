@@ -47,3 +47,9 @@
 "Disconnect the session?" = "断开会话?";
 
 "The session connection needs login in on web browser." = "会话需要在浏览器里登录";
+
+"uPlayer is 'Waiting' for your authorization" = "uPlayer正在'等待'您的授权";
+"Switch to the web instanse just opened and login in to allow uPlayer for scrobbling songs" = "切换到刚打开的网页然后登录来允许uPlayer Scrobble歌曲";
+"Abort" = "中止";
+
+

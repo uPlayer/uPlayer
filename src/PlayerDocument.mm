@@ -30,7 +30,7 @@
         self.resumeAtReboot = TRUE;
         self.playTime = -1;
         self.trackSongsWhenPlayStarted = TRUE;
-        self.lastFmEnabled =FALSE;
+        self.lastFmEnabled = FALSE;
         self.volume = 1.0;
         self.playerQueue=[[PlayerQueue alloc]init];
         self.playingIndexList = -1;
