@@ -155,31 +155,32 @@
     }
 }
 
+-(bool)hasRowSelected
+{
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    return rows.count > 0;
+}
+
 - (IBAction)cmdDeleteItem:(id)sender
 {
-    NSInteger item = self.tableView.clickedRow;
+    NSInteger item = self.tableView.selectedRow;
     
-    if (item != -1)
-    {
-        PlayerList* nearItem = [player().document.playerlList deleteItem:item];
-        
-        [self.tableView reloadData];
-        
-        postEvent(EventID_to_reload_tracklist, nearItem);
-    }
+    PlayerList* nearItem = [player().document.playerlList deleteItem:item];
+    
+    [self.tableView reloadData];
+    
+    postEvent(EventID_to_reload_tracklist, nearItem);
+    
     
 }
 
 - (IBAction)cmdActiveItem:(id)sender
 {
     int selectedRow = (int) self.tableView.selectedRow;
-    if ( selectedRow != -1)
-    {
-        PlayerList *l = [self.playerlList getItem:selectedRow];
-        
-        postEvent(EventID_to_reload_tracklist, l );
-    }
-
+    PlayerList *l = [self.playerlList getItem:selectedRow];
+    
+    postEvent(EventID_to_reload_tracklist, l );
+    
 }
 
 @end

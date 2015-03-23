@@ -562,31 +562,21 @@
                     </connections>
                 </viewController>
                 <customObject id="8rv-Tv-eeI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <menu id="0L1-7k-cmQ">
-                    <items>
-                        <menuItem title="Item 1" id="N5v-Ri-pz6">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Item 2" id="h61-UG-gb8">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Item 3" id="y8M-pL-2Ja">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                    </items>
-                </menu>
+                <menu id="0L1-7k-cmQ"/>
                 <menu id="zlW-gU-OyA">
                     <items>
                         <menuItem title="Active" id="49j-iI-dvk">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdActiveItem:" target="Qif-73-RE2" id="P4s-vm-ueq"/>
+                                <binding destination="Qif-73-RE2" name="enabled" keyPath="hasRowSelected" id="5PG-tE-6gs"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Delete" id="cKz-al-MiT">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdDeleteItem:" target="Qif-73-RE2" id="xr8-zQ-6Q6"/>
+                                <binding destination="Qif-73-RE2" name="enabled" keyPath="hasRowSelected" id="Czw-m1-PDT"/>
                             </connections>
                         </menuItem>
                     </items>
