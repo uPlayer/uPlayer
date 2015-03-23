@@ -19,6 +19,14 @@
 		1E169A891A78E701003D3D01 /* windowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.m */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */; };
+		1E5F6D931ABC35FF00430128 /* Pause_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */; };
+		1E5F6D941ABC35FF00430128 /* Pause_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8C1ABC35FF00430128 /* Pause_Button@2x.png */; };
+		1E5F6D951ABC35FF00430128 /* Pause_ButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8D1ABC35FF00430128 /* Pause_ButtonPressed.png */; };
+		1E5F6D961ABC35FF00430128 /* Pause_ButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8E1ABC35FF00430128 /* Pause_ButtonPressed@2x.png */; };
+		1E5F6D971ABC35FF00430128 /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8F1ABC35FF00430128 /* Play_Button.png */; };
+		1E5F6D981ABC35FF00430128 /* Play_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D901ABC35FF00430128 /* Play_Button@2x.png */; };
+		1E5F6D991ABC35FF00430128 /* Play_ButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D911ABC35FF00430128 /* Play_ButtonPressed.png */; };
+		1E5F6D9A1ABC35FF00430128 /* Play_ButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D921ABC35FF00430128 /* Play_ButtonPressed@2x.png */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
 		1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A78371AA974D9004E9DDC /* keymaps.json */; };
@@ -132,6 +140,14 @@
 		1E16D53B1A8B0F8A00C844ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
+		1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause_Button.png; sourceTree = "<group>"; };
+		1E5F6D8C1ABC35FF00430128 /* Pause_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pause_Button@2x.png"; sourceTree = "<group>"; };
+		1E5F6D8D1ABC35FF00430128 /* Pause_ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause_ButtonPressed.png; sourceTree = "<group>"; };
+		1E5F6D8E1ABC35FF00430128 /* Pause_ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pause_ButtonPressed@2x.png"; sourceTree = "<group>"; };
+		1E5F6D8F1ABC35FF00430128 /* Play_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play_Button.png; sourceTree = "<group>"; };
+		1E5F6D901ABC35FF00430128 /* Play_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play_Button@2x.png"; sourceTree = "<group>"; };
+		1E5F6D911ABC35FF00430128 /* Play_ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play_ButtonPressed.png; sourceTree = "<group>"; };
+		1E5F6D921ABC35FF00430128 /* Play_ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play_ButtonPressed@2x.png"; sourceTree = "<group>"; };
 		1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEngine.h; sourceTree = "<group>"; };
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
 		1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerSerialize.mm; sourceTree = "<group>"; };
@@ -287,6 +303,14 @@
 				1EB207C61AA80AF1007968C8 /* icon1.ico */,
 				1EB207C21AA80995007968C8 /* player.png */,
 				1EB207C31AA80995007968C8 /* player@2.png */,
+				1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */,
+				1E5F6D8C1ABC35FF00430128 /* Pause_Button@2x.png */,
+				1E5F6D8D1ABC35FF00430128 /* Pause_ButtonPressed.png */,
+				1E5F6D8E1ABC35FF00430128 /* Pause_ButtonPressed@2x.png */,
+				1E5F6D8F1ABC35FF00430128 /* Play_Button.png */,
+				1E5F6D901ABC35FF00430128 /* Play_Button@2x.png */,
+				1E5F6D911ABC35FF00430128 /* Play_ButtonPressed.png */,
+				1E5F6D921ABC35FF00430128 /* Play_ButtonPressed@2x.png */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -519,6 +543,7 @@
 			knownRegions = (
 				Base,
 				"zh-Hans",
+				zh_CN,
 			);
 			mainGroup = 1EDE8F991A773D810086677B;
 			productRefGroup = 1EDE8FA31A773D810086677B /* Products */;
@@ -561,21 +586,29 @@
 				1EB207C41AA80995007968C8 /* player.png in Resources */,
 				1EFBB8E11ABAEBAC008F8B7B /* GeneralPreferences.xib in Resources */,
 				1EB207C51AA80995007968C8 /* player@2.png in Resources */,
+				1E5F6D931ABC35FF00430128 /* Pause_Button.png in Resources */,
 				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
 				1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */,
 				1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */,
 				1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */,
+				1E5F6D971ABC35FF00430128 /* Play_Button.png in Resources */,
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
+				1E5F6D941ABC35FF00430128 /* Pause_Button@2x.png in Resources */,
 				1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */,
 				1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */,
+				1E5F6D961ABC35FF00430128 /* Pause_ButtonPressed@2x.png in Resources */,
 				1EFBB8BD1ABAE045008F8B7B /* AccountPreferences.xib in Resources */,
 				1EB207C71AA80AF1007968C8 /* icon1.ico in Resources */,
+				1E5F6D981ABC35FF00430128 /* Play_Button@2x.png in Resources */,
 				1EFBB8E61ABAEBB1008F8B7B /* HotKeyPreferences.xib in Resources */,
 				1EDAAD451AB6F17E009DB36A /* Localizable.strings in Resources */,
 				1EFBB8A91ABADDB4008F8B7B /* StatusMenu.xib in Resources */,
 				1EB207C91AA80EA5007968C8 /* player.icns in Resources */,
+				1E5F6D9A1ABC35FF00430128 /* Play_ButtonPressed@2x.png in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
 				1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */,
+				1E5F6D991ABC35FF00430128 /* Play_ButtonPressed.png in Resources */,
+				1E5F6D951ABC35FF00430128 /* Pause_ButtonPressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +827,7 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-ltag",
 					"-ljson",
@@ -825,6 +859,7 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-ltag",
 					"-ljson",

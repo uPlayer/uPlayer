@@ -64,4 +64,9 @@
     return nil;
 }
 
+-(NSInteger)count
+{
+    return _queue.count;
+}
+
 @end

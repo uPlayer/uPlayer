@@ -14,7 +14,7 @@
 #import "MAAssert.h"
 
 
-
+/*
 @interface NSTableView (rc)
 /// select item at right click.
 -(NSMenu *)menuForEvent:(NSEvent *)event;
@@ -23,17 +23,22 @@
 @implementation NSTableView (rc)
 -(NSMenu *)menuForEvent:(NSEvent *)event
 {
+    NSEvent *e = [NSEvent mouseEventWithType: NSLeftMouseDown location:event.locationInWindow modifierFlags:event.modifierFlags timestamp:event.timestamp windowNumber:event.windowNumber context:event.context eventNumber:event.eventNumber clickCount:event.clickCount pressure:event.pressure];
+    
+    [super menuForEvent: e];
+    
     // what row are we at?
     NSInteger row = [self rowAtPoint: [self convertPoint: [event locationInWindow] fromView: nil]];
     
-    if( row == -1)
-        [self deselectAll:nil];
-    else
+    //if( row == -1)
+    //    [self deselectAll:nil];
+    //else
         [self selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
     
     return [super menu]; // use what we've got
 }
 @end
+*/
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
@@ -490,46 +495,51 @@
 
 #pragma mark - context menu command
 
+-(bool)hasRowSelected
+{
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    return rows.count > 0;
+}
+
 - (IBAction)cmdShowInFinder:(id)sender
 {
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    if ( rows.count > 0)
-    {
-        NSMutableArray *urlArr=[NSMutableArray array];
-        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            TrackInfo *info = [self getSelectedItem:idx].info;
-            [urlArr addObject: [NSURL fileURLWithPath: info.path]];
-            
-        }];
+    NSMutableArray *urlArr=[NSMutableArray array];
+    [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        TrackInfo *info = [self getSelectedItem:idx].info;
+        [urlArr addObject: [NSURL fileURLWithPath: info.path]];
         
-        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs: urlArr ];
-    }
+    }];
+    
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs: urlArr ];
 }
 
 - (IBAction)cmdAddToPlayQueue:(id)sender
 {
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    if ( rows.count > 0)
-    {
-        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
-        {
-            PlayerTrack *track = [self getSelectedItem:idx];
-            
-            [player().document.playerQueue push:track];
-        }];
-
-    }
+    [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
+     {
+         PlayerTrack *track = [self getSelectedItem:idx];
+         
+         [player().document.playerQueue push:track];
+     }];
     
+}
+
+-(bool)isPlayQueueNotEmpty
+{
+    return [player().document.playerQueue count] > 0;
+}
+
+- (IBAction)cmdClearPlayQueue:(id)sender {
+    [player().document.playerQueue clear];
 }
 
 - (IBAction)cmdRemoveRefrence:(id)sender {
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    if ( rows.count > 0)
-    {
-        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            [self.playerlList.selectItem removeTrack: idx ];
-        }];
-    }
+    [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [self.playerlList.selectItem removeTrack: idx ];
+    }];
     
     [self.tableView reloadData];
 }
@@ -550,52 +560,49 @@
 - (IBAction)cmdRemoveToTrash:(id)sender {
     
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    if ( rows.count > 0)
+    NSString *alertSuppressionKey = @"RemoveItemToTrashConfirm";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    if (self.isSearchMode)
     {
-        NSString *alertSuppressionKey = @"RemoveItemToTrashConfirm";
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   
+        NSMutableIndexSet *rowsOrginal = [NSMutableIndexSet indexSet];
         
-        if (self.isSearchMode)
-        {
-            NSMutableIndexSet *rowsOrginal = [NSMutableIndexSet indexSet];
-            
-            [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-                NSUInteger d = [self.searchMng getOrginalByIndex:idx].index;
-                [rowsOrginal addIndex:d];
-            }];
-            
-            rows = rowsOrginal;
-        }
+        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            NSUInteger d = [self.searchMng getOrginalByIndex:idx].index;
+            [rowsOrginal addIndex:d];
+        }];
         
-        if ([defaults boolForKey: alertSuppressionKey])
-        {
+        rows = rowsOrginal;
+    }
+    
+    if ([defaults boolForKey: alertSuppressionKey])
+    {
+        [self removeItemsToTrash: rows];
+    }
+    else
+    {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = [NSString stringWithFormat: NSLocalizedString(@"Remove %d items to Trash", nil ) , rows.count ];
+        alert.alertStyle=NSWarningAlertStyle;
+        [alert addButtonWithTitle:NSLocalizedString(@"Continue",nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+        alert.showsSuppressionButton = YES; // Uses default checkbox title
+        
+        if( [alert runModal] == NSAlertFirstButtonReturn)
             [self removeItemsToTrash: rows];
-        }
-        else
-        {
-            NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = [NSString stringWithFormat: NSLocalizedString(@"Remove %d items to Trash", nil ) , rows.count ];
-            alert.alertStyle=NSWarningAlertStyle;
-            [alert addButtonWithTitle:NSLocalizedString(@"Continue",nil)];
-            [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
-            alert.showsSuppressionButton = YES; // Uses default checkbox title
-            
-            if( [alert runModal] == NSAlertFirstButtonReturn)
-                [self removeItemsToTrash: rows];
-            
-            // Suppress this alert from now on
-            if (alert.suppressionButton.state == NSOnState)
-                [defaults setBool: YES forKey: alertSuppressionKey];
-            
-        }
         
-        if (self.isSearchMode)
-        {
-            //refresh the search result.
-            [self.searchMng research];
-            [self.tableView reloadData];
-        }
+        // Suppress this alert from now on
+        if (alert.suppressionButton.state == NSOnState)
+            [defaults setBool: YES forKey: alertSuppressionKey];
+        
+    }
+    
+    if (self.isSearchMode)
+    {
+        //refresh the search result.
+        [self.searchMng research];
+        [self.tableView reloadData];
     }
     
 }

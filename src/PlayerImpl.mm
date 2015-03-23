@@ -97,12 +97,8 @@ NSArray* enumAudioFiles(NSString* path)
 
 void playTrack(PlayerTrack *track)
 {
-    PlayerList *list = track.list;
-    
     if (track)
     {
-//        PlayerlList *llist = player().document.playerlList;
-        //list.playIndex = (int) [list.playerTrackList indexOfObject:track];
         player().playing = track;
         
         [player().engine playTrackInfo:track pauseAfterInit: FALSE ];
@@ -133,7 +129,7 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 {
     PlayerTrack *track = player().playing;
     self.playingIndexTrack = (int)track.index;
-    self.playingIndexList = [player().document.playerlList getIndex: track.list];
+    self.playingIndexList = (int)[player().document.playerlList getIndex: track.list];
     
     [self.playerlList willSave];
 }

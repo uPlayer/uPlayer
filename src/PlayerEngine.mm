@@ -102,7 +102,7 @@
 {
     _playTimeEnded = TRUE;
     
-    [self stop];
+    [self stopForNext];
     
     postEvent(EventID_track_stopped_playnext, nil);
     
@@ -308,10 +308,23 @@
     return [self playURL:url pauseAfterInit:false];
 }
 
-- (void)stop
+-(void)stopForNext
 {
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
+    
+    
+    postEvent(EventID_track_stopped, nil);
+    postEvent(EventID_track_state_changed, nil);
+}
+
+
+-(void)stop
+{
+    [_player pause];
+    [_player replaceCurrentItemWithPlayerItem:nil];
+    
+    player().playing = nil;
     
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_state_changed, nil);

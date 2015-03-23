@@ -124,7 +124,7 @@
     
     if (column == 0)
     {
-        textField.stringValue = [NSNumber numberWithInt:(int)row].stringValue;
+        textField.stringValue = [NSNumber numberWithInt:(int)row+1].stringValue;
     }
     else if (column == 1)
     {

@@ -214,4 +214,17 @@
     [self.window makeFirstResponder:_searchField];
 }
 
+- (IBAction)cmdPlayPause:(id)sender
+{
+    
+}
+
+- (NSImage *)playPauseButtonImage
+{
+    if ( [player().engine isPlaying] )
+        return [NSImage imageNamed:@"Pause_Button"];
+    else
+        return [NSImage imageNamed:@"Play_Button"];
+}
+
 @end

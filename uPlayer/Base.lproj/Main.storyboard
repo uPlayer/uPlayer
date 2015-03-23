@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <scenes>
@@ -66,7 +67,7 @@
                             </menuItem>
                             <menuItem title="File" id="dMs-cI-mzQ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="File" autoenablesItems="NO" id="bib-Uj-vzu">
+                                <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
                                         <menuItem title="New PlayerList" id="Fxj-BS-OlW">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -74,10 +75,11 @@
                                                 <action selector="cmdNewPlayerList:" target="Voe-Tx-rLC" id="kcL-1q-gEv"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Import Directory..." enabled="NO" id="ICK-h2-7oe" userLabel="Open Directory...">
+                                        <menuItem title="Import Directory..." id="ICK-h2-7oe" userLabel="Open Directory...">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="cmdOpenDirectory:" target="Voe-Tx-rLC" id="J9f-kD-myF"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="importDirectoryEnabled" id="1kU-cW-faQ"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -354,10 +356,31 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="Fm4-g3-JmQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Ml3-NW-m2V"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kVY-E4-A0e"/>
+                                <toolbarItem implicitItemIdentifier="1928FF56-A0A0-436B-8948-3C5E03F2EACE" label="Play/Pause" paletteLabel="Play/Pause" id="5ly-F9-qqa">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="82" height="32"/>
+                                    <size key="maxSize" width="82" height="34"/>
+                                    <button key="view" verticalHuggingPriority="750" id="q6z-UG-Le3">
+                                        <rect key="frame" x="0.0" y="14" width="82" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="E1N-eF-Aao">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+IA
+</string>
+                                            <connections>
+                                                <action selector="cmdPlayPause:" target="B8D-0N-5wS" id="hM0-rw-Dgs"/>
+                                                <binding destination="B8D-0N-5wS" name="image" keyPath="playPauseButtonImage" id="9JX-ZW-KSa"/>
+                                            </connections>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="c2Z-N4-MTP"/>
                                 <toolbarItem reference="pmD-eR-0dO"/>
+                                <toolbarItem reference="5ly-F9-qqa"/>
                                 <toolbarItem reference="1U9-cg-qxf"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
@@ -381,8 +404,9 @@
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="JRU-F8-Ixg"/>
             </objects>
-            <point key="canvasLocation" x="20" y="438"/>
+            <point key="canvasLocation" x="-412" y="434"/>
         </scene>
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
@@ -468,7 +492,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="playlistColumnName" width="338.74232079777369" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="playlistColumnName" width="438.74232079777369" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -592,12 +616,21 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdPlayClickedTrack:" target="XfG-lQ-9wD" id="n1l-j7-3Fj"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="lge-RI-ckT"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Add to play queue" id="CGf-NP-DLA">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdAddToPlayQueue:" target="XfG-lQ-9wD" id="U6D-Tj-r7i"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="ckd-wW-bRA"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Clear Play Queue" id="tiA-Se-VSY">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdClearPlayQueue:" target="XfG-lQ-9wD" id="2dT-u6-ckv"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="isPlayQueueNotEmpty" id="ozA-i9-vIr"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="bz6-mc-lgT"/>
@@ -608,6 +641,7 @@ CA
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdRemoveRefrence:" target="XfG-lQ-9wD" id="Fef-L5-W3g"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="Flw-I5-WhJ"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Remove to Trash" id="zLH-oQ-QxW" userLabel="Remove to Trash">
@@ -616,6 +650,7 @@ CA
 </string>
                             <connections>
                                 <action selector="cmdRemoveToTrash:" target="XfG-lQ-9wD" id="EyL-sA-ac8"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="AaB-C1-wZS"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Uek-f8-d6s"/>
@@ -623,10 +658,12 @@ CA
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdShowInFinder:" target="XfG-lQ-9wD" id="hY6-1j-2TP"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="37d-CW-Rgg"/>
                             </connections>
                         </menuItem>
                     </items>
                 </menu>
+                <userDefaultsController id="eJW-Mq-KvT"/>
             </objects>
             <point key="canvasLocation" x="62" y="1186"/>
         </scene>

@@ -23,4 +23,6 @@
 
 -(NSArray*)getIndex:(PlayerTrack*)item;
 
+-(NSInteger)count;
+
 @end

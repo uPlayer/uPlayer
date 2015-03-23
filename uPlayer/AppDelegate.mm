@@ -397,4 +397,10 @@
     [[NSAlert alertWithError:error] runModal];
 }
 
+
+-(BOOL)importDirectoryEnabled
+{
+    return player().document.playerlList.selectItem.type != type_temporary ;
+}
+
 @end
