@@ -200,6 +200,7 @@
     [self.window setFrameUsingName: uPlayerWinPos];
     [self.window setFrameAutosaveName:uPlayerWinPos];
     
+
 }
 
 -(void)keyDown:(NSEvent *)theEvent

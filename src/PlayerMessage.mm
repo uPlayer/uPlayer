@@ -31,6 +31,9 @@ const char *arrEvent[] =
     "tracks_changed",
     "list_changed",
     
+    "importing_tracks_begin",
+    "importing_tracks_end",
+    
     "to_reload_tracklist",
     "to_save_config",
     "to_reload_lyrics",

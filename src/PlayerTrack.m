@@ -8,25 +8,13 @@
 
 
 #import "PlayerTrack.h"
-
-#ifdef DEBUG
 #import "PlayerList.h"
-#endif
 
 
 @interface TrackInfo()
 @end
 
-
 @implementation TrackInfo
-
-/// use uuid instead.
--(BOOL)isEqual:(id)object
-{
-    NSAssert( false, nil);
-    return 0;
-}
-
 @end
 
 

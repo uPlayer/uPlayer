@@ -13,6 +13,8 @@
 #import "keycode.h"
 #import "MAAssert.h"
 
+#import "Last_fm_user.h"
+#import "Last_fm_api.h"
 
 /*
 @interface NSTableView (rc)
@@ -46,6 +48,8 @@
 @property (nonatomic,assign) bool isSearchMode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
+
+@property (nonatomic,strong) NSProgressIndicator *progress;
 @end
 
 @implementation TracklistViewController
@@ -91,6 +95,9 @@
     addObserverForEvent(self, @selector(playSelectedTrack), EventID_to_play_selected_track);
     
     addObserverForEvent(self, @selector(playTrackItem:), EventID_to_play_item);
+
+    addObserverForEvent(self, @selector(startPIAnimation), EventID_importing_tracks_begin);
+    addObserverForEvent(self, @selector(stopPIAnimation), EventID_importing_tracks_end);
     
     self.playerlList = player().document.playerlList;
 }
@@ -281,6 +288,10 @@
     [self.view addSubview:tableContainer];
     
     [self.tableView reloadData];
+    
+    
+ 
+
 }
 
 
@@ -606,5 +617,43 @@
     }
     
 }
+
+-(void)startPIAnimation
+{
+    CGFloat bottomBarHeight = 22.0;
+    
+    NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
+ 
+    _progress = [[NSProgressIndicator alloc]initWithFrame: rc ];
+    _progress.style = NSProgressIndicatorSpinningStyle;
+    [_progress startAnimation:nil];
+    _progress.autoresizingMask =  NSViewWidthSizable | NSViewHeightSizable;
+    
+    [self.view addSubview:_progress];
+}
+
+-(void)stopPIAnimation
+{
+    [_progress stopAnimation:nil];
+    [_progress removeFromSuperview];
+}
+
+-(bool)lastFmEnabled
+{
+    return player().document.lastFmEnabled;
+}
+
+- (IBAction)cmdLastFm_Love:(id)sender
+{
+    PlayerTrack *track = [self getSelectedItem: self.tableView.selectedRow];
+ 
+    string artist(track.info.artist.UTF8String);
+    string title(track.info.title.UTF8String);
+    
+    LFUser *user = lastFmUser() ;
+
+    track_love(user->sessionKey , artist , title);
+}
+
 
 @end

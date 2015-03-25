@@ -34,6 +34,8 @@ typedef enum : NSUInteger {
     /// playerlist added or removed. @param: none.
     EventID_list_changed,
     
+    EventID_importing_tracks_begin,
+    EventID_importing_tracks_end,
     
     /// param: PlayerList* list , if list is nil , then go to the playing item.
     /// else reload the list at list.topitem. and list is selected.

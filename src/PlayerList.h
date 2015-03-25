@@ -42,6 +42,7 @@
 
 -(void)removeTracks:(NSIndexSet*)indexs;
 -(void)removeTrack:(NSInteger)index;
+-(void)removeAll;
 @end
 
 

@@ -118,15 +118,53 @@
             
             dojobInBkgnd(
                          ^{
+                             postEvent(EventID_importing_tracks_begin, nil);
                              [list  addTrackInfoItems: enumAudioFiles(fileName)];
                          } ,
                          ^{
+                             postEvent(EventID_importing_tracks_end, nil);
                              postEvent(EventID_to_reload_tracklist, list);
                          });
             
         }
     }
     
+}
+
+-(void)reloadiTunesMedia
+{
+    PlayerList *selected = player().document.playerlList.selectItem;
+    [selected removeAll];
+    postEvent(EventID_to_reload_tracklist, selected);
+    
+    [self loadiTunesMedia];
+}
+
+- (IBAction)cmdReloadiTunesMedia:(id)sender
+{
+    NSString *alertSuppressionKey = @"ReloadiTunesMedia";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey: alertSuppressionKey])
+    {
+        [self reloadiTunesMedia];
+    }
+    else
+    {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.alertStyle=NSWarningAlertStyle;
+        alert.messageText = NSLocalizedString(@"Reload iTunes Media Source?", nil );
+        alert.informativeText = NSLocalizedString(@"This will remove all tracks in current playlist first.", nil );
+        [alert addButtonWithTitle:NSLocalizedString(@"OK",nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+        alert.showsSuppressionButton = YES;
+        
+        if( [alert runModal] == NSAlertFirstButtonReturn)
+            [self reloadiTunesMedia];
+        
+        if (alert.suppressionButton.state == NSOnState)
+            [defaults setBool: YES forKey: alertSuppressionKey];
+    }
 }
 
 - (IBAction)cmdFind:(id)sender
@@ -271,23 +309,32 @@
     // add ~/music to a default playerlist, if is none.
     if ( [d.playerlList count] == 1 && d.playerlList.selectItem.count == 0)
     {
-        NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
-        
-        NSString *userMusic = arr.firstObject;
-        
-        userMusic = [userMusic stringByAppendingPathComponent:@"iTunes/iTunes Media/Music"];
-        
-        PlayerList *list = d.playerlList.selectItem;
-        
-        dojobInBkgnd(
-                     ^{
-                         [list  addTrackInfoItems: enumAudioFiles( userMusic )];
-                     } ,
-                     ^{
-                         postEvent(EventID_to_reload_tracklist, list);
-                     });
+        [self loadiTunesMedia];
     }
     
+}
+
+-(void)loadiTunesMedia
+{
+   PlayerDocument *d = player().document;
+    
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask , TRUE);
+    
+    NSString *userMusic = arr.firstObject;
+    
+    userMusic = [userMusic stringByAppendingPathComponent:@"iTunes/iTunes Media/Music"];
+    
+    PlayerList *list = d.playerlList.selectItem;
+    
+    dojobInBkgnd(
+                 ^{
+                     postEvent(EventID_importing_tracks_begin, nil);
+                     [list  addTrackInfoItems: enumAudioFiles( userMusic )];
+                 } ,
+                 ^{
+                     postEvent(EventID_importing_tracks_end, nil);
+                     postEvent(EventID_to_reload_tracklist, list);
+                 });
 }
 
 -(void)track_state_changed

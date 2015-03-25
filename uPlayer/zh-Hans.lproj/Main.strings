@@ -1,7 +1,4 @@
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "109-ro-5qv"; */
-"109-ro-5qv.title" = "Table View Cell";
-
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "11Z-4N-8B4"; */
 "11Z-4N-8B4.title" = "播放";
 
@@ -116,6 +113,9 @@
 /* Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL"; */
 "Ptp-SP-VEL.title" = "更大";
 
+/* Class = "NSMenuItem"; title = " ♥ - last.Fm"; ObjectID = "Pz1-mZ-0xy"; */
+"Pz1-mZ-0xy.title" = " ♥ - last.Fm";
+
 /* Class = "NSMenuItem"; title = "Show Fonts"; ObjectID = "Q5e-8K-NDq"; */
 "Q5e-8K-NDq.title" = "显示字体";
 
@@ -155,9 +155,6 @@
 /* Class = "NSViewController"; title = "Tracklist Viewer"; ObjectID = "XfG-lQ-9wD"; */
 "XfG-lQ-9wD.title" = "Tracklist Viewer";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "XxM-of-WlE"; */
-"XxM-of-WlE.title" = "Table View Cell";
-
 /* Class = "NSMenuItem"; title = "窗口"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "窗口";
 
@@ -188,20 +185,20 @@
 /* Class = "NSMenuItem"; title = "Show PlayList"; ObjectID = "erA-OL-DYs"; */
 "erA-OL-DYs.title" = "显示播放列表";
 
+/* Class = "NSToolbarItem"; label = "NextTrack"; ObjectID = "g9V-H0-xAb"; */
+"g9V-H0-xAb.label" = "下一首";
+
+/* Class = "NSToolbarItem"; paletteLabel = "NextTrack"; ObjectID = "g9V-H0-xAb"; */
+"g9V-H0-xAb.paletteLabel" = "下一首";
+
 /* Class = "NSMenuItem"; title = "粘贴"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "粘贴";
 
 /* Class = "NSTableColumn"; headerCell.title = "name"; ObjectID = "h2V-xq-zdE"; */
 "h2V-xq-zdE.headerCell.title" = "名字";
 
-/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "h61-UG-gb8"; */
-"h61-UG-gb8.title" = "Item 2";
-
-/* Class = "NSTableColumn"; headerCell.title = "name"; ObjectID = "h2V-xq-zdE"; */
-"h2V-xq-zdE.headerCell.title" = "名字";
-
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
-"hz9-B4-Xy5.title" = "Services";
+"hz9-B4-Xy5.title" = "服务";
 
 /* Class = "NSMenuItem"; title = "Smaller"; ObjectID = "i1d-Er-qST"; */
 "i1d-Er-qST.title" = "更小";
@@ -211,9 +208,6 @@
 
 /* Class = "NSToolbarItem"; paletteLabel = "Play/Pause"; ObjectID = "jYN-9J-YTY"; */
 "jYN-9J-YTY.paletteLabel" = "播放/暂停";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "jgL-sh-12X"; */
-"jgL-sh-12X.title" = "Table View Cell";
 
 /* Class = "NSMenuItem"; title = "Format"; ObjectID = "jxT-CU-nIS"; */
 "jxT-CU-nIS.title" = "Format";
@@ -237,7 +231,7 @@
 "snW-S8-Cw5.title" = "显示工具栏";
 
 /* Class = "NSMenuItem"; title = "Clear Play Queue"; ObjectID = "tiA-Se-VSY"; */
-"tiA-Se-VSY.title" = "清空播放列表";
+"tiA-Se-VSY.title" = "清空播放列队";
 
 /* Class = "NSMenu"; title = "uPlayer"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "uPlayer";

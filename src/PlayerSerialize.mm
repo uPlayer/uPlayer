@@ -363,7 +363,9 @@ NSArray *loadTrackInfoArray(FILE &file)
         
         self.playTime = playTime;
         
+#ifdef DEBUG
         [self assertMembers];
+#endif
         
         assert(self.playerlList);
         [self.playerlList load:appSupportDir];
@@ -388,7 +390,9 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
+#ifdef DEBUG
         [self assertMembers];
+#endif
         
         *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playingIndexList << self.playingIndexTrack <<self.playTime ;
         

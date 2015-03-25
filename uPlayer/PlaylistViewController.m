@@ -13,22 +13,14 @@
 
 
 
-@interface PlaylistViewController () <NSTableViewDelegate , NSTableViewDataSource >
+@interface PlaylistViewController ()
+<NSTableViewDelegate , NSTableViewDataSource >
+
 @property (weak) IBOutlet NSTableView *tableView;
 @property (nonatomic,strong) PlayerlList *playerlList;
 @end
 
 @implementation PlaylistViewController
-
--(void)awakeFromNib
-{
-//    addObserverForEvent(self, @selector(reloadTrackList), EventID_to_reload_tracklist);
-    
-    
-//    addObserverForEvent(self, @selector(showPlayList), EventID_to_show_playlist);
-//    NSStoryboardShowSegueTemplate *s;
-    self.playerlList = player().document.playerlList;
-}
 
 
 -(void)reloadTrackList
@@ -81,6 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    self.playerlList = player().document.playerlList;
+    
     self.tableView.rowHeight = 40.;
     
     self.tableView.doubleAction=@selector(doubleClicked);

@@ -82,6 +82,13 @@
                                                 <binding destination="Voe-Tx-rLC" name="enabled" keyPath="importDirectoryEnabled" id="1kU-cW-faQ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Reload iTunes Media" id="GuR-yr-pUc" userLabel="Open Directory...">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cmdReloadiTunesMedia:" target="Voe-Tx-rLC" id="cOd-ZG-HOB"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="importDirectoryEnabled" id="fbZ-7m-3gZ"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
@@ -363,7 +370,7 @@
                                     <button key="view" id="BDl-qT-HNp">
                                         <rect key="frame" x="19" y="14" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Play_Button" imagePosition="only" alignment="center" alternateImage="Play_ButtonPressed" state="on" imageScaling="proportionallyDown" inset="2" id="cq8-Pp-xeD">
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Play_Button" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="cq8-Pp-xeD">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -379,7 +386,7 @@
                                     <button key="view" id="LCs-lh-Moa">
                                         <rect key="frame" x="19" y="14" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NextTrack_Button" imagePosition="only" alignment="center" alternateImage="NextTrack_ButtonPressed" state="on" imageScaling="proportionallyDown" inset="2" id="zFn-2z-yrL">
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NextTrack_Button" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="zFn-2z-yrL">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -393,7 +400,7 @@
                                     <size key="minSize" width="40" height="38"/>
                                     <size key="maxSize" width="40" height="100"/>
                                     <button key="view" id="hz0-8s-Bwn">
-                                        <rect key="frame" x="17" y="15" width="40" height="38"/>
+                                        <rect key="frame" x="17" y="14" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Play_Random" imagePosition="only" alignment="center" alternateImage="Play_Random" state="on" imageScaling="proportionallyDown" inset="2" id="CBa-Bu-Hei">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -437,7 +444,7 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="JRU-F8-Ixg"/>
             </objects>
-            <point key="canvasLocation" x="-412" y="434"/>
+            <point key="canvasLocation" x="-681" y="425"/>
         </scene>
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
@@ -478,7 +485,7 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="109-ro-5qv">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="109-ro-5qv">
                                                                         <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -510,7 +517,7 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-C9-4wu">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="jgL-sh-12X">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="jgL-sh-12X">
                                                                         <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -542,7 +549,7 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="XxM-of-WlE">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="XxM-of-WlE">
                                                                         <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -654,7 +661,14 @@
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="isPlayQueueNotEmpty" id="ozA-i9-vIr"/>
                             </connections>
                         </menuItem>
-                        <menuItem isSeparatorItem="YES" id="bz6-mc-lgT"/>
+                        <menuItem title=" ♥ - last.Fm" id="Pz1-mZ-0xy">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdLastFm_Love:" target="XfG-lQ-9wD" id="MOm-t9-0HE"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="lastFmEnabled" id="DUC-gx-QAW"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Uek-f8-d6s"/>
                         <menuItem title="Remove" id="8Ng-b4-bmx">
                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
@@ -674,7 +688,7 @@ CA
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="AaB-C1-wZS"/>
                             </connections>
                         </menuItem>
-                        <menuItem isSeparatorItem="YES" id="Uek-f8-d6s"/>
+                        <menuItem isSeparatorItem="YES" id="bz6-mc-lgT"/>
                         <menuItem title="Show in Finder" id="WHJ-kh-lq3">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -686,14 +700,12 @@ CA
                 </menu>
                 <userDefaultsController id="eJW-Mq-KvT"/>
             </objects>
-            <point key="canvasLocation" x="62" y="1186"/>
+            <point key="canvasLocation" x="-681" y="1149"/>
         </scene>
     </scenes>
     <resources>
         <image name="NextTrack_Button" width="51" height="40"/>
-        <image name="NextTrack_ButtonPressed" width="51" height="40"/>
         <image name="Play_Button" width="45" height="44"/>
-        <image name="Play_ButtonPressed" width="45" height="44"/>
         <image name="Play_Random" width="32" height="32"/>
     </resources>
 </document>

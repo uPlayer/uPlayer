@@ -52,7 +52,7 @@
 		1EDAAD451AB6F17E009DB36A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAAD471AB6F17E009DB36A /* Localizable.strings */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.mm */; };
 		1EDE8FAB1A773D810086677B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAA1A773D810086677B /* main.m */; };
-		1EDE8FAE1A773D810086677B /* TracklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAD1A773D810086677B /* TracklistViewController.m */; };
+		1EDE8FAE1A773D810086677B /* TracklistViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAD1A773D810086677B /* TracklistViewController.mm */; };
 		1EDE8FB01A773D810086677B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE8FAF1A773D810086677B /* Images.xcassets */; };
 		1EDE8FB31A773D810086677B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE8FB11A773D810086677B /* Main.storyboard */; };
 		1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FCB1A7740DC0086677B /* audioTag.cpp */; };
@@ -192,7 +192,7 @@
 		1EDE8FA81A773D810086677B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1EDE8FAA1A773D810086677B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1EDE8FAC1A773D810086677B /* TracklistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracklistViewController.h; sourceTree = "<group>"; };
-		1EDE8FAD1A773D810086677B /* TracklistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TracklistViewController.m; sourceTree = "<group>"; };
+		1EDE8FAD1A773D810086677B /* TracklistViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TracklistViewController.mm; sourceTree = "<group>"; };
 		1EDE8FAF1A773D810086677B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1EDE8FB21A773D810086677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1EDE8FCB1A7740DC0086677B /* audioTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = audioTag.cpp; path = lyricsFetcher/src/audioTag.cpp; sourceTree = "<group>"; };
@@ -413,7 +413,7 @@
 				1E169A8A1A78E715003D3D01 /* windowController.h */,
 				1E169A881A78E701003D3D01 /* windowController.m */,
 				1EDE8FAC1A773D810086677B /* TracklistViewController.h */,
-				1EDE8FAD1A773D810086677B /* TracklistViewController.m */,
+				1EDE8FAD1A773D810086677B /* TracklistViewController.mm */,
 				1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */,
 				1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */,
 				1EDAAD471AB6F17E009DB36A /* Localizable.strings */,
@@ -624,7 +624,7 @@
 				1ECEB7891A906231006E8C23 /* serialize.cpp in Sources */,
 				1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */,
 				1ECEB7851A90621D006E8C23 /* Last_fm_serialize.cpp in Sources */,
-				1EDE8FAE1A773D810086677B /* TracklistViewController.m in Sources */,
+				1EDE8FAE1A773D810086677B /* TracklistViewController.mm in Sources */,
 				1ECEB7781A9059A5006E8C23 /* Last_fm.cpp in Sources */,
 				1EDE8FD11A7740DC0086677B /* audioTag.cpp in Sources */,
 				1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */,
@@ -823,7 +823,7 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-ltag",
 					"-ljson",
@@ -855,7 +855,7 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-ltag",
 					"-ljson",

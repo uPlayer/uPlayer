@@ -115,6 +115,15 @@
     postEvent(EventID_tracks_changed, self);
 }
 
+-(void)removeAll
+{
+    self.selectIndex = -1;
+    self.topIndex = -1;
+    
+    [self.playerTrackList removeAllObjects];
+    
+    postEvent(EventID_tracks_changed, self);
+}
 @end
 
 
