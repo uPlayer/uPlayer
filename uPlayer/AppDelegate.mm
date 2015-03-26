@@ -444,4 +444,21 @@
     return player().document.playerlList.selectItem.type != type_temporary ;
 }
 
+-(bool)lastFmEnabled
+{
+    return player().document.lastFmEnabled;
+}
+
+- (IBAction)cmdLastFm_Love:(id)sender
+{
+    PlayerTrack *track = player().playing;
+    
+    string artist(track.info.artist.UTF8String);
+    string title(track.info.title.UTF8String);
+    
+    LFUser *user = lastFmUser() ;
+    
+    track_love(user->sessionKey , artist , title);
+}
+
 @end

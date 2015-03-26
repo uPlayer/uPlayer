@@ -77,6 +77,9 @@
 /* Class = "NSMenuItem"; title = "Random"; ObjectID = "GkQ-Nl-Oqr"; */
 "GkQ-Nl-Oqr.title" = "随机";
 
+/* Class = "NSMenuItem"; title = "Reload iTunes Media"; ObjectID = "GuR-yr-pUc"; */
+"GuR-yr-pUc.title" = "重载iTunes媒体";
+
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "视图";
 
