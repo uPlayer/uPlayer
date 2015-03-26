@@ -32,7 +32,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="M9L-oc-J6c"/>
-                <menuItem title=" ♥ - last.Fm" id="7yB-yl-V3T">
+                <menuItem title="Love @ last.Fm" id="7yB-yl-V3T">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="cmdLastFm_Love:" target="-2" id="m92-ak-Fmy"/>

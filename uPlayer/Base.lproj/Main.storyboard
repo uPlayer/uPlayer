@@ -661,7 +661,7 @@
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="isPlayQueueNotEmpty" id="ozA-i9-vIr"/>
                             </connections>
                         </menuItem>
-                        <menuItem title=" ♥ - last.Fm" id="Pz1-mZ-0xy">
+                        <menuItem title="Love @ Last.Fm" id="Pz1-mZ-0xy">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdLastFm_Love:" target="XfG-lQ-9wD" id="MOm-t9-0HE"/>

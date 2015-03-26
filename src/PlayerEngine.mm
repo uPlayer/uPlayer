@@ -107,8 +107,7 @@
     postEvent(EventID_track_stopped_playnext, nil);
     
     if( player().document.trackSongsWhenPlayStarted)
-        postEvent(EventID_to_reload_tracklist, nil);
-    
+        postEvent(EventID_to_reload_tracklist, player().playing);
 }
 
 -(void)playNext
