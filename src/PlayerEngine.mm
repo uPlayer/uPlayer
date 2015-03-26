@@ -161,7 +161,7 @@
         
         
         track = nil;
-        if ( indexNext > 0 && indexNext < [list count] )
+        if ( indexNext >= 0 && indexNext < [list count] )
             track = [list getItem: indexNext ];
         
         playTrack(track);

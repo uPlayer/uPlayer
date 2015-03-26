@@ -17,7 +17,7 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
 
 ##Download  
 
-[latest releases](https://github.com/uPlayer/uPlayer/releases/latest)  
+[Latest Releases](https://github.com/uPlayer/uPlayer/releases/latest)  
 
 
 ##ToDo
