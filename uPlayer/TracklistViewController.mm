@@ -16,6 +16,8 @@
 #import "Last_fm_user.h"
 #import "Last_fm_api.h"
 
+#import "ThreadJob.h"
+
 /*
 @interface NSTableView (rc)
 /// select item at right click.
@@ -647,12 +649,17 @@
 {
     PlayerTrack *track = [self getSelectedItem: self.tableView.selectedRow];
  
-    string artist(track.info.artist.UTF8String);
-    string title(track.info.title.UTF8String);
     
-    LFUser *user = lastFmUser() ;
-
-    track_love(user->sessionKey , artist , title);
+    dojobInBkgnd(^{
+        string artist(track.info.artist.UTF8String);
+        string title(track.info.title.UTF8String);
+        
+        LFUser *user = lastFmUser() ;
+        track_love(user->sessionKey , artist , title);
+    }, ^{
+        
+    });
+    
 }
 
 
