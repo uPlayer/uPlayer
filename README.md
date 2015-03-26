@@ -1,6 +1,8 @@
 
 # uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)
 
+![uPlayer](res/uPlayer.png)
+
 ##Brief
 
 This is a lightweight audio player for Mac Os x.  
@@ -8,6 +10,8 @@ This is a lightweight audio player for Mac Os x.
 Before you try uPlayer , take a look at iTunes and Pinna.  
 
 But uPlayer's simpler and it UI is clear. 
+
+Last.fm scrobbling is supported.
 
 If you're looking for a audio player in windows , [uPlayer windows version](http://liaogang.github.io/player)  
 
@@ -21,8 +25,6 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
 * The lyrics showing thing.  
 	 Something it may be a good thing.  
    Seeing the lyrics may change the taste of a good song. ~_~  
-* 监视文件夹.(时间不够了)
-* Add Vim Mode
 * Change a better application's icon.
 
 ##System  
