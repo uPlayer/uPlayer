@@ -13,10 +13,7 @@
 #import "keycode.h"
 #import "MAAssert.h"
 
-#import "Last_fm_user.h"
-#import "Last_fm_api.h"
-
-#import "ThreadJob.h"
+#import "PlayerLastFm.h"
 
 /*
 @interface NSTableView (rc)
@@ -649,17 +646,7 @@
 {
     PlayerTrack *track = [self getSelectedItem: self.tableView.selectedRow];
  
-    
-    dojobInBkgnd(^{
-        string artist(track.info.artist.UTF8String);
-        string title(track.info.title.UTF8String);
-        
-        LFUser *user = lastFmUser() ;
-        track_love(user->sessionKey , artist , title);
-    }, ^{
-        
-    });
-    
+    lastFm_loveTrack(track);
 }
 
 

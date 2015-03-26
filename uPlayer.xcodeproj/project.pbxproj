@@ -25,6 +25,7 @@
 		1E5F6D981ABC35FF00430128 /* Play_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D901ABC35FF00430128 /* Play_Button@2x.png */; };
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
+		1E65A62B1AC4235C00D21C58 /* PlayerLastFm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E65A62A1AC4235C00D21C58 /* PlayerLastFm.mm */; };
 		1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A78371AA974D9004E9DDC /* keymaps.json */; };
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
@@ -147,6 +148,8 @@
 		1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEngine.mm; sourceTree = "<group>"; };
 		1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerSerialize.mm; sourceTree = "<group>"; };
 		1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerialize.h; sourceTree = "<group>"; };
+		1E65A6291AC4235C00D21C58 /* PlayerLastFm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerLastFm.h; sourceTree = "<group>"; };
+		1E65A62A1AC4235C00D21C58 /* PlayerLastFm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerLastFm.mm; sourceTree = "<group>"; };
 		1E7A78371AA974D9004E9DDC /* keymaps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = keymaps.json; path = res/keymaps.json; sourceTree = SOURCE_ROOT; };
 		1E8F702F1AA4707F0012402E /* PlayerQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerQueue.h; sourceTree = "<group>"; };
 		1E8F70311AA470950012402E /* PlayerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerQueue.m; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				1E0B2BF21A77536800B4FE14 /* UPlayer.mm */,
 				1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */,
 				1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */,
+				1E65A6291AC4235C00D21C58 /* PlayerLastFm.h */,
+				1E65A62A1AC4235C00D21C58 /* PlayerLastFm.mm */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -640,6 +645,7 @@
 				1ECEB76F1A90582B006E8C23 /* Last_fm_local_record.cpp in Sources */,
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
 				1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */,
+				1E65A62B1AC4235C00D21C58 /* PlayerLastFm.mm in Sources */,
 				1ECEB7751A905874006E8C23 /* socketTool.cpp in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */,
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,

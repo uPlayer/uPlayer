@@ -25,6 +25,10 @@
 #import "PlaylistViewController.h"
 #import "windowController.h"
 
+
+#import "PlayerLastFm.h"
+
+
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 
@@ -453,15 +457,7 @@
 {
     PlayerTrack *track = player().playing;
     
-    dojobInBkgnd(^{
-        string artist(track.info.artist.UTF8String);
-        string title(track.info.title.UTF8String);
-        
-        LFUser *user = lastFmUser() ;
-        track_love(user->sessionKey , artist , title);
-    }, ^{
-        
-    });
+    lastFm_loveTrack( track);
 }
 
 @end
