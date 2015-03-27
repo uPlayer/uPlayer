@@ -15,10 +15,7 @@ NSString *const NSPlayerErrorDomain = @"com.uPlayer";
 +(instancetype)errorNoSuchFile:(NSString*)path
 {
     NSDictionary *userInfo = @{
-NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedString(@"File %@ no found.", nil) , path],
-NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"File is deleted since last added.", nil) ,
-NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Relocation it in Finder.", nil)
-                               };
+                               NSLocalizedDescriptionKey: [NSString stringWithFormat:@"%@\n%@",NSLocalizedString(@"File no found", nil) , path] };
     
     return  [PlayerError errorWithDomain:NSPlayerErrorDomain code:PlayerNoSuchFileError userInfo:userInfo];
 }
