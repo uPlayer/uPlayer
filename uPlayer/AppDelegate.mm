@@ -30,6 +30,9 @@
 
 
 @interface AppDelegate ()
+
+@property (nonatomic,strong) NSWindowController * mainWindowController;
+
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
@@ -44,7 +47,15 @@
 {
     self = [super init];
     if (self) {
+        
         initPlayerMessage();
+        
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+        self.mainWindowController = [storyboard instantiateControllerWithIdentifier:@"IDMainWindow"];
+        
+        [_mainWindowController showWindow:nil];
+        
     }
     
     return self;
@@ -376,6 +387,13 @@
     }
 }
 
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+    [self.mainWindowController showWindow:nil];
+    
+    return YES;
+}
+
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     collectInfo( player().document , player().engine);
@@ -385,10 +403,7 @@
     saveFileShortcutKey();
 }
 
--(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
-{
-    return YES;
-}
+#pragma mark -
 
 -(void)scrobblerSong:(TrackInfo*)info
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -291,7 +291,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="IDMainWindow" id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" identifier="uPlayerWindow" title="uPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="718" y="383" width="900" height="500"/>
@@ -449,7 +449,7 @@
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
             <objects>
-                <viewController title="PlayList Viewer" storyboardIdentifier="PlaylistViewController" id="Qif-73-RE2" customClass="PlaylistViewController" sceneMemberID="viewController">
+                <viewController title="PlayList Viewer" storyboardIdentifier="IDPlaylistViewController" id="Qif-73-RE2" customClass="PlaylistViewController" sceneMemberID="viewController">
                     <view key="view" id="QTd-9G-JUC">
                         <rect key="frame" x="0.0" y="0.0" width="610" height="303"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -623,7 +623,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="-252" y="-149.5"/>
+            <point key="canvasLocation" x="-255" y="-343.5"/>
         </scene>
         <!--Tracklist Viewer-->
         <scene sceneID="hIz-AP-VOD">

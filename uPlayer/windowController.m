@@ -73,7 +73,7 @@
     {
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
         
-       self.playlistManager = [storyboard instantiateControllerWithIdentifier:@"PlaylistViewController"];
+       self.playlistManager = [storyboard instantiateControllerWithIdentifier:@"IDPlaylistViewController"];
     }
     
     wnd = _playlistManager.view.window;
