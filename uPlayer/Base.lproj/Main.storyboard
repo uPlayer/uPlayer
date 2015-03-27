@@ -164,8 +164,7 @@
                                                 <action selector="cmdStop:" target="Voe-Tx-rLC" id="AnH-rr-iRc"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Next" id="SEU-9f-99W">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Next" keyEquivalent="n" id="SEU-9f-99W">
                                             <connections>
                                                 <action selector="cmdNext:" target="Voe-Tx-rLC" id="3Ly-UC-af0"/>
                                             </connections>
@@ -180,12 +179,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="GQy-4g-JWh"/>
-                                        <menuItem title="Show PlayList" id="erA-OL-DYs">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="cmdShowPlayList:" target="Voe-Tx-rLC" id="cq1-Jm-cS8"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="Go to current song" tag="1" keyEquivalent="l" id="8Op-6c-njz">
                                             <connections>
                                                 <action selector="cmdShowPlayingItem:" target="Voe-Tx-rLC" id="Lnb-kH-0YG"/>
@@ -244,6 +237,12 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="DJf-zJ-iBW"/>
+                                        <menuItem title="Show PlayList" keyEquivalent="p" id="erA-OL-DYs">
+                                            <connections>
+                                                <action selector="cmdShowPlayList:" target="Voe-Tx-rLC" id="cq1-Jm-cS8"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>

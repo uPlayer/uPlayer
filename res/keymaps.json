@@ -1,20 +1,13 @@
 /**
-    "to_reload_tracklist", 
-    "to_save_config",
-    "to_reload_lyrics",
-    "to_center_item",
     "to_play_selected_track",
     "to_show_playlist",
-    
     "to_play_pause_resume",
     "to_stop",
-    "track_stopped_playnext",
     "to_play_next",
     "to_play_random"
 */
 
 {
 	"super+d" : "to_play_random",
-	"super+n" : "to_play_next",
-	"super+p" : "to_show_playlist"
+    "super+e": "to_play_pause_resume"
 }
