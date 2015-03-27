@@ -3,21 +3,39 @@
 
 ![uPlayer](res/uPlayer.png)
 
-##Brief
+A audio player for Mac Os x.  
 
-This is a lightweight audio player for Mac Os x.  
 
-Before you try uPlayer , take a look at iTunes and Pinna.  
 
-But uPlayer's simpler and it UI is clear. 
-
-Last.fm scrobbling is supported.
-
-If you're looking for a audio player in windows , [uPlayer windows version](http://liaogang.github.io/player)  
+Last.fm scrobbling and global key blinding is supported.
 
 ##Download  
 
 [Latest Releases](https://github.com/uPlayer/uPlayer/releases/latest)  
+
+##Advance fetures  
+
+* About global key blinding:  
+uPlayer use a json format config file.  
+You can find it in Menu uPlayer/KeyBlindings.  
+This is the default codes:  
+
+		{
+		  "super+d" : "to_play_random",
+	      "super+e": "to_play_pause_resume"
+		}
+
+You can change it yourself. Make sure all words is *lowecased*.
+
+* Last.fm:  
+	 
+	 * uPlayer will scrobble songs when played half of time or 40 seconds.  
+	 * uPlayer will send "nowPlaying" message to last.fm when a track started.
+	 * You can also mark a song loved via menu "Love @ Last.fm"
+
+##System  
+
+Only tested in OS X 10.10 Yosemite  
 
 
 ##ToDo
@@ -27,15 +45,13 @@ If you're looking for a audio player in windows , [uPlayer windows version](http
    Seeing the lyrics may change the taste of a good song. ~_~  
 * Change a better application's icon.
 
-##System  
-
-Only tested in OS X 10.10 Yosemite  
 
 ##Draft a new release 
 
 1. Change the `bundle version` to v0.a.x and `Bundle version string,short` to 0.a.x
 2. Create a new git tag  0.a.x
 2. Draft a new release in github with title `uPlayer-0.a.x`.
+
 
 
 ##License  
