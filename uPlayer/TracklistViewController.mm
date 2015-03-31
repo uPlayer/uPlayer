@@ -491,13 +491,13 @@
     {
         if([keyString isEqualToString:@"ESCAPE"])
         {
-            self.isSearchMode = false;
-            [self.tableView reloadData];
+            PlayerTrack *track = nil;
+            
             if (self.tableView.selectedRow != -1)
-            {
-                PlayerTrack *track = [self getSelectedItem:self.tableView.selectedRow];
-                postEvent(EventID_to_reload_tracklist, track);
-            }
+                track = [self getSelectedItem:self.tableView.selectedRow];
+            
+            self.isSearchMode = false;
+            postEvent(EventID_to_reload_tracklist, track);
         }
     }
    

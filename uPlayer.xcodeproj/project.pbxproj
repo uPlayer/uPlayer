@@ -18,6 +18,8 @@
 		1E154DF61AAEFA8A0000A3B1 /* keycode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E154DF51AAEFA8A0000A3B1 /* keycode.mm */; };
 		1E169A891A78E701003D3D01 /* windowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.m */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
+		1E211DC51ACA47BE005F994C /* libtag.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E211DC41ACA47BE005F994C /* libtag.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1E211DC91ACA5490005F994C /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E211DC81ACA5490005F994C /* libpthread.dylib */; };
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */; };
 		1E5F6D931ABC35FF00430128 /* Pause_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */; };
 		1E5F6D941ABC35FF00430128 /* Pause_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8C1ABC35FF00430128 /* Pause_Button@2x.png */; };
@@ -107,6 +109,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1E211DC51ACA47BE005F994C /* libtag.1.dylib in CopyFiles */,
 				1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +141,9 @@
 		1E169A8B1A78FF88003D3D01 /* PlayerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMessage.h; sourceTree = "<group>"; };
 		1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMessage.mm; sourceTree = "<group>"; };
 		1E16D53B1A8B0F8A00C844ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		1E211DC41ACA47BE005F994C /* libtag.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtag.1.dylib; path = ../../../usr/local/lib/libtag.1.dylib; sourceTree = "<group>"; };
+		1E211DC81ACA5490005F994C /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
+		1E211DCA1ACA5A1E005F994C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HotKeyPreferences.strings"; sourceTree = "<group>"; };
 		1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		1E5F426C1A887BE800911BE8 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause_Button.png; sourceTree = "<group>"; };
@@ -215,7 +221,6 @@
 		1EFBB8BE1ABAE045008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AccountPreferences.xib; sourceTree = "<group>"; };
 		1EFBB8E21ABAEBAC008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GeneralPreferences.xib; sourceTree = "<group>"; };
 		1EFBB8E71ABAEBB1008F8B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HotKeyPreferences.xib; sourceTree = "<group>"; };
-		1EFBB8EA1ABAEBB3008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HotKeyPreferences.strings"; sourceTree = "<group>"; };
 		1EFBB8EC1ABAEBF9008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GeneralPreferences.strings"; sourceTree = "<group>"; };
 		1EFBB8F01ABAEE00008F8B7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AccountPreferences.strings"; sourceTree = "<group>"; };
 		1EFD42AE1A91A985009D65B5 /* LLHotKeyRecorder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLHotKeyRecorder.xcodeproj; path = LLHotKeyRecorder/LLHotKeyRecorder.xcodeproj; sourceTree = "<group>"; };
@@ -233,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E211DC91ACA5490005F994C /* libpthread.dylib in Frameworks */,
 				1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */,
 				1EFD42B91A91A9EF009D65B5 /* LLHotKeyRecorder.framework in Frameworks */,
 				1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */,
@@ -384,6 +390,7 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1E211DC41ACA47BE005F994C /* libtag.1.dylib */,
 				1E9047F61AB2CA190000ED86 /* MAAssert */,
 				1EB207C11AA80995007968C8 /* res */,
 				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
@@ -455,6 +462,7 @@
 		1EDE8FE21A7742000086677B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E211DC81ACA5490005F994C /* libpthread.dylib */,
 				1E8FF13A1AA084A900EA0A89 /* Carbon.framework */,
 				1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */,
 				1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */,
@@ -722,7 +730,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1EFBB8E71ABAEBB1008F8B7B /* Base */,
-				1EFBB8EA1ABAEBB3008F8B7B /* zh-Hans */,
+				1E211DCA1ACA5A1E005F994C /* zh-Hans */,
 			);
 			name = HotKeyPreferences.xib;
 			path = ../uPlayer;
@@ -827,12 +835,14 @@
 					"\"$(SRCROOT)/LLHotKeyRecorder/LLHotKeyRecorder\"",
 				);
 				INFOPLIST_FILE = uPlayer/Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/libtag.1.14.0.dylib";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
-					"-ltag",
 					"-ljson",
+					"-ltag",
+					"-lpthread",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
@@ -859,12 +869,14 @@
 					"\"$(SRCROOT)/LLHotKeyRecorder/LLHotKeyRecorder\"",
 				);
 				INFOPLIST_FILE = uPlayer/Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/libtag.1.14.0.dylib";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
-					"-ltag",
 					"-ljson",
+					"-ltag",
+					"-lpthread",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
