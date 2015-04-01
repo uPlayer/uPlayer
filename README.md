@@ -1,13 +1,10 @@
 
 # uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)
-
-![uPlayer](res/uPlayer.png)
-
 A audio player for Mac Os x.  
 
-
-
 Last.fm scrobbling and global key blinding is supported.
+
+![uPlayer](res/uPlayer.png)
 
 ##Download  
 
@@ -15,7 +12,7 @@ Last.fm scrobbling and global key blinding is supported.
 
 ##Advance fetures  
 
-* About global key blinding:  
+* Global key blinding:  
 uPlayer use a json format config file.  
 You can find it in Menu uPlayer/KeyBlindings.  
 This is the default codes:  
@@ -38,20 +35,35 @@ You can change it yourself. Make sure all words is *lowecased*.
 Only tested in OS X 10.10 Yosemite  
 
 
+
+
+##How to build This Project  
+
+1. Clone this project 
+
+		git clone https://github.com/uPlayer/uPlayer.git 
+	
+	  And update the git submodule:
+
+2. Download and build [jsoncpp](http://sourceforge.net/projects/jsoncpp/) and [taglib](https://tablib.readthedocs.org/en/latest/)  
+
+3. Done and Open the project with xcode.
+
 ##ToDo
 
 * The lyrics showing thing.  
-	 Something it may be a good thing.  
-   Seeing the lyrics may change the taste of a good song. ~_~  
-* Change a better application's icon.
+   
+* Change a better application's icon.  
 
+* Reload Itunes Media , changed . 改进算法,using last modified time.  
 
 ##Draft a new release 
 
-1. Change the `bundle version` to v0.a.x and `Bundle version string,short` to 0.a.x
-2. Create a new git tag  0.a.x
-2. Draft a new release in github with title `uPlayer-0.a.x`.
+1. Change the `bundle version` to v0.a.x and `Bundle version string,short` to 0.a.x  
 
+2. Create a new git tag  0.a.x  
+
+3. Draft a new release in github with title `uPlayer-0.a.x`.
 
 
 ##License  
