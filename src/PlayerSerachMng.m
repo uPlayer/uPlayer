@@ -32,10 +32,12 @@
     
     NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF.info.artist contains[c] %@ ||SELF.info.album contains[c] %@",key,key];
     
-    NSArray *dataOld = [_playerlistOriginal.playerTrackList copy];
+    NSMutableArray *dataOld = [_playerlistOriginal.playerTrackList mutableCopy] ;
     
     NSMutableArray *dataNew = [ NSMutableArray array];
     [dataNew addObjectsFromArray: [dataOld filteredArrayUsingPredicate:predicate]];
+    
+    [dataOld removeObjectsInArray: dataNew];
     
     [dataNew addObjectsFromArray:[dataOld filteredArrayUsingPredicate: predicate2]];
     
