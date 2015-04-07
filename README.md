@@ -52,10 +52,12 @@ Only tested in OS X 10.10 Yosemite
 ##ToDo
 
 * The lyrics showing thing.  
-   
+
 * Change a better application's icon.  
 
 * Reload Itunes Media , changed . 改进算法,using last modified time.  
+
+* The Font Changing. 
 
 ##Draft a new release 
 
