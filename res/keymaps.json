@@ -4,10 +4,12 @@
     "to_play_pause_resume",
     "to_stop",
     "to_play_next",
-    "to_play_random"
+    "to_play_random",
+    "to_love_item"
 */
 
 {
 	"super+d" : "to_play_random",
-    "super+e": "to_play_pause_resume"
+    "super+e" : "to_play_pause_resume",
+    "ctrl+super+e" : "to_love_item"
 }
