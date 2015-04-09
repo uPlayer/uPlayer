@@ -46,7 +46,7 @@ extern "C" {
     
     NSArray* enumAudioFiles(NSString* path);
     
-
+    NSString* compressTitle(TrackInfo *info);
     
     
 #if defined(__cplusplus)

@@ -47,3 +47,11 @@
 }
 
 @end
+
+NSString* compressTitle(TrackInfo *info)
+{
+    if (info.artist.length > 0)
+        return  [NSString stringWithFormat:@"%@ - %@", info.artist, info.title];
+    else
+        return  info.title;
+}

@@ -370,7 +370,8 @@
     {
         if (track)
         {
-            NSString *title = [NSString stringWithFormat:@"%@ %@", track.info.artist, track.info.title];
+            NSString *title = compressTitle(track.info);
+            
             NSString *wTitle;
             if ( paused )
             {
