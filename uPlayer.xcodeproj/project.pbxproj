@@ -266,10 +266,16 @@
 		1E0B2BEC1A77536800B4FE14 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
-				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
+				1E0B2BF11A77536800B4FE14 /* UPlayer.h */,
+				1E0B2BF21A77536800B4FE14 /* UPlayer.mm */,
+				1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */,
+				1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */,
+				1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */,
+				1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */,
 				1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */,
 				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
+				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
+				1E0B2BFC1A7755C400B4FE14 /* PlayerImpl.mm */,
 				1E8F702F1AA4707F0012402E /* PlayerQueue.h */,
 				1E8F70311AA470950012402E /* PlayerQueue.m */,
 				1E9047FD1AB2CB240000ED86 /* PlayerError.h */,
@@ -280,14 +286,8 @@
 				1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */,
 				1ED021A81A7B3383008526E8 /* PlayerList.h */,
 				1ED021A91A7B3383008526E8 /* PlayerList.m */,
-				1E5F9EC31A7A1979000360D7 /* PlayerEngine.h */,
-				1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */,
-				1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */,
-				1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */,
 				1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */,
 				1E0B2BF01A77536800B4FE14 /* PlayerLayout.m */,
-				1E0B2BF11A77536800B4FE14 /* UPlayer.h */,
-				1E0B2BF21A77536800B4FE14 /* UPlayer.mm */,
 				1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */,
 				1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */,
 				1E65A6291AC4235C00D21C58 /* PlayerLastFm.h */,
@@ -308,6 +308,7 @@
 		1EB207C11AA80995007968C8 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				1E7A78371AA974D9004E9DDC /* keymaps.json */,
 				1EB207C81AA80EA5007968C8 /* player.icns */,
 				1EB207C21AA80995007968C8 /* player.png */,
 				1EB207C31AA80995007968C8 /* player@2.png */,
@@ -370,8 +371,8 @@
 		1ECEB7721A905874006E8C23 /* socketTool */ = {
 			isa = PBXGroup;
 			children = (
-				1ECEB7731A905874006E8C23 /* socketTool.cpp */,
 				1ECEB7741A905874006E8C23 /* socketTool.h */,
+				1ECEB7731A905874006E8C23 /* socketTool.cpp */,
 			);
 			name = socketTool;
 			path = Last.fm/socketTool;
@@ -390,17 +391,17 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
-				1E9047F61AB2CA190000ED86 /* MAAssert */,
-				1EB207C11AA80995007968C8 /* res */,
-				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
-				1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */,
-				1ECEB7861A906231006E8C23 /* serialize */,
-				1ECEB7721A905874006E8C23 /* socketTool */,
-				1ECEB7651A9057E1006E8C23 /* Last.fm */,
-				1E04435C1A7B747A00B644D8 /* Preferences */,
+				1EDE8FA41A773D810086677B /* uPlayer */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
 				1EDE8FD41A7740EC0086677B /* lyricsFetcher */,
-				1EDE8FA41A773D810086677B /* uPlayer */,
+				1ECEB7721A905874006E8C23 /* socketTool */,
+				1ECEB7651A9057E1006E8C23 /* Last.fm */,
+				1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */,
+				1E9047F61AB2CA190000ED86 /* MAAssert */,
+				1E04435C1A7B747A00B644D8 /* Preferences */,
+				1EB207C11AA80995007968C8 /* res */,
+				1ECEB7861A906231006E8C23 /* serialize */,
+				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
 				1EDE8FE21A7742000086677B /* Frameworks */,
 				1EDE8FA31A773D810086677B /* Products */,
 			);
@@ -448,12 +449,12 @@
 		1EDE8FD41A7740EC0086677B /* lyricsFetcher */ = {
 			isa = PBXGroup;
 			children = (
-				1EDE8FCB1A7740DC0086677B /* audioTag.cpp */,
 				1EDE8FCC1A7740DC0086677B /* audioTag.h */,
-				1EDE8FCD1A7740DC0086677B /* fileCtrl.cpp */,
+				1EDE8FCB1A7740DC0086677B /* audioTag.cpp */,
 				1EDE8FCE1A7740DC0086677B /* fileCtrl.h */,
-				1EDE8FCF1A7740DC0086677B /* threadpool.cpp */,
+				1EDE8FCD1A7740DC0086677B /* fileCtrl.cpp */,
 				1EDE8FD01A7740DC0086677B /* threadpool.h */,
+				1EDE8FCF1A7740DC0086677B /* threadpool.cpp */,
 			);
 			name = lyricsFetcher;
 			sourceTree = "<group>";
@@ -503,7 +504,6 @@
 			children = (
 				1EFD42DC1A91EE85009D65B5 /* shortcutKey.h */,
 				1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */,
-				1E7A78371AA974D9004E9DDC /* keymaps.json */,
 				1E154DF81AAEFA9E0000A3B1 /* keycode.h */,
 				1E154DF51AAEFA8A0000A3B1 /* keycode.mm */,
 			);

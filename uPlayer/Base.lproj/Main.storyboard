@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <scenes>
@@ -285,7 +284,7 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="kwZ-C4-vB6"/>
             </objects>
-            <point key="canvasLocation" x="-289.5" y="-612"/>
+            <point key="canvasLocation" x="-1049.5" y="-612"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -443,7 +442,7 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="JRU-F8-Ixg"/>
             </objects>
-            <point key="canvasLocation" x="-681" y="425"/>
+            <point key="canvasLocation" x="-936" y="262"/>
         </scene>
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
@@ -622,7 +621,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="-255" y="-343.5"/>
+            <point key="canvasLocation" x="-1031" y="-343.5"/>
         </scene>
         <!--Tracklist Viewer-->
         <scene sceneID="hIz-AP-VOD">
