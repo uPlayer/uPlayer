@@ -12,12 +12,12 @@
 
 @interface PlayerEngine : NSObject
 
-///Whether or not the Player is playing.
+///Whether or not the Player is playing not paused.
 @property (nonatomic, readonly) BOOL isPlaying;
 
-///The volume level of the player.
-///
-///This property is persistent.
+/**The volume level of the player.
+ * This property is persistent.
+ */
 @property float volume;
 
 -(BOOL)playURL:(NSURL *)url;

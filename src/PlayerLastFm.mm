@@ -35,7 +35,7 @@ void lastFm_loveTrack(PlayerTrack *track)
         
         NSUserNotification* n = [[ NSUserNotification alloc] init] ;
         n.title = title;
-        n.informativeText = track.info.title;
+        n.informativeText = compressTitle(track.info);
         
        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:n];
     });

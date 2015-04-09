@@ -645,7 +645,7 @@
 - (IBAction)cmdLastFm_Love:(id)sender
 {
     PlayerTrack *track = [self getSelectedItem: self.tableView.selectedRow];
- 
+    
     lastFm_loveTrack(track);
 }
 
