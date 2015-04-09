@@ -252,6 +252,8 @@
         
         addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
         
+        addObserverForEvent(self, @selector(lastFm_loveTrack:), EventID_to_love_item);
+        
         // locad config files.
         PlayerDocument *d = player().document;
         
@@ -354,13 +356,9 @@
 
 -(void)track_state_changed
 {
-//    PlayerlList *ll = player().document.playerlList;
-    
     PlayerTrack *track = player().playing;
     
-    
     BOOL stopped = [player().engine isStopped];
-    //BOOL playing = [player().engine isPlaying];
     BOOL paused = [player().engine isPaused];
     
     if (stopped)
@@ -471,9 +469,16 @@
 
 - (IBAction)cmdLastFm_Love:(id)sender
 {
-    PlayerTrack *track = player().playing;
+    postEvent(EventID_to_love_item, nil);
+}
+
+-(void)lastFm_loveTrack:(NSNotification*)n
+{
+    PlayerTrack *track = n.object;
+    if (track == nil)
+        track = player().playing;
     
-    lastFm_loveTrack( track);
+    lastFm_loveTrack( track );
 }
 
 @end
