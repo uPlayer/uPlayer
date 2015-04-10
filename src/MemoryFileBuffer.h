@@ -75,13 +75,9 @@ public:
         
         length += sizeof(T);
     }
-    
-    
-    void readDouble(double t);
 };
 
-template <class T>
-MemoryFileBuffer& operator<<(MemoryFileBuffer& mfb,T &t) ;
+
 
 template <class T>
 MemoryFileBuffer& operator<<(MemoryFileBuffer& mfb,T &t) {
@@ -96,6 +92,5 @@ MemoryFileBuffer& operator>>(MemoryFileBuffer& mfb,double t) {
     return mfb;
 }
 
-void test();
 
 #endif /* defined(__uPlayer__MemoryFileBuffer__) */
