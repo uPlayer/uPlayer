@@ -48,17 +48,44 @@
     self = [super init];
     if (self) {
         
+        // First init message center.
         initPlayerMessage();
         
+        // Add observers
+        [self addObservers];
+        
+        // Load ui layout
+        [player().layout load];
+        
+        [self setUpHotkeys];
+        
+        [self setUpStatusBar];
+        
+        // Load and maintain main window controller
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
             
         self.mainWindowController = [storyboard instantiateControllerWithIdentifier:@"IDMainWindow"];
         
-        [_mainWindowController showWindow:nil];
+        // Load document and notify the window
+        [self loadDocument];
         
+        [_mainWindowController showWindow:nil];
+
     }
     
     return self;
+}
+
+-(void)addObservers
+{
+    addObserverForEvent(self, @selector(playerErrorHandler:), EventID_play_error_happened);
+    
+    addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
+    
+    addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
+    
+    addObserverForEvent(self, @selector(lastFm_loveTrack:), EventID_to_love_item);
+    
 }
 
 - (IBAction)cmdRandom:(id)sender {
@@ -210,91 +237,69 @@
     shortcutKeyPressed( s, false);
 }
 
--(void)initApp
+-(void)setUpStatusBar
 {
-    static bool init = false;
-    if (init == false)
-    {
-        init = true;
+    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
-        // set up status bar
-        
-        _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-        
-        _statusItem.title = @"";
-        
-        _statusItem.image = [NSImage imageNamed:@"player"];
-        
-        _statusItem.alternateImage = [NSImage imageNamed:@"player"];
-        
-        _statusItem.highlightMode = YES;
-        
-        NSArray *array;
-        if ([[NSBundle mainBundle]  loadNibNamed:@"StatusMenu" owner:self topLevelObjects:&array] )
+    _statusItem.title = @"";
+    
+    _statusItem.image = [NSImage imageNamed:@"player"];
+    
+    _statusItem.alternateImage = [NSImage imageNamed:@"player"];
+    
+    _statusItem.highlightMode = YES;
+    
+    NSArray *array;
+    if ([[NSBundle mainBundle]  loadNibNamed:@"StatusMenu" owner:self topLevelObjects:&array] )
+    {
+        for (id arrItem in array)
         {
-            for (id arrItem in array)
+            if ([arrItem isKindOfClass:[NSMenu class]])
             {
-                if ([arrItem isKindOfClass:[NSMenu class]])
-                {
-                    NSMenu *menu = arrItem;
-                    NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
-                    [_statusItem setMenu: menu];
-                    break;
-                }
+                NSMenu *menu = arrItem;
+                NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
+                [_statusItem setMenu: menu];
+                break;
             }
         }
-        
-        // add observers
-        
-        addObserverForEvent(self, @selector(playerErrorHandler:), EventID_play_error_happened);
-        
-        addObserverForEvent(self, @selector(scrobbler:), EventID_track_started);
-        
-        addObserverForEvent(self , @selector(track_state_changed), EventID_track_state_changed);
-        
-        addObserverForEvent(self, @selector(lastFm_loveTrack:), EventID_to_love_item);
-        
-        // locad config files.
-        PlayerDocument *d = player().document;
-        
-        if( [d load] )
-        {
-            postEvent(EventID_to_reload_tracklist, nil);
-        }
-        
-        postEvent(EventID_player_document_loaded, nil);
-        
-        player().engine.volume = player().document.volume;
-        
-        self.menuOpenDirectory.enabled = [d.playerlList count]>0;
-        
-        
-        // register hotkeys from cache file.
-        verifyLoadFileShortcutKey();
-        
-        NSArray *hotKeys = globalHotKeysLoaded();
-        
-        for (LLHotKey *hotKey in hotKeys) {
-            [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
-        }
-        
-        // add a default playlist if have not
-        if( [d.playerlList count] == 0)
-            [self cmdNewPlayerList:nil];
-        
     }
 }
 
+/// Register hotkeys from cache file.
+-(void)setUpHotkeys
+{
+    verifyLoadFileShortcutKey();
+    
+    NSArray *hotKeys = globalHotKeysLoaded();
+    
+    for (LLHotKey *hotKey in hotKeys) {
+        [[LLHotKeyCenter defaultCenter] addObserver:self selector:@selector(hotKeyTriggered:) hotKey:hotKey];
+    }
+}
+
+-(void)loadDocument
+{
+    PlayerDocument *d = player().document;
+    
+    if( [d load] )
+    {
+        postEvent(EventID_to_reload_tracklist, nil);
+    }
+    
+    postEvent(EventID_player_document_loaded, nil);
+    
+    player().engine.volume = player().document.volume;
+    
+    self.menuOpenDirectory.enabled = [d.playerlList count]>0;
+}
+
+
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-    [self initApp];
 }
 
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
-    NSLog(@"%@",filenames);
-    
-    
     NSMutableArray *trackInfos = [NSMutableArray array];
     for(NSString *filename in filenames)
     {
@@ -311,7 +316,7 @@
 
     postEvent(EventID_to_play_item, tracks.firstObject);
     
-    /// add others to player queue.
+    // add others to player queue.
     [tracks removeObjectAtIndex:0];
     
     [d.playerQueue push2:tracks];
@@ -319,10 +324,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self initApp];
-    
-    
     PlayerDocument *d = player().document;
+    
+    // add a default playlist if have not
+    if( [d.playerlList count] == 0)
+        [self cmdNewPlayerList:nil];
+    
     // add ~/music to a default playerlist, if is none.
     if ( [d.playerlList count] == 1 && d.playerlList.selectItem.count == 0)
     {
@@ -395,9 +402,13 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
+    postEvent(EventID_applicationWillTerminate, nil);
+    
     collectInfo( player().document , player().engine);
     
     [player().document save];
+    
+    [player().layout save];
     
     saveFileShortcutKey();
 }

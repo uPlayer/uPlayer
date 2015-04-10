@@ -7,8 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PlayerLayout.h"
 
 @interface PlaylistViewController : NSViewController
 
+@property (nonatomic,strong) NSMutableArray * tableColumnWidths;
 
 @end

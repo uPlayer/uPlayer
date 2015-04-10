@@ -6,7 +6,33 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-@interface PlayerLayout :NSObject
 
+
+
+
+@protocol PlayerLayout <NSObject>
+
+-(void)saveTo:(FILE*)file;
+
+-(void)loadFrom:(FILE*)file;
 
 @end
+
+
+
+@interface PlayerLayout :NSObject
+
+@property (nonatomic,strong) NSMutableDictionary *dicObjects;
+
+-(void)saveData:(NSData*)data withKey:(NSString*)key;
+
+-(NSData*)getDataByKey:(NSString *)key;
+
+
+
+-(void)save;
+
+-(bool)load;
+
+@end
+

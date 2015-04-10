@@ -14,6 +14,8 @@
 #import "MAAssert.h"
 
 #import "PlayerLastFm.h"
+#import "PlayerLayout+MemoryFileBuffer.h"
+
 
 /*
 @interface NSTableView (rc)
@@ -98,7 +100,50 @@
     addObserverForEvent(self, @selector(startPIAnimation), EventID_importing_tracks_begin);
     addObserverForEvent(self, @selector(stopPIAnimation), EventID_importing_tracks_end);
     
+    addObserverForEvent(self, @selector(saveLayout), EventID_applicationWillTerminate);
+    
     self.playerlList = player().document.playerlList;
+}
+
+-(void)saveLayout
+{
+    NSArray *tableColumns = self.tableView.tableColumns;
+    
+    MemoryFileBuffer buffer( sizeof(CGFloat)*20);
+    
+    for (NSTableColumn *column in tableColumns) {
+        CGFloat w = column.width;
+        buffer.write(w);
+    }
+    
+    NSData *data = dataFromMemoryFileBuffer(&buffer);
+    [player().layout saveData:data withKey:self.className];
+}
+
+-(bool)loadLayout
+{
+    NSData *data = [player().layout getDataByKey:self.className];
+    if(data )
+    {
+        MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
+        
+        NSMutableArray *arrayWidths = [NSMutableArray array];
+        
+        int count = (int)self.columnNames.count;
+        for ( int i = 0; i < count ; ++i) {
+            CGFloat width;
+            buffer->read(width);
+            [arrayWidths addObject:@(width)];
+        }
+        
+        self.columnWidths = arrayWidths;
+        
+        delete buffer;
+        
+        return true;
+    }
+    
+    return false;
 }
 
 /**
@@ -261,8 +306,11 @@
                         NSLocalizedString(@"album", nil),
                         NSLocalizedString(@"genre", nil),
                         NSLocalizedString(@"year", nil),nil];
-    
-    self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
+   
+    if( ![self loadLayout])
+    {
+        self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
+    }
     
     for (int i = 0; i < self.columnNames.count; i++)
     {
@@ -287,9 +335,6 @@
     [self.view addSubview:tableContainer];
     
     [self.tableView reloadData];
-    
-    
- 
 
 }
 

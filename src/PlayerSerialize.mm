@@ -9,6 +9,9 @@
 #import "ThreadJob.h"
 #import "PlayerTypeDefines.h"
 #import "MAAssert.h"
+#import "PlayerLayout.h"
+#import "PlaylistViewController.h"
+
 
 const int max_path = 256;
 
@@ -88,6 +91,30 @@ NSString *loadString(FILE &file)
 void saveString(FILE &file , NSString* value)
 {
     file << value.UTF8String;
+}
+
+void saveData(FILE &file , NSData *data)
+{
+    int length = (int)data.length;
+    file << length;
+    
+    fwrite(data.bytes , 1, length , &file);
+}
+
+NSData *loadData(FILE &file)
+{
+    int length = 0;
+    file >> length;
+    
+    void *buffer =malloc(length);
+    
+    fread( buffer, 1, length , &file);
+    
+    NSData *data = [[NSData alloc] initWithBytes:buffer length:length];
+    
+    free(buffer);
+    
+    return data;
 }
 
 NSArray *loadStringArray(FILE &file)
@@ -416,6 +443,16 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
+        int count = (int)self.dicObjects.count;
+        *file << count;
+        
+        for (NSString *key in self.dicObjects.allKeys) {
+            saveString(*file, key);
+            NSData *data = self.dicObjects[key];
+            saveData(*file, data);
+        }
+        
+        
         fclose(file);
         return true;
     }
@@ -429,6 +466,19 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
+        int count = 0;
+        *file >> count;
+        
+        for (int i = 0; i< count ; i++) {
+            
+            NSString *key = loadString(*file);
+            
+            NSData *data = loadData(*file);
+            
+            self.dicObjects[key]=data;
+        }
+        
+        
         fclose(file);
         
         return true;
@@ -436,4 +486,33 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     return false;
 }
+@end
+
+
+@implementation PlaylistViewController (layout)
+
+-(void)saveTo:(FILE*)file
+{
+    int count = (int)self.tableColumnWidths.count;
+    *file << count;
+    
+    for (NSNumber *n in self.tableColumnWidths) {
+        *file << n.floatValue;
+    }
+}
+
+-(void)loadFrom:(FILE*)file
+{
+    int count = 0;
+    *file >> count;
+    
+    self.tableColumnWidths = [NSMutableArray array];
+    
+    while (count-->0) {
+        float v = 0;
+        *file >> v;
+        [self.tableColumnWidths addObject:@(v)];
+    }
+}
+
 @end

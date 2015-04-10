@@ -12,10 +12,9 @@
 #import "PlayerMessage.h"
 #import "AppDelegate.h"
 #import "PlaylistViewController.h"
-#import "keycode.h"
 
 #define uPlayerWinPos @"uPlayerWinPos"
-
+#define PlaylistWinPos @"PlaylistWinPos"
 
 
 @interface NSSliderCellHideThumbWhenDisable : NSSliderCell
@@ -38,12 +37,11 @@
 @property (weak) IBOutlet NSSlider *volumnSlider;
 @property (weak) IBOutlet NSSearchField *searchField;
 
-@property (strong,nonatomic) PlaylistViewController* playlistManager;
-
 @property (weak) IBOutlet NSButton *btnPlayPause;
 @property (weak) IBOutlet NSButton *btnNextTrack;
 @property (weak) IBOutlet NSButton *btnPlayRandom;
 
+@property (strong,nonatomic) PlaylistViewController* playlistManager;
 @end
 
 @implementation WindowController
@@ -63,7 +61,11 @@
     addObserverForEvent(self, @selector(initCtrls), EventID_player_document_loaded);
     
     addObserverForEvent(self, @selector(showPlaylistManager), EventID_to_show_playlist);
+    
+
 }
+
+
 
 -(void)showPlaylistManager
 {
@@ -78,7 +80,12 @@
     
     wnd = _playlistManager.view.window;
     if (!wnd)
+    {
         wnd = [NSWindow windowWithContentViewController:_playlistManager];
+        
+        [wnd setFrameUsingName:PlaylistWinPos ];
+        [wnd setFrameAutosaveName:PlaylistWinPos];
+    }
     
     if (wnd.parentWindow)
         [wnd makeKeyWindow];
@@ -139,7 +146,6 @@
     PlayerTrack *track = player().playing;
     
     BOOL stopped = [player().engine isStopped];
-    //BOOL playing = [player().engine isPlaying];
     BOOL paused = [player().engine isPaused];
     
     if (paused || stopped)
@@ -199,8 +205,6 @@
     
     [self.window setFrameUsingName: uPlayerWinPos];
     [self.window setFrameAutosaveName:uPlayerWinPos];
-    
-
 }
 
 -(void)keyDown:(NSEvent *)theEvent

@@ -33,7 +33,7 @@ const char *arrEvent[] =
     
     "importing_tracks_begin",
     "importing_tracks_end",
-    
+    "applicationWillTerminate",
     "to_reload_tracklist",
     "to_save_config",
     "to_reload_lyrics",

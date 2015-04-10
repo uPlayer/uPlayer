@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  PlayerlistViewController.mm
 //  uPlayer
 //
 //  Created by liaogang on 15/1/27.
@@ -11,7 +11,17 @@
 #import "PlayerMessage.h"
 #import "PlayerSerachMng.h"
 
+#import "PlayerLayout+MemoryFileBuffer.h"
 
+void asdf2()
+{
+    MemoryFileBuffer a(10);
+    int b=1;
+    int c;
+    a.read(c);
+    a<<b;
+    a.read(b);
+}
 
 @interface PlaylistViewController ()
 <NSTableViewDelegate , NSTableViewDataSource >
@@ -70,9 +80,19 @@
     [super viewDidAppear];
 }
 
+-(void)viewWillDisappear
+{
+    [super viewWillDisappear];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    addObserverForEvent(self, @selector(saveLayout), EventID_applicationWillTerminate);
+    
+    
     self.playerlList = player().document.playerlList;
     
     self.tableView.rowHeight = 40.;
@@ -83,12 +103,53 @@
     
     [self.tableView reloadData];
     
+    
     addObserverForEvent( self.tableView , @selector(reloadData), EventID_tracks_changed);
     addObserverForEvent( self.tableView , @selector(reloadData), EventID_list_changed);
     
+    // load ui layout
+    [self loadLayout];
 }
 
+#pragma mark - @protocol PlayerLayout
 
+-(void)saveLayout
+{
+    NSArray *tableColumns = self.tableView.tableColumns;
+    
+    MemoryFileBuffer buffer( sizeof(CGFloat)*10);
+    
+    for (NSTableColumn *column in tableColumns) {
+        CGFloat w = column.width;
+        buffer.write(w);
+    }
+    
+    NSData *data = dataFromMemoryFileBuffer(&buffer);
+    [player().layout saveData:data withKey:self.className];
+}
+
+-(void)loadLayout
+{
+    NSArray *tableColumns = self.tableView.tableColumns;
+    
+    NSData *data = [player().layout getDataByKey:self.className];
+    if(data )
+    {
+        MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
+        
+        for ( int i = 0; i < tableColumns.count ; ++i) {
+            NSTableColumn *column = tableColumns[i];
+            CGFloat width;
+            buffer->read(width);
+            column.width = width;
+        }
+        
+        [self.tableView reloadData];
+        delete buffer;
+    }
+}
+
+#pragma mark -
 
 -(void)doubleClicked
 {

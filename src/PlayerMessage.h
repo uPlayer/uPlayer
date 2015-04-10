@@ -36,7 +36,7 @@ typedef enum : NSUInteger {
     
     EventID_importing_tracks_begin,
     EventID_importing_tracks_end,
-    
+    EventID_applicationWillTerminate, // save layout config
     /// param: PlayerList* list , if list is nil , then go to the playing item.
     /// else reload the list at list.topitem. and list is selected.
     EventID_to_reload_tracklist ,
