@@ -45,7 +45,7 @@
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
-@property (nonatomic,assign) NSArray *columnNames,*columnWidths;
+@property (nonatomic,assign) NSArray *columnNames,*columnWidths,*columnIdentifies;
 @property (nonatomic,assign) bool isSearchMode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
@@ -111,7 +111,12 @@
     
     MemoryFileBuffer buffer( sizeof(CGFloat)*20);
     
+    // save column from left to right in tableView
     for (NSTableColumn *column in tableColumns) {
+        
+        int columnIdentify = column.identifier.intValue;
+        buffer.write(columnIdentify);
+        
         CGFloat w = column.width;
         buffer.write(w);
     }
@@ -128,14 +133,23 @@
         MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
         
         NSMutableArray *arrayWidths = [NSMutableArray array];
+        NSMutableArray *columnIdentifies = [NSMutableArray array];
         
+        // load column from left to right, and it's origin index.
         int count = (int)self.columnNames.count;
         for ( int i = 0; i < count ; ++i) {
+            
+            int columnIdentify = -1;
+            buffer->read(columnIdentify);
+            NSAssert(columnIdentify >= 0, nil);
+            [columnIdentifies addObject: @(columnIdentify).stringValue];
+            
             CGFloat width;
             buffer->read(width);
             [arrayWidths addObject:@(width)];
         }
         
+        self.columnIdentifies = columnIdentifies;
         self.columnWidths = arrayWidths;
         
         delete buffer;
@@ -309,15 +323,22 @@
                         NSLocalizedString(@"genre", nil),
                         NSLocalizedString(@"year", nil),nil];
    
+    // Reserialize table columns
+    
     if( ![self loadLayout])
     {
         self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
+        self.columnIdentifies = [NSArray arrayWithObjects:@"0",@"1",@"2",@"3",@"4",@"5", nil];
     }
     
     for (int i = 0; i < self.columnNames.count; i++)
     {
-        NSTableColumn *cn = [[NSTableColumn alloc]initWithIdentifier: @"idn"];
-        cn.title = (NSString*) self.columnNames[i];
+        // Use the identify as the origin index.
+        NSString *identify = self.columnIdentifies[i];
+        int originIndex = identify.intValue;
+
+        NSTableColumn *cn = [[NSTableColumn alloc]initWithIdentifier: identify ];
+        cn.title = (NSString*) self.columnNames[originIndex];
         cn.width =((NSNumber*)self.columnWidths[i]).intValue;
         
         [self.tableView addTableColumn:cn];
@@ -325,9 +346,6 @@
     
     
     self.tableView.doubleAction=@selector(doubleClicked);
-    
-    
-    
     self.tableView.usesAlternatingRowBackgroundColors = true;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -462,7 +480,7 @@
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSInteger column = [self.tableView.tableColumns indexOfObject:tableColumn];
+    NSInteger column = tableColumn.identifier.intValue;
     
     NSString *identifier = @"t_itf";
     NSTextField *textField = (NSTextField *)[self.tableView makeViewWithIdentifier:identifier owner:self];

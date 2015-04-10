@@ -163,7 +163,7 @@ void asdf2()
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSInteger column = [tableView.tableColumns indexOfObject:tableColumn];
+    NSInteger column = tableColumn.identifier.intValue;
     
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier   owner:self];
 
