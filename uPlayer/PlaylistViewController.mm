@@ -80,12 +80,6 @@ void asdf2()
     [super viewDidAppear];
 }
 
--(void)viewWillDisappear
-{
-    [super viewWillDisappear];
-}
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];

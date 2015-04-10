@@ -283,6 +283,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSAssert(self.playerlList, @"method: `InitLoad` not actived.");
+    
     CGFloat bottomBarHeight = 22.0;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);

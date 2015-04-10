@@ -59,18 +59,19 @@
         
         [self setUpHotkeys];
         
-        [self setUpStatusBar];
         
         // Load and maintain main window controller
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-            
+        
         self.mainWindowController = [storyboard instantiateControllerWithIdentifier:@"IDMainWindow"];
+        
+        [self setUpStatusBar];
         
         // Load document and notify the window
         [self loadDocument];
         
         [_mainWindowController showWindow:nil];
-
+        
     }
     
     return self;
