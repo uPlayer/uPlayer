@@ -24,9 +24,8 @@
 #import "ThreadJob.h"
 #import "PlaylistViewController.h"
 #import "windowController.h"
-
-
 #import "PlayerLastFm.h"
+
 
 
 @interface AppDelegate ()
@@ -64,6 +63,7 @@
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
         
         self.mainWindowController = [storyboard instantiateControllerWithIdentifier:@"IDMainWindow"];
+        
         
         [self setUpStatusBar];
         
