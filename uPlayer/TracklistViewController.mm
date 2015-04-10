@@ -45,7 +45,7 @@
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
-@property (nonatomic,assign) NSArray *columnNames,*columnWidths,*columnIdentifies;
+@property (nonatomic,strong) NSArray *columnNames,*columnWidths,*columnIdentifies;
 @property (nonatomic,assign) bool isSearchMode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
@@ -133,7 +133,8 @@
         MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
         
         NSMutableArray *arrayWidths = [NSMutableArray array];
-        NSMutableArray *columnIdentifies = [NSMutableArray array];
+        NSMutableArray *arrayIdns = [NSMutableArray array];
+
         
         // load column from left to right, and it's origin index.
         int count = (int)self.columnNames.count;
@@ -142,14 +143,14 @@
             int columnIdentify = -1;
             buffer->read(columnIdentify);
             NSAssert(columnIdentify >= 0, nil);
-            [columnIdentifies addObject: @(columnIdentify).stringValue];
+            [arrayIdns addObject: @(columnIdentify).stringValue];
             
             CGFloat width;
             buffer->read(width);
             [arrayWidths addObject:@(width)];
         }
         
-        self.columnIdentifies = columnIdentifies;
+        self.columnIdentifies = arrayIdns;
         self.columnWidths = arrayWidths;
         
         delete buffer;
@@ -331,6 +332,10 @@
         self.columnIdentifies = [NSArray arrayWithObjects:@"0",@"1",@"2",@"3",@"4",@"5", nil];
     }
     
+    NSAssert([self.columnWidths isKindOfClass:[NSArray class]], nil);
+    
+    
+    
     for (int i = 0; i < self.columnNames.count; i++)
     {
         // Use the identify as the origin index.
@@ -339,8 +344,10 @@
 
         NSTableColumn *cn = [[NSTableColumn alloc]initWithIdentifier: identify ];
         cn.title = (NSString*) self.columnNames[originIndex];
-        cn.width =((NSNumber*)self.columnWidths[i]).intValue;
         
+        
+        NSNumber *n = self.columnWidths[i];
+        cn.width =((NSNumber*)n).floatValue;
         [self.tableView addTableColumn:cn];
     }
     
