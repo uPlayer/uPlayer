@@ -454,7 +454,8 @@
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sof-Yj-DjO">
                                 <rect key="frame" x="0.0" y="0.0" width="610" height="303"/>
-<clipView key="contentView" misplaced="YES" id="rHG-2U-uEe"><rect key="frame" x="1" y="0.0" width="238" height="134"/>
+                                <clipView key="contentView" id="rHG-2U-uEe">
+                                    <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UNq-A6-I6m" viewBased="YES" id="1Gu-As-ZBl">
@@ -463,7 +464,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="playlistColumnIndex" width="60" minWidth="60" maxWidth="1000" id="QYP-aE-oTi">
+                                                <tableColumn identifier="0" width="60" minWidth="60" maxWidth="1000" id="QYP-aE-oTi">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="#">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -495,7 +496,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="playlistColumnName" width="100" minWidth="80" maxWidth="1000" id="bvQ-OO-SUT">
+                                                <tableColumn identifier="1" width="100" minWidth="80" maxWidth="1000" id="bvQ-OO-SUT">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="song number">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -527,7 +528,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="playlistColumnName" width="438.74232079777369" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="2" width="438.74232079777369" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
