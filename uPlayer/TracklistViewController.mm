@@ -709,6 +709,11 @@
     [_progress removeFromSuperview];
 }
 
+-(bool)rowSelectedLastFmEnabled
+{
+    return [self hasRowSelected] && [self lastFmEnabled];
+}
+
 -(bool)lastFmEnabled
 {
     return player().document.lastFmEnabled;

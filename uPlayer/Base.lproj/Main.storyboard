@@ -663,7 +663,7 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdLastFm_Love:" target="XfG-lQ-9wD" id="MOm-t9-0HE"/>
-                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="lastFmEnabled" id="DUC-gx-QAW"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="rowSelectedLastFmEnabled" id="mcH-pS-4gt"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Uek-f8-d6s"/>
