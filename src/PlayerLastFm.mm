@@ -12,7 +12,7 @@
 #import "PlayerTrack.h"
 #import "ThreadJob.h"
 #import <string>
-
+#import <Cocoa/Cocoa.h>
 
 void lastFm_loveTrack(PlayerTrack *track)
 {

@@ -4,7 +4,7 @@ A audio player for Mac Os x.
 
 Last.fm scrobbling and global key blinding is supported.
 
-![uPlayer](res/uPlayer.png)
+![uPlayer](res/uPlayerScreen.png)
 
 ##Download  
 

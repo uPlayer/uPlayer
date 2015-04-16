@@ -8,7 +8,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>iTunes-mp3.icns</string>
+			<string>uPlayer-mp3.icns</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSIsAppleDefaultForType</key>
@@ -22,7 +22,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
-	<string>player.icns</string>
+	<string>uPlayer.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>liaogang.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -32,11 +32,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2.1</string>
+	<string>0.2.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>v0.2.1</string>
+	<string>v0.2.2</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.music</string>
 	<key>LSMinimumSystemVersion</key>

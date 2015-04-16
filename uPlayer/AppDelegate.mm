@@ -244,9 +244,9 @@
     
     _statusItem.title = @"";
     
-    _statusItem.image = [NSImage imageNamed:@"player"];
+    _statusItem.image = [NSImage imageNamed:@"uPlayerStatus"];
     
-    _statusItem.alternateImage = [NSImage imageNamed:@"player"];
+    _statusItem.alternateImage = [NSImage imageNamed:@"uPlayerStatus"];
     
     _statusItem.highlightMode = YES;
     
