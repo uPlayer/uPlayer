@@ -1,10 +1,12 @@
+#uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)  
 
-# uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)
+![uPlayer](res/uPlayer.png)    
+
 A audio player for Mac Os x.  
 
 Last.fm scrobbling and global key blinding is supported.
 
-![uPlayer](res/uPlayerScreen.png)
+![uPlayerScreen](res/uPlayerScreen.png)
 
 ##Download  
 
