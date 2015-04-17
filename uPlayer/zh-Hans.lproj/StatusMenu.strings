@@ -1,12 +1,15 @@
 
+/* Class = "NSMenuItem"; title = "Love @ last.Fm"; ObjectID = "7yB-yl-V3T"; */
+"7yB-yl-V3T.title" = "喜爱 @ last.Fm";
+
 /* Class = "NSMenuItem"; title = "Random"; ObjectID = "DfF-kB-LZJ"; */
-"DfF-kB-LZJ.title" = "Random";
+"DfF-kB-LZJ.title" = "随机";
 
 /* Class = "NSMenuItem"; title = "Play/Pause"; ObjectID = "HAF-10-dUa"; */
-"HAF-10-dUa.title" = "Play/Pause";
+"HAF-10-dUa.title" = "播放/暂停";
 
-/* Class = "NSMenuItem"; title = "Stop"; ObjectID = "mWM-vJ-71g"; */
-"mWM-vJ-71g.title" = "停止";
+/* Class = "NSMenuItem"; title = "Exit"; ObjectID = "Z4J-VU-Fu3"; */
+"Z4J-VU-Fu3.title" = "退出";
 
 /* Class = "NSMenuItem"; title = "Next"; ObjectID = "zRD-Z2-fak"; */
 "zRD-Z2-fak.title" = "下一个";
