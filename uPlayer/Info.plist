@@ -24,7 +24,7 @@
 	<key>CFBundleIconFile</key>
 	<string>uPlayer.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>liaogang.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>liaogang345.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
