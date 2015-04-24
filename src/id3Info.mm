@@ -88,6 +88,39 @@ void getId3FromAudio(NSURL *audioFile, NSMutableData *image, NSMutableString *al
 }
 
 
-
+NSData * getId3ImageFromAudio(NSURL *audioFile)
+{
+    NSData *result;
+    
+    AVURLAsset *mp3Asset = [[AVURLAsset alloc] initWithURL:audioFile options:nil];
+    
+    if (!mp3Asset)
+        return nil ;
+    
+    for (NSString *format in [mp3Asset availableMetadataFormats])
+    {
+        for (AVMetadataItem *metadataItem in [mp3Asset metadataForFormat:format])
+        {
+            NSString *commonKey = metadataItem.commonKey;
+            
+            if ([commonKey isEqualToString:AVMetadataCommonKeyArtwork])
+            {
+                if ([metadataItem.value isKindOfClass:[NSDictionary class]])
+                    result = [(NSDictionary*)metadataItem.value objectForKey:@"data"];
+                else if([metadataItem.value isKindOfClass:[NSData class] ])
+                    result = (NSData*)metadataItem.value;
+            }
+            
+            if (result)
+                break;
+        }
+        
+        if (result)
+            break;
+        
+    }
+    
+    return result;
+}
 
 

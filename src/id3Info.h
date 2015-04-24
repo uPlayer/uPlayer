@@ -16,6 +16,8 @@
  */
 void getId3FromAudio(NSURL *audioFile, NSMutableData *image, NSMutableString *album, NSMutableString *artist,NSMutableString *title, NSMutableString *lyrics,NSMutableString *genre,NSMutableString *year);
 
+NSData * getId3ImageFromAudio(NSURL *audioFile);
+
 
 
 

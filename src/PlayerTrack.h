@@ -15,7 +15,7 @@
 @property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
 @property (nonatomic,strong)NSString *path;
 
-@property (nonatomic,strong) NSImage *image;
+@property (nonatomic,strong) NSImage *image,*imageSmall;
 @property (nonatomic,strong) NSString *lyrics;
 @end
 

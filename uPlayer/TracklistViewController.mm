@@ -16,6 +16,63 @@
 #import "PlayerLastFm.h"
 #import "PlayerLayout+MemoryFileBuffer.h"
 
+#import "id3Info.h"
+
+
+#define ColumnNames  @[\
+NSLocalizedString(@"cover", nil),\
+NSLocalizedString(@"#", nil),\
+NSLocalizedString(@"artist", nil),\
+NSLocalizedString(@"title", nil),\
+NSLocalizedString(@"album", nil),\
+NSLocalizedString(@"genre", nil),\
+NSLocalizedString(@"year", nil)\
+];
+
+#define ColumnWidths  @[@60,@60,@120,@320,@320,@60,@60];
+#define ColumnIdentifies  @[@"0",@"1",@"2",@"3",@"4",@"5",@"6"];
+
+enum columnIden
+{
+    columnIden_image,
+    columnIden_number,
+    columnIden_artist,
+    columnIden_title,
+    columnIden_album,
+    columnIden_genre,
+    columnIden_year,
+};
+
+
+
+NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
+{
+    NSRect targetFrame = NSMakeRect(0, 0, size.width, size.height);
+    NSImage* targetImage = nil;
+    NSImageRep *sourceImageRep =
+    [sourceImage bestRepresentationForRect:targetFrame
+                                   context:nil
+                                     hints:nil];
+    
+    targetImage = [[NSImage alloc] initWithSize:size];
+    
+    [targetImage lockFocus];
+    [sourceImageRep drawInRect: targetFrame];
+    [targetImage unlockFocus];
+    
+    return targetImage;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 @interface NSTableView (rc)
@@ -311,24 +368,19 @@
     NSMenu *menu = [[NSMenu alloc] init];
     self.tableView.headerView.menu = menu;
     
-    self.columnNames = [NSArray arrayWithObjects:
-                        NSLocalizedString(@"#", nil),
-                        NSLocalizedString(@"artist", nil),
-                        NSLocalizedString(@"title", nil),
-                        NSLocalizedString(@"album", nil),
-                        NSLocalizedString(@"genre", nil),
-                        NSLocalizedString(@"year", nil),nil];
-   
+
+    
+    
+    self.columnNames = ColumnNames;
     // Reserialize table columns
     
     if( ![self loadLayout])
     {
-        self.columnWidths = [NSArray arrayWithObjects: @60,@120,@320,@320,@60,@60, nil];
-        self.columnIdentifies = [NSArray arrayWithObjects:@"0",@"1",@"2",@"3",@"4",@"5", nil];
+        self.columnWidths = ColumnWidths;
+        self.columnIdentifies = ColumnIdentifies;
     }
     
     NSAssert([self.columnWidths isKindOfClass:[NSArray class]], nil);
-    
     
     
     for (int i = 0; i < self.columnNames.count; i++)
@@ -501,24 +553,39 @@
     PlayerTrack *track = [self getSelectedItem:row];
     TrackInfo *info = track.info;
     
-    if (column == 0) {
+    if (column == columnIden_image)
+    {
+        NSImageView *imageV = [[NSImageView alloc]initWithFrame: NSMakeRect(0, 0, tableColumn.width, 0)];
+        
+        if(!info.imageSmall)
+        {
+            NSImage * image =  [[NSImage alloc]initWithData: getId3ImageFromAudio([NSURL fileURLWithPath: info.path])];
+            info.imageSmall = resizeImage( image, NSMakeSize(tableColumn.width, tableColumn.width));
+        }
+        
+        imageV.image = info.imageSmall;
+        
+        return imageV;
+    }
+    else if (column == columnIden_number)
+    {
         textField.stringValue = [NSString stringWithFormat:@"%ld",row + 1];
         
         textField.editable = false;
     }
-    else if(column == 1) {
+    else if(column == columnIden_artist) {
         textField.stringValue = info.artist;
     }
-    else if(column == 2) {
+    else if(column == columnIden_title) {
         textField.stringValue = info.title ;
     }
-    else if(column == 3) {
+    else if(column == columnIden_album) {
         textField.stringValue = info.album;
     }
-    else if(column == 4) {
+    else if(column == columnIden_genre) {
         textField.stringValue = info.genre;
     }
-    else if(column == 5) {
+    else if(column == columnIden_year) {
         textField.stringValue = info.year;
     }
     

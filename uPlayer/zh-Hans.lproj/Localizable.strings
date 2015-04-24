@@ -39,6 +39,7 @@
 "single" = "单个";
 
 // column names
+"cover" = "封面";
 "#" = "序号";
 "artist" = "艺术家";
 "title" = "标题";
