@@ -18,7 +18,6 @@
 		1E154DF61AAEFA8A0000A3B1 /* keycode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E154DF51AAEFA8A0000A3B1 /* keycode.mm */; };
 		1E169A891A78E701003D3D01 /* windowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.mm */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
-		1E211DC51ACA47BE005F994C /* libtag.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E211DC41ACA47BE005F994C /* libtag.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1E211DC91ACA5490005F994C /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E211DC81ACA5490005F994C /* libpthread.dylib */; };
 		1E3AF1CA1ADF6A64004AA408 /* uPlayer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1C91ADF6A64004AA408 /* uPlayer.icns */; };
 		1E3AF1E11ADF756B004AA408 /* uPlayerStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */; };
@@ -114,7 +113,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1E211DC51ACA47BE005F994C /* libtag.1.dylib in CopyFiles */,
 				1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,7 +207,7 @@
 		1ED6B0A41AEA043F00DBEEE4 /* id3Info.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = id3Info.mm; sourceTree = "<group>"; };
 		1EDAAD461AB6F17E009DB36A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1EDAAD481AB6F180009DB36A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1EDE8FA21A773D810086677B /* uPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EDE8FA21A773D810086677B /* Smine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE8FA61A773D810086677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EDE8FA71A773D810086677B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1EDE8FA81A773D810086677B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -431,7 +429,7 @@
 		1EDE8FA31A773D810086677B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EDE8FA21A773D810086677B /* uPlayer.app */,
+				1EDE8FA21A773D810086677B /* Smine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -548,7 +546,7 @@
 			);
 			name = uPlayer;
 			productName = uPlayer;
-			productReference = 1EDE8FA21A773D810086677B /* uPlayer.app */;
+			productReference = 1EDE8FA21A773D810086677B /* Smine.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -866,7 +864,7 @@
 					"-ljson",
 					"-lpthread",
 				);
-				PRODUCT_NAME = smine;
+				PRODUCT_NAME = Smine;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -898,7 +896,7 @@
 					"-ljson",
 					"-lpthread",
 				);
-				PRODUCT_NAME = smine;
+				PRODUCT_NAME = Smine;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;

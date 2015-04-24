@@ -23,7 +23,7 @@ TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
     
-    NSMutableData *image = [NSMutableData data];
+    NSMutableData *image = nil;
     NSMutableString *artist = [NSMutableString string];
     NSMutableString *title = [NSMutableString string];
     NSMutableString *album = [NSMutableString string];
@@ -31,7 +31,10 @@ TrackInfo* getId3Info(NSString *filename)
     NSMutableString *year = [NSMutableString string];
     NSMutableString *lyrics = [NSMutableString string];
     
-    getId3FromAudio([NSURL fileURLWithPath:filename], image, album, artist, title, lyrics ,genre,year);
+    if (! getId3FromAudio([NSURL fileURLWithPath:filename], image, album, artist, title, lyrics ,genre,year) )
+    {
+        return nil;
+    }
     
    
     at.artist = artist;
@@ -40,7 +43,7 @@ TrackInfo* getId3Info(NSString *filename)
     at.lyrics = lyrics;
     at.genre = genre;
     at.year = year;
-    at.image = [[NSImage alloc] initWithData:image];
+//    at.image = [[NSImage alloc] initWithData:image];
     
     if([at.genre isEqualToString:@"null"])
         at.genre=@"";

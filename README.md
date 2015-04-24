@@ -47,7 +47,7 @@ Only tested in OS X 10.10 Yosemite
 	
 	  And update the git submodule:
 
-2. Download and build [jsoncpp](http://sourceforge.net/projects/jsoncpp/) and [taglib](https://tablib.readthedocs.org/en/latest/)  
+2. Download and build [jsoncpp](http://sourceforge.net/projects/jsoncpp/).   
 
 3. Done and Open the project with xcode.
 
