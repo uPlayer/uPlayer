@@ -478,7 +478,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="a50-0L-eBb">
-                                                            <rect key="frame" x="1" y="1" width="60" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="60.388164538468907" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
@@ -510,7 +510,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="lsr-Wy-tnZ">
-                                                            <rect key="frame" x="64" y="1" width="100" height="17"/>
+                                                            <rect key="frame" x="64.388164538468914" y="1" width="100.34233114868758" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-C9-4wu">
@@ -528,7 +528,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="2" width="438.74232079777369" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="2" width="438.59442246802064" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -542,7 +542,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="120" y="1" width="338" height="17"/>
+                                                            <rect key="frame" x="167.73049568715649" y="1" width="438.41604861976856" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
@@ -569,11 +569,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZMn-x1-68y">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.99818435319838827" horizontal="YES" id="ZMn-x1-68y">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="HeK-Oj-WBQ">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1.7601844062931201e-11" horizontal="NO" id="HeK-Oj-WBQ">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -645,14 +645,14 @@
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="lge-RI-ckT"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add to play queue" id="CGf-NP-DLA">
+                        <menuItem title="Enqueue" id="CGf-NP-DLA">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdAddToPlayQueue:" target="XfG-lQ-9wD" id="U6D-Tj-r7i"/>
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="ckd-wW-bRA"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Clear Play Queue" id="tiA-Se-VSY">
+                        <menuItem title="Clear Queue" id="tiA-Se-VSY">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="cmdClearPlayQueue:" target="XfG-lQ-9wD" id="2dT-u6-ckv"/>

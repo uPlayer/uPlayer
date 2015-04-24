@@ -239,9 +239,6 @@
         next = [list getItem: indexNext ];
     
     playTrack(next);
-    
-    if( player().document.trackSongsWhenPlayStarted)
-        postEvent(EventID_to_reload_tracklist, next );
 }
 
 -(void)playPause
