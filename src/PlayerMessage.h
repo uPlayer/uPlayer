@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 liaogang. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#include <Cocoa/Cocoa.h>
 
 typedef enum : NSUInteger {
     EventID_track_started = 0, // param: ProgressInfo *info

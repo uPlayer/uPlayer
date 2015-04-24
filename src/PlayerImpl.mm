@@ -7,7 +7,7 @@
 //
 
 #import "PlayerTrack.h"
-#import "audioTag.h"
+#import "id3Info.h"
 
 #import "fileCtrl.h"
 #import "threadpool.h"
@@ -18,31 +18,35 @@
 
 #import "PlayerSerialize.h"
 
+
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
-    char artist[256];
-    char title[256];
-    char album[256];
-    char genre[256];
-    char year[256];
     
-    if( getId3Info(filename.UTF8String, artist, title, album,genre,year) )
-    {
-        at.artist=[NSString stringWithUTF8String:artist];
-        at.title=[NSString stringWithUTF8String:title];
-        at.album=[NSString stringWithUTF8String:album];
-        at.genre=[NSString stringWithUTF8String:genre];
-        
-        if([at.genre isEqualToString:@"null"])
-            at.genre=@"";
-        
-        at.year=[NSString stringWithUTF8String:year];
-        
-        return at;
-    }
+    NSMutableData *image = [NSMutableData data];
+    NSMutableString *artist = [NSMutableString string];
+    NSMutableString *title = [NSMutableString string];
+    NSMutableString *album = [NSMutableString string];
+    NSMutableString *genre = [NSMutableString string];
+    NSMutableString *year = [NSMutableString string];
+    NSMutableString *lyrics = [NSMutableString string];
     
-    return nil;
+    getId3FromAudio([NSURL fileURLWithPath:filename], image, album, artist, title, lyrics ,genre,year);
+    
+   
+    at.artist = artist;
+    at.title = title;
+    at.album = album;
+    at.lyrics = lyrics;
+    at.genre = genre;
+    at.year = year;
+    at.image = [[NSImage alloc] initWithData:image];
+    
+    if([at.genre isEqualToString:@"null"])
+        at.genre=@"";
+    
+    
+    return at;
 }
 
 

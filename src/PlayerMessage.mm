@@ -8,8 +8,6 @@
 
 #import "PlayerMessage.h"
 
-#import <AVFoundation/AVFoundation.h>
-
 #import "MAAssert.h"
 
 const char *arrEvent[] =

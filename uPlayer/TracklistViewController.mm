@@ -290,11 +290,6 @@
 }
 
 
--(void)viewDidAppear
-{
-    [super viewDidAppear];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
