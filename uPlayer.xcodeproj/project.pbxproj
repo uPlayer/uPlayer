@@ -866,7 +866,7 @@
 					"-ljson",
 					"-lpthread",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = smine;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -898,7 +898,7 @@
 					"-ljson",
 					"-lpthread",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = smine;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
