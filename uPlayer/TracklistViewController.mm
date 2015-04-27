@@ -69,33 +69,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 
 
-
-/*
-@interface NSTableView (rc)
-/// select item at right click.
--(NSMenu *)menuForEvent:(NSEvent *)event;
-@end
-
-@implementation NSTableView (rc)
--(NSMenu *)menuForEvent:(NSEvent *)event
-{
-    NSEvent *e = [NSEvent mouseEventWithType: NSLeftMouseDown location:event.locationInWindow modifierFlags:event.modifierFlags timestamp:event.timestamp windowNumber:event.windowNumber context:event.context eventNumber:event.eventNumber clickCount:event.clickCount pressure:event.pressure];
-    
-    [super menuForEvent: e];
-    
-    // what row are we at?
-    NSInteger row = [self rowAtPoint: [self convertPoint: [event locationInWindow] fromView: nil]];
-    
-    //if( row == -1)
-    //    [self deselectAll:nil];
-    //else
-        [self selectRowIndexes:[NSIndexSet indexSetWithIndex: row] byExtendingSelection:YES];
-    
-    return [super menu]; // use what we've got
-}
-@end
-*/
-
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,strong) NSArray *columnNames,*columnWidths,*columnIdentifies;
