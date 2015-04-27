@@ -96,13 +96,11 @@ BOOL getId3FromAudio(NSURL *audioFile,
                 [year setString: metadataItem.stringValue];
                 bYear = true;
             }
-            
-            /*
-            else if ([key isEqualToString: AVMetadataID3MetadataKeyAttachedPicture] )
+            else if (!bImage && [key isEqualToString: AVMetadataID3MetadataKeyAttachedPicture] )
             {
                 [image appendData: (NSData*)metadataItem.value];
             }
-            */
+            
             /*
             else if ([key isEqualToString: AVMetadataID3MetadataKeyUnsynchronizedLyric] )
             {
@@ -110,7 +108,7 @@ BOOL getId3FromAudio(NSURL *audioFile,
             }
             */
             
-            if (bGenre && bYear)
+            if (bGenre && bYear && bImage)
                 break;
         }
         
@@ -149,6 +147,18 @@ NSData * getId3ImageFromAudio(NSURL *audioFile)
         
         if (result)
             break;
+    }
+    
+    if(!result) {
+        for (AVMetadataItem *metadataItem in [mp3Asset metadataForFormat: AVMetadataFormatID3Metadata] )
+        {
+            NSString *key = metadataItem.key;
+            if (!result && [key isEqualToString: AVMetadataID3MetadataKeyAttachedPicture] )
+            {
+                result = (NSData*)metadataItem.value;
+                break;
+            }
+        }
     }
     
     return result;
