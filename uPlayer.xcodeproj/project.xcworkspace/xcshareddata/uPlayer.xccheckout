@@ -7,42 +7,38 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>68FECB0B-CC7A-4BB3-8026-AE22384DE6B9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>uPlayer</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>
 		<string>https://github.com/liaogang/Last.fm.git</string>
 		<key>1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708</key>
-		<string>/Users/liaogang/%E5%BF%AB%E7%9B%98/git/serialize.git</string>
+		<string>https://github.com/liaogang/serialize.git</string>
 		<key>2C404F14CD435FC66D96BF9AF27ABC55394B0C65</key>
-		<string>/Users/liaogang/%E5%BF%AB%E7%9B%98/git/socketTool.git</string>
-		<key>3EE73753BD6A9CBDE063F8C745243E16B6B8D11A</key>
-		<string>https://github.com/liaogang/player.git</string>
+		<string>https://github.com/liaogang/socketTool.git</string>
 		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
 		<string>https://github.com/uPlayer/uPlayer.git</string>
 		<key>E882237546CBA62FD2A2E0A0237D35872ADF39DA</key>
 		<string>https://github.com/ddeville/LLHotKeyRecorder.git</string>
 		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
-		<string>/Users/liaogang/%E5%BF%AB%E7%9B%98/git/lyricsFetcher.git</string>
+		<string>https://github.com/liaogang/lyricsFetcher.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>uPlayer.xcodeproj</string>
+	<string>uPlayer.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>
-		<string>../../Last.fm</string>
+		<string>../..Last.fm/</string>
 		<key>1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708</key>
-		<string>../../Last.fm/serialize</string>
+		<string>../..Last.fm/serialize/</string>
 		<key>2C404F14CD435FC66D96BF9AF27ABC55394B0C65</key>
-		<string>../../Last.fm/socketTool</string>
-		<key>3EE73753BD6A9CBDE063F8C745243E16B6B8D11A</key>
-		<string>../../../player</string>
+		<string>../..Last.fm/socketTool/</string>
 		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
 		<string>../..</string>
 		<key>E882237546CBA62FD2A2E0A0237D35872ADF39DA</key>
-		<string>../../../LLHotKeyRecorder</string>
+		<string>../..LLHotKeyRecorder/</string>
 		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
-		<string>../..lyricsFetcher</string>
+		<string>../..lyricsFetcher/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/uPlayer/uPlayer.git</string>
@@ -72,9 +68,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3EE73753BD6A9CBDE063F8C745243E16B6B8D11A</string>
+			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>player</string>
+			<string>lyricsFetcher</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -99,14 +95,6 @@
 			<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
 			<key>IDESourceControlWCCName</key>
 			<string>uPlayer</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
-			<key>IDESourceControlWCCName</key>
-			<string>uPlayerlyricsFetcher</string>
 		</dict>
 	</array>
 </dict>

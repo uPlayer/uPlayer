@@ -292,7 +292,7 @@
                 <windowController storyboardIdentifier="IDMainWindow" id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" identifier="uPlayerWindow" title="Smine" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <rect key="contentRect" x="718" y="383" width="900" height="500"/>
+                        <rect key="contentRect" x="718" y="383" width="958" height="504"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                         <value key="minSize" type="size" width="900" height="500"/>
                         <toolbar key="toolbar" implicitIdentifier="68E8CA0D-303A-40FD-B1EC-C4C735410512" explicitIdentifier="uPlayerToolbar" displayMode="iconAndLabel" sizeMode="regular" id="9tp-fk-1gk">
@@ -413,10 +413,13 @@
                             <defaultToolbarItems>
                                 <toolbarItem reference="c2Z-N4-MTP"/>
                                 <toolbarItem reference="pmD-eR-0dO"/>
+                                <toolbarItem reference="kVY-E4-A0e"/>
+                                <toolbarItem reference="92u-z4-9TP"/>
                                 <toolbarItem reference="jYN-9J-YTY"/>
                                 <toolbarItem reference="g9V-H0-xAb"/>
-                                <toolbarItem reference="92u-z4-9TP"/>
                                 <toolbarItem reference="kVY-E4-A0e"/>
+                                <toolbarItem reference="Ml3-NW-m2V"/>
+                                <toolbarItem reference="1U9-cg-qxf"/>
                                 <toolbarItem reference="T1d-Pw-hE4"/>
                             </defaultToolbarItems>
                             <connections>
@@ -442,7 +445,7 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="JRU-F8-Ixg"/>
             </objects>
-            <point key="canvasLocation" x="-936" y="262"/>
+            <point key="canvasLocation" x="-907" y="264"/>
         </scene>
         <!--PlayList Viewer-->
         <scene sceneID="seY-7h-waO">
