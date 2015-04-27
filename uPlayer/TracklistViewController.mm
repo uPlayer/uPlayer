@@ -70,14 +70,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 
 
-
-
-
-
-
-
-
-
 /*
 @interface NSTableView (rc)
 /// select item at right click.
@@ -734,7 +726,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         [self.playerlList.selectItem removeTrack: idx ];
     }];
     
-    [self.tableView reloadData];
+    [self.tableView removeRowsAtIndexes:rows withAnimation:YES];
+    
+    [self updateNumberColumnOfCellThisPage];
 }
 
 -(void)removeItemsToTrash:(NSIndexSet*)set
@@ -747,8 +741,23 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     }];
     
     [list removeTracks: set ];
-    [self.tableView reloadData];
+    
+    [self.tableView removeRowsAtIndexes:set withAnimation:YES];
+   
+    [self updateNumberColumnOfCellThisPage];
 }
+
+-(void)updateNumberColumnOfCellThisPage
+{
+    NSRange r =  [self.tableView rowsInRect:self.tableView.visibleRect];
+    
+    NSIndexSet *rows = [NSIndexSet indexSetWithIndexesInRange: r];
+    
+    int numberColumn = (int) [self.tableView columnWithIdentifier:@(columnIden_number).stringValue];
+
+    [self.tableView reloadDataForRowIndexes:rows columnIndexes:[NSIndexSet indexSetWithIndex: numberColumn ]];
+}
+
 
 - (IBAction)cmdRemoveToTrash:(id)sender {
     
