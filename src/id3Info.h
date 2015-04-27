@@ -25,7 +25,7 @@ BOOL getId3FromAudio(NSURL *audioFile,
 
 NSData * getId3ImageFromAudio(NSURL *audioFile);
 
-
+NSString *getAudioLyrics(NSURL *audioFile);
 
 
 
