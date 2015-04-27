@@ -59,12 +59,12 @@ BOOL getId3FromAudio(NSURL *audioFile, NSMutableData *image, NSMutableString *al
                 }
                 else if( [commonKey isEqualToString: AVMetadataQuickTimeUserDataKeyGenre])
                 {
-                    [lyrics setString:metadataItem.stringValue];
+                    [genre setString:metadataItem.stringValue];
                     n++;
                 }
                 else if( [commonKey isEqualToString: AVMetadataQuickTimeMetadataKeyYear])
                 {
-                    [lyrics setString:metadataItem.stringValue];
+                    [year setString:metadataItem.stringValue];
                     n++;
                 }
                 else if (image &&[commonKey isEqualToString:AVMetadataCommonKeyArtwork])
