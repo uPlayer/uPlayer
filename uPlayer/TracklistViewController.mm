@@ -18,6 +18,19 @@
 
 #import "id3Info.h"
 
+enum columnIden
+{
+    columnIden_image,
+    columnIden_number,
+    columnIden_artist,
+    columnIden_title,
+    columnIden_album,
+    columnIden_genre,
+    columnIden_year,
+};
+
+const int columnTotal = sizeof(columnIden);
+bool columnAscending[columnTotal];
 
 #define ColumnNames  @[\
 NSLocalizedString(@"cover", nil),\
@@ -32,16 +45,7 @@ NSLocalizedString(@"year", nil)\
 #define ColumnWidths  @[@60,@60,@120,@320,@320,@60,@60];
 #define ColumnIdentifies  @[@"0",@"1",@"2",@"3",@"4",@"5",@"6"];
 
-enum columnIden
-{
-    columnIden_image,
-    columnIden_number,
-    columnIden_artist,
-    columnIden_title,
-    columnIden_album,
-    columnIden_genre,
-    columnIden_year,
-};
+
 
 
 
@@ -592,6 +596,51 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     return textField;
 }
 
+#pragma mark - Sort
+
+- (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
+{
+    NSInteger column = tableColumn.identifier.intValue;
+    
+    if ( column != columnIden_number && columnIden_image != column)
+    {
+        NSImage *indicatorImage;
+        
+        NSString *key;
+        
+        if (column == columnIden_artist)
+            key = @"info.artist";
+        else if( column == columnIden_album)
+            key = @"info.album";
+        else if( column == columnIden_title)
+            key = @"info.title";
+        else if( column == columnIden_genre)
+            key = @"info.genre";
+        else if( column == columnIden_year)
+            key = @"info.year";
+        
+        
+        NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending: columnAscending[column]];
+        
+        NSArray *sortDescriptors = @[titleDescriptor];
+        
+        PlayerList *list = player().playing.list;
+        
+        NSArray *sortedArray = [list.playerTrackList sortedArrayUsingDescriptors:sortDescriptors];
+        
+        list.playerTrackList = [NSMutableArray arrayWithArray: sortedArray];
+        
+        //sort your data ascending
+        indicatorImage = [NSImage imageNamed: columnAscending[column] ? @"NSAscendingSortIndicator":@"NSDescendingSortIndicator" ];
+        
+        columnAscending[column] = !columnAscending[column];
+        
+        [tableView setIndicatorImage: indicatorImage
+                       inTableColumn: tableColumn];
+        
+        [tableView reloadData];
+    }
+}
 
 #pragma mark - key event
 
