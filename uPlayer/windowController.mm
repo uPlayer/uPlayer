@@ -209,7 +209,9 @@
 
 -(void)keyDown:(NSEvent *)theEvent
 {
+#ifdef DEBUG
     printf("key pressed: %s\n", [[theEvent description] UTF8String]);
+#endif
 }
 
 
