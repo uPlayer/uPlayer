@@ -59,7 +59,7 @@
         
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
         
-        addObserverForEvent(self, @selector(playNext), EventID_to_play_next);
+        addObserverForEvent(self, @selector(actionPlayNext), EventID_to_play_next);
         
         addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
        
@@ -67,7 +67,7 @@
         
         addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
         
-        addObserverForEvent(self, @selector(playRandom), EventID_to_play_random);
+        addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
         
         
         
@@ -108,6 +108,14 @@
     
     if( player().document.trackSongsWhenPlayStarted)
         postEvent(EventID_to_reload_tracklist, player().playing);
+}
+
+// action by user.
+-(void)actionPlayNext
+{
+    [self playNext];
+    PlayerTrack *track = player().playing;
+    postEvent(EventID_to_reload_tracklist, track );
 }
 
 -(void)playNext
@@ -212,7 +220,8 @@
     return _state == playstate_pending;
 }
 
--(void)playRandom
+// by user
+-(void)actionPlayRandom
 {
     PlayerDocument *d = player().document;
     
@@ -239,6 +248,8 @@
         next = [list getItem: indexNext ];
     
     playTrack(next);
+    
+    postEvent(EventID_to_reload_tracklist, next );
 }
 
 -(void)playPause
