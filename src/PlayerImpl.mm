@@ -40,6 +40,9 @@ TrackInfo* getId3Info(NSString *filename)
         
         at.year=[NSString stringWithUTF8String:year];
         
+        if(!at.year)
+            at.year = @"";
+        
         return at;
     }
     
