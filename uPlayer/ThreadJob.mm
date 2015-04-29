@@ -16,7 +16,7 @@ dispatch_queue_t  _dispatchQueue  = nil;
 void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 {
     if(_dispatchQueue == nil)
-       _dispatchQueue = dispatch_queue_create("uPlayer", DISPATCH_QUEUE_SERIAL);
+       _dispatchQueue = dispatch_queue_create("Smine", DISPATCH_QUEUE_SERIAL);
     
     dispatch_async(_dispatchQueue, ^{
         job();
@@ -33,7 +33,7 @@ NSString *ApplicationSupportDirectory()
 {
     NSString *path = NSSearchPathForDirectoriesInDomains( NSApplicationSupportDirectory, NSUserDomainMask, true ).firstObject;
     
-    path = [path stringByAppendingPathComponent:@"uPlayer"];
+    path = [path stringByAppendingPathComponent:@"Smine"];
     
     BOOL isExist;
     BOOL isDirectory;
