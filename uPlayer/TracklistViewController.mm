@@ -589,7 +589,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         
         NSArray *sortDescriptors = @[descriptor];
         
-        PlayerList *list = player().playing.list;
+        PlayerList *list = [self.playerlList getItem:self.playerlList.selectIndex];
         
         NSArray *sortedArray = [list.playerTrackList sortedArrayUsingDescriptors:sortDescriptors];
         
