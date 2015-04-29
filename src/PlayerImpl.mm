@@ -7,7 +7,7 @@
 //
 
 #import "PlayerTrack.h"
-#import "id3Info.h"
+#import "audioTag.h"
 
 #import "fileCtrl.h"
 #import "threadpool.h"
@@ -22,33 +22,29 @@
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
+    char artist[256];
+    char title[256];
+    char album[256];
+    char genre[256];
+    char year[256];
     
-    NSMutableString *artist = [NSMutableString string];
-    NSMutableString *title = [NSMutableString string];
-    NSMutableString *album = [NSMutableString string];
-    NSMutableString *genre = [NSMutableString string];
-    NSMutableString *year = [NSMutableString string];
-    
-    
-    if (! getId3FromAudio([NSURL fileURLWithPath:filename], artist, album, title, genre, year, nil, nil) )
+    if( getId3Info(filename.UTF8String, artist, title, album,genre,year) )
     {
-        return nil;
+        at.artist=[NSString stringWithUTF8String:artist];
+        at.title=[NSString stringWithUTF8String:title];
+        at.album=[NSString stringWithUTF8String:album];
+        at.genre=[NSString stringWithUTF8String:genre];
+        
+        if([at.genre isEqualToString:@"null"])
+            at.genre=@"";
+        
+        at.year=[NSString stringWithUTF8String:year];
+        
+        return at;
     }
     
-   
-    at.artist = artist;
-    at.title = title;
-    at.album = album;
-    at.genre = genre;
-    at.year = year;
-    
-    if([at.genre isEqualToString:@"null"])
-        at.genre=@"";
-    
-    
-    return at;
+    return nil;
 }
-
 
 
 void* addJobIsFileAudio(const char * file ,void *arg)

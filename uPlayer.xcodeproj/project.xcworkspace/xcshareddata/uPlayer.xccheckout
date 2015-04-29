@@ -7,7 +7,7 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>68FECB0B-CC7A-4BB3-8026-AE22384DE6B9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>uPlayer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>
@@ -24,7 +24,7 @@
 		<string>https://github.com/liaogang/lyricsFetcher.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>uPlayer.xcodeproj/project.xcworkspace</string>
+	<string>uPlayer.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>

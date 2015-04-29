@@ -14,14 +14,15 @@
  *  @param album,artist,title: output info
  *  @return audio's album image.(封面图)
  */
-BOOL getId3FromAudio(NSURL *audioFile,
-                     NSMutableString *artist,
-                     NSMutableString *album,
-                     NSMutableString *title,
-                     NSMutableString *genre,
-                     NSMutableString *year,
-                     NSMutableData *image /*could be nil*/ ,
-                     NSMutableString *lyrics/*could be nil*/);
+
+//BOOL getId3FromAudio(NSURL *audioFile,
+//                     NSMutableString *artist,
+//                     NSMutableString *album,
+//                     NSMutableString *title,
+//                     NSMutableString *genre,
+//                     NSMutableString *year,
+//                     NSMutableData *image /*could be nil*/ ,
+//                     NSMutableString *lyrics/*could be nil*/);
 
 NSData * getId3ImageFromAudio(NSURL *audioFile);
 

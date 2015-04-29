@@ -9,15 +9,15 @@
 #import "id3Info.h"
 #import <AVFoundation/AVFoundation.h>
 
-
+/*
 BOOL getId3FromAudio(NSURL *audioFile,
                      NSMutableString *artist,
                      NSMutableString *album,
                      NSMutableString *title,
                      NSMutableString *genre,
                      NSMutableString *year,
-                     NSMutableData *image /*could be nil*/ ,
-                     NSMutableString *lyrics/*could be nil*/)
+                     NSMutableData *image  ,
+                     NSMutableString *lyrics)
 {
     AVURLAsset *mp3Asset = [[AVURLAsset alloc] initWithURL:audioFile options:nil];
     
@@ -51,6 +51,7 @@ BOOL getId3FromAudio(NSURL *audioFile,
             else if (!bTitle && [commonKey isEqualToString:AVMetadataCommonKeyTitle])
             {
                 [title setString:metadataItem.stringValue];
+                
                 bTitle = true;
             }
             else if (!bImage && [commonKey isEqualToString:AVMetadataCommonKeyArtwork])
@@ -70,22 +71,27 @@ BOOL getId3FromAudio(NSURL *audioFile,
         if(lyrics)
             [lyrics setString: mp3Asset.lyrics];
 
+        bArtist = artist.length> 0;
+        bAlbum = album.length > 0;
+        bTitle = title.length > 0;
+        bImage = image.length > 0;
+        
         // Then find stand id3 tag info.
         for (AVMetadataItem *metadataItem in [mp3Asset metadataForFormat: AVMetadataFormatID3Metadata] )
         {
             NSString *key = metadataItem.key;
             
-            /*
-            if ([key isEqualToString: AVMetadataID3MetadataKeyTitleDescription] ) {
+            if (!bTitle && [key isEqualToString: AVMetadataID3MetadataKeyTitleDescription] )
+            {
                 [title setString:metadataItem.stringValue];
+                bTitle = true;
             }
-            else if ([key isEqualToString: AVMetadataID3MetadataKeyAlbumTitle] )
+            else if ( !album && [key isEqualToString: AVMetadataID3MetadataKeyAlbumTitle] )
             {
                 [album setString: metadataItem.stringValue];
+                bAlbum = true;
             }
             else
-             */
-            
             if ( !bGenre && [key isEqualToString: AVMetadataID3MetadataKeyContentType] )
             {
                 [genre setString: metadataItem.stringValue];
@@ -101,14 +107,7 @@ BOOL getId3FromAudio(NSURL *audioFile,
                 [image appendData: (NSData*)metadataItem.value];
             }
             
-            /*
-            else if ([key isEqualToString: AVMetadataID3MetadataKeyUnsynchronizedLyric] )
-            {
-                [lyrics setString: metadataItem.stringValue];
-            }
-            */
-            
-            if (bGenre && bYear && bImage)
+            if ( bArtist && bAlbum && bTitle && bGenre && bYear && bImage)
                 break;
         }
         
@@ -125,6 +124,7 @@ BOOL getId3FromAudio(NSURL *audioFile,
     
     return FALSE;
 }
+*/
 
 
 NSData * getId3ImageFromAudio(NSURL *audioFile)
