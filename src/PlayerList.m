@@ -95,7 +95,11 @@
         }
         
         [self.playerTrackList addObjectsFromArray: arr];
-        postEvent(EventID_tracks_changed, self);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            postEvent(EventID_tracks_changed, self);
+        });
+
         
         return arr;
     }
