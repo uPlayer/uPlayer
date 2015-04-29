@@ -20,8 +20,8 @@
 
 enum columnIden
 {
-    columnIden_image,
     columnIden_number,
+    columnIden_image,
     columnIden_artist,
     columnIden_title,
     columnIden_album,
@@ -33,8 +33,8 @@ const int columnTotal = sizeof(columnIden);
 bool columnAscending[columnTotal];
 
 #define ColumnNames  @[\
-NSLocalizedString(@"cover", nil),\
 NSLocalizedString(@"#", nil),\
+NSLocalizedString(@"cover", nil),\
 NSLocalizedString(@"artist", nil),\
 NSLocalizedString(@"title", nil),\
 NSLocalizedString(@"album", nil),\
@@ -585,9 +585,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
             key = @"info.year";
         
         
-        NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending: columnAscending[column]];
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:key ascending: columnAscending[column]];
         
-        NSArray *sortDescriptors = @[titleDescriptor];
+        NSArray *sortDescriptors = @[descriptor];
         
         PlayerList *list = player().playing.list;
         
