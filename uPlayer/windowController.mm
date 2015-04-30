@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "PlaylistViewController.h"
 
-#define uPlayerWinPos @"uPlayerWinPos"
+#define SmineWinPos @"SmineWinPos"
 #define PlaylistWinPos @"PlaylistWinPos"
 
 
@@ -203,8 +203,8 @@
 {
     [super windowDidLoad];
     
-    [self.window setFrameUsingName: uPlayerWinPos];
-    [self.window setFrameAutosaveName:uPlayerWinPos];
+    [self.window setFrameUsingName: SmineWinPos];
+    [self.window setFrameAutosaveName: SmineWinPos];
 }
 
 -(void)keyDown:(NSEvent *)theEvent

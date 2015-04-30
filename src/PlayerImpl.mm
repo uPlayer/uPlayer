@@ -22,11 +22,11 @@
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
-    char artist[256];
-    char title[256];
-    char album[256];
-    char genre[256];
-    char year[256];
+    char artist[256]={0};
+    char title[256]={0};
+    char album[256]={0};
+    char genre[256]={0};
+    char year[256]={0};
     
     if( getId3Info(filename.UTF8String, artist, title, album,genre,year) )
     {

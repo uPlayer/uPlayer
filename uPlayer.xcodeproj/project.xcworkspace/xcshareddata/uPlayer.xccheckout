@@ -28,17 +28,17 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</key>
-		<string>../..Last.fm/</string>
+		<string>../..Last.fm</string>
 		<key>1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708</key>
-		<string>../..Last.fm/serialize/</string>
+		<string>../..Last.fm/serialize</string>
 		<key>2C404F14CD435FC66D96BF9AF27ABC55394B0C65</key>
-		<string>../..Last.fm/socketTool/</string>
+		<string>../..Last.fm/socketTool</string>
 		<key>679D5178DC105629D3F991569DE1C7BA0951C699</key>
 		<string>../..</string>
 		<key>E882237546CBA62FD2A2E0A0237D35872ADF39DA</key>
-		<string>../..LLHotKeyRecorder/</string>
+		<string>../..LLHotKeyRecorder</string>
 		<key>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</key>
-		<string>../..lyricsFetcher/</string>
+		<string>../..lyricsFetcher</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/uPlayer/uPlayer.git</string>
@@ -48,30 +48,6 @@
 	<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Last.fm</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E882237546CBA62FD2A2E0A0237D35872ADF39DA</string>
-			<key>IDESourceControlWCCName</key>
-			<string>LLHotKeyRecorder</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
-			<key>IDESourceControlWCCName</key>
-			<string>lyricsFetcher</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -95,6 +71,30 @@
 			<string>679D5178DC105629D3F991569DE1C7BA0951C699</string>
 			<key>IDESourceControlWCCName</key>
 			<string>uPlayer</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>18F77737BD2767E2CDC1C8B28D94DD278248CBC4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>uPlayerLast.fm</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E882237546CBA62FD2A2E0A0237D35872ADF39DA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>uPlayerLLHotKeyRecorder</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>uPlayerlyricsFetcher</string>
 		</dict>
 	</array>
 </dict>

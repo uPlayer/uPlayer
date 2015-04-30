@@ -25,7 +25,7 @@
     self = [super init];
     if (self)
     {
-        self.windowName = NSLocalizedString(@"uPlayer windows name", nil);
+        self.windowName = NSLocalizedString(@"Smine windows name", nil);
         self.playerlList = [[PlayerlList alloc]init];
         self.resumeAtReboot = TRUE;
         self.playTime = -1;
