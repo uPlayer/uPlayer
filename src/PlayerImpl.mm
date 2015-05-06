@@ -7,7 +7,7 @@
 //
 
 #import "PlayerTrack.h"
-#import "audioTag.h"
+#import "audioTag2.h"
 
 #import "fileCtrl.h"
 #import "threadpool.h"
@@ -18,27 +18,33 @@
 
 #import "PlayerSerialize.h"
 
+#include "stringConv.h"
+
+
+
+
 
 TrackInfo* getId3Info(NSString *filename)
 {
     TrackInfo* at = [[TrackInfo alloc]init];
-    char artist[256]={0};
-    char title[256]={0};
-    char album[256]={0};
-    char genre[256]={0};
-    char year[256]={0};
     
-    if( getId3Info(filename.UTF8String, artist, title, album,genre,year) )
+    NSMutableString *artist=[NSMutableString string];
+    NSMutableString *title=[NSMutableString string];
+    NSMutableString *album=[NSMutableString string];
+    NSMutableString *genre=[NSMutableString string];
+    NSMutableString *year=[NSMutableString string];
+    
+    if( getID3Info(filename.UTF8String, artist, title, album,genre,year) )
     {
-        at.artist=[NSString stringWithUTF8String:artist];
-        at.title=[NSString stringWithUTF8String:title];
-        at.album=[NSString stringWithUTF8String:album];
-        at.genre=[NSString stringWithUTF8String:genre];
+        at.artist=artist;
+        at.title=title;
+        at.album=album;
+        at.genre=genre;
         
         if([at.genre isEqualToString:@"null"])
             at.genre=@"";
         
-        at.year=[NSString stringWithUTF8String:year];
+        at.year=year;
         
         if(!at.year)
             at.year = @"";
