@@ -17,6 +17,8 @@
 #import "PlayerLayout+MemoryFileBuffer.h"
 
 #import "id3Info.h"
+#import "ThreadJob.h"
+
 
 enum columnIden
 {
@@ -77,6 +79,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 @property (nonatomic,strong) NSProgressIndicator *progress;
+-(void)fileDraggedIn:(NSArray*)arrStringFileNames;
 @end
 
 @implementation TracklistViewController
@@ -112,7 +115,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 -(void)dealloc
 {
-    
+    // dealloc is not expect when application is running.
 }
 
 -(void)initLoad
@@ -140,6 +143,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     addObserverForEvent(self, @selector(saveLayout), EventID_applicationWillTerminate);
     
     self.playerlList = player().document.playerlList;
+    
 }
 
 -(void)saveLayout
@@ -488,10 +492,14 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 }
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     NSAssert(self.playerlList, @"method: `InitLoad` not actived.");
+    
+    [self.view registerForDraggedTypes:[NSArray arrayWithObjects: NSFilenamesPboardType, nil]];
+    
     
     CGFloat bottomBarHeight = 22.0;
     
@@ -550,7 +558,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [self.view addSubview:tableContainer];
     
     [self.tableView reloadData];
-
 }
 
 
@@ -1023,10 +1030,104 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         
         NSArray *objectsToPaste = [pasteboard readObjectsForClasses:classArray options:options];
         
+        NSLog(@"objectsToPaste: %@",objectsToPaste);
+        
         NSArray *added = [self.playerlList.selectItem addTrackInfoItems: objectsToPaste];
         
         postEvent(EventID_to_reload_tracks, added);
     }
+    
+}
+
+
+
+@end
+
+
+
+
+
+@implementation NSTracklistView
+
+#pragma mark - NSDraggingDestination
+
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
+    
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+    
+    sourceDragMask = [sender draggingSourceOperationMask];
+    pboard = [sender draggingPasteboard];
+    
+    if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
+        if (sourceDragMask & NSDragOperationLink) {
+            return NSDragOperationLink;
+        } else if (sourceDragMask & NSDragOperationCopy) {
+            return NSDragOperationCopy;
+        }
+    }
+    
+    return NSDragOperationNone;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+    
+    
+    sourceDragMask = [sender draggingSourceOperationMask];
+    pboard = [sender draggingPasteboard];
+    
+    if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
+        NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
+        // Depending on the dragging source and modifier keys,
+        // the file data may be copied or linked
+        
+        if (sourceDragMask & NSDragOperationLink) {
+            NSLog(@"link files: %@",files);
+            [self fileDraggedIn:files];
+        }
+    }
+    
+    return YES;
+}
+
+
+-(void)fileDraggedIn:(NSArray*)arrStringFileNames
+{
+    PlayerList *list = player().document.playerlList.selectItem;
+    
+    NSMutableArray *array = [NSMutableArray array];
+    __block NSArray *added;
+    
+    dojobInBkgnd(
+                 ^{
+                     postEvent(EventID_importing_tracks_begin, nil);
+                     
+                     for (NSString *file in arrStringFileNames) {
+                         BOOL isDirectory;
+                         [[NSFileManager defaultManager] fileExistsAtPath:file isDirectory:&isDirectory];
+                         
+                         if(isDirectory)
+                         {
+                             [array addObjectsFromArray: enumAudioFiles(file)];
+                         }
+                         else
+                         {
+                             TrackInfo *arti = getId3Info(file);
+                             if (arti) {
+                                 arti.path = file;
+                                 [array addObject:arti];
+                             }
+                         }
+                     }
+                     
+                     added = [list addTrackInfoItems: array ];
+                 } ,
+                 ^{
+                     postEvent(EventID_importing_tracks_end, nil);
+                     postEvent(EventID_to_reload_tracks, added);
+                 });
     
 }
 

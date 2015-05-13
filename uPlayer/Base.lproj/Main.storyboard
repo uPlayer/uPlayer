@@ -631,7 +631,7 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController title="Tracklist Viewer" storyboardIdentifier="idTracklistView" id="XfG-lQ-9wD" customClass="TracklistViewController" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
+                    <view key="view" id="m2S-Jp-Qdl" customClass="NSTracklistView">
                         <rect key="frame" x="0.0" y="0.0" width="900" height="478"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>

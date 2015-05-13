@@ -15,3 +15,6 @@
 @end
 
 
+@interface NSTracklistView : NSView
+
+@end
