@@ -24,7 +24,7 @@ void asdf2()
 }
 
 @interface PlaylistViewController ()
-<NSTableViewDelegate , NSTableViewDataSource >
+<NSTableViewDelegate , NSTableViewDataSource ,NSTextFieldDelegate >
 
 @property (weak) IBOutlet NSTableView *tableView;
 @property (nonatomic,strong) PlayerlList *playerlList;
@@ -182,9 +182,21 @@ void asdf2()
     else
     {
         textField.stringValue = list.name;
+        textField.editable = true;
+        textField.delegate=self;
+        textField.tag = row;
     }
     
     return textField;
+}
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+    int row = (int)control.tag;
+    PlayerList * list = [self.playerlList getItem:row];
+    list.name = fieldEditor.string;
+    
+    return TRUE;
 }
 
 - (void)setRepresentedObject:(id)representedObject {
