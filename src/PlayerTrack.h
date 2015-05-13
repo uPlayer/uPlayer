@@ -8,13 +8,12 @@
 
 
 #import <Foundation/Foundation.h>
-
+#import <AppKit/AppKit.h>
 @class PlayerList;
 
-@interface TrackInfo: NSObject
-@property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
+@interface TrackInfo: NSObject < NSPasteboardReading,NSPasteboardWriting,NSCoding>
 @property (nonatomic,strong)NSString *path;
-
+@property (nonatomic,strong) NSString *artist,*title,*album,*genre,*year;
 @property (nonatomic,strong) NSImage *image,*imageSmall;
 @property (nonatomic,strong) NSString *lyrics;
 @end

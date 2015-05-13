@@ -119,6 +119,17 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     addObserverForEvent(self, @selector(reloadTrackList:), EventID_to_reload_tracklist);
     
+    
+    /// @param: PlayerList *list.
+    addObserverForEvent(self, @selector(reloadPlaylist:), EventID_to_reload_playlist);
+    
+    /// @param: array of PlayerTrack.
+    addObserverForEvent(self, @selector(reloadTracks:), EventID_to_reload_tracks);
+    
+    /// Reload the playing item.
+    addObserverForEvent(self, @selector(reloadPlayingTrack), EventID_to_reload_playing_track);
+    
+    
     addObserverForEvent(self, @selector(playSelectedTrack), EventID_to_play_selected_track);
     
     addObserverForEvent(self, @selector(playTrackItem:), EventID_to_play_item);
@@ -271,6 +282,167 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: target] byExtendingSelection:YES];
 
 }
+
+-(void)reloadPlaylist:(NSNotification*)n
+{
+    MAAssert(n.object);
+    MAAssert([n.object isKindOfClass:[PlayerList class]]);
+    
+    
+    [self.view.window makeFirstResponder:self.tableView];
+    
+    // quit search mode.
+    if(self.isSearchMode)
+        self.isSearchMode = false;
+    
+    PlayerList *listOld = self.playerlList.selectItem;
+    PlayerList *list = n.object;
+    
+    int target = 0;
+    // scroll target index to center or top?
+    bool toCenter = YES;
+    
+    // current is not showing. reload it.
+    if (list != self.playerlList.selectItem)
+    {
+        [self.playerlList setSelectItem:list];
+        
+        target = list.topIndex;
+        toCenter = false;
+    }
+    
+    if ( list != listOld)
+    {
+        if (listOld)
+            listOld.topIndex = [self getRowOnTableTop];
+        
+        if (list)
+            [self.playerlList setSelectItem:list];
+    }
+    
+    [self.tableView reloadData];
+    
+    if (toCenter)
+        [self scrollRowToCenter: target];
+    else
+        [self scrollRowToTop: target];
+    
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: target] byExtendingSelection:YES];
+}
+
+
+
+-(void)reloadTracks:(NSNotification*)n
+{
+    NSArray *arrTracks = n.object;
+    MAAssert([arrTracks isKindOfClass:[NSArray class]]);
+    
+    PlayerTrack *track = arrTracks.firstObject;
+    MAAssert([track isKindOfClass:[PlayerTrack class]]);
+    
+    
+    [self.view.window makeFirstResponder:self.tableView];
+    
+    // quit search mode.
+    if(self.isSearchMode)
+        self.isSearchMode = false;
+    
+    
+    
+    PlayerList *listOld = self.playerlList.selectItem;
+
+    PlayerList *list = track.list;
+    
+    int target = (int)track.index;
+    
+    /// Scroll target index to center or top?
+    bool toCenter = YES;
+    
+    if (list != self.playerlList.selectItem)
+    {
+        [self.playerlList setSelectItem:list];
+        [self.tableView reloadData];
+    }
+    
+    
+    // Current is not showing. reload it.
+    if (list != self.playerlList.selectItem)
+    {
+        [self.playerlList setSelectItem:list];
+        
+        target = list.topIndex;
+        toCenter = false;
+    }
+    
+    if ( list != listOld)
+    {
+        if (listOld)
+            listOld.topIndex = [self getRowOnTableTop];
+        
+        if (list)
+            [self.playerlList setSelectItem:list];
+    }
+    
+    [self.tableView reloadData];
+    
+    if (toCenter)
+        [self scrollRowToCenter: target];
+    else
+        [self scrollRowToTop: target];
+    
+    
+    NSMutableIndexSet *sets = [NSMutableIndexSet indexSet];
+    for (PlayerTrack *track2 in arrTracks) {
+        [sets addIndex:[track2 getIndex]];
+    }
+    
+    [self.tableView selectRowIndexes:sets byExtendingSelection:YES];
+}
+
+-(void)reloadPlayingTrack
+{
+    [self.view.window makeFirstResponder:self.tableView];
+    
+    // quit search mode.
+    if(self.isSearchMode)
+        self.isSearchMode = false;
+    
+    PlayerList *listOld = self.playerlList.selectItem;
+    PlayerList *list = player().playing.list;
+    
+    int target = (int)player().playing.index;
+    // scroll target index to center or top?
+    bool toCenter = YES;
+    
+    // current is not showing. reload it.
+    if (list != self.playerlList.selectItem)
+    {
+        [self.playerlList setSelectItem:list];
+        
+        target = list.topIndex;
+        toCenter = false;
+    }
+    
+    if ( list != listOld)
+    {
+        if (listOld)
+            listOld.topIndex = [self getRowOnTableTop];
+        
+        if (list)
+            [self.playerlList setSelectItem:list];
+    }
+    
+    [self.tableView reloadData];
+    
+    if (toCenter)
+        [self scrollRowToCenter: target];
+    else
+        [self scrollRowToTop: target];
+    
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: target] byExtendingSelection:YES];
+}
+
+
 
 
 -(int)getRowOnTableTop
@@ -819,5 +991,43 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     lastFm_loveTrack(track);
 }
 
+- (void) copy:(id)sender {
+    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    
+    [pasteBoard clearContents];
+    
+    NSMutableArray *copiedObjects = [NSMutableArray array];
+    
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    
+    [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        TrackInfo *info = [self getSelectedItem:idx].info;
+        [copiedObjects addObject:info];
+    }];
+    
+    [pasteBoard writeObjects:copiedObjects];
+}
+
+- (void)paste:sender
+{
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+
+    NSArray *classArray = [NSArray arrayWithObjects:[TrackInfo class],[NSURL class],nil];
+    
+    NSDictionary *options = [NSDictionary dictionary];
+    
+
+    BOOL ok = [pasteboard canReadObjectForClasses:classArray options:options];
+    
+    if (ok) {
+        
+        NSArray *objectsToPaste = [pasteboard readObjectsForClasses:classArray options:options];
+        
+        NSArray *added = [self.playerlList.selectItem addTrackInfoItems: objectsToPaste];
+        
+        postEvent(EventID_to_reload_tracks, added);
+    }
+    
+}
 
 @end

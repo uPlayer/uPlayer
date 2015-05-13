@@ -32,7 +32,18 @@ const char *arrEvent[] =
     "importing_tracks_begin",
     "importing_tracks_end",
     "applicationWillTerminate",
+    
     "to_reload_tracklist",
+    
+    /// @param: PlayerList *list.
+    "to_reload_playlist",
+    
+    /// @param: array of PlayerTrack.
+    "to_reload_tracks",
+    
+    /// Reload the playing item.
+    "to_reload_playing_track",
+    
     "to_save_config",
     "to_reload_lyrics",
     "to_center_item",
