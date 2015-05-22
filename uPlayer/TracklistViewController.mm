@@ -151,7 +151,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     addObserverForEvent(self, @selector(reloadTrackList:), EventID_to_reload_tracklist);
     
-    
     /// @param: PlayerList *list.
     addObserverForEvent(self, @selector(reloadPlaylist:), EventID_to_reload_playlist);
     
@@ -161,12 +160,12 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     /// Reload the playing item.
     addObserverForEvent(self, @selector(reloadPlayingTrack), EventID_to_reload_playing_track);
     
-    
     addObserverForEvent(self, @selector(playSelectedTrack), EventID_to_play_selected_track);
     
     addObserverForEvent(self, @selector(playTrackItem:), EventID_to_play_item);
 
     addObserverForEvent(self, @selector(startPIAnimation), EventID_importing_tracks_begin);
+    
     addObserverForEvent(self, @selector(stopPIAnimation), EventID_importing_tracks_end);
     
     addObserverForEvent(self, @selector(saveLayout), EventID_applicationWillTerminate);
@@ -588,10 +587,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     
     // Create table view.
-    
-    NSRect rcc = NSMakeRect(0, 0, self.view.window.frame.size.width, [self.view.window contentBorderThicknessForEdge: CGRectMinYEdge] );
-    
-    CGFloat bottomBarHeight = rcc.size.height;
+    CGFloat bottomBarHeight = 22.0;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
     
