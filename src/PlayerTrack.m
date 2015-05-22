@@ -176,7 +176,22 @@
 
 NSString* compressTitle(TrackInfo *info)
 {
-    if (info.artist.length > 0)
+    const char *a = info.artist.UTF8String;
+    
+    bool isAllBlank = true;
+    int l = (int)strlen(a);
+    l--;
+    while (l >= 0) {
+        if(!isblank(a[l]))
+        {
+            isAllBlank = false;
+            break;
+        }
+        l--;
+    }
+    
+    
+    if ( l > 0 && isAllBlank == false)
         return  [NSString stringWithFormat:@"%@ - %@", info.artist, info.title];
     else
         return  info.title;

@@ -107,7 +107,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 @property (nonatomic,strong) NSProgressIndicator *progress;
--(void)fileDraggedIn:(NSArray*)arrStringFileNames;
 @end
 
 @implementation TracklistViewController
