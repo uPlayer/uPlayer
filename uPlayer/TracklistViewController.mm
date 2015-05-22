@@ -20,10 +20,42 @@
 #import "ThreadJob.h"
 
 
-enum columnIden
+@interface columnData : NSObject
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic) int identifies,order,state,ascending;
+@property (nonatomic) float width;
+
++(instancetype)columnDataWith:(NSString*)title identifies:(int)identifies order:(int)order state:(int)state ascending:(int)ascending width:(float)width;
+
++(int)objectSize;
+@end
+
+
+@implementation columnData
++(int)objectSize
+{
+    return sizeof(NSString*)+sizeof(int)*4+sizeof(float);
+}
+
++(instancetype)columnDataWith:(NSString*)title identifies:(int)identifies order:(int)order state:(int)state ascending:(int)ascending width:(float)width
+{
+    columnData *c = [[columnData alloc]init];
+    c.title = title;
+    c.identifies = identifies;
+    c.order = order;
+    c.state = state;
+    c.ascending = ascending;
+    c.width = width;
+    return c;
+}
+@end
+
+
+
+enum defaultColumnIden
 {
     columnIden_number,
-    columnIden_image,
+    columnIden_cover,
     columnIden_artist,
     columnIden_title,
     columnIden_album,
@@ -31,23 +63,19 @@ enum columnIden
     columnIden_year,
 };
 
-const int columnTotal = sizeof(columnIden);
-bool columnAscending[columnTotal];
+const int defaultColumnNumbers = 7;
 
-#define ColumnNames  @[\
-NSLocalizedString(@"#", nil),\
-NSLocalizedString(@"cover", nil),\
-NSLocalizedString(@"artist", nil),\
-NSLocalizedString(@"title", nil),\
-NSLocalizedString(@"album", nil),\
-NSLocalizedString(@"genre", nil),\
-NSLocalizedString(@"year", nil)\
-];
+bool columnAscending[defaultColumnNumbers];
 
-#define ColumnWidths  @[@60,@60,@120,@320,@320,@60,@60];
-#define ColumnIdentifies  @[@"0",@"1",@"2",@"3",@"4",@"5",@"6"];
-
-
+#define defaultColumnNames  @[\
+NSLocalizedString(@"Index", nil),\
+NSLocalizedString(@"Cover", nil),\
+NSLocalizedString(@"Artist", nil),\
+NSLocalizedString(@"Title", nil),\
+NSLocalizedString(@"Album", nil),\
+NSLocalizedString(@"Genre", nil),\
+NSLocalizedString(@"Year", nil)\
+]
 
 
 
@@ -73,7 +101,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
 @property (nonatomic,strong) NSTableView *tableView;
-@property (nonatomic,strong) NSArray *columnNames,*columnWidths,*columnIdentifies;
+@property (nonatomic,strong) NSArray *columnDatas;
 @property (nonatomic,assign) bool isSearchMode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
 @property (nonatomic,strong) PlayerlList *playerlList;
@@ -108,6 +136,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self initLoad];
+        
     }
     
     return self;
@@ -146,21 +175,77 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
 }
 
+-(void)headerMenuClicked:(NSMenuItem*)item
+{
+    int index =  (int)item.tag;
+    columnData *data = self.columnDatas[index];
+    
+    if (item.state == NSOffState)
+    {
+        item.state = NSOnState;
+        data.state = NSOnState;
+        
+        NSTableColumn *tableColumn = [[NSTableColumn alloc]initWithIdentifier:@(item.tag).stringValue];
+        
+        
+        tableColumn.title = data.title;
+        
+        [self.tableView beginUpdates];
+        [self.tableView addTableColumn: tableColumn];
+        int cc = (int)self.tableView.tableColumns.count;
+        
+        [self.tableView moveColumn:cc-1 toColumn:data.order];
+        
+        [self.tableView endUpdates];
+        [self updateColumnThisPage:data.order];
+        
+        NSAssert( 0 <= data.order && data.order < defaultColumnNumbers, nil);
+    }
+    else
+    {
+        item.state = NSOffState;
+        data.state = NSOffState;
+        
+        NSTableColumn *column = [self.tableView tableColumnWithIdentifier:@(item.tag).stringValue];
+        NSAssert(column, nil);
+        
+        int order = (int)[self.tableView.tableColumns indexOfObject:column];
+        
+        NSAssert( 0 <= order && order < defaultColumnNumbers, nil);
+        
+        data.width = column.width;
+        data.order = order;
+        
+        [self.tableView removeTableColumn: column ];
+    }
+
+}
+
+
 -(void)saveLayout
 {
-    NSArray *tableColumns = self.tableView.tableColumns;
+    MemoryFileBuffer buffer( [columnData objectSize]  * defaultColumnNumbers);
     
-    MemoryFileBuffer buffer( sizeof(CGFloat)*20);
-    
-    // save column from left to right in tableView
-    for (NSTableColumn *column in tableColumns) {
+    for (int j = 0 ; j < defaultColumnNumbers; j++) {
+        columnData *data = self.columnDatas[j];
+        int i = data.identifies,s=data.state,a=data.ascending;
+        float w=data.width;
         
-        int columnIdentify = column.identifier.intValue;
-        buffer.write(columnIdentify);
+        int o = (int)[self.tableView columnWithIdentifier:@(j).stringValue];
+        if (o == -1) {
+            o = data.order;
+        }
         
-        CGFloat w = column.width;
+        NSAssert( 0 <= o && o < defaultColumnNumbers, nil);
+        
+        buffer.write(i);
+        buffer.write(o);
+        buffer.write(s);
+        buffer.write(a);
         buffer.write(w);
+
     }
+
     
     NSData *data = dataFromMemoryFileBuffer(&buffer);
     [player().layout saveData:data withKey:self.className];
@@ -172,35 +257,35 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     if(data )
     {
         MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
-        
-        NSMutableArray *arrayWidths = [NSMutableArray array];
-        NSMutableArray *arrayIdns = [NSMutableArray array];
 
+        NSMutableArray *arrColumnDatas = [ NSMutableArray array];
         
-        // load column from left to right, and it's origin index.
-        int count = (int)self.columnNames.count;
-        for ( int i = 0; i < count ; ++i) {
+        for (int j = 0 ; j < defaultColumnNumbers; j++) {
+            int i,o,s,a;
+            float w;
             
-            int columnIdentify = -1;
-            buffer->read(columnIdentify);
-            NSAssert(columnIdentify >= 0, nil);
-            [arrayIdns addObject: @(columnIdentify).stringValue];
+            buffer->read(i);
+            buffer->read(o);
+            buffer->read(s);
+            buffer->read(a);
+            buffer->read(w);
             
-            CGFloat width;
-            buffer->read(width);
-            [arrayWidths addObject:@(width)];
+            
+            columnData *c = [columnData columnDataWith:defaultColumnNames[j] identifies:i order:o state:s ascending:a width:w];
+            [arrColumnDatas addObject:c];
         }
         
-        self.columnIdentifies = arrayIdns;
-        self.columnWidths = arrayWidths;
-        
-        delete buffer;
+        self.columnDatas = arrColumnDatas;
         
         return true;
     }
     
     return false;
 }
+
+
+
+
 
 /**
  @see EventID_to_reload_tracklist
@@ -497,11 +582,16 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [super viewDidLoad];
     
     NSAssert(self.playerlList, @"method: `InitLoad` not actived.");
-    
+ 
+
     [self.view registerForDraggedTypes:[NSArray arrayWithObjects: NSFilenamesPboardType, nil]];
     
     
-    CGFloat bottomBarHeight = 22.0;
+    // Create table view.
+    
+    NSRect rcc = NSMakeRect(0, 0, self.view.window.frame.size.width, [self.view.window contentBorderThicknessForEdge: CGRectMinYEdge] );
+    
+    CGFloat bottomBarHeight = rcc.size.height;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
     
@@ -513,41 +603,70 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     self.tableView.rowHeight = 40.;
     self.tableView.allowsMultipleSelection = TRUE;
     
-    // disable table header's menu.
+
+    // Reserialize table columns
+    if( [self loadLayout] == FALSE)
+    {
+        // Then set default value.
+        self.columnDatas =
+        [NSArray arrayWithObjects:
+         [columnData columnDataWith: NSLocalizedString(@"Index", nil) identifies:columnIden_number  order:0 state:NSOnState ascending:0 width:60.] ,
+         [columnData columnDataWith: NSLocalizedString(@"Cover", nil) identifies:columnIden_cover order:1 state:NSOnState ascending:0 width:60.] ,
+         [columnData columnDataWith:NSLocalizedString(@"Artist", nil) identifies:columnIden_artist order:2 state:NSOnState ascending:0 width:120.] ,
+         [columnData columnDataWith:NSLocalizedString(@"Title", nil) identifies:columnIden_title order:3 state:NSOnState ascending:0 width:320.] ,
+         [columnData columnDataWith:NSLocalizedString(@"Album", nil) identifies:columnIden_album order:4 state:NSOnState ascending:0 width:320.] ,
+         [columnData columnDataWith:NSLocalizedString(@"Genre", nil) identifies:columnIden_genre order:5 state:NSOnState ascending:0 width:60.] ,
+         [columnData columnDataWith:NSLocalizedString(@"Year", nil) identifies:columnIden_year order:6 state:NSOnState ascending:0 width:60.] ,
+         nil];
+    }
+    
+    
+    // Load table header menu state.
     NSMenu *menu = [[NSMenu alloc] init];
+    int j = 0;
+    for (NSString *columnName in defaultColumnNames)
+    {
+        columnData *c = self.columnDatas[j];
+        
+        NSMenuItem *item;
+        item = [[NSMenuItem alloc]initWithTitle:columnName action:@selector(headerMenuClicked:) keyEquivalent:@""];
+        item.tag = j;
+        item.state = c.state;
+        [menu addItem:item];
+        
+        j++;
+    }
     self.tableView.headerView.menu = menu;
     
-
     
-    
-    self.columnNames = ColumnNames;
-    // Reserialize table columns
-    
-    if( ![self loadLayout])
-    {
-        self.columnWidths = ColumnWidths;
-        self.columnIdentifies = ColumnIdentifies;
-    }
-    
-    NSAssert([self.columnWidths isKindOfClass:[NSArray class]], nil);
-    
-    
-    for (int i = 0; i < self.columnNames.count; i++)
-    {
-        // Use the identify as the origin index.
-        NSString *identify = self.columnIdentifies[i];
-        int originIndex = identify.intValue;
-
-        NSTableColumn *cn = [[NSTableColumn alloc]initWithIdentifier: identify ];
-        cn.title = (NSString*) self.columnNames[originIndex];
+    // Table columns by order not index.
+    int arrOrder2Index[defaultColumnNumbers];
+    for (int i = 0; i < defaultColumnNumbers; i++) {
+        columnData *data = self.columnDatas[i];
+        int order = data.order;
         
-        
-        NSNumber *n = self.columnWidths[i];
-        cn.width =((NSNumber*)n).floatValue;
-        [self.tableView addTableColumn:cn];
+        arrOrder2Index[order] = i;
     }
     
     
+    for (int order = 0; order < defaultColumnNumbers; order++)
+    {
+        int index = arrOrder2Index[order];
+        
+        NSAssert( 0 <= index && index < defaultColumnNumbers, nil);
+        
+        columnData *data = self.columnDatas[index];
+        if (data.state == NSOnState) {
+            // Use the identify as the origin index.
+            NSTableColumn *cn = [[NSTableColumn alloc]initWithIdentifier: @(data.identifies).stringValue ];
+            cn.title = data.title;
+            cn.width = data.width;
+            [self.tableView addTableColumn:cn];
+        }
+    }
+    
+    
+    // others.
     self.tableView.doubleAction=@selector(doubleClicked);
     self.tableView.usesAlternatingRowBackgroundColors = true;
     self.tableView.delegate = self;
@@ -559,6 +678,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     [self.tableView reloadData];
 }
+
+
+
 
 
 
@@ -701,7 +823,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     PlayerTrack *track = [self getSelectedItem:row];
     TrackInfo *info = track.info;
     
-    if (column == columnIden_image)
+    if (column == columnIden_cover)
     {
         NSImageView *imageV = [[NSImageView alloc]initWithFrame: NSMakeRect(0, 0, tableColumn.width, 0)];
         
@@ -746,7 +868,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     NSInteger column = tableColumn.identifier.intValue;
     
-    if ( column != columnIden_number && columnIden_image != column)
+    if ( column != columnIden_number && columnIden_cover != column)
     {
         NSImage *indicatorImage;
         
@@ -880,7 +1002,12 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     [self.tableView removeRowsAtIndexes:rows withAnimation:YES];
     
-    [self updateNumberColumnOfCellThisPage];
+    [self updateColumnThisPage: [self index2order: columnIden_number ]];
+}
+
+-(int)index2order:(int)index
+{
+    return  (int)[self.tableView columnWithIdentifier: @(index).stringValue];
 }
 
 -(void)removeItemsToTrash:(NSIndexSet*)set
@@ -896,18 +1023,16 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     [self.tableView removeRowsAtIndexes:set withAnimation:YES];
    
-    [self updateNumberColumnOfCellThisPage];
+    [self updateColumnThisPage: [self index2order: columnIden_number ]];
 }
 
--(void)updateNumberColumnOfCellThisPage
+-(void)updateColumnThisPage:(int)columnOrder
 {
     NSRange r =  [self.tableView rowsInRect:self.tableView.visibleRect];
     
     NSIndexSet *rows = [NSIndexSet indexSetWithIndexesInRange: r];
     
-    int numberColumn = (int) [self.tableView columnWithIdentifier:@(columnIden_number).stringValue];
-
-    [self.tableView reloadDataForRowIndexes:rows columnIndexes:[NSIndexSet indexSetWithIndex: numberColumn ]];
+    [self.tableView reloadDataForRowIndexes:rows columnIndexes:[NSIndexSet indexSetWithIndex: columnOrder ]];
 }
 
 

@@ -3,61 +3,61 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "uPlayer16.png",
+      "filename" : "Smine16.png",
       "scale" : "1x"
     },
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "uPlayer32.png",
+      "filename" : "Smine32.png",
       "scale" : "2x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "uPlayer32-1.png",
+      "filename" : "Smine32-1.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "uPlayer64.png",
+      "filename" : "Smine64.png",
       "scale" : "2x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "uPlayer128.png",
+      "filename" : "Smine128.png",
       "scale" : "1x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "uPlayer256.png",
+      "filename" : "Smine256.png",
       "scale" : "2x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "uPlayer256-1.png",
+      "filename" : "Smine256-1.png",
       "scale" : "1x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "uPlayer512.png",
+      "filename" : "Smine512.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "uPlayer512-1.png",
+      "filename" : "Smine512-1.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "uPlayer1024.png",
+      "filename" : "Smine1024.png",
       "scale" : "2x"
     }
   ],

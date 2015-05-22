@@ -42,6 +42,7 @@ public:
         return length;
     }
     
+    /// Read a object on current position to t.
     template<class T>
     void read(T &t)
     {
@@ -52,6 +53,7 @@ public:
         assert(currRead <=bytes+length);
     }
     
+    /// Write t to current posiiton.
     template<class T>
     void write(T t)
     {

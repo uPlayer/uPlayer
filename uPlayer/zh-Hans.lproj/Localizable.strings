@@ -38,13 +38,13 @@
 "single" = "单个";
 
 // column names
-"cover" = "封面";
-"#" = "序号";
-"artist" = "艺术家";
-"title" = "标题";
-"album" = "专辑";
-"genre" = "流派";
-"year" = "年份";
+"Index" = "序号";
+"Cover" = "封面";
+"Artist" = "艺术家";
+"Title" = "标题";
+"Album" = "专辑";
+"Genre" = "流派";
+"Year" = "年份";
 
 
 
