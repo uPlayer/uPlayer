@@ -69,15 +69,26 @@
     return self.playerTrackList.count;
 }
 
--(void)addItems:(NSArray*)items
+-(NSArray*)addItems:(NSArray*)items
 {
     int count = (int)items.count;
     if (count > 0) {
         assert( [items.firstObject isKindOfClass:[PlayerTrack class] ]);
+        
+        for (PlayerTrack *track in items) {
+            track.list = self;
+        }
+        
         [self.playerTrackList addObjectsFromArray: items];
         
-        postEvent(EventID_tracks_changed, self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            postEvent(EventID_tracks_changed, self);
+        });
+        
+        return items;
     }
+    
+    return nil;
 }
 
 -(NSArray*)addTrackInfoItems:(NSArray*)items
@@ -117,6 +128,16 @@
 {
     [self.playerTrackList removeObjectsAtIndexes: indexs];
     postEvent(EventID_tracks_changed, self);
+}
+
+-(NSArray*)trackAtSets:(NSIndexSet*)sets
+{
+    NSMutableArray *arr = [NSMutableArray array];
+    [sets enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [arr addObject: [self.playerTrackList objectAtIndex:idx]];
+    }];
+    
+    return arr;
 }
 
 -(void)removeAll

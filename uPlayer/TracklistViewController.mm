@@ -248,7 +248,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     MemoryFileBuffer buffer( [NSTableColumnMy objectSize]  * defaultColumnNumbers);
  
-    
+  
     printf("\n");
     for (int j = 0 ; j < defaultColumnNumbers; j++) {
         NSTableColumnMy *c = self.tableColumns[j];
@@ -1192,6 +1192,32 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     PlayerTrack *track = [self getSelectedItem: self.tableView.selectedRow];
     
     lastFm_loveTrack(track);
+}
+
+- (IBAction)cmdSendToANewPlaylist:(id)sender
+{
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    
+    if (self.isSearchMode)
+    {
+        NSMutableIndexSet *rowsOrginal = [NSMutableIndexSet indexSet];
+        
+        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            NSUInteger d = [self.searchMng getOrginalByIndex:idx].index;
+            [rowsOrginal addIndex:d];
+        }];
+        
+        rows = rowsOrginal;
+    }
+    
+    NSArray *copied = [self.playerlList.selectItem trackAtSets:rows];
+    
+    PlayerList *newlist = [self.playerlList newPlayerList];
+    postEvent(EventID_to_reload_tracklist, newlist );
+    
+    [newlist addItems:copied];
+    
+    postEvent(EventID_to_reload_tracks, copied);
 }
 
 - (void) copy:(id)sender {

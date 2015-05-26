@@ -45,6 +45,9 @@
 		1EA38A501AE1003300016273 /* uPlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA38A4E1AE1003300016273 /* uPlayer@2x.png */; };
 		1EAA25C11AD67405008F44EC /* MemoryFileBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA25BF1AD67405008F44EC /* MemoryFileBuffer.cpp */; };
 		1EAA25C41AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA25C21AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm */; };
+		1EC8B91B1B141665001E3F78 /* Timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EC8B91A1B141665001E3F78 /* Timer.png */; };
+		1EC8B91E1B141683001E3F78 /* TimerPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8B91D1B141683001E3F78 /* TimerPreferences.m */; };
+		1EC8B9201B1416D5001E3F78 /* TimerPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EC8B91F1B1416D5001E3F78 /* TimerPreferences.xib */; };
 		1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */; };
 		1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */; };
 		1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */; };
@@ -187,6 +190,10 @@
 		1EAA25C01AD67405008F44EC /* MemoryFileBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryFileBuffer.h; sourceTree = "<group>"; };
 		1EAA25C21AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "PlayerLayout+MemoryFileBuffer.mm"; sourceTree = "<group>"; };
 		1EAA25C31AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlayerLayout+MemoryFileBuffer.h"; sourceTree = "<group>"; };
+		1EC8B91A1B141665001E3F78 /* Timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timer.png; sourceTree = "<group>"; };
+		1EC8B91C1B141683001E3F78 /* TimerPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerPreferences.h; sourceTree = "<group>"; };
+		1EC8B91D1B141683001E3F78 /* TimerPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerPreferences.m; sourceTree = "<group>"; };
+		1EC8B91F1B1416D5001E3F78 /* TimerPreferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimerPreferences.xib; path = uPlayer/TimerPreferences.xib; sourceTree = SOURCE_ROOT; };
 		1ECEB7561A9052AD006E8C23 /* AccountPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferences.h; sourceTree = "<group>"; };
 		1ECEB7571A9052AD006E8C23 /* AccountPreferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccountPreferences.mm; sourceTree = "<group>"; };
 		1ECEB7591A9052AD006E8C23 /* AccountPreferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountPreferences.png; sourceTree = "<group>"; };
@@ -275,6 +282,7 @@
 				1ECEB7631A9053AB006E8C23 /* General */,
 				1ECEB7641A9053BB006E8C23 /* Account */,
 				1EFD42BA1A91ABBD009D65B5 /* HotKey */,
+				1EC8B9181B1415B2001E3F78 /* Timer */,
 				1E04435D1A7B747A00B644D8 /* AppPreferences.h */,
 				1E04435E1A7B747A00B644D8 /* AppPreferences.m */,
 				1E04435F1A7B747A00B644D8 /* NSPreferences.h */,
@@ -351,6 +359,17 @@
 				1EFAA29D1AC001D10010A965 /* Play_Random@2x.png */,
 			);
 			path = res;
+			sourceTree = "<group>";
+		};
+		1EC8B9181B1415B2001E3F78 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				1EC8B91C1B141683001E3F78 /* TimerPreferences.h */,
+				1EC8B91D1B141683001E3F78 /* TimerPreferences.m */,
+				1EC8B91F1B1416D5001E3F78 /* TimerPreferences.xib */,
+				1EC8B91A1B141665001E3F78 /* Timer.png */,
+			);
+			name = Timer;
 			sourceTree = "<group>";
 		};
 		1ECEB7631A9053AB006E8C23 /* General */ = {
@@ -631,12 +650,14 @@
 				1E3AF1E11ADF756B004AA408 /* uPlayerStatus.png in Resources */,
 				1E5F6D931ABC35FF00430128 /* Pause_Button.png in Resources */,
 				1E3AF1CA1ADF6A64004AA408 /* uPlayer.icns in Resources */,
+				1EC8B91B1B141665001E3F78 /* Timer.png in Resources */,
 				1E3AF1E21ADF756B004AA408 /* uPlayerStatus@2x.png in Resources */,
 				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
 				1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */,
 				1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */,
 				1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */,
 				1E5F6D971ABC35FF00430128 /* Play_Button.png in Resources */,
+				1EC8B9201B1416D5001E3F78 /* TimerPreferences.xib in Resources */,
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
 				1EFAA2A31AC001D10010A965 /* Play_Random@2x.png in Resources */,
 				1EA38A501AE1003300016273 /* uPlayer@2x.png in Resources */,
@@ -706,6 +727,7 @@
 				1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */,
 				1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */,
 				1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */,
+				1EC8B91E1B141683001E3F78 /* TimerPreferences.m in Sources */,
 				1ECEB75B1A9052AD006E8C23 /* AccountPreferences.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

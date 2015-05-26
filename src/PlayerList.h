@@ -32,14 +32,14 @@
 -(size_t)count;
 //-(PlayerTrack*)getSelectedItem;
 //-(PlayerTrack*)getPlayItem;
--(void)addItems:(NSArray*)items;
+-(NSArray*)addItems:(NSArray*)items;
 
 /**
  @param items: array of TrackInfo*
  @return :array of PlayerTrack *.
  */
 -(NSArray*)addTrackInfoItems:(NSArray*)items;
-
+-(NSArray*)trackAtSets:(NSIndexSet*)sets;
 -(void)removeTracks:(NSIndexSet*)indexs;
 -(void)removeTrack:(NSInteger)index;
 -(void)removeAll;

@@ -664,13 +664,6 @@
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="isPlayQueueNotEmpty" id="ozA-i9-vIr"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Love @ Last.Fm" id="Pz1-mZ-0xy">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="cmdLastFm_Love:" target="XfG-lQ-9wD" id="MOm-t9-0HE"/>
-                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="rowSelectedLastFmEnabled" id="mcH-pS-4gt"/>
-                            </connections>
-                        </menuItem>
                         <menuItem isSeparatorItem="YES" id="Uek-f8-d6s"/>
                         <menuItem title="Remove" id="8Ng-b4-bmx">
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -692,6 +685,13 @@ CA
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="bz6-mc-lgT"/>
+                        <menuItem title="Love @ Last.Fm" id="Pz1-mZ-0xy">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdLastFm_Love:" target="XfG-lQ-9wD" id="MOm-t9-0HE"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="rowSelectedLastFmEnabled" id="mcH-pS-4gt"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="Show in Finder" id="WHJ-kh-lq3">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -699,9 +699,17 @@ CA
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="37d-CW-Rgg"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Send to a New Playlist" id="giq-ZT-t5y">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="cmdSendToANewPlaylist:" target="XfG-lQ-9wD" id="ru4-HC-Dmu"/>
+                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="pid-7p-cHd"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <userDefaultsController id="eJW-Mq-KvT"/>
+                <userDefaultsController id="MHf-82-fj1"/>
             </objects>
             <point key="canvasLocation" x="-936" y="899"/>
         </scene>

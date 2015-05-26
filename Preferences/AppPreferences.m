@@ -21,6 +21,8 @@
 	[self addPreferenceNamed: NSLocalizedString( @"General",nil) owner: [GeneralPreferences sharedInstance]];
 	[self addPreferenceNamed: NSLocalizedString(@"Account",nil) owner: [AccountPreferences sharedInstance]];
 	//[self addPreferenceNamed: NSLocalizedString(@"HotKeys",nil) owner: [HotKeyPreferences sharedInstance]];
+//	[self addPreferenceNamed: NSLocalizedString(@"Timer",nil) owner: [HotKeyPreferences sharedInstance]];
+    
 	 return self;
 }
 
