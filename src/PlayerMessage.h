@@ -34,6 +34,9 @@ typedef enum : NSUInteger {
     /// playerlist added or removed. @param: none.
     EventID_list_changed,
     
+    /// A PlayerList's name changed. @param: PlayerList *list;
+    EventID_list_name_changed,
+    
     EventID_importing_tracks_begin,
     EventID_importing_tracks_end,
     EventID_applicationWillTerminate, // save layout config

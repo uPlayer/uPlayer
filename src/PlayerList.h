@@ -80,6 +80,9 @@
 // return the nearest one before or after the deleted.
 -(PlayerList*)deleteItem:(NSInteger)index;
 
+-(PlayerList*)getPreviousItem:(NSInteger)index;
+-(PlayerList*)getNextItem:(NSInteger)index;
+
 @end
 
 @interface PlayerlList (documentLoaded)

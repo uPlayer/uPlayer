@@ -276,4 +276,32 @@
     }
 }
 
+-(PlayerList*)getPreviousItem:(NSInteger)index
+{
+    NSInteger count = self.playerlList.count;
+    if(count == 1)
+        return nil;
+    
+    NSInteger prev = index - 1;
+    if (prev == -1) {
+        prev = count - 1;
+    }
+    
+    return [self getItem:(int)prev];
+}
+
+-(PlayerList*)getNextItem:(NSInteger)index
+{
+    NSInteger count = self.playerlList.count;
+    if(count == 1)
+        return nil;
+    
+    NSInteger prev = index + 1;
+    if (prev == count) {
+        prev = 0;
+    }
+    
+    return [self getItem:(int)prev];
+}
+
 @end

@@ -196,6 +196,8 @@ void asdf2()
     PlayerList * list = [self.playerlList getItem:row];
     list.name = fieldEditor.string;
     
+    postEvent(EventID_list_name_changed, list);
+    
     return TRUE;
 }
 
@@ -230,9 +232,6 @@ void asdf2()
     
     [self.tableView reloadData];
     
-    postEvent(EventID_to_reload_tracklist, nearItem);
-    
-    
 }
 
 - (IBAction)cmdActiveItem:(id)sender
@@ -241,7 +240,6 @@ void asdf2()
     PlayerList *l = [self.playerlList getItem:selectedRow];
     
     postEvent(EventID_to_reload_tracklist, l );
-    
 }
 
 @end

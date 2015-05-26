@@ -104,6 +104,8 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 @property (nonatomic,strong) NSProgressIndicator *progress;
+
+@property (nonatomic,strong) NSTextField *bottomTextLeft,*bottomTextRight,*bottomTextCenter;
 @end
 
 @implementation TracklistViewController
@@ -165,6 +167,11 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     addObserverForEvent(self, @selector(stopPIAnimation), EventID_importing_tracks_end);
     
     addObserverForEvent(self, @selector(saveLayout), EventID_applicationWillTerminate);
+    
+    addObserverForEvent( self, @selector(updateBottomBar), EventID_tracks_changed);
+    
+    addObserverForEvent( self, @selector(updateBottomBar), EventID_list_name_changed);
+    
     
     self.playerlList = player().document.playerlList;
     
@@ -388,6 +395,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: target] byExtendingSelection:YES];
 
+    [self updateBottomBar];
 }
 
 -(void)reloadPlaylist:(NSNotification*)n
@@ -435,9 +443,22 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         [self scrollRowToTop: target];
     
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex: target] byExtendingSelection:YES];
+    
+    postEvent(EventID_list_changed, nil);
+    
+
+    [self updateBottomBar];
 }
 
 
+-(void)updateBottomBar
+{
+    PlayerList *list = self.playerlList.selectItem;
+    
+    _bottomTextRight.stringValue = [NSString stringWithFormat: NSLocalizedString(@"playlist: %@",nil) , list.name];
+    
+    _bottomTextCenter.stringValue = [NSString stringWithFormat: NSLocalizedString(@"%d songs",nil) , list.count ];
+}
 
 -(void)reloadTracks:(NSNotification*)n
 {
@@ -504,6 +525,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     }
     
     [self.tableView selectRowIndexes:sets byExtendingSelection:YES];
+    [self updateBottomBar];
 }
 
 -(void)reloadPlayingTrack
@@ -604,9 +626,52 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
     [self.view registerForDraggedTypes:[NSArray arrayWithObjects: NSFilenamesPboardType, nil]];
     
+    CGFloat bottomBarHeight = 22.0;
+    CGFloat bottomBarWidth = self.view.bounds.size.width;
+    
+    // Create controls in bottom bar.
+    
+    CGFloat ff = bottomBarHeight;
+    const CGFloat margin = 5;
+    const CGFloat labelText = 100;
+    
+   _bottomTextLeft = [[NSTextField alloc] initWithFrame: NSMakeRect(margin, (bottomBarHeight-ff)/2, labelText + margin , ff )];
+    _bottomTextLeft.autoresizingMask = NSViewMinXMargin| NSViewWidthSizable| NSViewMaxXMargin;
+    _bottomTextLeft.stringValue = @"";
+    _bottomTextLeft.editable = false;
+    _bottomTextLeft.bordered = false;
+    _bottomTextLeft.drawsBackground = false;
+    _bottomTextLeft.alignment =  NSLeftTextAlignment;
+    
+    [self.view addSubview:_bottomTextLeft];
+    
+    
+    _bottomTextCenter = [[NSTextField alloc] initWithFrame: NSMakeRect(labelText+margin, (bottomBarHeight-ff)/2, bottomBarWidth - labelText - labelText - margin - margin , ff )];
+    _bottomTextCenter.autoresizingMask = NSViewMinXMargin| NSViewWidthSizable| NSViewMaxXMargin;
+//    _bottomTextCenter.stringValue = [NSString stringWithFormat: NSLocalizedString(@"%d songs",nil) , 966 ];
+    _bottomTextCenter.editable = false;
+    _bottomTextCenter.bordered = false;
+    _bottomTextCenter.drawsBackground = false;
+    _bottomTextCenter.alignment =  NSCenterTextAlignment;
+    
+    [self.view addSubview: _bottomTextCenter];
+    
+    
+    
+    _bottomTextRight = [[NSTextField alloc] initWithFrame: NSMakeRect( bottomBarWidth - margin - labelText, (bottomBarHeight-ff)/2, labelText , ff )];
+    _bottomTextRight.autoresizingMask = NSViewMinXMargin| NSViewWidthSizable| NSViewMaxXMargin;
+//    _bottomTextRight.stringValue = [NSString stringWithFormat: NSLocalizedString(@"playlist: %@",nil) ,@"孙燕姿"];
+    _bottomTextRight.editable = false;
+    _bottomTextRight.bordered = false;
+    _bottomTextRight.drawsBackground = false;
+    _bottomTextRight.alignment =  NSRightTextAlignment;
+    
+    [self.view addSubview:_bottomTextRight];
+    
+    
+
     
     // Create table view.
-    CGFloat bottomBarHeight = 22.0;
     
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
     
@@ -1196,28 +1261,48 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 - (IBAction)cmdSendToANewPlaylist:(id)sender
 {
-    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    NSAlert *alert = [[NSAlert alloc]init];
     
-    if (self.isSearchMode)
+    NSTextField *textfield = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 240, 25)];
+    textfield.placeholderString = NSLocalizedString(@"default playlist name",nil);
+    alert.messageText = @"Please enter the playlist name";
+    alert.accessoryView = textfield;
+    alert.alertStyle = NSInformationalAlertStyle;
+    [alert addButtonWithTitle:@"ok"];
+    [alert addButtonWithTitle:@"cancel"];
+    [alert layout];
+    
+    //textfield.frame = NSMakeRect(0, 0, textfield.superview.superview.bounds.size.width - 20, 30) ;
+    
+    if([alert runModal] == NSAlertFirstButtonReturn && textfield.stringValue.length > 0)
     {
-        NSMutableIndexSet *rowsOrginal = [NSMutableIndexSet indexSet];
+        NSLog(@"%@",textfield.stringValue);
+        NSString *playlistName = textfield.stringValue;
         
-        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            NSUInteger d = [self.searchMng getOrginalByIndex:idx].index;
-            [rowsOrginal addIndex:d];
-        }];
+        NSIndexSet *rows = self.tableView.selectedRowIndexes;
         
-        rows = rowsOrginal;
+        if (self.isSearchMode)
+        {
+            NSMutableIndexSet *rowsOrginal = [NSMutableIndexSet indexSet];
+            
+            [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+                NSUInteger d = [self.searchMng getOrginalByIndex:idx].index;
+                [rowsOrginal addIndex:d];
+            }];
+            
+            rows = rowsOrginal;
+        }
+        
+        NSArray *copied = [self.playerlList.selectItem trackAtSets:rows];
+        
+        PlayerList *newlist = [self.playerlList newPlayerList];
+        newlist.name = playlistName;
+        postEvent(EventID_to_reload_tracklist, newlist );
+        
+        [newlist addItems:copied];
+        
+        postEvent(EventID_to_reload_tracks, copied);
     }
-    
-    NSArray *copied = [self.playerlList.selectItem trackAtSets:rows];
-    
-    PlayerList *newlist = [self.playerlList newPlayerList];
-    postEvent(EventID_to_reload_tracklist, newlist );
-    
-    [newlist addItems:copied];
-    
-    postEvent(EventID_to_reload_tracks, copied);
 }
 
 - (void) copy:(id)sender {

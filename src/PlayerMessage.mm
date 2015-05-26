@@ -29,6 +29,8 @@ const char *arrEvent[] =
     "tracks_changed",
     "list_changed",
     
+    "list_name_changed",
+    
     "importing_tracks_begin",
     "importing_tracks_end",
     "applicationWillTerminate",

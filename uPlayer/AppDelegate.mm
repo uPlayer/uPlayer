@@ -227,6 +227,31 @@
     postEvent(EventID_to_show_playlist, nil);
 }
 
+- (IBAction)cmdPrevPlaylist:(id)sender
+{
+    PlayerlList *llist = player().document.playerlList;
+    
+    PlayerList *currList = llist.selectItem;
+    
+    PlayerList *prevList =  [llist getPreviousItem: [llist getIndex:currList]];
+    
+    if(prevList)
+        postEvent(EventID_to_reload_playlist, prevList);
+}
+
+- (IBAction)cmdNextPlaylist:(id)sender
+{
+     PlayerlList *llist = player().document.playerlList;
+    
+    PlayerList *currList = llist.selectItem;
+    
+    PlayerList *nextList =  [llist getNextItem: [llist getIndex:currList]];
+    
+    if(nextList)
+        postEvent(EventID_to_reload_playlist, nextList);
+}
+
+
 #pragma mark -
 
 
