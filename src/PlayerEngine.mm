@@ -137,43 +137,45 @@
         
         int index = (int)track.index;
         int count = (int)[list count];
-        int indexNext =-1;
-        PlayOrder order = (PlayOrder)d.playOrder;
-        
-        if (order == playorder_single) {
-            [self stop];
-        }
-        else if (order == playorder_default)
+        if(count > 0)
         {
-            indexNext = index +1;
-        }
-        else if(order == playorder_random)
-        {
-            static int s=0;
-            if(s++==0)
-                srand((uint )time(NULL));
+            int indexNext =-1;
+            PlayOrder order = (PlayOrder)d.playOrder;
             
-            indexNext =rand() % (count) - 1;
-        }else if(order == playorder_repeat_single)
-        {
+            if (order == playorder_single) {
+                [self stop];
+            }
+            else if (order == playorder_default)
+            {
+                indexNext = index +1;
+            }
+            else if(order == playorder_random)
+            {
+                static int s=0;
+                if(s++==0)
+                    srand((uint )time(NULL));
+                
+                indexNext =rand() % (count) - 1;
+            }else if(order == playorder_repeat_single)
+            {
+                playTrack(track);
+                return;
+                
+            }else if(order == playorder_repeat_list)
+            {
+                indexNext = index + 1;
+                if (indexNext == count - 1)
+                    indexNext = 0;
+            }
+            
+            
+            track = nil;
+            if ( indexNext >= 0 && indexNext < [list count] )
+                track = [list getItem: indexNext ];
+            
             playTrack(track);
-            return;
-            
-        }else if(order == playorder_repeat_list)
-        {
-            indexNext = index + 1;
-            if (indexNext == count - 1)
-                indexNext = 0;
         }
-        
-        
-        track = nil;
-        if ( indexNext >= 0 && indexNext < [list count] )
-            track = [list getItem: indexNext ];
-        
-        playTrack(track);
     }
-    
 }
 
 -(void)dealloc
