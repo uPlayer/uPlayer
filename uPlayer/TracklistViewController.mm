@@ -19,32 +19,16 @@
 #import "id3Info.h"
 #import "ThreadJob.h"
 
-
-@interface NSTableColumnMy : NSTableColumn
-
-@property (nonatomic) int state;
-
-+(int)objectSize;
-+(instancetype)tableColumnWithIdentifies:(NSString*)iden title:(NSString*)title state:(bool)state width:(CGFloat)width;
+//http://stackoverflow.com/questions/1235219/is-there-a-right-way-to-have-nstextfieldcell-draw-vertically-centered-text
+@interface NSTextFieldCell (MyCategories)
 @end
 
 
-@implementation NSTableColumnMy
-+(int)objectSize
-{
-    return 5*sizeof(void*)+sizeof(int)*3+sizeof(float)*3;
-}
 
-+(instancetype)tableColumnWithIdentifies:(NSString*)iden title:(NSString*)title state:(bool)state width:(CGFloat)width
-{
-    NSTableColumnMy *t = [[NSTableColumnMy alloc]initWithIdentifier:iden];
-    t.title = title;
-    t.state = state;
-    t.width = width;
-    
-    return t;
-}
-
+@interface NSTableColumnMy : NSTableColumn
+@property (nonatomic) int state;
++(int)objectSize;
++(instancetype)tableColumnWithIdentifies:(NSString*)iden title:(NSString*)title state:(bool)state width:(CGFloat)width;
 @end
 
 
@@ -653,7 +637,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     _bottomTextCenter.bordered = false;
     _bottomTextCenter.drawsBackground = false;
     _bottomTextCenter.alignment =  NSCenterTextAlignment;
-    
+
     [self.view addSubview: _bottomTextCenter];
     
     
@@ -1439,3 +1423,61 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 }
 
 @end
+
+@implementation NSTextFieldCell (MyCategories)
+
+-(void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    NSAttributedString *attrString = self.attributedStringValue;
+    
+    /* if your values can be attributed strings, make them white when selected */
+    if (self.isHighlighted && self.backgroundStyle==NSBackgroundStyleDark) {
+        NSMutableAttributedString *whiteString = attrString.mutableCopy;
+        [whiteString addAttribute: NSForegroundColorAttributeName
+                            value: [NSColor whiteColor]
+                            range: NSMakeRange(0, whiteString.length) ];
+        attrString = whiteString;
+    }
+    
+    [attrString drawWithRect: [self titleRectForBounds:cellFrame]
+                     options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin];
+}
+
+- (NSRect)titleRectForBounds:(NSRect)theRect {
+    /* get the standard text content rectangle */
+    NSRect titleFrame = [super titleRectForBounds:theRect];
+    
+    /* find out how big the rendered text will be */
+    NSAttributedString *attrString = self.attributedStringValue;
+    NSRect textRect = [attrString boundingRectWithSize: titleFrame.size
+                                               options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin ];
+    
+    /* If the height of the rendered text is less then the available height,
+     * we modify the titleRect to center the text vertically */
+    if (textRect.size.height < titleFrame.size.height) {
+        titleFrame.origin.y = theRect.origin.y + (theRect.size.height - textRect.size.height) / 2.0;
+        titleFrame.size.height = textRect.size.height;
+    }
+    return titleFrame;
+}
+
+@end
+
+
+@implementation NSTableColumnMy
++(int)objectSize
+{
+    return 5*sizeof(void*)+sizeof(int)*3+sizeof(float)*3;
+}
+
++(instancetype)tableColumnWithIdentifies:(NSString*)iden title:(NSString*)title state:(bool)state width:(CGFloat)width
+{
+    NSTableColumnMy *t = [[NSTableColumnMy alloc]initWithIdentifier:iden];
+    t.title = title;
+    t.state = state;
+    t.width = width;
+    
+    return t;
+}
+
+@end
+
