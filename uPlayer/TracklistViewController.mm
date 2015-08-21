@@ -1417,7 +1417,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
                  } ,
                  ^{
                      postEvent(EventID_importing_tracks_end, nil);
-                     postEvent(EventID_to_reload_tracks, added);
+                     
+                     if(added.count>0)
+                         postEvent(EventID_to_reload_tracks, added);
                  });
     
 }
