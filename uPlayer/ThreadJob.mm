@@ -15,15 +15,12 @@ dispatch_queue_t  _dispatchQueue  = nil;
 
 void dojobInBkgnd(JobBlock job ,JobBlockDone done)
 {
-    if(_dispatchQueue == nil)
-       _dispatchQueue = dispatch_queue_create("Smine", DISPATCH_QUEUE_SERIAL);
-    
-    dispatch_async(_dispatchQueue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         job();
         if (done)
             dispatch_async(dispatch_get_main_queue(), ^{
                 done();
-        });
+            });
     });
     
 }
