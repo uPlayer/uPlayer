@@ -35,6 +35,8 @@ lastFmEnabled;
 
 @property (nonatomic,strong) NSString *windowName;
 
+// value not
+@property (nonatomic) bool needBackupConfigFile;
 
 @end
 

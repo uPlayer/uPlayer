@@ -50,10 +50,19 @@ struct PlayStateTime
 
 
 #define docFileName  @"core.cfg"
+#define docFileNameLastSuccessfullyLoaded @"core_last.cfg"
+#define docFileNameLock @"loadConfig.lock"
+
 #define layoutFileName  @"ui.cfg"
+#define layoutFileNameLastSuccessfullyLoaded  @"ui_last.cfg"
+#define layoutFileNameLock  @"ui.cfg.lock"
+
+
 #define keyblindingFileName @"keymaps.json"
 #define playlistDirectoryName @"playlist"
 #define playlistIndexFileName @"index.cfg"
+
+
 
 
 enum PlayerListType

@@ -365,8 +365,46 @@ NSArray *loadTrackInfoArray(FILE &file)
 {
     NSString *appSupportDir = ApplicationSupportDirectory();
     
-    FILE *file = fopen([appSupportDir  stringByAppendingPathComponent: docFileName ].UTF8String, "r");
     
+    NSString *fileName =  [appSupportDir  stringByAppendingPathComponent: docFileName ];
+    
+    /** the load protect system.
+     Before load the config file,we create a lock file.
+     After load complete,we delete lock file,and backup the config file.
+     
+     If anything happenned,load failed,the lock file is leaved there.
+     */
+    
+    NSString *lockFilePath = [appSupportDir  stringByAppendingPathComponent: docFileNameLock ];
+    
+    FILE *loadConfigLockFile = fopen(lockFilePath.UTF8String, "r");
+    
+    
+    self.needBackupConfigFile = true;
+    
+    NSString *_backupFileName = [appSupportDir  stringByAppendingPathComponent: docFileNameLastSuccessfullyLoaded ];
+    const char *backupFileName =  _backupFileName.UTF8String;
+    
+    if (loadConfigLockFile) {
+        // Last loading failed,load last file successfully saved yet.
+        char cmdCP[256] = "cp \"";
+        strcat(cmdCP, backupFileName);
+        strcat(cmdCP, "\" \"");
+        strcat(cmdCP, fileName.UTF8String);
+        strcat(cmdCP, "\"");
+        system(cmdCP);
+        
+        self.needBackupConfigFile = false;
+    }
+    else
+    {
+        //create one
+        loadConfigLockFile = fopen(lockFilePath.UTF8String, "w");
+    }
+    
+    
+    
+    FILE *file = fopen( fileName.UTF8String ,"r");
     if (file)
     {
         int resumeAtReboot , trackSongsWhenPlayStarted ;
@@ -402,8 +440,29 @@ NSArray *loadTrackInfoArray(FILE &file)
         
         [self didLoad];
         
+        //If load complete,delete the lock file.
+        fclose(loadConfigLockFile);
+        unlink(lockFilePath.UTF8String);
+        
+        if( self.needBackupConfigFile )
+        {
+            //backup config file.
+            char cmdCP[256] = "cp \"";
+            strcat(cmdCP, fileName.UTF8String);
+            strcat(cmdCP, "\" \"");
+            strcat(cmdCP, backupFileName);
+            strcat(cmdCP, "\"");
+            system(cmdCP);
+            
+            self.needBackupConfigFile = false;
+        }
+        
+        _backupFileName = nil;
+        
+        
         return true;
     }
+    
     
     return false;
 }
@@ -413,7 +472,26 @@ NSArray *loadTrackInfoArray(FILE &file)
     [self willSave];
     
     NSString *appSupportDir = ApplicationSupportDirectory();
-    FILE *file = fopen([appSupportDir stringByAppendingPathComponent: docFileName].UTF8String, "w");
+    NSString *_fileName = [appSupportDir stringByAppendingPathComponent: docFileName];
+    const char * fileName = _fileName.UTF8String;
+    
+    NSString *_backupFileName = [appSupportDir  stringByAppendingPathComponent: docFileNameLastSuccessfullyLoaded ];
+    const char *backupFileName =  _backupFileName.UTF8String;
+    
+    
+    if( self.needBackupConfigFile )
+    {
+        //backup config file.
+        char cmdCP[256] = "cp \"";
+        strcat(cmdCP, fileName);
+        strcat(cmdCP, "\" \"");
+        strcat(cmdCP, backupFileName);
+        strcat(cmdCP, "\"");
+        system(cmdCP);
+    }
+    
+    
+    FILE *file = fopen( fileName , "w");
     
     if (file)
     {
