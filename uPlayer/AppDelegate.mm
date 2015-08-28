@@ -331,7 +331,8 @@
     {
         TrackInfo *trackInfo = getId3Info( filename );
         trackInfo.path=filename;
-        [trackInfos addObject:trackInfo];
+        if(trackInfo)
+            [trackInfos addObject:trackInfo];
     }
     
     
