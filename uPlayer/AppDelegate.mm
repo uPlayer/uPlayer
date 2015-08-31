@@ -241,7 +241,7 @@
 
 - (IBAction)cmdNextPlaylist:(id)sender
 {
-     PlayerlList *llist = player().document.playerlList;
+    PlayerlList *llist = player().document.playerlList;
     
     PlayerList *currList = llist.selectItem;
     
