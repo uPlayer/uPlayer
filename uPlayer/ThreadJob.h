@@ -14,6 +14,5 @@ typedef void (^JobBlockDone)();
 
 void dojobInBkgnd(JobBlock job ,JobBlockDone done);
 
-/// ~/Library/Application Support/uPlayer
-NSString *ApplicationSupportDirectory();
+
 

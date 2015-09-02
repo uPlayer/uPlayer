@@ -88,7 +88,7 @@ extern "C" {
     
     void removeObserver(id observer);
     
-    void postEvent(EventID et , id object = nil);
+    void postEvent(EventID et , id object );
     
     void postEventByString( NSString *strEvent , id object);
     

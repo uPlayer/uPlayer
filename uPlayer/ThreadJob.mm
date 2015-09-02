@@ -24,39 +24,3 @@ void dojobInBkgnd(JobBlock job ,JobBlockDone done)
     });
     
 }
-
-/// ~/Library/Application Support/uPlayer
-NSString *ApplicationSupportDirectory()
-{
-    NSString *path = NSSearchPathForDirectoriesInDomains( NSApplicationSupportDirectory, NSUserDomainMask, true ).firstObject;
-    
-    path = [path stringByAppendingPathComponent:@"Smine"];
-    
-    BOOL isExist;
-    BOOL isDirectory;
-    isExist = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
-    
-    if (isExist )
-    {
-        if (!isDirectory)
-        {
-           /// @todo: remove this file.
-           // isExist = false;
-        }
-    }
-
-    if (!isExist)
-    {
-        NSError *error;
-        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-        
-        if (error) {
-            NSLog(@"%@",error);
-            return nil;
-        }
-    }
-    
-
-    
-    return path;
-}
