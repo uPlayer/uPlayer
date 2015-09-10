@@ -164,7 +164,7 @@
             }else if(order == playorder_repeat_list)
             {
                 indexNext = index + 1;
-                if (indexNext == count )
+                if (indexNext == count - 1)
                     indexNext = 0;
             }
             
