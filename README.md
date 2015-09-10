@@ -37,42 +37,30 @@ You can change it yourself. Make sure all words is *lowecased*.
 Only tested in OS X 10.10 Yosemite  
 
 
-
-
 ##How to build This Project  
 
 1. Clone this project 
-
+		
 		git clone https://github.com/uPlayer/uPlayer.git 
 	
-	  And update the git submodule:
-
-2. Download and build [jsoncpp](http://sourceforge.net/projects/jsoncpp/).   
-
-3. Done and Open the project with xcode.
-
-##ToDo
-
-* The lyrics showing thing.  
-
-* Reload Itunes Media , changed . 改进算法,using last modified time.  
-
-* The Font Changing. 
-
-##Draft a new release 
-
-1. Change the `bundle version` to v0.a.x and `Bundle version string,short` to 0.a.x  
-
-2. Create a new git tag  0.a.x  
-
-3. Draft a new release in github with title `uPlayer-0.a.x`.
+	 and change your directory and update the pods:
+	 
+		 pod update
+	 
+2. Download and build [jsoncpp](http://sourceforge.net/projects/jsoncpp/) , and [taglib](www.taglib.com). It quite easy if you use [homebrew](http://brew.sh) to install it.   
+ 
+		  brew install jsoncpp  
+		  brew install taglib
+	
+3. Done   
+		 👍
 
 
-##License  
+##License   
+Attribution  NonCommercial  ShareAlike   
+![by](https://creativecommons.org/images/deed/by.png)   ![nc](https://creativecommons.org/images/deed/nc.png) 
+![](https://creativecommons.org/images/deed/sa.png)  
 
-[![by](https://creativecommons.org/images/deed/by.png)![](https://creativecommons.org/images/deed/nc.png)![](https://creativecommons.org/images/deed/sa.png)](http://creativecommons.org/licenses/by-nc-sa/3.0)
-
-  
 
 
 
