@@ -51,13 +51,16 @@ Only tested in OS X 10.10 Yosemite
  
 		  brew install taglib
 
-3. Done   
-		 👍
+3. Open uPlayer.xcworkspace for this project.   
+	  👍
 
 
 ##License   
-Attribution  NonCommercial  ShareAlike   
-![by](https://creativecommons.org/images/deed/by.png)   ![nc](https://creativecommons.org/images/deed/nc.png) 
+Attribution  
+![by](https://creativecommons.org/images/deed/by.png)   
+NonCommercial  
+![nc](https://creativecommons.org/images/deed/nc.png)   
+ShareAlike   
 ![](https://creativecommons.org/images/deed/sa.png)  
 
 
