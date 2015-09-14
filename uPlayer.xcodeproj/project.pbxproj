@@ -60,7 +60,6 @@
 		1ECEB7751A905874006E8C23 /* socketTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7731A905874006E8C23 /* socketTool.cpp */; };
 		1ECEB7781A9059A5006E8C23 /* Last_fm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7761A9059A5006E8C23 /* Last_fm.cpp */; };
 		1ECEB7851A90621D006E8C23 /* Last_fm_serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7831A90621D006E8C23 /* Last_fm_serialize.cpp */; };
-		1ECEB7891A906231006E8C23 /* serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7871A906231006E8C23 /* serialize.cpp */; };
 		1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.m */; };
 		1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */; };
 		1ED6B0A51AEA043F00DBEEE4 /* id3Info.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6B0A41AEA043F00DBEEE4 /* id3Info.mm */; };
@@ -87,6 +86,7 @@
 		1EFD42C11A91ABFF009D65B5 /* HotKeyPreferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD42BE1A91ABFF009D65B5 /* HotKeyPreferences.png */; };
 		1EFD42CD1A91E826009D65B5 /* ThreadJob.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */; };
 		1EFD42DE1A91EE85009D65B5 /* shortcutKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */; };
+		3A4ED56EE8C89A4225510F30 /* libPods-uPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 313FA56A96AF81C657FC2AC0 /* libPods-uPlayer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,6 +258,9 @@
 		1EFD42CE1A91E847009D65B5 /* ThreadJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadJob.h; sourceTree = "<group>"; };
 		1EFD42DB1A91EE85009D65B5 /* shortcutKey.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = shortcutKey.mm; sourceTree = "<group>"; };
 		1EFD42DC1A91EE85009D65B5 /* shortcutKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shortcutKey.h; sourceTree = "<group>"; };
+		313FA56A96AF81C657FC2AC0 /* libPods-uPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-uPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		317B1433D115C61D7CAC8F8E /* Pods-uPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-uPlayer/Pods-uPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		A8F7659B8BBB38202F51A341 /* Pods-uPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-uPlayer/Pods-uPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +273,7 @@
 				1EFD42B91A91A9EF009D65B5 /* LLHotKeyRecorder.framework in Frameworks */,
 				1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */,
 				1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */,
+				3A4ED56EE8C89A4225510F30 /* libPods-uPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +456,7 @@
 				1EFD42D81A91EE85009D65B5 /* ShortCutcmd */,
 				1EDE8FE21A7742000086677B /* Frameworks */,
 				1EDE8FA31A773D810086677B /* Products */,
+				B6BC25268A3B3D3A2AD70721 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -519,6 +524,7 @@
 				1E8FF13A1AA084A900EA0A89 /* Carbon.framework */,
 				1EE5DDAC1A83380F0074D282 /* CoreMedia.framework */,
 				1EE5DDAA1A8337DC0074D282 /* AVFoundation.framework */,
+				313FA56A96AF81C657FC2AC0 /* libPods-uPlayer.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -562,6 +568,15 @@
 			path = ShortCutcmd;
 			sourceTree = "<group>";
 		};
+		B6BC25268A3B3D3A2AD70721 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A8F7659B8BBB38202F51A341 /* Pods-uPlayer.debug.xcconfig */,
+				317B1433D115C61D7CAC8F8E /* Pods-uPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -569,10 +584,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EDE8FC21A773D810086677B /* Build configuration list for PBXNativeTarget "uPlayer" */;
 			buildPhases = (
+				0008378F2ED268B10DCCA31C /* Check Pods Manifest.lock */,
 				1EDE8F9E1A773D810086677B /* Sources */,
 				1EDE8F9F1A773D810086677B /* Frameworks */,
 				1EDE8FA01A773D810086677B /* Resources */,
 				1E89285B1AA1B05600CF0634 /* CopyFiles */,
+				8A933A250DE2408F5C0B5F60 /* Embed Pods Frameworks */,
+				0C0AFDA3DD1E8A022554F94C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -682,6 +700,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0008378F2ED268B10DCCA31C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0C0AFDA3DD1E8A022554F94C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-uPlayer/Pods-uPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A933A250DE2408F5C0B5F60 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-uPlayer/Pods-uPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1EDE8F9E1A773D810086677B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -696,7 +762,6 @@
 				1EAA25C41AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm in Sources */,
 				1ED6B0A51AEA043F00DBEEE4 /* id3Info.mm in Sources */,
 				1E5F426D1A887BE800911BE8 /* PlaylistViewController.mm in Sources */,
-				1ECEB7891A906231006E8C23 /* serialize.cpp in Sources */,
 				1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */,
 				1ECEB7851A90621D006E8C23 /* Last_fm_serialize.cpp in Sources */,
 				1EDE8FAE1A773D810086677B /* TracklistViewController.mm in Sources */,
@@ -881,6 +946,7 @@
 		};
 		1EDE8FC31A773D810086677B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8F7659B8BBB38202F51A341 /* Pods-uPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -906,6 +972,7 @@
 					"-ljson",
 					"-ltag",
 					"-lpthread",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = Smine;
 				VALID_ARCHS = x86_64;
@@ -914,6 +981,7 @@
 		};
 		1EDE8FC41A773D810086677B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 317B1433D115C61D7CAC8F8E /* Pods-uPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -939,6 +1007,7 @@
 					"-ljson",
 					"-ltag",
 					"-lpthread",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = Smine;
 				VALID_ARCHS = x86_64;
