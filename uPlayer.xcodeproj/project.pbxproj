@@ -57,7 +57,6 @@
 		1ECEB76F1A90582B006E8C23 /* Last_fm_local_record.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7681A90582B006E8C23 /* Last_fm_local_record.cpp */; };
 		1ECEB7701A90582B006E8C23 /* Last_fm_user.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB76A1A90582B006E8C23 /* Last_fm_user.cpp */; };
 		1ECEB7711A90582B006E8C23 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB76C1A90582B006E8C23 /* md5.cpp */; };
-		1ECEB7751A905874006E8C23 /* socketTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7731A905874006E8C23 /* socketTool.cpp */; };
 		1ECEB7781A9059A5006E8C23 /* Last_fm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7761A9059A5006E8C23 /* Last_fm.cpp */; };
 		1ECEB7851A90621D006E8C23 /* Last_fm_serialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEB7831A90621D006E8C23 /* Last_fm_serialize.cpp */; };
 		1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.m */; };
@@ -781,7 +780,6 @@
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
 				1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */,
 				1E65A62B1AC4235C00D21C58 /* PlayerLastFm.mm in Sources */,
-				1ECEB7751A905874006E8C23 /* socketTool.cpp in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */,
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,

@@ -3,7 +3,7 @@
 
 target 'uPlayer' do
 pod 'socketTool'
-pod 'serialize'
+pod 'serialize', :git => 'https://github.com/liaogang/serialize'
 pod 'Last.fm', :git => 'https://github.com/liaogang/Last.fm'
 end
 

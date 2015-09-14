@@ -47,11 +47,10 @@ Only tested in OS X 10.10 Yosemite
 	 
 		 pod update
 	 
-2. Download and build [jsoncpp](http://sourceforge.net/projects/jsoncpp/) , and [taglib](www.taglib.com). It quite easy if you use [homebrew](http://brew.sh) to install it.   
+2. Download and build [taglib](www.taglib.com). It quite easy if you use [homebrew](http://brew.sh) to install to /usr/local.   
  
-		  brew install jsoncpp  
 		  brew install taglib
-	
+
 3. Done   
 		 👍
 
