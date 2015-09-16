@@ -25,6 +25,13 @@
 		1E3AF1E41ADF76C6004AA408 /* uPlayer-mp3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1E31ADF76C6004AA408 /* uPlayer-mp3.icns */; };
 		1E4900141B047CD600A9481A /* Smine.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1E4900121B047CD600A9481A /* Smine.icns */; };
 		1E4900151B047CD600A9481A /* Smine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E4900131B047CD600A9481A /* Smine.png */; };
+		1E4A13C11BA94C730008CBEE /* audioTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B31BA94C730008CBEE /* audioTag.cpp */; };
+		1E4A13C21BA94C730008CBEE /* audioTag2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B61BA94C730008CBEE /* audioTag2.mm */; };
+		1E4A13C31BA94C730008CBEE /* fileCtrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B71BA94C730008CBEE /* fileCtrl.cpp */; };
+		1E4A13C41BA94C730008CBEE /* lrcFch_qianqian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B91BA94C730008CBEE /* lrcFch_qianqian.cpp */; };
+		1E4A13C51BA94C730008CBEE /* lrcFch_ting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13BB1BA94C730008CBEE /* lrcFch_ting.cpp */; };
+		1E4A13C61BA94C730008CBEE /* stringConv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13BD1BA94C730008CBEE /* stringConv.cpp */; };
+		1E4A13C71BA94C730008CBEE /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13BF1BA94C730008CBEE /* threadpool.cpp */; };
 		1E5F426D1A887BE800911BE8 /* PlaylistViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F426C1A887BE800911BE8 /* PlaylistViewController.mm */; };
 		1E5F6D931ABC35FF00430128 /* Pause_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */; };
 		1E5F6D941ABC35FF00430128 /* Pause_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6D8C1ABC35FF00430128 /* Pause_Button@2x.png */; };
@@ -149,6 +156,20 @@
 		1E3AF1E31ADF76C6004AA408 /* uPlayer-mp3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "uPlayer-mp3.icns"; sourceTree = "<group>"; };
 		1E4900121B047CD600A9481A /* Smine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Smine.icns; sourceTree = "<group>"; };
 		1E4900131B047CD600A9481A /* Smine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smine.png; sourceTree = "<group>"; };
+		1E4A13B31BA94C730008CBEE /* audioTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audioTag.cpp; sourceTree = "<group>"; };
+		1E4A13B41BA94C730008CBEE /* audioTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioTag.h; sourceTree = "<group>"; };
+		1E4A13B51BA94C730008CBEE /* audioTag2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioTag2.h; sourceTree = "<group>"; };
+		1E4A13B61BA94C730008CBEE /* audioTag2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = audioTag2.mm; sourceTree = "<group>"; };
+		1E4A13B71BA94C730008CBEE /* fileCtrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fileCtrl.cpp; sourceTree = "<group>"; };
+		1E4A13B81BA94C730008CBEE /* fileCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileCtrl.h; sourceTree = "<group>"; };
+		1E4A13B91BA94C730008CBEE /* lrcFch_qianqian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lrcFch_qianqian.cpp; sourceTree = "<group>"; };
+		1E4A13BA1BA94C730008CBEE /* lrcFch_qianqian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lrcFch_qianqian.h; sourceTree = "<group>"; };
+		1E4A13BB1BA94C730008CBEE /* lrcFch_ting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lrcFch_ting.cpp; sourceTree = "<group>"; };
+		1E4A13BC1BA94C730008CBEE /* lrcFch_ting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lrcFch_ting.h; sourceTree = "<group>"; };
+		1E4A13BD1BA94C730008CBEE /* stringConv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stringConv.cpp; sourceTree = "<group>"; };
+		1E4A13BE1BA94C730008CBEE /* stringConv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringConv.h; sourceTree = "<group>"; };
+		1E4A13BF1BA94C730008CBEE /* threadpool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = threadpool.cpp; sourceTree = "<group>"; };
+		1E4A13C01BA94C730008CBEE /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threadpool.h; sourceTree = "<group>"; };
 		1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		1E5F426C1A887BE800911BE8 /* PlaylistViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlaylistViewController.mm; sourceTree = "<group>"; };
 		1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause_Button.png; sourceTree = "<group>"; };
@@ -297,6 +318,36 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		1E4A13B01BA94C600008CBEE /* lyricsFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A13B21BA94C730008CBEE /* src */,
+			);
+			name = lyricsFetcher;
+			sourceTree = "<group>";
+		};
+		1E4A13B21BA94C730008CBEE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1E4A13B31BA94C730008CBEE /* audioTag.cpp */,
+				1E4A13B41BA94C730008CBEE /* audioTag.h */,
+				1E4A13B51BA94C730008CBEE /* audioTag2.h */,
+				1E4A13B61BA94C730008CBEE /* audioTag2.mm */,
+				1E4A13B71BA94C730008CBEE /* fileCtrl.cpp */,
+				1E4A13B81BA94C730008CBEE /* fileCtrl.h */,
+				1E4A13B91BA94C730008CBEE /* lrcFch_qianqian.cpp */,
+				1E4A13BA1BA94C730008CBEE /* lrcFch_qianqian.h */,
+				1E4A13BB1BA94C730008CBEE /* lrcFch_ting.cpp */,
+				1E4A13BC1BA94C730008CBEE /* lrcFch_ting.h */,
+				1E4A13BD1BA94C730008CBEE /* stringConv.cpp */,
+				1E4A13BE1BA94C730008CBEE /* stringConv.h */,
+				1E4A13BF1BA94C730008CBEE /* threadpool.cpp */,
+				1E4A13C01BA94C730008CBEE /* threadpool.h */,
+			);
+			name = src;
+			path = lyricsFetcher/src;
+			sourceTree = "<group>";
+		};
 		1E9047F61AB2CA190000ED86 /* MAAssert */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +420,7 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1E4A13B01BA94C600008CBEE /* lyricsFetcher */,
 				1EDE8FA41A773D810086677B /* uPlayer */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
 				1EFD42921A91A8B9009D65B5 /* HotKeyRecorder */,
@@ -665,22 +717,29 @@
 				1EAA25C41AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm in Sources */,
 				1ED6B0A51AEA043F00DBEEE4 /* id3Info.mm in Sources */,
 				1E5F426D1A887BE800911BE8 /* PlaylistViewController.mm in Sources */,
+				1E4A13C41BA94C730008CBEE /* lrcFch_qianqian.cpp in Sources */,
 				1E0B2BF51A77536800B4FE14 /* UPlayer.mm in Sources */,
 				1EDE8FAE1A773D810086677B /* TracklistViewController.mm in Sources */,
 				1E0B2BFB1A7754D000B4FE14 /* PlayerTrack.m in Sources */,
 				1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */,
 				1E8F70321AA470950012402E /* PlayerQueue.m in Sources */,
 				1EDE8FAB1A773D810086677B /* main.m in Sources */,
+				1E4A13C61BA94C730008CBEE /* stringConv.cpp in Sources */,
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
+				1E4A13C51BA94C730008CBEE /* lrcFch_ting.cpp in Sources */,
 				1EAA25C11AD67405008F44EC /* MemoryFileBuffer.cpp in Sources */,
 				1E169A891A78E701003D3D01 /* windowController.mm in Sources */,
+				1E4A13C31BA94C730008CBEE /* fileCtrl.cpp in Sources */,
 				1E0B2BF41A77536800B4FE14 /* PlayerLayout.mm in Sources */,
 				1EFD42CD1A91E826009D65B5 /* ThreadJob.mm in Sources */,
 				1E0443611A7B747A00B644D8 /* AppPreferences.m in Sources */,
+				1E4A13C11BA94C730008CBEE /* audioTag.cpp in Sources */,
 				1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */,
+				1E4A13C21BA94C730008CBEE /* audioTag2.mm in Sources */,
 				1E0443661A7B75EE00B644D8 /* GeneralPreferences.m in Sources */,
 				1E65A62B1AC4235C00D21C58 /* PlayerLastFm.mm in Sources */,
+				1E4A13C71BA94C730008CBEE /* threadpool.cpp in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */,
 				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,
