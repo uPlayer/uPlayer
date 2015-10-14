@@ -1053,6 +1053,13 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     {
         [player().engine playPause];
     }
+    // 'Esc' to view the album detail
+    else if ( [keyString isEqualToString:@"ESCAPE"])
+    {
+        /// @todo
+        
+        
+    }
     
     
     

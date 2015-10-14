@@ -20,13 +20,13 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Check for Updates..." id="ZTX-1i-mti">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="checkForUpdates:" target="BHC-IP-nmF" id="rw6-8J-sDO"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <action selector="showPreferences:" target="Voe-Tx-rLC" id="MLN-YL-cIT"/>
@@ -480,7 +480,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UNq-A6-I6m" viewBased="YES" id="1Gu-As-ZBl">
-                                            <rect key="frame" x="0.0" y="0.0" width="606" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -740,6 +740,23 @@ CA
                                 <action selector="cmdSendToANewPlaylist:" target="XfG-lQ-9wD" id="ru4-HC-Dmu"/>
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="pid-7p-cHd"/>
                             </connections>
+                        </menuItem>
+                        <menuItem title="Send to Playlist" id="x7W-O5-z8W">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Send to Playlist" id="y4W-23-2SC">
+                                <items>
+                                    <menuItem title="Playlist B" id="Cin-ui-lOG">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="cmdSendToANewPlaylist:" target="XfG-lQ-9wD" id="UJk-l8-erJ"/>
+                                            <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="KO1-CK-82I"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Playlist A" id="3gN-dD-DDV">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
                         </menuItem>
                     </items>
                 </menu>
