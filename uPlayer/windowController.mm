@@ -12,6 +12,10 @@
 #import "PlayerMessage.h"
 #import "AppDelegate.h"
 #import "PlaylistViewController.h"
+#import "AlbumViewController.h"
+#import "keycode.h"
+#import "id3Info.h"
+
 
 #define SmineWinPos @"SmineWinPos"
 #define PlaylistWinPos @"PlaylistWinPos"
@@ -42,6 +46,8 @@
 @property (weak) IBOutlet NSButton *btnPlayRandom;
 
 @property (strong,nonatomic) PlaylistViewController* playlistManager;
+@property (strong,nonatomic) TracklistViewController *tracklist;
+@property (strong,nonatomic)AlbumViewController *albumview;
 @end
 
 @implementation WindowController
@@ -203,8 +209,42 @@
 {
     [super windowDidLoad];
     
+    self.tracklist = self.contentViewController;
+    [self.tracklist setW:self];
+    
     [self.window setFrameUsingName: SmineWinPos];
     [self.window setFrameAutosaveName: SmineWinPos];
+}
+
+-(void)switchViewMode
+{
+    if (!self.albumview)
+    {
+        self.albumview = [AlbumViewController instanceFromStoryboard];
+        [self.albumview setW:self];
+    }
+    
+    if ([self.contentViewController isKindOfClass:[AlbumViewController class]])
+    {
+        [self.tracklist.view setFrame: self.albumview.view.frame];
+        self.contentViewController = self.tracklist;
+        [self.window makeFirstResponder:self.tracklist];
+    }
+    else
+    {
+        [self.albumview.view setFrame: self.tracklist.view.frame];
+        self.contentViewController = self.albumview;
+        [self.window makeFirstResponder:self.albumview];
+        
+        
+        TrackInfo *info = player().playing.info;
+        if (info) {
+            NSImage * image =  [[NSImage alloc]initWithData: getId3ImageFromAudio([NSURL fileURLWithPath: info.path])];
+            
+            [self.albumview setAlbumImage:image];
+        }
+        
+    }
 }
 
 -(void)keyDown:(NSEvent *)theEvent
@@ -212,6 +252,17 @@
 #ifdef DEBUG
     printf("key pressed: %s\n", [[theEvent description] UTF8String]);
 #endif
+    
+    
+    
+    NSString *keyString = keyStringFormKeyCode(theEvent.keyCode);
+    
+    if([keyString isEqualToString:@"ESCAPE"])
+    {
+        [self switchViewMode];
+    }
+    
+   
 }
 
 

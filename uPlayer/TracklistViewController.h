@@ -7,10 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "windowController.h"
 
 @interface TracklistViewController : NSViewController
 
 -(void)filterTable:(NSString*)key;
+
+@property (nonatomic,strong) WindowController *w;
 
 @end
 

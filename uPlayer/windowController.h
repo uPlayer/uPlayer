@@ -10,8 +10,9 @@
 
 @interface WindowController : NSWindowController
 
-
 /// active and reload the search field key words.
 -(void)activeSearchControl;
+
+-(void)switchViewMode;
 
 @end

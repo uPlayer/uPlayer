@@ -500,7 +500,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="a50-0L-eBb">
-                                                            <rect key="frame" x="1" y="1" width="61" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="60" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
@@ -532,7 +532,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="lsr-Wy-tnZ">
-                                                            <rect key="frame" x="65" y="1" width="101" height="17"/>
+                                                            <rect key="frame" x="64" y="1" width="100" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-C9-4wu">
@@ -550,7 +550,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="2" width="439.16635466567055" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="2" width="438.48507690155424" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -564,7 +564,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="169" y="1" width="437" height="17"/>
+                                                            <rect key="frame" x="166" y="1" width="439" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
@@ -591,11 +591,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZMn-x1-68y">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.29639069684958486" horizontal="YES" id="ZMn-x1-68y">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="HeK-Oj-WBQ">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.026511571920094977" horizontal="NO" id="HeK-Oj-WBQ">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -764,6 +764,33 @@ CA
                 <userDefaultsController id="MHf-82-fj1"/>
             </objects>
             <point key="canvasLocation" x="-936" y="899"/>
+        </scene>
+        <!--Album View Controller-->
+        <scene sceneID="T3p-WW-9TY">
+            <objects>
+                <viewController storyboardIdentifier="AlbumViewControllerID" id="UX8-rs-3xn" customClass="AlbumViewController" sceneMemberID="viewController">
+                    <view key="view" id="1v7-I2-ldt">
+                        <rect key="frame" x="0.0" y="0.0" width="890" height="390"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="NJ7-Ea-n7G">
+                                <rect key="frame" x="0.0" y="0.0" width="890" height="390"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="NJ7-Ea-n7G" firstAttribute="leading" secondItem="1v7-I2-ldt" secondAttribute="leading" id="286-oa-zPO"/>
+                            <constraint firstItem="NJ7-Ea-n7G" firstAttribute="top" secondItem="1v7-I2-ldt" secondAttribute="top" id="5ex-wI-I1J"/>
+                            <constraint firstAttribute="bottom" secondItem="NJ7-Ea-n7G" secondAttribute="bottom" id="PGd-8v-FIH"/>
+                            <constraint firstAttribute="trailing" secondItem="NJ7-Ea-n7G" secondAttribute="trailing" id="g09-Ti-RM8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cdAlbumView" destination="NJ7-Ea-n7G" id="hj6-Ox-Ais"/>
+                    </connections>
+                </viewController>
+                <customObject id="nma-Gv-8yZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-941" y="1404"/>
         </scene>
     </scenes>
     <resources>

@@ -1053,19 +1053,13 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     {
         [player().engine playPause];
     }
-    // 'Esc' to view the album detail
-    else if ( [keyString isEqualToString:@"ESCAPE"])
+    
+    
+    
+    
+    if([keyString isEqualToString:@"ESCAPE"])
     {
-        /// @todo
-        
-        
-    }
-    
-    
-    
-    if (self.isSearchMode )
-    {
-        if([keyString isEqualToString:@"ESCAPE"])
+        if (self.isSearchMode )
         {
             PlayerTrack *track = nil;
             
@@ -1074,6 +1068,12 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
             
             self.isSearchMode = false;
             postEvent(EventID_to_reload_tracklist, track);
+        }
+        // 'Esc' to view the album detail
+        else
+        {
+            [self.w switchViewMode];
+            
         }
     }
    
