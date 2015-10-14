@@ -19,12 +19,8 @@
 		1E169A891A78E701003D3D01 /* windowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.mm */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
 		1E211DC91ACA5490005F994C /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E211DC81ACA5490005F994C /* libpthread.dylib */; };
-		1E3AF1CA1ADF6A64004AA408 /* uPlayer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1C91ADF6A64004AA408 /* uPlayer.icns */; };
 		1E3AF1E11ADF756B004AA408 /* uPlayerStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */; };
 		1E3AF1E21ADF756B004AA408 /* uPlayerStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1E01ADF756B004AA408 /* uPlayerStatus@2x.png */; };
-		1E3AF1E41ADF76C6004AA408 /* uPlayer-mp3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1E31ADF76C6004AA408 /* uPlayer-mp3.icns */; };
-		1E4900141B047CD600A9481A /* Smine.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1E4900121B047CD600A9481A /* Smine.icns */; };
-		1E4900151B047CD600A9481A /* Smine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E4900131B047CD600A9481A /* Smine.png */; };
 		1E4A13C11BA94C730008CBEE /* audioTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B31BA94C730008CBEE /* audioTag.cpp */; };
 		1E4A13C21BA94C730008CBEE /* audioTag2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B61BA94C730008CBEE /* audioTag2.mm */; };
 		1E4A13C31BA94C730008CBEE /* fileCtrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B71BA94C730008CBEE /* fileCtrl.cpp */; };
@@ -46,8 +42,6 @@
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
 		1E9047F91AB2CA190000ED86 /* MAAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047F81AB2CA190000ED86 /* MAAssert.m */; };
 		1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047FB1AB2CB110000ED86 /* PlayerError.m */; };
-		1EA38A4F1AE1003300016273 /* uPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA38A4D1AE1003300016273 /* uPlayer.png */; };
-		1EA38A501AE1003300016273 /* uPlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA38A4E1AE1003300016273 /* uPlayer@2x.png */; };
 		1EAA25C11AD67405008F44EC /* MemoryFileBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA25BF1AD67405008F44EC /* MemoryFileBuffer.cpp */; };
 		1EAA25C41AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA25C21AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm */; };
 		1EC8B91B1B141665001E3F78 /* Timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EC8B91A1B141665001E3F78 /* Timer.png */; };
@@ -150,12 +144,8 @@
 		1E211DC41ACA47BE005F994C /* libtag.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtag.1.dylib; path = /usr/local/lib/libtag.1.dylib; sourceTree = "<absolute>"; };
 		1E211DC81ACA5490005F994C /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
 		1E211DCA1ACA5A1E005F994C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HotKeyPreferences.strings"; sourceTree = "<group>"; };
-		1E3AF1C91ADF6A64004AA408 /* uPlayer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = uPlayer.icns; sourceTree = "<group>"; };
 		1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uPlayerStatus.png; sourceTree = "<group>"; };
 		1E3AF1E01ADF756B004AA408 /* uPlayerStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uPlayerStatus@2x.png"; sourceTree = "<group>"; };
-		1E3AF1E31ADF76C6004AA408 /* uPlayer-mp3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "uPlayer-mp3.icns"; sourceTree = "<group>"; };
-		1E4900121B047CD600A9481A /* Smine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Smine.icns; sourceTree = "<group>"; };
-		1E4900131B047CD600A9481A /* Smine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smine.png; sourceTree = "<group>"; };
 		1E4A13B31BA94C730008CBEE /* audioTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audioTag.cpp; sourceTree = "<group>"; };
 		1E4A13B41BA94C730008CBEE /* audioTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioTag.h; sourceTree = "<group>"; };
 		1E4A13B51BA94C730008CBEE /* audioTag2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioTag2.h; sourceTree = "<group>"; };
@@ -190,8 +180,6 @@
 		1E9047F81AB2CA190000ED86 /* MAAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAssert.m; sourceTree = "<group>"; };
 		1E9047FB1AB2CB110000ED86 /* PlayerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerError.m; sourceTree = "<group>"; };
 		1E9047FD1AB2CB240000ED86 /* PlayerError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerError.h; sourceTree = "<group>"; };
-		1EA38A4D1AE1003300016273 /* uPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uPlayer.png; sourceTree = "<group>"; };
-		1EA38A4E1AE1003300016273 /* uPlayer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uPlayer@2x.png"; sourceTree = "<group>"; };
 		1EAA25BF1AD67405008F44EC /* MemoryFileBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryFileBuffer.cpp; sourceTree = "<group>"; };
 		1EAA25C01AD67405008F44EC /* MemoryFileBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryFileBuffer.h; sourceTree = "<group>"; };
 		1EAA25C21AD688ED008F44EC /* PlayerLayout+MemoryFileBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "PlayerLayout+MemoryFileBuffer.mm"; sourceTree = "<group>"; };
@@ -360,15 +348,9 @@
 		1EB207C11AA80995007968C8 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				1E4900121B047CD600A9481A /* Smine.icns */,
-				1E4900131B047CD600A9481A /* Smine.png */,
 				1E7A78371AA974D9004E9DDC /* keymaps.json */,
-				1EA38A4D1AE1003300016273 /* uPlayer.png */,
-				1EA38A4E1AE1003300016273 /* uPlayer@2x.png */,
-				1E3AF1E31ADF76C6004AA408 /* uPlayer-mp3.icns */,
 				1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */,
 				1E3AF1E01ADF756B004AA408 /* uPlayerStatus@2x.png */,
-				1E3AF1C91ADF6A64004AA408 /* uPlayer.icns */,
 				1E5F6D8B1ABC35FF00430128 /* Pause_Button.png */,
 				1E5F6D8C1ABC35FF00430128 /* Pause_Button@2x.png */,
 				1E5F6D8F1ABC35FF00430128 /* Play_Button.png */,
@@ -626,7 +608,6 @@
 				1EFAA2A21AC001D10010A965 /* Play_Random.png in Resources */,
 				1E3AF1E11ADF756B004AA408 /* uPlayerStatus.png in Resources */,
 				1E5F6D931ABC35FF00430128 /* Pause_Button.png in Resources */,
-				1E3AF1CA1ADF6A64004AA408 /* uPlayer.icns in Resources */,
 				1EC8B91B1B141665001E3F78 /* Timer.png in Resources */,
 				1E3AF1E21ADF756B004AA408 /* uPlayerStatus@2x.png in Resources */,
 				1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */,
@@ -637,18 +618,13 @@
 				1EC8B9201B1416D5001E3F78 /* TimerPreferences.xib in Resources */,
 				1EDE8FB01A773D810086677B /* Images.xcassets in Resources */,
 				1EFAA2A31AC001D10010A965 /* Play_Random@2x.png in Resources */,
-				1EA38A501AE1003300016273 /* uPlayer@2x.png in Resources */,
-				1E4900151B047CD600A9481A /* Smine.png in Resources */,
 				1E5F6D941ABC35FF00430128 /* Pause_Button@2x.png in Resources */,
 				1E04436A1A7B787D00B644D8 /* GeneralPreferences.png in Resources */,
 				1EFAA29F1AC001D10010A965 /* NextTrack_Button@2x.png in Resources */,
 				1ECEB75D1A9052AD006E8C23 /* AccountPreferences.png in Resources */,
-				1E4900141B047CD600A9481A /* Smine.icns in Resources */,
 				1EFAA29E1AC001D10010A965 /* NextTrack_Button.png in Resources */,
 				1EFBB8BD1ABAE045008F8B7B /* AccountPreferences.xib in Resources */,
 				1E5F6D981ABC35FF00430128 /* Play_Button@2x.png in Resources */,
-				1EA38A4F1AE1003300016273 /* uPlayer.png in Resources */,
-				1E3AF1E41ADF76C6004AA408 /* uPlayer-mp3.icns in Resources */,
 				1EFBB8E61ABAEBB1008F8B7B /* HotKeyPreferences.xib in Resources */,
 				1EDAAD451AB6F17E009DB36A /* Localizable.strings in Resources */,
 				1EFBB8A91ABADDB4008F8B7B /* StatusMenu.xib in Resources */,
