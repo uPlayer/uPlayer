@@ -54,6 +54,10 @@ Only tested in OS X 10.10 Yosemite
 3. Open uPlayer.xcworkspace for this project.   
 	  👍
 
+##appcast
+
+[appcast_rss](smine_cast.xml)
+
 
 ##License   
 Attribution  

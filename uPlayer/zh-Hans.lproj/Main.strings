@@ -158,6 +158,9 @@
 /* Class = "NSViewController"; title = "Tracklist Viewer"; ObjectID = "XfG-lQ-9wD"; */
 "XfG-lQ-9wD.title" = "Tracklist Viewer";
 
+/* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "ZTX-1i-mti"; */
+"ZTX-1i-mti.title" = "检查更新...";
+
 /* Class = "NSMenuItem"; title = "窗口"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "窗口";
 

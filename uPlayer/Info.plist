@@ -47,5 +47,7 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/uPlayer/uPlayer/master/smine_cast.xml</string>
 </dict>
 </plist>

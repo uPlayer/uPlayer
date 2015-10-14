@@ -25,8 +25,9 @@
 #import "PlaylistViewController.h"
 #import "windowController.h"
 #import "PlayerLastFm.h"
+#import <AFNetworking/AFURLSessionManager.h>
 
-
+#import <Sparkle/SUAppcast.h>
 
 @interface AppDelegate ()
 
@@ -119,6 +120,67 @@
         postEvent(EventID_to_play_pause_resume, nil);
 }
 
+- (IBAction)checkForUpdates:(id)sender {
+    
+    NSString *v =  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSUInteger verMajor ,verMinor,verLast;
+    sscanf("%d.%d.%d",v.UTF8String, &verMajor,&verMinor,&verLast);
+    
+
+    NSURL *url = [NSURL URLWithString:@"https://api.github.com/repos/uPlayer/uPlayer/releases/lastest"];
+//    NSString *s = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+
+     NSDictionary *d = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:url options:NSDataReadingMapped error:nil] options:NSJSONReadingAllowFragments error:nil];
+    NSString *tag_name = d[@"tag_name"];
+    
+    
+    NSUInteger verMajor2 ,verMinor2,verLast2;
+    sscanf("v%d.%d.%d",tag_name.UTF8String, &verMajor2,&verMinor2,&verLast2);
+    
+    bool updated = false;
+    if ( verMajor2 > verMajor | verMinor2 > verMinor | verLast2 > verLast) {
+        updated = true;
+    }
+        
+    if (updated)
+    {
+        NSString *published_at = d[@"published_at"];
+        NSArray *assets = d[@"assets"];
+        
+        NSDictionary *asset = assets.firstObject;
+        if (asset) {
+            
+            NSString * browser_download_url = asset[@"browser_download_url"];
+            
+            NSLog(browser_download_url);
+            
+            
+            
+            
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            
+            NSURL *URL = [NSURL URLWithString:@"http://example.com/download.zip"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+            
+            NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                NSLog(@"File downloaded to: %@", filePath);
+            }];
+            [downloadTask resume];
+            
+            
+        }
+    }
+    else
+    {
+        
+    }
+    
+    
+}
 
 - (IBAction)showPreferences:(id)sender {
     [NSPreferences setDefaultPreferencesClass:[AppPreferences class] ];
