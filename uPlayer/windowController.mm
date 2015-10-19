@@ -301,16 +301,5 @@
     postEvent(EventID_to_reload_tracklist, nil);
 }
 
--(void)mouseDown:(NSEvent *)theEvent
-{
-    // Active the current song if double clicked on the bottom bar.
-    if (theEvent.clickCount == 2) {
-        NSRect rc = NSMakeRect(0, 0, self.window.frame.size.width, [self.window contentBorderThicknessForEdge: CGRectMinYEdge] );
-        if ( NSPointInRect( theEvent.locationInWindow, rc )) {
-            postEvent(EventID_to_reload_tracklist, player().playing );
-        }
-    }
-    
-}
 
 @end

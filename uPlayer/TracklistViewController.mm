@@ -90,6 +90,8 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 @property (nonatomic,strong) NSProgressIndicator *progress;
 
 @property (nonatomic,strong) NSTextField *bottomTextLeft,*bottomTextRight,*bottomTextCenter;
+@property (weak) IBOutlet NSMenu *subMenuSendtoPL;
+@property (weak) IBOutlet NSMenuItem *menuItemSendHowMuchItems;
 @end
 
 @implementation TracklistViewController
@@ -156,10 +158,77 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     addObserverForEvent( self, @selector(updateBottomBar), EventID_list_name_changed);
     
+    addObserverForEvent( self, @selector(playlistChanged), EventID_list_changed);
+    
+    addObserverForEvent( self, @selector(reloadMenu), EventID_player_document_loaded);
+    
     
     self.playerlList = player().document.playerlList;
     
 }
+
+-(void)playlistChanged
+{
+    [self reloadMenu];
+}
+
+-(void)reloadMenu
+{
+    // reload `send to playlist` popup context menu items
+    NSInteger index = [self.subMenuSendtoPL indexOfItemWithTag:12323];
+    NSAssert(index != -1, nil);
+    
+    int i = (int)self.subMenuSendtoPL.numberOfItems -1;
+    for (; i > index; i--) {
+        [self.subMenuSendtoPL removeItemAtIndex: i];
+    }
+    
+   
+    
+    PlayerlList *ll =player().document.playerlList;
+    int count = (int)ll.count;
+    
+    
+    for (int i = 0; i < count; i++) {
+        PlayerList * list = [ll getItem:i];
+        [self.subMenuSendtoPL addItemWithTitle:list.name action:@selector(sendItemsToPlaylist:) keyEquivalent:@""].tag = i;
+    }
+ 
+}
+
+
+/// binded to menu's `enabled`. but we just want to refresh the menu title.
+-(BOOL)refreshMenuItemSendHowMuch
+{
+    self.menuItemSendHowMuchItems.title = [NSString stringWithFormat: NSLocalizedString(@"Send %d items to:", nil) , self.tableView.selectedRowIndexes.count];
+    return YES;
+}
+
+-(void)sendItemsToPlaylist:(NSMenuItem*)item
+{
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    
+    if (rows.count)
+    {
+        NSMutableArray *selected = [NSMutableArray array];
+        
+        [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            [selected addObject: [self getSelectedItem:idx].info];
+        }];
+        
+        
+        
+        int index = (int)item.tag;
+        PlayerList * list = [player().document.playerlList getItem: index];
+        
+        NSArray *added = [list addTrackInfoItems:selected];
+        
+        postEvent(EventID_to_reload_tracks, added);
+ 
+    }
+}
+
+
 
 -(NSTableColumnMy*)tableColumnByIdentifier:(NSString*)identifier
 {
@@ -439,7 +508,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     PlayerList *list = self.playerlList.selectItem;
     
-    _bottomTextRight.stringValue = [NSString stringWithFormat: NSLocalizedString(@"playlist: %@",nil) , list.name];
+    _bottomTextRight.stringValue = list.name;
     
     _bottomTextCenter.stringValue = [NSString stringWithFormat: NSLocalizedString(@"%d songs",nil) , list.count ];
 }
@@ -606,8 +675,8 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [super viewDidLoad];
     
     NSAssert(self.playerlList, @"method: `InitLoad` not actived.");
- 
-
+    
+    
     [self.view registerForDraggedTypes:[NSArray arrayWithObjects: NSFilenamesPboardType, nil]];
     
     CGFloat bottomBarHeight = 22.0;
@@ -619,7 +688,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     const CGFloat margin = 5;
     const CGFloat labelText = 100;
     
-   _bottomTextLeft = [[NSTextField alloc] initWithFrame: NSMakeRect(margin, (bottomBarHeight-ff)/2, labelText + margin , ff )];
+    _bottomTextLeft = [[NSTextField alloc] initWithFrame: NSMakeRect(margin, (bottomBarHeight-ff)/2, labelText + margin , ff )];
     _bottomTextLeft.autoresizingMask = NSViewMinXMargin| NSViewWidthSizable| NSViewMaxXMargin;
     _bottomTextLeft.stringValue = @"";
     _bottomTextLeft.editable = false;
@@ -632,19 +701,17 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     _bottomTextCenter = [[NSTextField alloc] initWithFrame: NSMakeRect(labelText+margin, (bottomBarHeight-ff)/2, bottomBarWidth - labelText - labelText - margin - margin , ff )];
     _bottomTextCenter.autoresizingMask = NSViewMinXMargin| NSViewWidthSizable| NSViewMaxXMargin;
-//    _bottomTextCenter.stringValue = [NSString stringWithFormat: NSLocalizedString(@"%d songs",nil) , 966 ];
     _bottomTextCenter.editable = false;
     _bottomTextCenter.bordered = false;
     _bottomTextCenter.drawsBackground = false;
     _bottomTextCenter.alignment =  NSCenterTextAlignment;
-
+    
     [self.view addSubview: _bottomTextCenter];
     
     
     
     _bottomTextRight = [[NSTextField alloc] initWithFrame: NSMakeRect( bottomBarWidth - margin - labelText, (bottomBarHeight-ff)/2, labelText , ff )];
     _bottomTextRight.autoresizingMask = NSViewMinXMargin| NSViewWidthSizable| NSViewMaxXMargin;
-//    _bottomTextRight.stringValue = [NSString stringWithFormat: NSLocalizedString(@"playlist: %@",nil) ,@"孙燕姿"];
     _bottomTextRight.editable = false;
     _bottomTextRight.bordered = false;
     _bottomTextRight.drawsBackground = false;
@@ -653,7 +720,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [self.view addSubview:_bottomTextRight];
     
     
-
+    
     
     // Create table view.
     
@@ -667,7 +734,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     self.tableView.rowHeight = 40.;
     self.tableView.allowsMultipleSelection = TRUE;
     
-
+    
     // Reserialize table columns
     if( [self loadLayout] == FALSE)
     {
@@ -1079,6 +1146,53 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
    
 }
 
+#pragma mark - mouse down
+
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    if( theEvent.type == NSLeftMouseDown)
+    {
+        // Active the current song if double clicked on the bottom bar.
+        if (theEvent.clickCount == 2)
+        {
+            NSWindow *w = self.view.window;
+            
+            NSRect rc = NSMakeRect(0, 0, w.frame.size.width, [w contentBorderThicknessForEdge: CGRectMinYEdge] );
+            
+            if ( NSPointInRect( theEvent.locationInWindow, rc )) {
+                postEvent(EventID_to_reload_tracklist, player().playing );
+            }
+            
+        }
+        // click right bottom bar to switch playlist
+        else if ( theEvent.clickCount == 1)
+        {
+            if (NSPointInRect( [theEvent locationInWindow] , _bottomTextRight.frame ) )
+            {
+                PlayerlList *ll =player().document.playerlList;
+                int count = (int)ll.count;
+                
+                NSMenu *menu = [[NSMenu alloc]init];
+                
+                for (int i = 0; i < count; i++) {
+                    PlayerList * list = [ll getItem:i];
+                    [menu addItemWithTitle:list.name action:@selector(switchPlaylist:) keyEquivalent:@""].tag = i;
+                }
+                
+                
+                [NSMenu popUpContextMenu:menu withEvent:theEvent forView:self.view];
+            }
+        }
+    }
+    
+}
+
+-(void)switchPlaylist:(NSMenuItem*)item
+{
+    PlayerList * list = [player().document.playerlList getItem:(int)item.tag];
+    postEvent(EventID_to_reload_playlist, list);
+}
+
 #pragma mark - context menu command
 
 -(bool)hasRowSelected
@@ -1122,10 +1236,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 }
 
 - (IBAction)cmdRemoveRefrence:(id)sender {
+    
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    [rows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        [self.playerlList.selectItem removeTrack: idx ];
-    }];
+    [self.playerlList.selectItem removeTracks:rows];
     
     [self.tableView removeRowsAtIndexes:rows withAnimation:YES];
     
@@ -1344,10 +1457,8 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 
 
-
-@implementation NSTracklistView
-
 #pragma mark - NSDraggingDestination
+@implementation NSTracklistView
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
     
@@ -1430,6 +1541,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
                  });
     
 }
+
+
+
 
 @end
 

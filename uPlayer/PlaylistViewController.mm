@@ -13,15 +13,6 @@
 
 #import "PlayerLayout+MemoryFileBuffer.h"
 
-void asdf2()
-{
-    MemoryFileBuffer a(10);
-    int b=1;
-    int c;
-    a.read(c);
-    a<<b;
-    a.read(b);
-}
 
 @interface PlaylistViewController ()
 <NSTableViewDelegate , NSTableViewDataSource ,NSTextFieldDelegate >

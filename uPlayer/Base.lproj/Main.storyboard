@@ -480,7 +480,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UNq-A6-I6m" viewBased="YES" id="1Gu-As-ZBl">
-                                            <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="607" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -550,7 +550,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="2" width="438.48507690155424" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="2" width="439.26282036011173" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -564,7 +564,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="166" y="1" width="439" height="17"/>
+                                                            <rect key="frame" x="167" y="1" width="439" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
@@ -591,11 +591,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.29639069684958486" horizontal="YES" id="ZMn-x1-68y">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.33333333333333331" horizontal="YES" id="ZMn-x1-68y">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.026511571920094977" horizontal="NO" id="HeK-Oj-WBQ">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.011554858148853479" horizontal="NO" id="HeK-Oj-WBQ">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -671,9 +671,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="900" height="478"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
-                            <outlet property="menu" destination="GUD-5I-IFb" id="QE5-e3-f3x"/>
+                            <outlet property="menu" destination="GUD-5I-IFb" id="JqD-CA-XEZ"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="menuItemSendHowMuchItems" destination="fNs-zD-PL6" id="cpS-o1-q2Y"/>
+                        <outlet property="subMenuSendtoPL" destination="y4W-23-2SC" id="OCT-WA-jpL"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="GUD-5I-IFb">
@@ -734,27 +738,26 @@ CA
                                 <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="37d-CW-Rgg"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Send to a New Playlist" id="giq-ZT-t5y">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="cmdSendToANewPlaylist:" target="XfG-lQ-9wD" id="ru4-HC-Dmu"/>
-                                <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="pid-7p-cHd"/>
-                            </connections>
-                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="6kB-u0-kg3"/>
                         <menuItem title="Send to Playlist" id="x7W-O5-z8W">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <menu key="submenu" title="Send to Playlist" id="y4W-23-2SC">
                                 <items>
-                                    <menuItem title="Playlist B" id="Cin-ui-lOG">
+                                    <menuItem enabled="NO" id="fNs-zD-PL6">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
-                                            <action selector="cmdSendToANewPlaylist:" target="XfG-lQ-9wD" id="UJk-l8-erJ"/>
-                                            <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="KO1-CK-82I"/>
+                                            <binding destination="XfG-lQ-9wD" name="enabled" keyPath="refreshMenuItemSendHowMuch" id="P7O-on-1Qk"/>
                                         </connections>
                                     </menuItem>
-                                    <menuItem title="Playlist A" id="3gN-dD-DDV">
+                                    <menuItem isSeparatorItem="YES" id="sQD-X5-xjM"/>
+                                    <menuItem title="A New Playlist" id="giq-ZT-t5y">
                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="cmdSendToANewPlaylist:" target="XfG-lQ-9wD" id="ru4-HC-Dmu"/>
+                                            <binding destination="XfG-lQ-9wD" name="enabled" keyPath="hasRowSelected" id="pid-7p-cHd"/>
+                                        </connections>
                                     </menuItem>
+                                    <menuItem isSeparatorItem="YES" tag="12323" id="yGt-uk-KYf"/>
                                 </items>
                             </menu>
                         </menuItem>
@@ -762,6 +765,7 @@ CA
                 </menu>
                 <userDefaultsController id="eJW-Mq-KvT"/>
                 <userDefaultsController id="MHf-82-fj1"/>
+                <userDefaultsController id="w8u-VK-4v4"/>
             </objects>
             <point key="canvasLocation" x="-936" y="899"/>
         </scene>
