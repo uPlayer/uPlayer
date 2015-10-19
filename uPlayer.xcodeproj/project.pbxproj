@@ -42,6 +42,7 @@
 		1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */; };
 		1E5F9ECA1A7A2DB2000360D7 /* PlayerSerialize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */; };
 		1E65A62B1AC4235C00D21C58 /* PlayerLastFm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E65A62A1AC4235C00D21C58 /* PlayerLastFm.mm */; };
+		1E77237C1BD4F7CB008D7393 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E77237B1BD4F7CB008D7393 /* dsa_pub.pem */; };
 		1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A78371AA974D9004E9DDC /* keymaps.json */; };
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
@@ -186,6 +187,7 @@
 		1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerialize.h; sourceTree = "<group>"; };
 		1E65A6291AC4235C00D21C58 /* PlayerLastFm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerLastFm.h; sourceTree = "<group>"; };
 		1E65A62A1AC4235C00D21C58 /* PlayerLastFm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerLastFm.mm; sourceTree = "<group>"; };
+		1E77237B1BD4F7CB008D7393 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		1E7A78371AA974D9004E9DDC /* keymaps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = keymaps.json; path = res/keymaps.json; sourceTree = SOURCE_ROOT; };
 		1E8F702F1AA4707F0012402E /* PlayerQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerQueue.h; sourceTree = "<group>"; };
 		1E8F70311AA470950012402E /* PlayerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerQueue.m; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 		1EB207C11AA80995007968C8 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				1E77237B1BD4F7CB008D7393 /* dsa_pub.pem */,
 				1E7A78371AA974D9004E9DDC /* keymaps.json */,
 				1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */,
 				1E3AF1E01ADF756B004AA408 /* uPlayerStatus@2x.png */,
@@ -635,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E1719851BCE36B90048C3EB /* cd_bg.png in Resources */,
+				1E77237C1BD4F7CB008D7393 /* dsa_pub.pem in Resources */,
 				1EFBB8E11ABAEBAC008F8B7B /* GeneralPreferences.xib in Resources */,
 				1EFAA2A21AC001D10010A965 /* Play_Random.png in Resources */,
 				1E3AF1E11ADF756B004AA408 /* uPlayerStatus.png in Resources */,
