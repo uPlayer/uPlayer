@@ -245,7 +245,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 -(BOOL)refreshMenuItemSendHowMuch
 {
     self.menuItemSendHowMuchItems.title = [NSString stringWithFormat: NSLocalizedString(@"Send %d items to:", nil) , self.tableView.selectedRowIndexes.count];
-    return YES;
+    return FALSE;
 }
 
 -(void)sendItemsToPlaylist:(NSMenuItem*)item
@@ -1181,8 +1181,8 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         
         NSArray *sortDescriptors = @[descriptor];
         
-        PlayerList *list = [self.playerlList getItem:self.playerlList.selectIndex];
-        
+        PlayerList *list = self.playerlList.selectItem;
+                            
         NSArray *sortedArray = [list.playerTrackList sortedArrayUsingDescriptors:sortDescriptors];
         
         list.playerTrackList = [NSMutableArray arrayWithArray: sortedArray];
@@ -1280,7 +1280,13 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
                 
                 for (int i = 0; i < count; i++) {
                     PlayerList * list = [ll getItem:i];
-                    [menu addItemWithTitle:list.name action:@selector(switchPlaylist:) keyEquivalent:@""].tag = i;
+                   
+                    NSMenuItem *item = [menu addItemWithTitle:list.name action:@selector(switchPlaylist:) keyEquivalent:@""];
+                    
+                    item.tag = i;
+                    if (list == ll.selectItem) {
+                        item.state  =  NSOnState;
+                    } 
                 }
                 
                 
