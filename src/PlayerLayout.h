@@ -28,6 +28,5 @@
 
 -(NSData*)getDataByKey:(NSString *)key;
 
-
 @end
 

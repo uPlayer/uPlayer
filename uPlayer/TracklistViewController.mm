@@ -92,6 +92,12 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 @property (nonatomic,strong) NSTextField *bottomTextLeft,*bottomTextRight,*bottomTextCenter;
 @property (weak) IBOutlet NSMenu *subMenuSendtoPL;
 @property (weak) IBOutlet NSMenuItem *menuItemSendHowMuchItems;
+
+//need to serialize
+@property (nonatomic) int fontsize,rowHeight;
+
+@property (nonatomic) int fontsizeOld,rowHeightDefault;
+
 @end
 
 @implementation TracklistViewController
@@ -162,10 +168,48 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     addObserverForEvent( self, @selector(reloadMenu), EventID_player_document_loaded);
     
+    addObserverForEvent(self, @selector(onSetFontSize:), EventID_to_set_font_size);
     
     self.playerlList = player().document.playerlList;
     
 }
+
+-(void)onSetFontSize:(NSNotification*)n
+{
+    NSNumber *num = n.object;
+    
+    self.fontsizeOld = self.fontsize;
+    
+    if ( num.intValue == -1) {
+        //larger
+        self.fontsize += 1;
+        self.tableView.rowHeight = ++_rowHeight;
+        [self.tableView reloadData];
+        [self.tableView needsLayout];
+    }
+    else if( num.intValue == -2)
+    {
+        //smaller
+        self.tableView.rowHeight = --_rowHeight;
+        self.fontsize -= 1;
+        [self.tableView needsLayout];
+        [self.tableView reloadData];
+    }
+    if( num.intValue == 0)
+    {
+        //normal
+        self.tableView.rowHeight = _rowHeight = _rowHeightDefault;
+        self.fontsize = [NSFont systemFontSize];
+        [self.tableView needsLayout];
+        [self.tableView reloadData];
+    }
+    else
+    {
+        
+    }
+    
+}
+
 
 -(void)playlistChanged
 {
@@ -306,33 +350,51 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 -(void)saveLayout
 {
-    MemoryFileBuffer buffer( [NSTableColumnMy objectSize]  * defaultColumnNumbers);
- 
-  
-    printf("\n");
-    for (int j = 0 ; j < defaultColumnNumbers; j++) {
-        NSTableColumnMy *c = self.tableColumns[j];
-        
-        int i = c.identifier.intValue;
-        int s = c.state;
-        float w = c.width;
-        
-        buffer.write(i);
-        buffer.write(s);
-        buffer.write(w);
-        
-        printf("%s,%d   ",c.title.UTF8String,c.state);
-    }
-    printf("\n");
     
-    NSData *data = dataFromMemoryFileBuffer(&buffer);
-    [player().layout saveData:data withKey:self.className];
+    {
+        MemoryFileBuffer buffer( [NSTableColumnMy objectSize]  * defaultColumnNumbers);
+        
+        
+        printf("\n");
+        for (int j = 0 ; j < defaultColumnNumbers; j++) {
+            NSTableColumnMy *c = self.tableColumns[j];
+            
+            int i = c.identifier.intValue;
+            int s = c.state;
+            float w = c.width;
+            
+            buffer.write(i);
+            buffer.write(s);
+            buffer.write(w);
+            
+            printf("%s,%d   ",c.title.UTF8String,c.state);
+        }
+        printf("\n");
+        
+        NSData *data = dataFromMemoryFileBuffer(&buffer);
+        [player().layout saveData:data withKey:self.className];
+    }
+    
+    
+    
+    
+    {
+        MemoryFileBuffer buffer( sizeof(int)*2);
+        
+        buffer.write(_fontsize);
+        buffer.write(_rowHeight);
+        
+        NSData *data = dataFromMemoryFileBuffer(&buffer);
+        [player().layout saveData:data withKey: @"tracklistview_font_size" ];
+    }
+    
 }
 
 -(bool)loadLayout
 {
+    bool column_loaded = false;
     NSData *data = [player().layout getDataByKey:self.className];
-    if(data )
+    if( data )
     {
         MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
 
@@ -354,11 +416,36 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         
         self.tableColumns = arrColumnDatas;
         [self debugPrint];
+     
+        delete buffer;
         
-        return true;
+        column_loaded = true;
     }
     
-    return false;
+    
+    bool font_size_loaded = false;
+    {
+        NSData *data = [player().layout getDataByKey: @"tracklistview_font_size"];
+        if( data )
+        {
+            MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
+            
+            int fontsize;
+            int rowHeight;
+            buffer->read(fontsize);
+            buffer->read(rowHeight);
+            
+            
+            _fontsize = fontsize;
+            _rowHeight = rowHeight;
+            
+            delete buffer;
+            
+            font_size_loaded = true;
+        }
+    }
+    
+    return column_loaded && font_size_loaded;
 }
 
 
@@ -723,22 +810,24 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     
     // Create table view.
-    
     NSRect rc = NSMakeRect(0, 0 + bottomBarHeight, self.view.bounds.size.width, self.view.bounds.size.height  - bottomBarHeight);
     
     NSScrollView *tableContainer = [[NSScrollView alloc]initWithFrame:rc];
     tableContainer.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     
     self.tableView = [[NSTableView alloc]initWithFrame:tableContainer.bounds];
-    self.tableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;;
-    self.tableView.rowHeight = 40.;
+    self.tableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     self.tableView.allowsMultipleSelection = TRUE;
-    
+    self.rowHeightDefault = self.tableView.rowHeight;
     
     // Reserialize table columns
     if( [self loadLayout] == FALSE)
     {
         // Then set default value.
+        self.fontsize = self.fontsizeOld = [NSFont systemFontSize];
+        
+        self.rowHeight = self.rowHeightDefault;
+        
         self.tableColumns =
         [NSMutableArray arrayWithObjects:
          [NSTableColumnMy tableColumnWithIdentifies:@(column_identifier_number).stringValue title:NSLocalizedString(@"Index", nil) state:NSOnState width: 60.0 ],
@@ -749,6 +838,12 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
          [NSTableColumnMy tableColumnWithIdentifies:@(column_identifier_genre).stringValue title:NSLocalizedString(@"Genre", nil) state:NSOnState width: 60.0 ],
          [NSTableColumnMy tableColumnWithIdentifies:@(column_identifier_year).stringValue title:NSLocalizedString(@"Year", nil) state:NSOnState width: 60.0 ], nil];
     }
+    
+    
+    
+
+    self.tableView.rowHeight = self.rowHeight;
+    
     
     
     // Load table header menu state.
@@ -861,6 +956,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 -(void)debugPrint
 {
+#ifdef DEBUG
     printf("\n");
     
     for (NSTableColumnMy *c in self.tableColumns) {
@@ -869,6 +965,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     }
     
     printf("\n");
+#endif
 }
 
 -(void)filterTable:(NSString*)key
@@ -993,7 +1090,14 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     NSInteger column = tableColumn.identifier.intValue;
     
-    NSString *identifier = @"t_itf";
+    static NSString *identifier = @"t_itf";
+    if (self.fontsize != self.fontsizeOld) {
+        // font has changed
+        self.fontsizeOld = self.fontsize;
+        
+        identifier = @(self.fontsize).stringValue;
+    }
+    
     NSTextField *textField = (NSTextField *)[self.tableView makeViewWithIdentifier:identifier owner:self];
     
     if (textField == nil)
@@ -1002,7 +1106,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         textField.autoresizingMask = ~0 ;
         textField.bordered = false ;
         textField.drawsBackground = false ;
-        textField.font = [NSFont systemFontOfSize:30] ;
+        textField.font = [NSFont systemFontOfSize:self.fontsize];
         textField.editable = false ;
         textField.identifier=identifier;
     }

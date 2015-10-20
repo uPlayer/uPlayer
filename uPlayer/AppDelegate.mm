@@ -313,7 +313,20 @@
         postEvent(EventID_to_reload_playlist, nextList);
 }
 
+- (IBAction)setFontLarger:(id)sender {
+    postEvent(EventID_to_set_font_size, @(-1));
+}
 
+- (IBAction)setFontSmaller:(id)sender {
+    postEvent(EventID_to_set_font_size, @(-2));
+}
+- (IBAction)setFontNormal:(id)sender {
+    postEvent(EventID_to_set_font_size, @(0));
+}
+
+- (IBAction)showFontDialog:(id)sender {
+    
+}
 #pragma mark -
 
 
