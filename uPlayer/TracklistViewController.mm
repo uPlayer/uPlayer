@@ -1261,7 +1261,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         {
             NSWindow *w = self.view.window;
             
-            NSRect rc = NSMakeRect(0, 0, w.frame.size.width, [w contentBorderThicknessForEdge: CGRectMinYEdge] );
+            NSRect rc = NSMakeRect(0, 0, w.frame.size.width, [w contentBorderThicknessForEdge: NSMinYEdge] );
             
             if ( NSPointInRect( theEvent.locationInWindow, rc )) {
                 postEvent(EventID_to_reload_tracklist, player().playing );

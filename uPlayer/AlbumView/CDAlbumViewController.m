@@ -130,8 +130,8 @@ void pauseLayer(CALayer * layer);
         self.imageAlbum.hidden = NO;
         
         NSImage *mask = [NSImage imageNamed:@"cd_mask"];
-        self.imageAlbum.image = maskImage(image , mask);
-//        [self.imageAlbum setImage:image];
+//        self.imageAlbum.image = maskImage(image , mask);
+        [self.imageAlbum setImage:image];
     }
     else
     {
