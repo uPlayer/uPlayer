@@ -59,28 +59,15 @@ NSLocalizedString(@"Year", nil)\
 ]
 
 
+NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
-NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
-{
-    NSRect targetFrame = NSMakeRect(0, 0, size.width, size.height);
-    NSImage* targetImage = nil;
-    NSImageRep *sourceImageRep =
-    [sourceImage bestRepresentationForRect:targetFrame
-                                   context:nil
-                                     hints:nil];
-    
-    targetImage = [[NSImage alloc] initWithSize:size];
-    
-    [targetImage lockFocus];
-    [sourceImageRep drawInRect: targetFrame];
-    [targetImage unlockFocus];
-    
-    return targetImage;
-}
+
 
 
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
+@property (nonatomic,strong) NSScrollView *tableContainer;
+@property (nonatomic) bool scrolling;
 @property (nonatomic,strong) NSTableView *tableView;
 @property (nonatomic,strong) NSMutableArray *tableColumns;
 @property (nonatomic,assign) bool isSearchMode;
@@ -184,6 +171,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         //larger
         self.fontsize += 1;
         self.tableView.rowHeight = ++_rowHeight;
+        
         [self.tableView reloadData];
         [self.tableView needsLayout];
     }
@@ -724,6 +712,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 {
     int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
     
+    
     int topIndex = [self getRowOnTableTop];
     
     if ( targetIndex > topIndex )
@@ -762,7 +751,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [super viewDidLoad];
     
     NSAssert(self.playerlList, @"method: `InitLoad` not actived.");
-    
     
     [self.view registerForDraggedTypes:[NSArray arrayWithObjects: NSFilenamesPboardType, nil]];
     
@@ -814,6 +802,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     
     NSScrollView *tableContainer = [[NSScrollView alloc]initWithFrame:rc];
     tableContainer.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewDidEndScroll:) name:NSScrollViewDidEndLiveScrollNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewDidLiveScroll:) name:NSScrollViewDidLiveScrollNotification object:nil];
+    
     
     self.tableView = [[NSTableView alloc]initWithFrame:tableContainer.bounds];
     self.tableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
@@ -1084,6 +1075,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 }
 
 
+
 #pragma mark - NSTableViewDelegate
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -1120,11 +1112,34 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
         
         if(!info.imageSmall)
         {
-            NSImage * image =  [[NSImage alloc]initWithData: getId3ImageFromAudio([NSURL fileURLWithPath: info.path])];
-            info.imageSmall = resizeImage( image, NSMakeSize(tableColumn.width, tableColumn.width));
+            if (!self.scrolling) {
+                
+                int top = [self getRowOnTableTop];
+                int rowsPerPage = self.tableView.visibleRect.size.height/ self.tableView.rowHeight;
+                
+                if (top <= row && row <= top + rowsPerPage) {
+                    
+                    
+                    __weak typeof (imageV) weakImageV = imageV;
+                    dojobInBkgnd(^{
+                        
+                        NSImage * image =  [[NSImage alloc]initWithData: getId3ImageFromAudio([NSURL fileURLWithPath: info.path])];
+                        info.imageSmall = resizeImage( image, NSMakeSize(tableColumn.width, tableColumn.width));
+                        
+                    }, ^{
+                        
+                        if (weakImageV) {
+                            weakImageV.image = info.imageSmall;
+                            [weakImageV setNeedsDisplay];
+                        }
+                        
+                    });
+                }
+            }
+
         }
-        
-        imageV.image = info.imageSmall;
+        else
+            imageV.image = info.imageSmall;
         
         return imageV;
     }
@@ -1151,6 +1166,25 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     }
     
     return textField;
+}
+
+#pragma mark -  scrolling
+
+-(void)scrollViewDidLiveScroll:(NSNotification*)n
+{
+    NSScrollView *v = n.object;
+    if (v == self.tableContainer) {
+        self.scrolling = true;
+    }
+}
+
+-(void)scrollViewDidEndScroll:(NSNotification*)n
+{
+    NSScrollView *v = n.object;
+    if (v == self.tableContainer) {
+        self.scrolling = false;
+    }
+    
 }
 
 #pragma mark - Sort
@@ -1714,3 +1748,20 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
 
 @end
 
+NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
+{
+    NSRect targetFrame = NSMakeRect(0, 0, size.width, size.height);
+    NSImage* targetImage = nil;
+    NSImageRep *sourceImageRep =
+    [sourceImage bestRepresentationForRect:targetFrame
+                                   context:nil
+                                     hints:nil];
+    
+    targetImage = [[NSImage alloc] initWithSize:size];
+    
+    [targetImage lockFocus];
+    [sourceImageRep drawInRect: targetFrame];
+    [targetImage unlockFocus];
+    
+    return targetImage;
+}
