@@ -155,7 +155,7 @@
                 if(s++==0)
                     srand((uint )time(NULL));
                 
-                indexNext =rand() % (count) - 1;
+                indexNext =rand() % (count);
             }else if(order == playorder_repeat_single)
             {
                 playTrack(track);
@@ -172,6 +172,7 @@
             track = nil;
             if ( indexNext >= 0 && indexNext < [list count] )
                 track = [list getItem: indexNext ];
+            
             
             playTrack(track);
         }
