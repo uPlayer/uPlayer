@@ -78,7 +78,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 @property (nonatomic,strong) NSTextField *bottomTextLeft,*bottomTextRight,*bottomTextCenter;
 @property (weak) IBOutlet NSMenu *subMenuSendtoPL;
+//@property (nonatomic,strong) nsarr
 @property (weak) IBOutlet NSMenuItem *menuItemSendHowMuchItems;
+@property (weak) IBOutlet NSMenuItem *menuItemSendToPL;
 
 //need to serialize
 @property (nonatomic) int fontsize,rowHeight;
@@ -215,17 +217,24 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
         [self.subMenuSendtoPL removeItemAtIndex: i];
     }
     
-   
-    
-    PlayerlList *ll =player().document.playerlList;
-    int count = (int)ll.count;
-    
-    
-    for (int i = 0; i < count; i++) {
-        PlayerList * list = [ll getItem:i];
-        [self.subMenuSendtoPL addItemWithTitle:list.name action:@selector(sendItemsToPlaylist:) keyEquivalent:@""].tag = i;
-    }
+    NSIndexSet *rows = self.tableView.selectedRowIndexes;
+    bool hasRowSelected = rows.count > 0;
  
+    if (hasRowSelected)
+    {
+        PlayerlList *ll =player().document.playerlList;
+        int count = (int)ll.count;
+        
+        
+        for (int i = 0; i < count; i++) {
+            PlayerList * list = [ll getItem:i];
+            
+            NSMenuItem *item = [self.subMenuSendtoPL addItemWithTitle:list.name action:@selector(sendItemsToPlaylist:) keyEquivalent:@""];
+            item.tag = i;
+            
+        }
+    }
+    
 }
 
 
@@ -1341,8 +1350,12 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 -(bool)hasRowSelected
 {
+    [self reloadMenu];
+    
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    return rows.count > 0;
+    bool hasRowSelected = rows.count > 0;
+    
+    return hasRowSelected;
 }
 
 - (IBAction)cmdShowInFinder:(id)sender
