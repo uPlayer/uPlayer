@@ -10,6 +10,8 @@
 #include "Last_fm_user.h"
 #include "Last_fm_api.h"
 #import "ThreadJob.h"
+#import "PlayerMessage.h"
+#import "PlayerSerialize.h"
 
 void initLastFm()
 {
@@ -41,8 +43,20 @@ void initLastFm()
         self.engine= [[PlayerEngine alloc] init];
        
         initLastFm();
+        
+        addObserverForEvent(self, @selector(saveCoreConfig), EventID_list_changed);
+        
+        addObserverForEvent(self, @selector(saveCoreConfig), EventID_tracks_changed);
+        
+        addObserverForEvent(self, @selector(saveCoreConfig), EventID_list_name_changed);
+        
     }
     return self;
+}
+
+-(void)saveCoreConfig
+{
+    [self.document save];
 }
 
 @end
