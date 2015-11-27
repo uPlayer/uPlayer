@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
     </dependencies>
@@ -106,7 +106,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
-                                        <menuItem title="Exit" keyEquivalent="w" id="DVo-aG-piG">
+                                        <menuItem title="Close Window" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
@@ -189,6 +189,17 @@
                                                 <action selector="cmdShowPlayingItem:" target="Voe-Tx-rLC" id="Lnb-kH-0YG"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="aRa-jU-rez"/>
+                                        <menuItem title="Previous Playlist" keyEquivalent="{" id="hlh-hY-WEO">
+                                            <connections>
+                                                <action selector="cmdPrevPlaylist:" target="Voe-Tx-rLC" id="Swn-gT-npa"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Next Playlist" keyEquivalent="}" id="fOB-cg-lrR">
+                                            <connections>
+                                                <action selector="cmdNextPlaylist:" target="Voe-Tx-rLC" id="HG9-mA-dQu"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -266,16 +277,6 @@
                                         <menuItem title="Show PlayList" keyEquivalent="p" id="erA-OL-DYs">
                                             <connections>
                                                 <action selector="cmdShowPlayList:" target="Voe-Tx-rLC" id="cq1-Jm-cS8"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Previous Playlist" keyEquivalent="{" id="hlh-hY-WEO">
-                                            <connections>
-                                                <action selector="cmdPrevPlaylist:" target="Voe-Tx-rLC" id="Swn-gT-npa"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Next Playlist" keyEquivalent="}" id="fOB-cg-lrR">
-                                            <connections>
-                                                <action selector="cmdNextPlaylist:" target="Voe-Tx-rLC" id="HG9-mA-dQu"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
@@ -494,11 +495,11 @@
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sof-Yj-DjO">
                                 <rect key="frame" x="0.0" y="0.0" width="610" height="303"/>
                                 <clipView key="contentView" id="rHG-2U-uEe">
-                                    <rect key="frame" x="1" y="0.0" width="238" height="134"/>
+                                    <rect key="frame" x="1" y="16" width="608" height="284"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UNq-A6-I6m" viewBased="YES" id="1Gu-As-ZBl">
-                                            <rect key="frame" x="0.0" y="0.0" width="608" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="607" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -518,7 +519,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="a50-0L-eBb">
-                                                            <rect key="frame" x="1" y="1" width="60" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="60.394740734442394" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
@@ -568,7 +569,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="2" width="439.26282036011173" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
+                                                <tableColumn identifier="2" width="437.72593311874408" minWidth="100" maxWidth="1000" id="h2V-xq-zdE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -582,7 +583,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hBD-Id-K5e">
-                                                            <rect key="frame" x="167" y="1" width="439" height="17"/>
+                                                            <rect key="frame" x="167" y="1" width="438" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
@@ -609,11 +610,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.33333333333333331" horizontal="YES" id="ZMn-x1-68y">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ZMn-x1-68y">
+                                    <rect key="frame" x="1" y="287" width="608" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.011554858148853479" horizontal="NO" id="HeK-Oj-WBQ">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="HeK-Oj-WBQ">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

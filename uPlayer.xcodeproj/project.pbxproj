@@ -25,6 +25,7 @@
 		1E17198A1BCE3E3F0048C3EB /* CDAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1719891BCE3E3F0048C3EB /* CDAlbumViewController.m */; };
 		1E17198C1BCE41F10048C3EB /* cd_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E17198B1BCE41F10048C3EB /* cd_mask.png */; };
 		1E211DC91ACA5490005F994C /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E211DC81ACA5490005F994C /* libpthread.dylib */; };
+		1E227F6D1C082B100057FBCE /* DockMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E227F6C1C082B100057FBCE /* DockMenu.xib */; };
 		1E3AF1E11ADF756B004AA408 /* uPlayerStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */; };
 		1E3AF1E21ADF756B004AA408 /* uPlayerStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3AF1E01ADF756B004AA408 /* uPlayerStatus@2x.png */; };
 		1E4A13C11BA94C730008CBEE /* audioTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A13B31BA94C730008CBEE /* audioTag.cpp */; };
@@ -159,6 +160,7 @@
 		1E211DC41ACA47BE005F994C /* libtag.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtag.1.dylib; path = /usr/local/lib/libtag.1.dylib; sourceTree = "<absolute>"; };
 		1E211DC81ACA5490005F994C /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
 		1E211DCA1ACA5A1E005F994C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HotKeyPreferences.strings"; sourceTree = "<group>"; };
+		1E227F6C1C082B100057FBCE /* DockMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DockMenu.xib; sourceTree = "<group>"; };
 		1E3AF1DF1ADF756B004AA408 /* uPlayerStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uPlayerStatus.png; sourceTree = "<group>"; };
 		1E3AF1E01ADF756B004AA408 /* uPlayerStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uPlayerStatus@2x.png"; sourceTree = "<group>"; };
 		1E4A13B31BA94C730008CBEE /* audioTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audioTag.cpp; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				1EDAAD471AB6F17E009DB36A /* Localizable.strings */,
 				1EDE8FB11A773D810086677B /* Main.storyboard */,
 				1EFBB8AB1ABADDB4008F8B7B /* StatusMenu.xib */,
+				1E227F6C1C082B100057FBCE /* DockMenu.xib */,
 				1EDE8FAF1A773D810086677B /* Images.xcassets */,
 				1EDE8FA51A773D810086677B /* Supporting Files */,
 			);
@@ -666,6 +669,7 @@
 				1EFBB8A91ABADDB4008F8B7B /* StatusMenu.xib in Resources */,
 				1E17198C1BCE41F10048C3EB /* cd_mask.png in Resources */,
 				1E1719861BCE36B90048C3EB /* cd_icon.png in Resources */,
+				1E227F6D1C082B100057FBCE /* DockMenu.xib in Resources */,
 				1EDE8FB31A773D810086677B /* Main.storyboard in Resources */,
 				1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */,
 			);

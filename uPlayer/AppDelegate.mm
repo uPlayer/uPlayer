@@ -37,6 +37,9 @@
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
 
 @property (nonatomic,strong) NSStatusItem *statusItem;
+
+@property (nonatomic,strong)  NSMenu *dockMenu;
+
 @end
 
 
@@ -531,6 +534,35 @@
         track = player().playing;
     
     lastFm_loveTrack( track );
+}
+
+
+
+
+-(NSMenu *)applicationDockMenu:(NSApplication *)sender
+{
+    
+    if ( _dockMenu == nil) {
+        
+        NSArray *array;
+        if ([[NSBundle mainBundle]  loadNibNamed:@"DockMenu" owner:self topLevelObjects:&array] )
+        {
+            for (id arrItem in array)
+            {
+                if ([arrItem isKindOfClass:[NSMenu class]])
+                {
+                    NSMenu *menu = arrItem;
+                    NSAssert([menu isKindOfClass:[NSMenu class]], @"not menu");
+                    _dockMenu = menu;
+                    break;
+                }
+            }
+        }
+    }
+    
+    
+    
+    return _dockMenu;
 }
 
 @end
