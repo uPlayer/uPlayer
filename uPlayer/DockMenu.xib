@@ -25,6 +25,12 @@
                         <action selector="cmdRandom:" target="-2" id="wBz-48-eld"/>
                     </connections>
                 </menuItem>
+                <menuItem title="Love @ last.Fm" id="PBH-Eu-dyP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="cmdLastFm_Love:" target="-2" id="6Ry-9l-qRi"/>
+                    </connections>
+                </menuItem>
             </items>
             <point key="canvasLocation" x="218" y="331.5"/>
         </menu>
