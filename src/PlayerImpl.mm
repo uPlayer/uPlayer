@@ -26,16 +26,15 @@
 
 TrackInfo* getId3Info(NSString *filename)
 {
-    TrackInfo* at = [[TrackInfo alloc]init];
-    
     NSMutableString *artist=[NSMutableString string];
     NSMutableString *title=[NSMutableString string];
     NSMutableString *album=[NSMutableString string];
     NSMutableString *genre=[NSMutableString string];
     NSMutableString *year=[NSMutableString string];
     
-    if( getID3Info(filename.UTF8String, artist, title, album,genre,year) )
+    if(getID3Info(filename.UTF8String, artist, title, album,genre,year) )
     {
+        TrackInfo* at = [[TrackInfo alloc]init];
         at.artist=artist;
         at.title=title;
         at.album=album;
@@ -48,11 +47,13 @@ TrackInfo* getId3Info(NSString *filename)
         
         if(!at.year)
             at.year = @"";
-        
         return at;
     }
+    else
+    {
+        return nil;
+    }
     
-    return nil;
 }
 
 
