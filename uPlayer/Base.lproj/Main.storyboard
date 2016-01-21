@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -368,9 +368,9 @@
                                     <size key="minSize" width="96" height="21"/>
                                     <size key="maxSize" width="96" height="21"/>
                                     <slider key="view" verticalHuggingPriority="750" id="mlb-Ky-CB6">
-                                        <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
+                                        <rect key="frame" x="0.0" y="14" width="96" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="flZ-HD-eeR"/>
+                                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="flZ-HD-eeR"/>
                                         <connections>
                                             <action selector="actionVolumnSlider:" target="B8D-0N-5wS" id="NVI-7U-07C"/>
                                         </connections>
@@ -381,7 +381,7 @@
                                     <size key="minSize" width="96" height="22"/>
                                     <size key="maxSize" width="96" height="22"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="3Z0-st-x37">
-                                        <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="96" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="a41-x5-Caj">
                                             <font key="font" metaFont="system"/>
@@ -402,7 +402,7 @@
                                     <size key="minSize" width="40" height="40"/>
                                     <size key="maxSize" width="40" height="100"/>
                                     <button key="view" id="BDl-qT-HNp">
-                                        <rect key="frame" x="19" y="14" width="40" height="40"/>
+                                        <rect key="frame" x="14" y="14" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Play_Button" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="cq8-Pp-xeD">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -418,7 +418,7 @@
                                     <size key="minSize" width="40" height="40"/>
                                     <size key="maxSize" width="40" height="100"/>
                                     <button key="view" id="LCs-lh-Moa">
-                                        <rect key="frame" x="19" y="14" width="40" height="40"/>
+                                        <rect key="frame" x="11" y="14" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NextTrack_Button" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="zFn-2z-yrL">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
