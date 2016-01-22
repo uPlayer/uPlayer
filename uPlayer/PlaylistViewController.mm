@@ -185,7 +185,7 @@
 {
     int row = (int)control.tag;
     PlayerList * list = [self.playerlList getItem:row];
-    list.name = fieldEditor.string;
+    list.name = [fieldEditor.string copy];
     
     postEvent(EventID_list_name_changed, list);
     
@@ -219,7 +219,7 @@
 {
     NSInteger item = self.tableView.selectedRow;
     
-    PlayerList* nearItem = [player().document.playerlList deleteItem:item];
+    /*PlayerList* nearItem =*/ [player().document.playerlList deleteItem:item];
     
     [self.tableView reloadData];
     
