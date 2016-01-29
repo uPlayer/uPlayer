@@ -48,7 +48,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/uPlayer/release/master/smine_cast.xml</string>
+	<string>https://code.aliyun.com/liaogang/smine_release/raw/master/smine_cast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>
