@@ -44,19 +44,39 @@ void initLastFm()
        
         initLastFm();
         
-        addObserverForEvent(self, @selector(saveCoreConfig), EventID_list_changed);
+        addObserverForEvent(self, @selector(cmdSavePlaylist), EventID_list_changed);
         
-        addObserverForEvent(self, @selector(saveCoreConfig), EventID_tracks_changed);
+        addObserverForEvent(self, @selector(cmdSavePlaylist), EventID_tracks_changed);
         
-        addObserverForEvent(self, @selector(saveCoreConfig), EventID_list_name_changed);
+        addObserverForEvent(self, @selector(cmdSavePlaylist), EventID_list_name_changed);
+        
+        addObserverForEvent(self, @selector(cmdSaveConfig), EventID_to_save_config);
+        addObserverForEvent(self, @selector(cmdSavePlaylist), EventID_to_save_playlist);
+        addObserverForEvent(self, @selector(cmdSaveUILayout), EventID_to_save_ui_layout);
+        
+        
         
     }
     return self;
 }
 
--(void)saveCoreConfig
+
+
+
+-(void)cmdSaveConfig
 {
-    [self.document save];
+    NSLog(@"cmdSaveConfig");
+    [self.document saveConfig];
+}
+
+-(void)cmdSavePlaylist
+{
+    [self.document savePlaylist];
+}
+
+-(void)cmdSaveUILayout
+{
+    [self.layout save];
 }
 
 @end

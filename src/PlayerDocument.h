@@ -43,5 +43,5 @@ lastFmEnabled;
 
 @interface PlayerDocument (documentLoaded)
 -(void)didLoad;
--(void)willSave;
+-(void)willSaveConfig;
 @end

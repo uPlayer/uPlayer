@@ -69,7 +69,7 @@
         
         addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
         
-        
+
         
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
         
@@ -97,6 +97,11 @@
     
     return self;
 }
+
+
+
+
+
 
 -(void)DidPlayToEndTime:(NSNotification*)n
 {
@@ -250,7 +255,9 @@
     if ( indexNext > 0 && indexNext < [list count] )
         next = [list getItem: indexNext ];
     
-    playTrack(next);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        playTrack(next);
+    });
     
     postEvent(EventID_to_reload_tracklist, next );
 }

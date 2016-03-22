@@ -10,7 +10,7 @@ Last.fm scrobbling and global key blinding is supported.
 
 ##Download  
 
-[Download zip file](https://raw.githubusercontent.com/uPlayer/release/master/Smine.zip)  
+[Download zip file](https://code.aliyun.com/liaogang/smine_release/raw/master/Smine.zip)  
 [View Latest Releases](https://github.com/uPlayer/uPlayer/releases/latest)  
 
 

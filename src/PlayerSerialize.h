@@ -40,7 +40,8 @@ using namespace std;
 
 
 @interface PlayerDocument (serialize)
--(bool)save;
+-(bool)saveConfig;
+-(bool)savePlaylist;
 -(bool)load;
 @end
 

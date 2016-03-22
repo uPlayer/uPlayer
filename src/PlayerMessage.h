@@ -54,6 +54,9 @@ typedef enum : NSUInteger {
     EventID_to_reload_playing_track,
     
     EventID_to_save_config,
+    EventID_to_save_playlist,
+    EventID_to_save_ui_layout,
+    
     EventID_to_reload_lyrics,
     EventID_to_center_item,
     EventID_to_play_selected_track,

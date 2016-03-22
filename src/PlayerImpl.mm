@@ -112,6 +112,10 @@ void playTrack(PlayerTrack *track)
         player().playing = track;
         
         [player().engine playTrackInfo:track pauseAfterInit: FALSE ];
+        
+        // playing track index changed.
+        postEvent( EventID_to_save_config, nil);
+        
     }
     
 }
@@ -135,13 +139,11 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 
 @implementation PlayerDocument (documentLoaded)
 
--(void)willSave
+-(void)willSaveConfig
 {
     PlayerTrack *track = player().playing;
     self.playingIndexTrack = (int)track.index;
     self.playingIndexList = (int)[player().document.playerlList getIndex: track.list];
-    
-    [self.playerlList willSave];
 }
 
 -(void)didLoad

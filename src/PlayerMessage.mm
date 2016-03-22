@@ -47,6 +47,9 @@ const char *arrEvent[] =
     "to_reload_playing_track",
     
     "to_save_config",
+    "to_save_playlist",
+    "to_save_ui_layout",
+    
     "to_reload_lyrics",
     "to_center_item",
     "to_play_selected_track",

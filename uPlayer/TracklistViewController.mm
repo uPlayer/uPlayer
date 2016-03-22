@@ -1053,6 +1053,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     [player().document.playerQueue clear];
     
     [self playClickedTrack];
+    
 }
 
 // play track in or not in selecting playlist.

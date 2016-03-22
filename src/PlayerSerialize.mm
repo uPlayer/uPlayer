@@ -467,9 +467,18 @@ NSArray *loadTrackInfoArray(FILE &file)
     return false;
 }
 
--(bool)save
+
+-(bool)savePlaylist
 {
-    [self willSave];
+    NSString *appSupportDir = ApplicationSupportDirectory();
+    [self.playerlList willSave];
+    [self.playerlList save:appSupportDir];
+    return true;
+}
+
+-(bool)saveConfig
+{
+    [self willSaveConfig];
     
     NSString *appSupportDir = ApplicationSupportDirectory();
     NSString *_fileName = [appSupportDir stringByAppendingPathComponent: docFileName];
@@ -499,9 +508,10 @@ NSArray *loadTrackInfoArray(FILE &file)
         [self assertMembers];
 #endif
         
+        NSLog(@"list: %d, index: %d",self.playingIndexList,self.playingIndexTrack);
+        
         *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playingIndexList << self.playingIndexTrack <<self.playTime ;
         
-        [self.playerlList save:appSupportDir];
         
         fclose(file);
         return true;

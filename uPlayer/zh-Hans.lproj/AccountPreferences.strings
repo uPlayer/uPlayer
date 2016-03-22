@@ -3,7 +3,7 @@
 "4Ye-QE-v4b.title" = "Window";
 
 /* Class = "NSTextFieldCell"; title = "Scrobble your songs and now playing status to Last.fm"; ObjectID = "HD1-Ks-7Qs"; */
-"HD1-Ks-7Qs.title" = "Scrobble 你的歌曲 和 正在播放状态 至 Last.fm";
+"HD1-Ks-7Qs.title" = "上传 你的歌曲信息 和 正在播放状态 至 Last.fm";
 
 /* Class = "NSButtonCell"; title = "Connect to your account"; ObjectID = "nHj-hg-UQI"; */
 "nHj-hg-UQI.title" = "连接到您的帐号";

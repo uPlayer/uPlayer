@@ -450,7 +450,7 @@
     
     collectInfo( player().document , player().engine);
     
-    [player().document save];
+    [player().document saveConfig];
     
     [player().layout save];
     
