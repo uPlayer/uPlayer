@@ -461,17 +461,16 @@
 
 -(void)scrobblerSong:(TrackInfo*)info
 {
-    dojobInBkgnd(^{
-        string artist(info.artist.UTF8String);
-        string track(info.title.UTF8String);
-        
-        LFUser *user = lastFmUser() ;
-        if (track_scrobble(user->sessionKey, artist, track) )
-        {
+    if( player().document.lastFmEnabled)
+    {
+        dojobInBkgnd(^{
+            string artist(info.artist.UTF8String);
+            string track(info.title.UTF8String);
+            track_scrobble(lastFmUser()->sessionKey, artist, track);
             
-        }
-        
-    },nil);
+        },nil);
+    }
+    
 }
 
 -(void)scrobbler:(NSNotification*)n
