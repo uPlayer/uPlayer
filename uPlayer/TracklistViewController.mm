@@ -459,6 +459,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 -(void)reloadTrackList:(NSNotification*)n
 {
+    
     [self.view.window makeFirstResponder:self.tableView];
     
     // quit search mode.
@@ -493,6 +494,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
         else
         {
             list = n.object;
+            
             
             // current is not showing. reload it.
             if (list != self.playerlList.selectItem)

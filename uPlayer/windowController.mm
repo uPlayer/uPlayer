@@ -293,12 +293,10 @@
 
 - (IBAction)cmdNextTrack:(id)sender {
     postEvent(EventID_to_play_next, nil);
-    postEvent(EventID_to_reload_tracklist, nil);
 }
 
 - (IBAction)cmdPlayRandom:(id)sender {
     postEvent(EventID_to_play_random, nil);
-    postEvent(EventID_to_reload_tracklist, nil);
 }
 
 
