@@ -62,6 +62,7 @@
 		1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */; };
 		1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.m */; };
 		1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */; };
+		1ED32D961CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED32D951CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m */; };
 		1ED6B0A51AEA043F00DBEEE4 /* id3Info.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6B0A41AEA043F00DBEEE4 /* id3Info.mm */; };
 		1EDAAD451AB6F17E009DB36A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAAD471AB6F17E009DB36A /* Localizable.strings */; };
 		1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE8FA81A773D810086677B /* AppDelegate.mm */; };
@@ -216,6 +217,9 @@
 		1ED021A91A7B3383008526E8 /* PlayerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerList.m; sourceTree = "<group>"; };
 		1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerachMng.h; sourceTree = "<group>"; };
 		1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSerachMng.m; sourceTree = "<group>"; };
+		1ED32D931CA9054E00D0C87D /* PlayerDocument+ScreenSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlayerDocument+ScreenSaver.h"; sourceTree = "<group>"; };
+		1ED32D951CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PlayerDocument+ScreenSaver.m"; sourceTree = "<group>"; };
+		1ED32D971CA90FC000D0C87D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1ED6B0A31AEA043F00DBEEE4 /* id3Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = id3Info.h; path = ../src/id3Info.h; sourceTree = "<group>"; };
 		1ED6B0A41AEA043F00DBEEE4 /* id3Info.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = id3Info.mm; path = ../src/id3Info.mm; sourceTree = "<group>"; };
 		1EDAAD461AB6F17E009DB36A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 				1E5F9EC41A7A1979000360D7 /* PlayerEngine.mm */,
 				1E0B2BED1A77536800B4FE14 /* PlayerDocument.h */,
 				1E0B2BEE1A77536800B4FE14 /* PlayerDocument.mm */,
+				1ED32D931CA9054E00D0C87D /* PlayerDocument+ScreenSaver.h */,
+				1ED32D951CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m */,
 				1E5F9EC91A7A2DB2000360D7 /* PlayerSerialize.h */,
 				1E5F9EC81A7A2DB2000360D7 /* PlayerSerialize.mm */,
 				1E0B2BFE1A77575400B4FE14 /* PlayerTypeDefines.h */,
@@ -434,6 +440,7 @@
 		1EDE8F991A773D810086677B = {
 			isa = PBXGroup;
 			children = (
+				1ED32D971CA90FC000D0C87D /* README.md */,
 				1E4A13B01BA94C600008CBEE /* lyricsFetcher */,
 				1EDE8FA41A773D810086677B /* uPlayer */,
 				1E0B2BEC1A77536800B4FE14 /* src */,
@@ -745,6 +752,7 @@
 				1E4A13C61BA94C730008CBEE /* stringConv.cpp in Sources */,
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
 				1E1719841BCE36B90048C3EB /* AlbumViewController.m in Sources */,
+				1ED32D961CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m in Sources */,
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
 				1E4A13C51BA94C730008CBEE /* lrcFch_ting.cpp in Sources */,
 				1EAA25C11AD67405008F44EC /* MemoryFileBuffer.cpp in Sources */,

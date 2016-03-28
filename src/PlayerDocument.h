@@ -11,6 +11,7 @@
 #import "PlayerList.h"
 #import "PlayerQueue.h"
 
+
 @interface PlayerDocument : NSObject
 
 /// value need to searialize.
@@ -20,14 +21,16 @@
 @property (nonatomic) int playOrder,//enum PlayOrder
 playState,//enum PlayStatus
 fontHeight,
-lastFmEnabled;
+lastFmEnabled,
+stopScrobblingWhenScreenSaverRunning;
+
+// runtime property
+@property BOOL screenSaverRunning;
 
 @property (nonatomic) int playingIndexList,playingIndexTrack;
 
 
 @property (nonatomic) NSTimeInterval playTime;
-
-
 
 
 @property (nonatomic,strong) PlayerQueue *playerQueue;
@@ -37,6 +40,8 @@ lastFmEnabled;
 
 // value not
 @property (nonatomic) bool needBackupConfigFile;
+
+-(BOOL)shouldScrobbleToLastFm;
 
 @end
 

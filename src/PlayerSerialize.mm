@@ -413,7 +413,16 @@ NSArray *loadTrackInfoArray(FILE &file)
         int playingIndexList,playingIndexTrack;
         NSTimeInterval playTime;
         
-        *file >> resumeAtReboot  >> trackSongsWhenPlayStarted >> volume >> playOrder >>playState >> fontHeight >> lastFmEnabled >>playingIndexList >> playingIndexTrack >> playTime;
+        *file >> resumeAtReboot
+        >> trackSongsWhenPlayStarted
+        >> volume
+        >> playOrder
+        >>playState
+        >> fontHeight
+        >> lastFmEnabled
+        >>playingIndexList
+        >> playingIndexTrack
+        >> playTime;
         
         self.resumeAtReboot=resumeAtReboot;
         self.trackSongsWhenPlayStarted = trackSongsWhenPlayStarted;
@@ -510,7 +519,16 @@ NSArray *loadTrackInfoArray(FILE &file)
         
         NSLog(@"list: %d, index: %d",self.playingIndexList,self.playingIndexTrack);
         
-        *file << self.resumeAtReboot << self.trackSongsWhenPlayStarted  << self.volume << self.playOrder << self.playState << self.fontHeight << self.lastFmEnabled <<self.playingIndexList << self.playingIndexTrack <<self.playTime ;
+        *file << self.resumeAtReboot
+        << self.trackSongsWhenPlayStarted
+        << self.volume
+        << self.playOrder
+        << self.playState
+        << self.fontHeight
+        << self.lastFmEnabled
+        << self.playingIndexList
+        << self.playingIndexTrack
+        << self.playTime ;
         
         
         fclose(file);

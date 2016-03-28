@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccountPreferences">
@@ -12,6 +13,7 @@
                 <outlet property="imageLastFm" destination="r0b-Pd-U7B" id="vZ2-0w-8xn"/>
                 <outlet property="labelLastFmName" destination="xIa-IC-jrq" id="9Ve-jJ-nRq"/>
                 <outlet property="lastFmEnabled" destination="0tW-R3-Bno" id="G9s-yX-t5H"/>
+                <outlet property="stopScrobblingWhenScreenSaverRunning" destination="av8-8y-sOU" id="9jD-S4-zqO"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -28,7 +30,7 @@
                     <box autoresizesSubviews="NO" borderType="none" id="Evs-lC-hgm">
                         <rect key="frame" x="-3" y="-4" width="486" height="274"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <view key="contentView">
+                        <view key="contentView" id="uNX-mB-N2x">
                             <rect key="frame" x="0.0" y="0.0" width="486" height="259"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -47,7 +49,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <button verticalHuggingPriority="750" id="7WZ-g5-1gW">
-                                    <rect key="frame" x="35" y="130" width="193" height="32"/>
+                                    <rect key="frame" x="35" y="55" width="193" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Connect to your account" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nHj-hg-UQI">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -69,7 +71,7 @@
                                     </connections>
                                 </button>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xIa-IC-jrq">
-                                    <rect key="frame" x="228" y="140" width="194" height="17"/>
+                                    <rect key="frame" x="228" y="65" width="194" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="7ru-dY-wGx">
                                         <font key="font" metaFont="system"/>
@@ -77,6 +79,14 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
+                                <button id="av8-8y-sOU">
+                                    <rect key="frame" x="39" y="138" width="429" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Stop scrobbling when screen saver running" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lNm-oT-Hic">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system" size="14"/>
+                                    </buttonCell>
+                                </button>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -84,7 +94,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="264" y="271"/>
+            <point key="canvasLocation" x="681" y="173"/>
         </window>
     </objects>
     <resources>

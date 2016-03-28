@@ -381,6 +381,7 @@
     
 }
 
+
 -(void)loadiTunesMedia
 {
    PlayerDocument *d = player().document;
@@ -460,7 +461,7 @@
 
 -(void)scrobblerSong:(TrackInfo*)info
 {
-    if( player().document.lastFmEnabled)
+    if( [player().document shouldScrobbleToLastFm])
     {
         dojobInBkgnd(^{
             string artist(info.artist.UTF8String);
@@ -474,7 +475,7 @@
 
 -(void)scrobbler:(NSNotification*)n
 {
-    if( player().document.lastFmEnabled)
+    if( [player().document shouldScrobbleToLastFm])
     {
         LFUser *user = lastFmUser();
         if (user->isConnected)
@@ -515,10 +516,6 @@
     return player().document.playerlList.selectItem.type != type_temporary ;
 }
 
--(bool)lastFmEnabled
-{
-    return player().document.lastFmEnabled;
-}
 
 - (IBAction)cmdLastFm_Love:(id)sender
 {

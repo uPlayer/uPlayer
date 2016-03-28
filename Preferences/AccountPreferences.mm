@@ -18,6 +18,7 @@
 @property (weak) IBOutlet NSButton *lastFmEnabled;
 @property (weak) IBOutlet NSImageView *imageLastFm;
 @property (weak) IBOutlet NSTextField *descriptionLastFm;
+@property (weak) IBOutlet NSButton *stopScrobblingWhenScreenSaverRunning;
 
 @property (assign) LFUser *user;
 @end
@@ -41,6 +42,11 @@
     self.descriptionLastFm.enabled = enabled;
     self.labelLastFmName.hidden = !enabled;
     self.btnConnect.hidden = !enabled;
+    self.stopScrobblingWhenScreenSaverRunning.hidden = !enabled;
+    
+    if (player().document.stopScrobblingWhenScreenSaverRunning)
+        self.stopScrobblingWhenScreenSaverRunning.state = enabled?NSOnState:NSOffState;
+    
 }
 
 -(void)updateUIUser:(LFUser*)user
