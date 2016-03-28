@@ -14,7 +14,8 @@
 @class PlayerlList;
 
 
-@interface PlayerList: NSObject
+@interface PlayerList: NSObject <NSCoding>
+
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic) int selectIndex,topIndex;
 @property (nonatomic,strong) NSMutableArray *playerTrackList;//class PlayerTrack
@@ -25,6 +26,8 @@
 -(instancetype)initWithOwner:(PlayerlList*)llist;
 @property (nonatomic) PlayerlList *llist;
 -(void)markSelected;
+-(int)indexInParent;
+
 
 
 -(PlayerTrack*)getItem:(NSInteger)index;
@@ -54,7 +57,7 @@
 
 
 /// list of player list.
-@interface PlayerlList : NSObject
+@interface PlayerlList : NSObject <NSCoding>
 
 /// use selectItem at application's runtime. selectIndex when serialize.
 @property (nonatomic) int selectIndex;

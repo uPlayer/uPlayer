@@ -149,6 +149,12 @@
     
     postEvent(EventID_tracks_changed, self);
 }
+
+-(int)indexInParent
+{
+    return [self.llist.playerlList indexOfObject:self];
+}
+
 @end
 
 
@@ -172,6 +178,13 @@
 
 -(PlayerList*)getItem:(int)index
 {
+    
+    
+    ///TODO ,delete
+    if (index == self.playerlList.count) {
+        return nil;
+    }
+    
     assert(index>=0 && index < self.playerlList.count);
     
     return self.playerlList[index];

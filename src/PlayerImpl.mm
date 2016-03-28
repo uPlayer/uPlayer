@@ -166,7 +166,8 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 
 -(void)didLoad
 {
-    self.selectItem = [self getItem: self.selectIndex];
+    if( self.selectIndex != -1)
+        self.selectItem = [self getItem: self.selectIndex];
 }
 
 @end

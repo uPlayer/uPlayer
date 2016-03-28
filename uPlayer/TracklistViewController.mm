@@ -594,9 +594,11 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 {
     PlayerList *list = self.playerlList.selectItem;
     
-    _bottomTextRight.stringValue = list.name;
-    
-    _bottomTextCenter.stringValue = [NSString stringWithFormat: NSLocalizedString(@"%d songs",nil) , list.count ];
+    if (list) {
+        _bottomTextRight.stringValue = list.name;
+        
+        _bottomTextCenter.stringValue = [NSString stringWithFormat: NSLocalizedString(@"%d songs",nil) , list.count ];
+    }
 }
 
 -(void)reloadTracks:(NSNotification*)n

@@ -22,6 +22,8 @@
 @property (nonatomic,strong) PlayerLayout *layout;
 @property (nonatomic,strong) PlayerEngine *engine;
 
+///save all config
+-(void)save;
 
 @property (nonatomic,strong) PlayerTrack *playing;
 @end

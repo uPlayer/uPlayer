@@ -31,7 +31,6 @@ MAAssert( (x) == 0 || (x) == 1)
 
 
 
-
 FILE& operator<<(FILE& f,const NSTimeInterval &t)
 {
     fwrite(&t, sizeof(NSTimeInterval), 1, &f);
@@ -52,8 +51,6 @@ FILE& operator<<(FILE& f,const NSString *t)
 
 
 #pragma mark -
-
-
 
 
 void saveTrackInfo(FILE &file , TrackInfo *info)
@@ -202,6 +199,25 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 
 @implementation PlayerList (serialize)
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self  = [super init]) {
+        
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+        
+        
+        
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.name forKey:@"name"];
+}
+
 -(void)saveTo:(NSString*)path
 {
     FILE *file = fopen(path.UTF8String, "w");
@@ -253,6 +269,55 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 
 @implementation PlayerlList (serialize)
+
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        
+        self.selectIndex = [aDecoder decodeIntForKey:@"selectIndex"];
+        
+        
+        NSString *playlistDirectory = [ ApplicationSupportDirectory()  stringByAppendingPathComponent: playlistDirectoryName ];
+        
+        BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:playlistDirectory isDirectory:nil];
+        
+        if (!isExist)
+            [[NSFileManager defaultManager] createDirectoryAtPath:playlistDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        
+       int count = [aDecoder decodeIntForKey:@"count"];
+        
+        while ( (count--) > 0) {
+            
+            char path2[max_path];
+            sprintf(path2,"%08d.upl",index);
+            
+
+            
+            NSString *listFile = [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ];
+            
+            PlayerList *list = [NSKeyedUnarchiver unarchiveObjectWithFile:listFile];
+            
+            
+            
+        }
+        
+        
+    }
+    
+    return self;
+}
+
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInteger:self.selectIndex forKey:@"selectIndex"];
+    
+    [aCoder encodeObject:self.playerlList forKey:@"playerlList"];
+}
+
+
 -(void)save:(NSString*)applicationDirectory
 {
     NSString *playlistDirectory = [applicationDirectory  stringByAppendingPathComponent: playlistDirectoryName ];
@@ -349,131 +414,82 @@ NSArray *loadTrackInfoArray(FILE &file)
 
 @implementation PlayerDocument (serialize)
 
-#ifdef DEBUG
--(void)assertMembers
-{
-    assertBool(self.resumeAtReboot);
-    assertBool( self.resumeAtReboot );
-    assertBool( self.trackSongsWhenPlayStarted );
-    MAAssert( 0 <= self.volume && self.volume <= 1);
-    MAAssert( self.playOrder < kPlayOrder.count );
-    assertBool( self.lastFmEnabled );
-}
-#endif
+
 
 -(bool)load
 {
-    NSString *appSupportDir = ApplicationSupportDirectory();
-    
-    
-    NSString *fileName =  [appSupportDir  stringByAppendingPathComponent: docFileName ];
-    
-    /** the load protect system.
-     Before load the config file,we create a lock file.
-     After load complete,we delete lock file,and backup the config file.
-     
-     If anything happenned,load failed,the lock file is leaved there.
-     */
-    
-    NSString *lockFilePath = [appSupportDir  stringByAppendingPathComponent: docFileNameLock ];
-    
-    FILE *loadConfigLockFile = fopen(lockFilePath.UTF8String, "r");
-    
-    
-    self.needBackupConfigFile = true;
-    
-    NSString *_backupFileName = [appSupportDir  stringByAppendingPathComponent: docFileNameLastSuccessfullyLoaded ];
-    const char *backupFileName =  _backupFileName.UTF8String;
-    
-    if (loadConfigLockFile) {
-        // Last loading failed,load last file successfully saved yet.
-        char cmdCP[256] = "cp \"";
-        strcat(cmdCP, backupFileName);
-        strcat(cmdCP, "\" \"");
-        strcat(cmdCP, fileName.UTF8String);
-        strcat(cmdCP, "\"");
-        system(cmdCP);
-        
-        self.needBackupConfigFile = false;
-    }
-    else
-    {
-        //create one
-        loadConfigLockFile = fopen(lockFilePath.UTF8String, "w");
-    }
-    
-    
-    
-    FILE *file = fopen( fileName.UTF8String ,"r");
-    if (file)
-    {
-        int resumeAtReboot , trackSongsWhenPlayStarted ;
-        float volume ;
-        int playOrder ,playState , fontHeight ,lastFmEnabled ;
-        int playingIndexList,playingIndexTrack;
-        NSTimeInterval playTime;
-        
-        *file >> resumeAtReboot
-        >> trackSongsWhenPlayStarted
-        >> volume
-        >> playOrder
-        >>playState
-        >> fontHeight
-        >> lastFmEnabled
-        >>playingIndexList
-        >> playingIndexTrack
-        >> playTime;
-        
-        self.resumeAtReboot=resumeAtReboot;
-        self.trackSongsWhenPlayStarted = trackSongsWhenPlayStarted;
-        self.volume=volume;
-        self.playOrder=playOrder;
-        self.playState=playState;
-        self.fontHeight=fontHeight;
-        self.lastFmEnabled = lastFmEnabled;
-        
-        self.playingIndexList = playingIndexList;
-        self.playingIndexTrack = playingIndexTrack;
-        
-        self.playTime = playTime;
-        
-#ifdef DEBUG
-        [self assertMembers];
-#endif
-        
-        assert(self.playerlList);
-        [self.playerlList load:appSupportDir];
-        
-        
-        fclose(file);
-        
+
+//    FILE *file = fopen( fileName.UTF8String ,"r");
+//    if (file)
+//    {
+//        int resumeAtReboot , trackSongsWhenPlayStarted ;
+//        float volume ;
+//        int playOrder ,playState , fontHeight ,lastFmEnabled ;
+//        int playingIndexList,playingIndexTrack;
+//        NSTimeInterval playTime;
+//        
+//        *file >> resumeAtReboot
+//        >> trackSongsWhenPlayStarted
+//        >> volume
+//        >> playOrder
+//        >>playState
+//        >> fontHeight
+//        >> lastFmEnabled
+//        >>playingIndexList
+//        >> playingIndexTrack
+//        >> playTime;
+//        
+//        self.resumeAtReboot=resumeAtReboot;
+//        self.trackSongsWhenPlayStarted = trackSongsWhenPlayStarted;
+//        self.volume=volume;
+//        self.playOrder=playOrder;
+//        self.playState=playState;
+//        self.fontHeight=fontHeight;
+//        self.lastFmEnabled = lastFmEnabled;
+//        
+//        self.playingIndexList = playingIndexList;
+//        self.playingIndexTrack = playingIndexTrack;
+//        
+//        self.playTime = playTime;
+//        
+//#ifdef DEBUG
+//        [self assertMembers];
+//#endif
+//        
+//        assert(self.playerlList);
+//        [self.playerlList load:appSupportDir];
+//        
+//        
+//        fclose(file);
+//        
         [self didLoad];
-        
-        //If load complete,delete the lock file.
-        fclose(loadConfigLockFile);
-        unlink(lockFilePath.UTF8String);
-        
-        if( self.needBackupConfigFile )
-        {
-            //backup config file.
-            char cmdCP[256] = "cp \"";
-            strcat(cmdCP, fileName.UTF8String);
-            strcat(cmdCP, "\" \"");
-            strcat(cmdCP, backupFileName);
-            strcat(cmdCP, "\"");
-            system(cmdCP);
-            
-            self.needBackupConfigFile = false;
-        }
-        
-        _backupFileName = nil;
-        
-        
-        return true;
-    }
-    
-    
-    return false;
+//
+//        //If load complete,delete the lock file.
+//        fclose(loadConfigLockFile);
+//        unlink(lockFilePath.UTF8String);
+//        
+//        if( self.needBackupConfigFile )
+//        {
+//            //backup config file.
+//            char cmdCP[256] = "cp \"";
+//            strcat(cmdCP, fileName.UTF8String);
+//            strcat(cmdCP, "\" \"");
+//            strcat(cmdCP, backupFileName);
+//            strcat(cmdCP, "\"");
+//            system(cmdCP);
+//            
+//            self.needBackupConfigFile = false;
+//        }
+//        
+//        _backupFileName = nil;
+//        
+//        
+//        return true;
+//    }
+//    
+//    
+//    return false;
+    return true;
 }
 
 
@@ -485,56 +501,102 @@ NSArray *loadTrackInfoArray(FILE &file)
     return true;
 }
 
--(bool)saveConfig
+
+
+
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+ 
+        self.resumeAtReboot = [aDecoder decodeBoolForKey:@"resumeAtReboot"];
+        self.trackSongsWhenPlayStarted = [aDecoder decodeBoolForKey:@"trackSongsWhenPlayStarted"];
+        self.volume = [aDecoder decodeFloatForKey:@"volume"];
+        self.playOrder = [aDecoder decodeIntForKey:@"playOrder"];
+        self.playState = [aDecoder decodeIntForKey:@"playState"];
+        self.fontHeight = [aDecoder decodeIntForKey:@"fontHeight"];
+        self.lastFmEnabled = [aDecoder decodeIntForKey:@"lastFmEnabled"];
+        self.playingIndexList = [aDecoder decodeIntForKey:@"playingIndexList"];
+        self.playingIndexTrack = [aDecoder decodeIntForKey:@"playingIndexTrack"];
+        self.playTime  = [aDecoder decodeDoubleForKey:@"playTime"];
+        
+        
+        self.playerlList =[aDecoder decodeObjectForKey:@"playerlList"];
+        
+        
+        [self didLoad];
+    }
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
 {
     [self willSaveConfig];
     
-    NSString *appSupportDir = ApplicationSupportDirectory();
-    NSString *_fileName = [appSupportDir stringByAppendingPathComponent: docFileName];
-    const char * fileName = _fileName.UTF8String;
+    [aCoder encodeBool:self.resumeAtReboot forKey:@"resumeAtReboot"];
+    [aCoder encodeBool:self.trackSongsWhenPlayStarted forKey:@"trackSongsWhenPlayStarted"];
+    [aCoder encodeFloat:self.volume forKey:@"volume"];
+    [aCoder encodeInt:self.playOrder forKey:@"playOrder"];
+    [aCoder encodeInt:self.playState forKey:@"playState"];
+    [aCoder encodeInt:self.fontHeight forKey:@"fontHeight"];
+    [aCoder encodeInt:self.lastFmEnabled forKey:@"lastFmEnabled"];
+    [aCoder encodeInt:self.playingIndexList forKey:@"playingIndexList"];
+    [aCoder encodeInt:self.playingIndexTrack forKey:@"playingIndexTrack"];
+    [aCoder encodeFloat:self.playTime forKey:@"playTime"];
     
-    NSString *_backupFileName = [appSupportDir  stringByAppendingPathComponent: docFileNameLastSuccessfullyLoaded ];
-    const char *backupFileName =  _backupFileName.UTF8String;
-    
-    
-    if( self.needBackupConfigFile )
-    {
-        //backup config file.
-        char cmdCP[256] = "cp \"";
-        strcat(cmdCP, fileName);
-        strcat(cmdCP, "\" \"");
-        strcat(cmdCP, backupFileName);
-        strcat(cmdCP, "\"");
-        system(cmdCP);
-    }
-    
-    
-    FILE *file = fopen( fileName , "w");
-    
-    if (file)
-    {
-#ifdef DEBUG
-        [self assertMembers];
-#endif
-        
-        NSLog(@"list: %d, index: %d",self.playingIndexList,self.playingIndexTrack);
-        
-        *file << self.resumeAtReboot
-        << self.trackSongsWhenPlayStarted
-        << self.volume
-        << self.playOrder
-        << self.playState
-        << self.fontHeight
-        << self.lastFmEnabled
-        << self.playingIndexList
-        << self.playingIndexTrack
-        << self.playTime ;
-        
-        
-        fclose(file);
-        return true;
-    }
-    
+    [aCoder encodeObject:self.playerlList forKey:@"playerlList"];
+}
+
+-(bool)saveConfig
+{
+//    [self willSaveConfig];
+//    
+//    NSString *appSupportDir = ApplicationSupportDirectory();
+//    NSString *_fileName = [appSupportDir stringByAppendingPathComponent: docFileName];
+//    const char * fileName = _fileName.UTF8String;
+//    
+//    NSString *_backupFileName = [appSupportDir  stringByAppendingPathComponent: docFileNameLastSuccessfullyLoaded ];
+//    const char *backupFileName =  _backupFileName.UTF8String;
+//    
+//    
+//    if( self.needBackupConfigFile )
+//    {
+//        //backup config file.
+//        char cmdCP[256] = "cp \"";
+//        strcat(cmdCP, fileName);
+//        strcat(cmdCP, "\" \"");
+//        strcat(cmdCP, backupFileName);
+//        strcat(cmdCP, "\"");
+//        system(cmdCP);
+//    }
+//    
+//    
+//    FILE *file = fopen( fileName , "w");
+//    
+//    if (file)
+//    {
+////#ifdef DEBUG
+////        [self assertMembers];
+////#endif
+//        
+//        NSLog(@"list: %d, index: %d",self.playingIndexList,self.playingIndexTrack);
+//        
+//        *file << self.resumeAtReboot
+//        << self.trackSongsWhenPlayStarted
+//        << self.volume
+//        << self.playOrder
+//        << self.playState
+//        << self.fontHeight
+//        << self.lastFmEnabled
+//        << self.playingIndexList
+//        << self.playingIndexTrack
+//        << self.playTime ;
+//        
+//        
+//        fclose(file);
+//        return true;
+//    }
+//    
     return false;
 }
 

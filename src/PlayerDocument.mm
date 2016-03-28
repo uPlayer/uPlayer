@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "serialize.h"
 #include "PlayerDocument+ScreenSaver.h"
+#include "ThreadJob.h"
 
 @interface PlayerDocument ()
 
@@ -18,22 +19,33 @@
 
 @implementation PlayerDocument
 
++(NSString*)filePathForSearialize
+{
+    return [ApplicationSupportDirectory() stringByAppendingPathComponent: @"config.plist" ];
+}
+
+-(void)resetProperty
+{
+    self.windowName = NSLocalizedString(@"Smine windows name", nil);
+    self.playerlList = [[PlayerlList alloc]init];
+    self.resumeAtReboot = TRUE;
+    self.playTime = -1;
+    self.trackSongsWhenPlayStarted = FALSE;
+    self.lastFmEnabled = FALSE;
+    self.stopScrobblingWhenScreenSaverRunning = TRUE;
+    self.volume = 1.0;
+    self.playerQueue=[[PlayerQueue alloc]init];
+    self.playingIndexList = -1;
+    self.playingIndexTrack = -1;
+}
+
 -(instancetype)init
 {
     self = [super init];
     if (self)
     {
-        self.windowName = NSLocalizedString(@"Smine windows name", nil);
-        self.playerlList = [[PlayerlList alloc]init];
-        self.resumeAtReboot = TRUE;
-        self.playTime = -1;
-        self.trackSongsWhenPlayStarted = FALSE;
-        self.lastFmEnabled = FALSE;
-        self.stopScrobblingWhenScreenSaverRunning = TRUE;
-        self.volume = 1.0;
-        self.playerQueue=[[PlayerQueue alloc]init];
-        self.playingIndexList = -1;
-        self.playingIndexTrack = -1;
+
+        [self resetProperty];
         
 #ifdef PlayerDocument_ScreenSaver
         [self monitorScreenSaverEvent];

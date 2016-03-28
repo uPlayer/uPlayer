@@ -454,6 +454,8 @@
     
     [player().layout save];
     
+    [player() save];
+    
     saveFileShortcutKey();
 }
 

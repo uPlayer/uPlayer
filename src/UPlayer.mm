@@ -38,7 +38,14 @@ void initLastFm()
     self = [super init];
     if (self)
     {
-        self.document = [[PlayerDocument alloc ] init];
+        
+        self.document = [NSKeyedUnarchiver unarchiveObjectWithFile: [PlayerDocument filePathForSearialize]];
+        if (!self.document)
+        {
+            self.document = [[PlayerDocument alloc ] init];
+        }
+        
+            
         self.layout= [[PlayerLayout alloc] init];
         self.engine= [[PlayerEngine alloc] init];
        
@@ -61,7 +68,10 @@ void initLastFm()
 }
 
 
-
+-(void)save
+{
+    [NSKeyedArchiver archiveRootObject:self.document toFile:[PlayerDocument filePathForSearialize]];
+}
 
 -(void)cmdSaveConfig
 {

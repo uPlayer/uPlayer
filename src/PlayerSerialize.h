@@ -39,7 +39,7 @@ using namespace std;
 @end
 
 
-@interface PlayerDocument (serialize)
+@interface PlayerDocument (serialize) <NSCoding>
 -(bool)saveConfig;
 -(bool)savePlaylist;
 -(bool)load;

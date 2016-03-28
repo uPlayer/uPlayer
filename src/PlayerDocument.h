@@ -14,6 +14,8 @@
 
 @interface PlayerDocument : NSObject
 
++(NSString*)filePathForSearialize;
+
 /// value need to searialize.
 @property (nonatomic) int resumeAtReboot;
 @property (nonatomic) int trackSongsWhenPlayStarted; //track song when playing changed autoly. 
@@ -42,6 +44,8 @@ stopScrobblingWhenScreenSaverRunning;
 @property (nonatomic) bool needBackupConfigFile;
 
 -(BOOL)shouldScrobbleToLastFm;
+
+-(void)resetProperty;
 
 @end
 
