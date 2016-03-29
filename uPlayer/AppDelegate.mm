@@ -56,6 +56,8 @@
         // Add observers
         [self addObservers];
         
+
+        
         // Load ui layout
         [player().layout load];
         
@@ -71,8 +73,8 @@
         [self setUpStatusBar];
         
         // Load document and notify the window
-        ///TODO DELETE
-//        [self loadDocument];
+        [self loadDocument];
+
         
         [_mainWindowController showWindow:nil];
         
@@ -324,9 +326,10 @@
 {
     PlayerDocument *d = player().document;
     
+    [player() load];
 //    if( [d load] )
 //    {
-//        postEvent(EventID_to_reload_tracklist, nil);
+        postEvent(EventID_to_reload_tracklist, nil);
 //    }
     
     postEvent(EventID_player_document_loaded, nil);

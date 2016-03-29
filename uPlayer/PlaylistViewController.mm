@@ -10,8 +10,25 @@
 #import "UPlayer.h"
 #import "PlayerMessage.h"
 #import "PlayerSerachMng.h"
-
 #import "PlayerLayout+MemoryFileBuffer.h"
+
+//@interface PlaylistViewControllerCoding : NSObject
+//<NSCoding>
+//@end
+//
+//@implementation PlaylistViewControllerCoding
+//
+//-(instancetype)initWithCoder:(NSCoder *)aDecoder
+//{
+//    
+//}
+//
+//-(void)encodeWithCoder:(NSCoder *)aCoder
+//{
+//    
+//}
+//
+//@end
 
 
 @interface PlaylistViewController ()
@@ -19,6 +36,9 @@
 
 @property (weak) IBOutlet NSTableView *tableView;
 @property (nonatomic,strong) PlayerlList *playerlList;
+
+//@property (nonatomic,strong) PlaylistViewControllerCoding *data;
+
 @end
 
 @implementation PlaylistViewController

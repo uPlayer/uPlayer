@@ -58,9 +58,17 @@ struct PlayStateTime
 #define layoutFileNameLock  @"ui.cfg.lock"
 
 
+//几个配置文件的版本，当程序修改之后与之前的不兼容时，把版本号加一
+enum
+{
+    DocumentConfigFile_Version = 1,
+    LayoutFile_Version = 1,
+    Playlist_Version = 1
+};
+
+
 #define keyblindingFileName @"keymaps.json"
 #define playlistDirectoryName @"playlist"
-#define playlistIndexFileName @"index.plist"
 
 
 

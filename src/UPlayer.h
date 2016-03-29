@@ -24,6 +24,7 @@
 
 ///save all config
 -(void)save;
+-(void)load;
 
 @property (nonatomic,strong) PlayerTrack *playing;
 @end

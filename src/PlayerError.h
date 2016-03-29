@@ -14,12 +14,15 @@ extern NSString *const NSPlayerErrorDomain;
 
 enum PlayErrorEnum
 {
-    PlayerNoSuchFileError
+    PlayerNoSuchFileError,
+    PlayerConfigVersionDismatchError,
 };
 
 
 @interface PlayerError : NSError
 
 +(instancetype)errorNoSuchFile:(NSString*)path;
+
++(instancetype)errorConfigVersionDismatch;
 
 @end

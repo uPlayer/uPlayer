@@ -36,6 +36,7 @@ stopScrobblingWhenScreenSaverRunning;
 
 
 @property (nonatomic,strong) PlayerQueue *playerQueue;
+
 @property (nonatomic,strong) PlayerlList *playerlList;
 
 @property (nonatomic,strong) NSString *windowName;

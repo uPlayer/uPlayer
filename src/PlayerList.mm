@@ -10,7 +10,7 @@
 #import "PlayerList.h"
 #import "PlayerMessage.h"
 #import "ThreadJob.h"
-
+#import "PlayerError.h"
 
 @interface PlayerList()
 
@@ -33,7 +33,10 @@ const char fileformat[] = "%08d.plist";
     NSString *listFile = [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ];
     
     PlayerList *list = [NSKeyedUnarchiver unarchiveObjectWithFile:listFile];
-    list.fileIndex = index;
+    if (list == nil)
+        postEvent( EventID_play_error_happened, [PlayerError errorNoSuchFile:listFile]);
+    else
+        list.fileIndex = index;
     
     return list;
 }
@@ -57,19 +60,26 @@ const char fileformat[] = "%08d.plist";
 {
     if (self  = [super init]) {
         
-        self.name = [aDecoder decodeObjectForKey:@"name"];
-        self.type = (PlayerListType)[aDecoder decodeIntForKey:@"type"];;
-        
-        // is dirty?
-        self.playerTrackList = [NSMutableArray arrayWithArray: [aDecoder decodeObjectForKey:@"playerTrackList"]];
-        if ( self.playerTrackList == nil)
-            self.playerTrackList = [NSMutableArray array];
-        
-        for (PlayerTrack *track in self.playerTrackList) {
-            track.list = self;
+        int fileVersion = [aDecoder decodeIntForKey:@"version"];
+        if ( fileVersion == Playlist_Version )
+        {
+            self.name = [aDecoder decodeObjectForKey:@"name"];
+            self.type = (PlayerListType)[aDecoder decodeIntForKey:@"type"];;
+            
+            // is dirty?
+            self.playerTrackList = [NSMutableArray arrayWithArray: [aDecoder decodeObjectForKey:@"playerTrackList"]];
+            if ( self.playerTrackList == nil)
+                self.playerTrackList = [NSMutableArray array];
+            
+            for (PlayerTrack *track in self.playerTrackList) {
+                track.list = self;
+            }
+            
         }
-        
-        
+        else
+        {
+            postEvent(EventID_play_error_happened, [PlayerError errorConfigVersionDismatch]);
+        }
         
         self.isDirty = FALSE;
         
@@ -83,6 +93,8 @@ const char fileformat[] = "%08d.plist";
 
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
+    [aCoder encodeInt: Playlist_Version forKey:@"version"];
+    
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeInt:self.type forKey:@"type"];
     [aCoder encodeObject:self.playerTrackList forKey:@"playerTrackList"];
@@ -279,8 +291,9 @@ const char fileformat[] = "%08d.plist";
             PlayerList *list = [PlayerList instanceFromFileIndex:fileIndex.intValue];
             list.selectIndex = selectIndex.intValue;
             list.topIndex = topIndex.intValue;
-            
-            [self.playerlList addObject:list];
+            if ( list != nil) {
+                [self.playerlList addObject:list];
+            }
         }
         
         

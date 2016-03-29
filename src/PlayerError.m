@@ -8,7 +8,7 @@
 
 #import "PlayerError.h"
 
-NSString *const NSPlayerErrorDomain = @"com.uPlayer";
+NSString *const NSPlayerErrorDomain = @"com.smine";
 
 @implementation PlayerError
 
@@ -18,6 +18,14 @@ NSString *const NSPlayerErrorDomain = @"com.uPlayer";
                                NSLocalizedDescriptionKey: [NSString stringWithFormat:@"%@\n%@",NSLocalizedString(@"File no found", nil) , path] };
     
     return  [PlayerError errorWithDomain:NSPlayerErrorDomain code:PlayerNoSuchFileError userInfo:userInfo];
+}
+
++(instancetype)errorConfigVersionDismatch
+{
+    NSDictionary *userInfo = @{
+                               NSLocalizedDescriptionKey: NSLocalizedString(@"Config Version Dismatch",nil) };
+    
+    return  [PlayerError errorWithDomain:NSPlayerErrorDomain code:PlayerConfigVersionDismatchError userInfo:userInfo];
 }
 
 @end

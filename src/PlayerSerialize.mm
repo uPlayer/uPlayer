@@ -11,7 +11,8 @@
 #import "MAAssert.h"
 #import "PlayerLayout.h"
 #import "PlaylistViewController.h"
-
+#import "PlayerError.h"
+#import "PlayerMessage.h"
 
 const int max_path = 256;
 
@@ -511,6 +512,9 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
+        *file << LayoutFile_Version;
+        
+        
         int count = (int)self.dicObjects.count;
         *file << count;
         
@@ -534,18 +538,28 @@ NSArray *loadTrackInfoArray(FILE &file)
     
     if (file)
     {
-        int count = 0;
-        *file >> count;
+        int version = 0;
+        *file >> version;
         
-        for (int i = 0; i< count ; i++) {
+        if (version == LayoutFile_Version)
+        {
+            int count = 0;
+            *file >> count;
             
-            NSString *key = loadString(*file);
+            for (int i = 0; i< count ; i++) {
+                
+                NSString *key = loadString(*file);
+                
+                NSData *data = loadData(*file);
+                
+                self.dicObjects[key]=data;
+            }
             
-            NSData *data = loadData(*file);
-            
-            self.dicObjects[key]=data;
         }
-        
+        else
+        {
+            postEvent(EventID_play_error_happened, [PlayerError errorConfigVersionDismatch]);
+        }
         
         fclose(file);
         

@@ -31,8 +31,6 @@
     return self;
 }
 
-
-
 -(void)saveData:(NSData*)data withKey:(NSString*)key
 {
     NSAssert(key,nil);
@@ -43,9 +41,6 @@
 {
     return self.dicObjects[key];
 }
-
-
-
 
 @end
 

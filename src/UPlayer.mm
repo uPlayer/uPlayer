@@ -39,13 +39,8 @@ void initLastFm()
     if (self)
     {
         
-        self.document = [NSKeyedUnarchiver unarchiveObjectWithFile: [PlayerDocument filePathForSearialize]];
-        if (!self.document)
-        {
-            self.document = [[PlayerDocument alloc ] init];
-        }
+        self.document = [[PlayerDocument alloc ] init];
         
-            
         self.layout= [[PlayerLayout alloc] init];
         self.engine= [[PlayerEngine alloc] init];
        
@@ -62,11 +57,18 @@ void initLastFm()
         addObserverForEvent(self, @selector(cmdSaveUILayout), EventID_to_save_ui_layout);
         
         
-        
     }
     return self;
 }
 
+-(void)load
+{
+    self.document = [NSKeyedUnarchiver unarchiveObjectWithFile: [PlayerDocument filePathForSearialize]];
+    if (!self.document)
+    {
+        self.document = [[PlayerDocument alloc ] init];
+    }
+}
 
 -(void)save
 {

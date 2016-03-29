@@ -12,6 +12,9 @@
 #import "serialize.h"
 #include "PlayerDocument+ScreenSaver.h"
 #include "ThreadJob.h"
+#import "PlayerMessage.h"
+#import "PlayerError.h"
+
 
 @interface PlayerDocument ()
 
@@ -64,20 +67,28 @@
         
         [self resetProperty];
         
-        self.resumeAtReboot = [aDecoder decodeBoolForKey:@"resumeAtReboot"];
-        self.trackSongsWhenPlayStarted = [aDecoder decodeBoolForKey:@"trackSongsWhenPlayStarted"];
-        self.volume = [aDecoder decodeFloatForKey:@"volume"];
-        self.playOrder = [aDecoder decodeIntForKey:@"playOrder"];
-        self.playState = [aDecoder decodeIntForKey:@"playState"];
-        self.fontHeight = [aDecoder decodeIntForKey:@"fontHeight"];
-        self.lastFmEnabled = [aDecoder decodeIntForKey:@"lastFmEnabled"];
-        self.playingIndexList = [aDecoder decodeIntForKey:@"playingIndexList"];
-        self.playingIndexTrack = [aDecoder decodeIntForKey:@"playingIndexTrack"];
-        self.playTime  = [aDecoder decodeDoubleForKey:@"playTime"];
-        
-        
-        self.playerlList =[aDecoder decodeObjectForKey:@"playerlList"];
-        
+        int fileVersion = [aDecoder decodeIntForKey:@"version"];
+        if ( fileVersion == DocumentConfigFile_Version )
+        {
+            self.resumeAtReboot = [aDecoder decodeBoolForKey:@"resumeAtReboot"];
+            self.trackSongsWhenPlayStarted = [aDecoder decodeBoolForKey:@"trackSongsWhenPlayStarted"];
+            self.volume = [aDecoder decodeFloatForKey:@"volume"];
+            self.playOrder = [aDecoder decodeIntForKey:@"playOrder"];
+            self.playState = [aDecoder decodeIntForKey:@"playState"];
+            self.fontHeight = [aDecoder decodeIntForKey:@"fontHeight"];
+            self.lastFmEnabled = [aDecoder decodeIntForKey:@"lastFmEnabled"];
+            self.playingIndexList = [aDecoder decodeIntForKey:@"playingIndexList"];
+            self.playingIndexTrack = [aDecoder decodeIntForKey:@"playingIndexTrack"];
+            self.playTime  = [aDecoder decodeDoubleForKey:@"playTime"];
+            
+            
+            self.playerlList =[aDecoder decodeObjectForKey:@"playerlList"];
+            
+        }
+        else
+        {
+            postEvent(EventID_play_error_happened, [PlayerError errorConfigVersionDismatch]);
+        }
         
         [self didLoad];
     }
@@ -88,6 +99,8 @@
 {
     [self willSaveConfig];
     
+    [aCoder encodeInt: DocumentConfigFile_Version forKey:@"version"];
+    
     [aCoder encodeBool:self.resumeAtReboot forKey:@"resumeAtReboot"];
     [aCoder encodeBool:self.trackSongsWhenPlayStarted forKey:@"trackSongsWhenPlayStarted"];
     [aCoder encodeFloat:self.volume forKey:@"volume"];
@@ -97,7 +110,7 @@
     [aCoder encodeInt:self.lastFmEnabled forKey:@"lastFmEnabled"];
     [aCoder encodeInt:self.playingIndexList forKey:@"playingIndexList"];
     [aCoder encodeInt:self.playingIndexTrack forKey:@"playingIndexTrack"];
-    [aCoder encodeFloat:self.playTime forKey:@"playTime"];
+    [aCoder encodeDouble:self.playTime forKey:@"playTime"];
     
     [aCoder encodeObject:self.playerlList forKey:@"playerlList"];
 }
