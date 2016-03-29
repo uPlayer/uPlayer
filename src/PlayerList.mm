@@ -419,40 +419,6 @@ const char fileformat[] = "%08d.plist";
     return [_playerlList indexOfObject:list];
 }
 
-/*
--(void)setSelectItem:(PlayerList*)list
-{
-    NSUInteger index = [self.playerlList indexOfObject:list];
-    if ( index == NSNotFound) {
-#ifdef DEBUG
-        assert(false);
-#endif
-    }
-    else
-    {
-        _selectIndex = (int)index;
-    }
-    
-}
-
--(PlayerList*)getSelectedList
-{
-    if (_selectIndex == -1)
-        return nil;
-    
-    return [self getItem:_selectIndex];
-}
-*/
-
-/*
--(PlayerList*)getPlayList
-{
-    if (_playIndex == -1)
-        return nil;
-    
-    return [self getItem:_playIndex];
-}*/
-
 -(size_t)count
 {
     return self.playerlList.count;

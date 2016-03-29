@@ -12,18 +12,14 @@
 #import "PlayerSerachMng.h"
 #import "keycode.h"
 #import "MAAssert.h"
-
 #import "PlayerLastFm.h"
 #import "PlayerLayout+MemoryFileBuffer.h"
-
 #import "id3Info.h"
 #import "ThreadJob.h"
 
 //http://stackoverflow.com/questions/1235219/is-there-a-right-way-to-have-nstextfieldcell-draw-vertically-centered-text
 @interface NSTextFieldCell (MyCategories)
 @end
-
-
 
 @interface NSTableColumnMy : NSTableColumn
 @property (nonatomic) int state;
@@ -160,7 +156,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     addObserverForEvent(self, @selector(onSetFontSize:), EventID_to_set_font_size);
     
     self.playerlList = player().document.playerlList;
-    NSLog(@"%p,,%p",self.playerlList,player().document.playerlList);
 }
 
 -(void)onSetFontSize:(NSNotification*)n

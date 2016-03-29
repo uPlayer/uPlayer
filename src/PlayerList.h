@@ -20,10 +20,9 @@
 
 @property (nonatomic) int selectIndex,topIndex;
 
-@property (nonatomic,strong) NSMutableArray<PlayerTrack*> *playerTrackList;//class PlayerTrack
+@property (nonatomic,strong) NSMutableArray<PlayerTrack*> *playerTrackList;
 
 @property (nonatomic) enum PlayerListType type;
-
 
 //index in file arrays saved
 @property (nonatomic) int fileIndex;
@@ -39,8 +38,6 @@
 -(PlayerTrack*)getItem:(NSInteger)index;
 -(NSInteger)getIndex:(PlayerTrack*)track;
 -(size_t)count;
-//-(PlayerTrack*)getSelectedItem;
-//-(PlayerTrack*)getPlayItem;
 -(NSArray*)addItems:(NSArray*)items;
 
 /**
