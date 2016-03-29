@@ -56,28 +56,22 @@
         // Add observers
         [self addObservers];
         
-
-        
         // Load ui layout
         [player().layout load];
         
         [self setUpHotkeys];
-        
         
         // Load and maintain main window controller
         NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
         
         self.mainWindowController = [storyboard instantiateControllerWithIdentifier:@"IDMainWindow"];
         
-        
         [self setUpStatusBar];
         
         // Load document and notify the window
         [self loadDocument];
-
         
         [_mainWindowController showWindow:nil];
-        
     }
     
     return self;
@@ -163,7 +157,7 @@
             NSString* fileName =[(NSURL*)(files.firstObject) path];
             
             PlayerDocument *document = player().document;
-            PlayerList *list = document.playerlList.selectItem;
+            const PlayerList *list = [document.playerlList getSelectedItem];
             
             dojobInBkgnd(
                          ^{
@@ -182,7 +176,7 @@
 
 -(void)reloadiTunesMedia
 {
-    PlayerList *selected = player().document.playerlList.selectItem;
+    const PlayerList *selected = [player().document.playerlList getSelectedItem];
     [selected removeAll];
     postEvent(EventID_to_reload_tracklist, selected);
     
@@ -237,9 +231,9 @@
 {
     PlayerlList *llist = player().document.playerlList;
     
-    PlayerList *currList = llist.selectItem;
+    const PlayerList *currList = [llist getSelectedItem];
     
-    PlayerList *prevList =  [llist getPreviousItem: [llist getIndex:currList]];
+    PlayerList *prevList =  [llist getPreviousItem: [llist getIndex: (PlayerList*)currList]];
     
     if(prevList)
         postEvent(EventID_to_reload_playlist, prevList);
@@ -247,11 +241,11 @@
 
 - (IBAction)cmdNextPlaylist:(id)sender
 {
-     PlayerlList *llist = player().document.playerlList;
+    PlayerlList *llist = player().document.playerlList;
     
-    PlayerList *currList = llist.selectItem;
+    const PlayerList *currList = [llist getSelectedItem];
     
-    PlayerList *nextList =  [llist getNextItem: [llist getIndex:currList]];
+    PlayerList *nextList =  [llist getNextItem: [llist getIndex:(PlayerList*)currList]];
     
     if(nextList)
         postEvent(EventID_to_reload_playlist, nextList);
@@ -326,7 +320,7 @@
 {
     PlayerDocument *d = player().document;
     
-    [player() load];
+//    [player() load];
 //    if( [d load] )
 //    {
         postEvent(EventID_to_reload_tracklist, nil);
@@ -378,7 +372,7 @@
         [self cmdNewPlayerList:nil];
     
     // add ~/music to a default playerlist, if is none.
-    if ( [d.playerlList count] == 1 && d.playerlList.selectItem.count == 0)
+    if ( [d.playerlList count] == 1 && [d.playerlList getSelectedItem].count == 0)
     {
         [self loadiTunesMedia];
     }
@@ -396,7 +390,7 @@
     
     userMusic = [userMusic stringByAppendingPathComponent:@"iTunes/iTunes Media/Music"];
     
-    PlayerList *list = d.playerlList.selectItem;
+    const PlayerList *list = [d.playerlList getSelectedItem];
     
     dojobInBkgnd(
                  ^{
@@ -411,7 +405,7 @@
 
 -(void)track_state_changed
 {
-    PlayerTrack *track = player().playing;
+    PlayerTrack *track = Playing();
     
     BOOL stopped = [player().engine isStopped];
     BOOL paused = [player().engine isPaused];
@@ -486,7 +480,7 @@
         LFUser *user = lastFmUser();
         if (user->isConnected)
         {
-            TrackInfo *info =  player().playing.info;
+            TrackInfo *info =  Playing().info;
             
             dojobInBkgnd(^{
                 string artist(info.artist.UTF8String);
@@ -519,7 +513,7 @@
 
 -(BOOL)importDirectoryEnabled
 {
-    return player().document.playerlList.selectItem.type != type_temporary ;
+    return [player().document.playerlList getSelectedItem].type != type_temporary ;
 }
 
 
@@ -532,7 +526,7 @@
 {
     PlayerTrack *track = n.object;
     if (track == nil)
-        track = player().playing;
+        track = Playing();
     
     lastFm_loveTrack( track );
 }

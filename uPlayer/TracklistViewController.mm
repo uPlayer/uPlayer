@@ -160,7 +160,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     addObserverForEvent(self, @selector(onSetFontSize:), EventID_to_set_font_size);
     
     self.playerlList = player().document.playerlList;
-    
+    NSLog(@"%p,,%p",self.playerlList,player().document.playerlList);
 }
 
 -(void)onSetFontSize:(NSNotification*)n
@@ -466,7 +466,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     if(self.isSearchMode)
         self.isSearchMode = false;
     
-    PlayerList *listOld = self.playerlList.selectItem;
+    const PlayerList *listOld = [self.playerlList getSelectedItem];
     PlayerList *list;
     int target = 0;
     // scroll target index to center or top?
@@ -483,7 +483,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
             
             list = track.list;
             
-            if (list != self.playerlList.selectItem)
+            if (list != [self.playerlList getSelectedItem])
             {
                 [self.playerlList setSelectItem:list];
                 [self.tableView reloadData];
@@ -497,7 +497,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
             
             
             // current is not showing. reload it.
-            if (list != self.playerlList.selectItem)
+            if (list != [self.playerlList getSelectedItem])
             {
                 [self.playerlList setSelectItem:list];
                 
@@ -509,9 +509,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     else
     {
         // then reload playing.
-        list = player().playing.list;
+        list = Playing().list;
         
-        target = (int)player().playing.index;
+        target = (int)Playing().index;
     }
 
     
@@ -549,7 +549,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     if(self.isSearchMode)
         self.isSearchMode = false;
     
-    PlayerList *listOld = self.playerlList.selectItem;
+    const PlayerList *listOld = [self.playerlList getSelectedItem];
     PlayerList *list = n.object;
     
     int target = 0;
@@ -557,7 +557,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     bool toCenter = YES;
     
     // current is not showing. reload it.
-    if (list != self.playerlList.selectItem)
+    if (list != [self.playerlList getSelectedItem])
     {
         [self.playerlList setSelectItem:list];
         
@@ -592,7 +592,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 -(void)updateBottomBar
 {
-    PlayerList *list = self.playerlList.selectItem;
+    const PlayerList *list = [self.playerlList getSelectedItem];
     
     if (list) {
         _bottomTextRight.stringValue = list.name;
@@ -618,7 +618,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     
     
     
-    PlayerList *listOld = self.playerlList.selectItem;
+    const PlayerList *listOld = [self.playerlList getSelectedItem];
 
     PlayerList *list = track.list;
     
@@ -627,7 +627,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     /// Scroll target index to center or top?
     bool toCenter = YES;
     
-    if (list != self.playerlList.selectItem)
+    if (list != [self.playerlList getSelectedItem])
     {
         [self.playerlList setSelectItem:list];
         [self.tableView reloadData];
@@ -635,7 +635,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     
     
     // Current is not showing. reload it.
-    if (list != self.playerlList.selectItem)
+    if (list != [self.playerlList getSelectedItem])
     {
         [self.playerlList setSelectItem:list];
         
@@ -677,15 +677,15 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     if(self.isSearchMode)
         self.isSearchMode = false;
     
-    PlayerList *listOld = self.playerlList.selectItem;
-    PlayerList *list = player().playing.list;
+    const PlayerList *listOld = [self.playerlList getSelectedItem];
+    PlayerList *list = Playing().list;
     
-    int target = (int)player().playing.index;
+    int target = (int)Playing().index;
     // scroll target index to center or top?
     bool toCenter = YES;
     
     // current is not showing. reload it.
-    if (list != self.playerlList.selectItem)
+    if (list != [self.playerlList getSelectedItem])
     {
         [self.playerlList setSelectItem:list];
         
@@ -981,7 +981,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
         if (self.searchMng == nil)
             self.searchMng = [[PlayerSearchMng alloc]init];
         
-        self.searchMng.playerlistOriginal = self.playerlList.selectItem;
+        self.searchMng.playerlistOriginal = [self.playerlList getSelectedItem];
         
         [self.searchMng search:key];
     }
@@ -1003,7 +1003,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     
     if ( row >= 0)
     {
-        PlayerList *list ;
+        const PlayerList *list ;
         
         PlayerTrack *track;
         if (self.isSearchMode )
@@ -1012,7 +1012,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
             
             track = [self.searchMng getOrginalByIndex:row];
             
-            player().playing = track;
+            setPlaying(track);
             
             [list markSelected];
             
@@ -1022,7 +1022,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
         }
         else
         {
-            list = _playerlList.selectItem;
+            list = [_playerlList getSelectedItem];
             track = [list getItem:row];
             [list setSelectIndex:(int)row];
         }
@@ -1074,7 +1074,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 -(PlayerTrack*)getSelectedItem:(NSInteger)row
 {
-    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [self.playerlList.selectItem  getItem: (int)row];
+    PlayerTrack *track = self.isSearchMode ? [self.searchMng.playerlistFilter getItem: (int)row ]: [[self.playerlList getSelectedItem]  getItem: (int)row];
     return track;
 }
 
@@ -1085,7 +1085,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     if ( self.isSearchMode )
         return   [self.searchMng.playerlistFilter count ];
     else
-        return   [self.playerlList.selectItem count];
+        return   [[self.playerlList getSelectedItem] count];
 }
 
 
@@ -1229,7 +1229,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
         
         NSArray *sortDescriptors = @[descriptor];
         
-        PlayerList *list = self.playerlList.selectItem;
+        const PlayerList *list = [self.playerlList getSelectedItem];
                             
         NSArray *sortedArray = [list.playerTrackList sortedArrayUsingDescriptors:sortDescriptors];
         
@@ -1312,7 +1312,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
             NSRect rc = NSMakeRect(0, 0, w.frame.size.width, [w contentBorderThicknessForEdge: NSMinYEdge] );
             
             if ( NSPointInRect( theEvent.locationInWindow, rc )) {
-                postEvent(EventID_to_reload_tracklist, player().playing );
+                postEvent(EventID_to_reload_tracklist, Playing() );
             }
             
         }
@@ -1332,7 +1332,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
                     NSMenuItem *item = [menu addItemWithTitle:list.name action:@selector(switchPlaylist:) keyEquivalent:@""];
                     
                     item.tag = i;
-                    if (list == ll.selectItem) {
+                    if (list == [ll getSelectedItem]) {
                         item.state  =  NSOnState;
                     } 
                 }
@@ -1400,7 +1400,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 - (IBAction)cmdRemoveRefrence:(id)sender {
     
     NSIndexSet *rows = self.tableView.selectedRowIndexes;
-    [self.playerlList.selectItem removeTracks:rows];
+    [[self.playerlList getSelectedItem] removeTracks:rows];
     
     [self.tableView removeRowsAtIndexes:rows withAnimation:YES];
     
@@ -1414,7 +1414,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 -(void)removeItemsToTrash:(NSIndexSet*)set
 {
-    PlayerList *list = self.playerlList.selectItem;
+    const PlayerList *list = [self.playerlList getSelectedItem];
     
     [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         PlayerTrack *track = [list getItem: idx ];
@@ -1559,7 +1559,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
             rows = rowsOrginal;
         }
         
-        NSArray *copied = [self.playerlList.selectItem trackAtSets:rows];
+        NSArray *copied = [[self.playerlList getSelectedItem] trackAtSets:rows];
         
         PlayerList *newlist = [self.playerlList newPlayerList];
         newlist.name = playlistName;
@@ -1605,7 +1605,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
         
         NSLog(@"objectsToPaste: %@",objectsToPaste);
         
-        NSArray *added = [self.playerlList.selectItem addTrackInfoItems: objectsToPaste];
+        NSArray *added = [[self.playerlList getSelectedItem] addTrackInfoItems: objectsToPaste];
         
         postEvent(EventID_to_reload_tracks, added);
     }
@@ -1666,7 +1666,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 -(void)fileDraggedIn:(NSArray*)arrStringFileNames
 {
-    PlayerList *list = player().document.playerlList.selectItem;
+    const PlayerList *list = [player().document.playerlList getSelectedItem];
     
     NSMutableArray *array = [NSMutableArray array];
     __block NSArray *added;

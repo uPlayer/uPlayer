@@ -67,8 +67,8 @@
 
 /// use selectItem at application's runtime. selectIndex when serialize.
 @property (nonatomic) int selectIndex;
-@property (nonatomic) PlayerList *selectItem;
-
+-(void)setSelectItem:(PlayerList*)list;
+-(const PlayerList*)getSelectedItem;
 
 @property (nonatomic,strong) NSMutableArray *playerlList;
 
@@ -76,8 +76,7 @@
 
 -(NSInteger)getIndex:(PlayerList*)list;
 
-//-(void)setSelectItem:(PlayerList*)list;
-//-(PlayerList*)getSelectedList;
+
 
 -(size_t)count;
 

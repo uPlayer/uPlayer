@@ -149,7 +149,7 @@
 
 -(void)updateUI
 {
-    PlayerTrack *track = player().playing;
+    PlayerTrack *track = Playing();
     
     BOOL stopped = [player().engine isStopped];
     BOOL paused = [player().engine isPaused];
@@ -237,7 +237,7 @@
         [self.window makeFirstResponder:self.albumview];
         
         
-        TrackInfo *info = player().playing.info;
+        TrackInfo *info = Playing().info;
         if (info) {
             NSImage * image =  [[NSImage alloc]initWithData: getId3ImageFromAudio([NSURL fileURLWithPath: info.path])];
             

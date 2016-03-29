@@ -14,7 +14,7 @@
 
 
 @interface PlayerSearchMng : NSObject
-@property (nonatomic,strong) PlayerList *playerlistOriginal,*playerlistFilter;
+@property (nonatomic,strong) const PlayerList *playerlistOriginal,*playerlistFilter;
 @property (nonatomic,strong) NSMutableDictionary *dicFilterToOrginal;//index
 
 -(void)search:(NSString*)key;

@@ -38,8 +38,8 @@ void initLastFm()
     self = [super init];
     if (self)
     {
-        
-        self.document = [[PlayerDocument alloc ] init];
+        [self load];
+//        self.document = [[PlayerDocument alloc ] init];
         
         self.layout= [[PlayerLayout alloc] init];
         self.engine= [[PlayerEngine alloc] init];
@@ -101,4 +101,17 @@ static UPlayer *_player ;
 UPlayer *player()
 {
     return _player?_player:(_player=[[UPlayer alloc]init]);
+}
+
+
+static PlayerTrack *playing = nil;
+
+PlayerTrack* Playing()
+{
+    return playing;
+}
+
+void setPlaying(PlayerTrack* p)
+{
+    playing = p;
 }

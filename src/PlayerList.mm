@@ -21,6 +21,18 @@
 
 @implementation PlayerList
 
+-(void)setName:(NSString *)name
+{
+    _name = name;
+    _isDirty = TRUE;
+}
+
+-(void)setType:(enum PlayerListType)type
+{
+    _type = type;
+    _isDirty = TRUE;
+}
+
 const char fileformat[] = "%08d.plist";
 
 +(instancetype)instanceFromFileIndex:(int)index
@@ -75,13 +87,14 @@ const char fileformat[] = "%08d.plist";
                 track.list = self;
             }
             
+            self.isDirty = FALSE;
         }
         else
         {
+            self.isDirty = TRUE;
             postEvent(EventID_play_error_happened, [PlayerError errorConfigVersionDismatch]);
         }
-        
-        self.isDirty = FALSE;
+
         
         self.fileIndex = -1;
     }
@@ -263,10 +276,21 @@ const char fileformat[] = "%08d.plist";
 
 @interface PlayerlList ()
 @property (nonatomic,strong) PlayerList *tempPlayerlist;
+@property (nonatomic) PlayerList *selectItem;
 @end
 
 
 @implementation PlayerlList
+
+-(void)setSelectItem:(PlayerList*)list
+{
+    _selectItem = list;
+}
+
+-(const PlayerList*)getSelectedItem
+{
+    return _selectItem;
+}
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {

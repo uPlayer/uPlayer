@@ -31,7 +31,7 @@
     PlayerDocument *doc = player().document;
     if (doc.resumeAtReboot && doc.playState != playstate_stopped )
     {
-        PlayerTrack *track = player().playing;
+        PlayerTrack *track = Playing();
         PlayerList *list = track.list;
         
         if ( doc.playState == playstate_playing )
@@ -112,14 +112,14 @@
     postEvent(EventID_track_stopped_playnext, nil);
     
     if( player().document.trackSongsWhenPlayStarted)
-        postEvent(EventID_to_reload_tracklist, player().playing);
+        postEvent(EventID_to_reload_tracklist, Playing());
 }
 
 // action by user.
 -(void)actionPlayNext
 {
     [self playNext];
-    PlayerTrack *track = player().playing;
+    PlayerTrack *track = Playing();
     postEvent(EventID_to_reload_tracklist, track );
 }
 
@@ -135,7 +135,7 @@
     }
     else
     {
-        PlayerTrack *track = player().playing;
+        PlayerTrack *track = Playing();
         PlayerList *list = track.list;
         
         assert(list);
@@ -233,12 +233,12 @@
 {
     PlayerDocument *d = player().document;
     
-    PlayerTrack *track = player().playing;
+    PlayerTrack *track = Playing();
     
-    PlayerList *list = track.list;
+    const PlayerList *list = track.list;
     
     if (!list)
-        list = d.playerlList.selectItem ;
+        list = [d.playerlList getSelectedItem] ;
     
     assert(list);
     
@@ -339,7 +339,7 @@
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
     
-    player().playing = nil;
+    setPlaying(nil);
     
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_state_changed, nil);

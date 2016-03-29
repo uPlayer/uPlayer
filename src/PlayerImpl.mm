@@ -95,7 +95,7 @@ NSArray* enumAudioFiles(NSString* path)
     
    if ([[NSFileManager defaultManager] fileExistsAtPath: path])
    {
-       player().playing = track;
+       setPlaying(track);
        [self playURL:[NSURL fileURLWithPath: path] pauseAfterInit:pfi];
    }
     else
@@ -109,7 +109,7 @@ void playTrack(PlayerTrack *track)
 {
     if (track)
     {
-        player().playing = track;
+        setPlaying(track);
         
         [player().engine playTrackInfo:track pauseAfterInit: FALSE ];
         
@@ -141,7 +141,7 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 
 -(void)willSaveConfig
 {
-    PlayerTrack *track = player().playing;
+    PlayerTrack *track = Playing();
     self.playingIndexTrack = (int)track.index;
     self.playingIndexList = (int)[player().document.playerlList getIndex: track.list];
 }
@@ -151,7 +151,7 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
     [self.playerlList didLoad];
     
     if (self.playingIndexList >= 0 && self.playingIndexTrack >= 0)
-        player().playing = [[self.playerlList getItem: self.playingIndexList] getItem: self.playingIndexTrack];
+        setPlaying( [[self.playerlList getItem: self.playingIndexList] getItem: self.playingIndexTrack]);
     
 }
 
@@ -161,7 +161,7 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 
 -(void)willSave
 {
-    self.selectIndex =  (int) [self getIndex:self.selectItem];
+    self.selectIndex =  (int) [self getIndex:(PlayerList*) [self getSelectedItem]];
 }
 
 -(void)didLoad

@@ -26,8 +26,12 @@
 -(void)save;
 -(void)load;
 
-@property (nonatomic,strong) PlayerTrack *playing;
 @end
+
+
+PlayerTrack* Playing();
+void setPlaying(PlayerTrack* p);
+
 
 @interface PlayerEngine (playTrack)
 -(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi;

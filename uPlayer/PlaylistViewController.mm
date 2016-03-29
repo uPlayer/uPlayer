@@ -52,7 +52,7 @@
     
     [self.tableView resignFirstResponder];
     
-    PlayerTrack *track = player().playing;
+    PlayerTrack *track = Playing();
     
     PlayerList *list = track.list;
     
