@@ -24,30 +24,29 @@ using namespace std;
 
 
 @interface PlayerTrack (serialize)
--(void)saveTo:(FILE*)file;
--(void)loadFrom:(FILE*)file;
+//-(void)saveTo:(FILE*)file;
+//-(void)loadFrom:(FILE*)file;
 @end
 
 @interface PlayerList (serialize)
--(void)saveTo:(NSString*)path;
--(void)loadFrom:(NSString*)path;
+//-(void)saveTo:(NSString*)path;
+//-(void)loadFrom:(NSString*)path;
 @end
 
 @interface PlayerlList (serialize)
--(void)save:(NSString*)applicationDirectory;
--(void)load:(NSString*)applicationDirectory;
+//-(void)save:(NSString*)applicationDirectory;
+//-(void)load:(NSString*)applicationDirectory;
 @end
 
 
 @interface PlayerDocument (serialize) <NSCoding>
--(bool)saveConfig;
--(bool)savePlaylist;
--(bool)load;
+//-(bool)saveConfig;
+//-(bool)savePlaylist;
+//-(bool)load;
 @end
 
 @interface PlayerLayout (serialize)
--(bool)save;
--(bool)load;
+
 @end
 
 

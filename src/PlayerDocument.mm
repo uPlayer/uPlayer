@@ -58,6 +58,50 @@
     return self;
 }
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        
+        [self resetProperty];
+        
+        self.resumeAtReboot = [aDecoder decodeBoolForKey:@"resumeAtReboot"];
+        self.trackSongsWhenPlayStarted = [aDecoder decodeBoolForKey:@"trackSongsWhenPlayStarted"];
+        self.volume = [aDecoder decodeFloatForKey:@"volume"];
+        self.playOrder = [aDecoder decodeIntForKey:@"playOrder"];
+        self.playState = [aDecoder decodeIntForKey:@"playState"];
+        self.fontHeight = [aDecoder decodeIntForKey:@"fontHeight"];
+        self.lastFmEnabled = [aDecoder decodeIntForKey:@"lastFmEnabled"];
+        self.playingIndexList = [aDecoder decodeIntForKey:@"playingIndexList"];
+        self.playingIndexTrack = [aDecoder decodeIntForKey:@"playingIndexTrack"];
+        self.playTime  = [aDecoder decodeDoubleForKey:@"playTime"];
+        
+        
+        self.playerlList =[aDecoder decodeObjectForKey:@"playerlList"];
+        
+        
+        [self didLoad];
+    }
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [self willSaveConfig];
+    
+    [aCoder encodeBool:self.resumeAtReboot forKey:@"resumeAtReboot"];
+    [aCoder encodeBool:self.trackSongsWhenPlayStarted forKey:@"trackSongsWhenPlayStarted"];
+    [aCoder encodeFloat:self.volume forKey:@"volume"];
+    [aCoder encodeInt:self.playOrder forKey:@"playOrder"];
+    [aCoder encodeInt:self.playState forKey:@"playState"];
+    [aCoder encodeInt:self.fontHeight forKey:@"fontHeight"];
+    [aCoder encodeInt:self.lastFmEnabled forKey:@"lastFmEnabled"];
+    [aCoder encodeInt:self.playingIndexList forKey:@"playingIndexList"];
+    [aCoder encodeInt:self.playingIndexTrack forKey:@"playingIndexTrack"];
+    [aCoder encodeFloat:self.playTime forKey:@"playTime"];
+    
+    [aCoder encodeObject:self.playerlList forKey:@"playerlList"];
+}
+
 
 -(BOOL)shouldScrobbleToLastFm
 {

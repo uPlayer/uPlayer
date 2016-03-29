@@ -28,5 +28,9 @@
 
 -(NSData*)getDataByKey:(NSString *)key;
 
+-(bool)save;
+
+-(bool)load;
+
 @end
 

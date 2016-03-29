@@ -9,13 +9,36 @@
 
 #import "PlayerList.h"
 #import "PlayerMessage.h"
+#import "ThreadJob.h"
 
 
 @interface PlayerList()
+
+/// should save to file if is drity
+@property (nonatomic) BOOL isDirty;
 @end
 
 
 @implementation PlayerList
+
+const char fileformat[] = "%08d.plist";
+
++(instancetype)instanceFromFileIndex:(int)index
+{
+    char path2[256];
+    sprintf(path2, fileformat,index);
+    
+    NSString *playlistDirectory = [ ApplicationSupportDirectory()  stringByAppendingPathComponent: playlistDirectoryName ];
+    
+    NSString *listFile = [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ];
+    
+    PlayerList *list = [NSKeyedUnarchiver unarchiveObjectWithFile:listFile];
+    list.fileIndex = index;
+    
+    return list;
+}
+
+
 
 -(instancetype)initWithOwner:(PlayerlList*)llist
 {
@@ -24,9 +47,71 @@
         _llist = llist;
         _selectIndex = -1;
         _topIndex = 0;
+        _fileIndex = -1;
         self.playerTrackList= [NSMutableArray array];
     }
     return self;
+}
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self  = [super init]) {
+        
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+        self.type = (PlayerListType)[aDecoder decodeIntForKey:@"type"];;
+        
+        // is dirty?
+        self.playerTrackList = [NSMutableArray arrayWithArray: [aDecoder decodeObjectForKey:@"playerTrackList"]];
+        if ( self.playerTrackList == nil)
+            self.playerTrackList = [NSMutableArray array];
+        
+        for (PlayerTrack *track in self.playerTrackList) {
+            track.list = self;
+        }
+        
+        
+        
+        self.isDirty = FALSE;
+        
+        self.fileIndex = -1;
+    }
+    
+    return self;
+}
+
+
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeInt:self.type forKey:@"type"];
+    [aCoder encodeObject:self.playerTrackList forKey:@"playerTrackList"];
+}
+
+
+-(void)save
+{
+    assert(self.fileIndex != -1);
+    
+    if (self.isDirty)
+    {
+        NSString *playlistDirectory = [ ApplicationSupportDirectory()  stringByAppendingPathComponent: playlistDirectoryName ];
+        
+        BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:playlistDirectory isDirectory:nil];
+        
+        if (!isExist)
+            [[NSFileManager defaultManager] createDirectoryAtPath:playlistDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        
+        char path2[256];
+        sprintf(path2, fileformat ,self.fileIndex);
+        
+        NSString *listFile = [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ];
+        
+        [NSKeyedArchiver archiveRootObject:self toFile:listFile];
+        self.isDirty = FALSE;
+    }
+    
 }
 
 -(void)markSelected
@@ -80,6 +165,7 @@
         }
         
         [self.playerTrackList addObjectsFromArray: items];
+        self.isDirty = TRUE;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             postEvent(EventID_tracks_changed, self);
@@ -107,6 +193,7 @@
         
         [self.playerTrackList addObjectsFromArray: arr];
         
+        self.isDirty = TRUE;
         dispatch_async(dispatch_get_main_queue(), ^{
             postEvent(EventID_tracks_changed, self);
         });
@@ -121,12 +208,14 @@
 -(void)removeTrack:(NSInteger)index
 {
     [self.playerTrackList removeObjectAtIndex:index];
+    self.isDirty = TRUE;
     postEvent(EventID_tracks_changed, self);
 }
 
 -(void)removeTracks:(NSIndexSet*)indexs
 {
     [self.playerTrackList removeObjectsAtIndexes: indexs];
+    self.isDirty = TRUE;
     postEvent(EventID_tracks_changed, self);
 }
 
@@ -146,6 +235,7 @@
     self.topIndex = -1;
     
     [self.playerTrackList removeAllObjects];
+    self.isDirty = TRUE;
     
     postEvent(EventID_tracks_changed, self);
 }
@@ -165,6 +255,103 @@
 
 
 @implementation PlayerlList
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        
+        self.selectIndex = [aDecoder decodeIntForKey:@"selectIndex"];
+        
+        NSString *playlistDirectory = [ ApplicationSupportDirectory()  stringByAppendingPathComponent: playlistDirectoryName ];
+        
+
+        int count = [aDecoder decodeIntForKey:@"count"];
+        
+        
+        NSArray *arr = [aDecoder decodeObjectForKey:@"playerlList"];
+        self.playerlList = [NSMutableArray array];
+        for (NSDictionary *d in arr) {
+        
+            NSNumber* selectIndex = d[@"selectIndex"];
+            NSNumber* topIndex = d[@"topIndex"];
+            NSNumber* fileIndex = d[@"fileIndex"];
+           
+            PlayerList *list = [PlayerList instanceFromFileIndex:fileIndex.intValue];
+            list.selectIndex = selectIndex.intValue;
+            list.topIndex = topIndex.intValue;
+            
+            [self.playerlList addObject:list];
+        }
+        
+        
+//        
+//        NSMutableArray *array = [NSMutableArray array];
+//        
+//        for (int i = 0; i < count; i++)
+//        {
+//            int index = i + 1;
+//            
+//            char path2[256];
+//            sprintf(path2,"%08d.upl",index);
+//            
+//            NSString *listFile = [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ];
+//            
+//            PlayerList *list = [NSKeyedUnarchiver unarchiveObjectWithFile:listFile];
+//            [array addObject:list];
+//        }
+//        
+//        self.playerlList = array;
+        
+    }
+    
+    return self;
+}
+
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    NSString *playlistDirectory = [ ApplicationSupportDirectory()  stringByAppendingPathComponent: playlistDirectoryName ];
+    
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:playlistDirectory isDirectory:nil];
+    
+    if (!isExist)
+        [[NSFileManager defaultManager] createDirectoryAtPath:playlistDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    [aCoder encodeInteger:self.selectIndex forKey:@"selectIndex"];
+    
+    
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    int count = self.playerlList.count;
+    for (int i = 0; i < count; i++)
+    {
+        PlayerList *l = self.playerlList[i];
+        [l save];
+        
+        NSDictionary *d =
+        @{@"selectIndex":@(l.selectIndex),
+          @"topIndex":@(l.topIndex),
+          @"fileIndex":@(l.fileIndex)};
+        
+        [arr addObject:d];
+    }
+    
+    [aCoder encodeObject:arr forKey:@"playerlList"];
+    
+    
+//    for (int i = 0; i < count; i++)
+//    {
+//        int index = i + 1;
+//        char path2[256];
+//        sprintf(path2,"%08d.upl",index);
+//        
+//        NSString *listFile = [playlistDirectory stringByAppendingPathComponent: [NSString stringWithUTF8String:path2] ];
+//        
+//        [NSKeyedArchiver archiveRootObject:self.playerlList[i] toFile:listFile];
+//    }
+    
+    
+}
 
 -(instancetype)init
 {
@@ -239,6 +426,7 @@
     PlayerList *list = [[PlayerList alloc]initWithOwner:self];
     list.name = name;
     [self.playerlList addObject:list];
+    list.fileIndex = self.playerlList.count - 1;
 //    _selectIndex = (int)self.playerlList.count-1;
     
     postEvent(EventID_list_changed, nil);

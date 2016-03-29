@@ -17,10 +17,16 @@
 @interface PlayerList: NSObject <NSCoding>
 
 @property (nonatomic,strong) NSString *name;
+
 @property (nonatomic) int selectIndex,topIndex;
-@property (nonatomic,strong) NSMutableArray *playerTrackList;//class PlayerTrack
+
+@property (nonatomic,strong) NSMutableArray<PlayerTrack*> *playerTrackList;//class PlayerTrack
 
 @property (nonatomic) enum PlayerListType type;
+
+
+//index in file arrays saved
+@property (nonatomic) int fileIndex;
 
 //
 -(instancetype)initWithOwner:(PlayerlList*)llist;

@@ -146,6 +146,19 @@
 
 
 @implementation PlayerTrack
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if( self  = [super init]){
+        self.info = [aDecoder decodeObjectForKey:@"info"];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.info forKey:@"info"];
+}
 
 -(NSInteger)getIndex
 {

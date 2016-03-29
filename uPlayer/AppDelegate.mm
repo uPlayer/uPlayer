@@ -71,7 +71,8 @@
         [self setUpStatusBar];
         
         // Load document and notify the window
-        [self loadDocument];
+        ///TODO DELETE
+//        [self loadDocument];
         
         [_mainWindowController showWindow:nil];
         
@@ -323,10 +324,10 @@
 {
     PlayerDocument *d = player().document;
     
-    if( [d load] )
-    {
-        postEvent(EventID_to_reload_tracklist, nil);
-    }
+//    if( [d load] )
+//    {
+//        postEvent(EventID_to_reload_tracklist, nil);
+//    }
     
     postEvent(EventID_player_document_loaded, nil);
     
@@ -450,7 +451,7 @@
     
     collectInfo( player().document , player().engine);
     
-    [player().document saveConfig];
+//    [player().document saveConfig];
     
     [player().layout save];
     

@@ -19,9 +19,10 @@
 @end
 
 
-@interface PlayerTrack : NSObject
+@interface PlayerTrack : NSObject <NSCoding>
 
 -(NSInteger)getIndex;
+
 @property (nonatomic,readonly,getter=getIndex) NSInteger index;
 
 @property (nonatomic,strong) TrackInfo *info;

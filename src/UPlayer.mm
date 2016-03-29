@@ -76,12 +76,12 @@ void initLastFm()
 -(void)cmdSaveConfig
 {
     NSLog(@"cmdSaveConfig");
-    [self.document saveConfig];
+//    [self.document saveConfig];
 }
 
 -(void)cmdSavePlaylist
 {
-    [self.document savePlaylist];
+//    [self.document savePlaylist];
 }
 
 -(void)cmdSaveUILayout

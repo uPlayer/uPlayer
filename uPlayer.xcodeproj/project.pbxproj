@@ -60,7 +60,7 @@
 		1ECEB75E1A9052AD006E8C23 /* AccountPreferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75A1A9052AD006E8C23 /* AccountPreferences@2x.png */; };
 		1ECEB7611A9053A2006E8C23 /* LastFMLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */; };
 		1ECEB7621A9053A2006E8C23 /* LastFMLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */; };
-		1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.m */; };
+		1ED021AA1A7B3383008526E8 /* PlayerList.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021A91A7B3383008526E8 /* PlayerList.mm */; };
 		1ED021AD1A7B3C89008526E8 /* PlayerSerachMng.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */; };
 		1ED32D961CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED32D951CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m */; };
 		1ED6B0A51AEA043F00DBEEE4 /* id3Info.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6B0A41AEA043F00DBEEE4 /* id3Info.mm */; };
@@ -214,7 +214,7 @@
 		1ECEB75F1A9053A2006E8C23 /* LastFMLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LastFMLogo.png; sourceTree = "<group>"; };
 		1ECEB7601A9053A2006E8C23 /* LastFMLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LastFMLogo@2x.png"; sourceTree = "<group>"; };
 		1ED021A81A7B3383008526E8 /* PlayerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerList.h; sourceTree = "<group>"; };
-		1ED021A91A7B3383008526E8 /* PlayerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerList.m; sourceTree = "<group>"; };
+		1ED021A91A7B3383008526E8 /* PlayerList.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerList.mm; sourceTree = "<group>"; };
 		1ED021AB1A7B3C89008526E8 /* PlayerSerachMng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSerachMng.h; sourceTree = "<group>"; };
 		1ED021AC1A7B3C89008526E8 /* PlayerSerachMng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSerachMng.m; sourceTree = "<group>"; };
 		1ED32D931CA9054E00D0C87D /* PlayerDocument+ScreenSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlayerDocument+ScreenSaver.h"; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 				1E0B2BF91A7754D000B4FE14 /* PlayerTrack.h */,
 				1E0B2BFA1A7754D000B4FE14 /* PlayerTrack.m */,
 				1ED021A81A7B3383008526E8 /* PlayerList.h */,
-				1ED021A91A7B3383008526E8 /* PlayerList.m */,
+				1ED021A91A7B3383008526E8 /* PlayerList.mm */,
 				1EAA25C01AD67405008F44EC /* MemoryFileBuffer.h */,
 				1EAA25BF1AD67405008F44EC /* MemoryFileBuffer.cpp */,
 				1E0B2BEF1A77536800B4FE14 /* PlayerLayout.h */,
@@ -769,7 +769,7 @@
 				1E65A62B1AC4235C00D21C58 /* PlayerLastFm.mm in Sources */,
 				1E4A13C71BA94C730008CBEE /* threadpool.cpp in Sources */,
 				1EDE8FA91A773D810086677B /* AppDelegate.mm in Sources */,
-				1ED021AA1A7B3383008526E8 /* PlayerList.m in Sources */,
+				1ED021AA1A7B3383008526E8 /* PlayerList.mm in Sources */,
 				1E0B2BF31A77536800B4FE14 /* PlayerDocument.mm in Sources */,
 				1EFD42BF1A91ABFF009D65B5 /* HotKeyPreferences.m in Sources */,
 				1EFD42DE1A91EE85009D65B5 /* shortcutKey.mm in Sources */,
