@@ -28,11 +28,13 @@
 
 -(void)screensaverStarted:(NSNotification*)n
 {
+    NSLog(@"screensaverStarted");
     self.screenSaverRunning = TRUE;
 }
 
 -(void)screensaverStopped:(NSNotification*)n
 {
+    NSLog(@"screensaverStopped");
     self.screenSaverRunning = FALSE;
 }
 

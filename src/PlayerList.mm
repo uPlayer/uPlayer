@@ -78,6 +78,8 @@ const char fileformat[] = "%08d.plist";
             self.name = [aDecoder decodeObjectForKey:@"name"];
             self.type = (PlayerListType)[aDecoder decodeIntForKey:@"type"];;
             
+
+            
             // is dirty?
             self.playerTrackList = [NSMutableArray arrayWithArray: [aDecoder decodeObjectForKey:@"playerTrackList"]];
             if ( self.playerTrackList == nil)

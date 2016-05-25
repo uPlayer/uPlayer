@@ -67,6 +67,12 @@
         
         [self resetProperty];
         
+#ifdef PlayerDocument_ScreenSaver
+        [self monitorScreenSaverEvent];
+#else
+#warning "ScreenSaver not motiter enabled"
+#endif
+        
         int fileVersion = [aDecoder decodeIntForKey:@"version"];
         if ( fileVersion == DocumentConfigFile_Version )
         {
