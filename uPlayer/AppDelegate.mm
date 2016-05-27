@@ -40,6 +40,8 @@
 
 @property (nonatomic,strong)  NSMenu *dockMenu;
 
+@property  bool isLoadItunesMedia;
+
 @end
 
 
@@ -161,12 +163,14 @@
             
             dojobInBkgnd(
                          ^{
+                             self.isLoadItunesMedia = true;
                              postEvent(EventID_importing_tracks_begin, nil);
                              [list  addTrackInfoItems: enumAudioFiles(fileName)];
                          } ,
                          ^{
                              postEvent(EventID_importing_tracks_end, nil);
                              postEvent(EventID_to_reload_tracklist, list);
+                             self.isLoadItunesMedia = false;
                          });
             
         }
@@ -185,6 +189,7 @@
 
 - (IBAction)cmdReloadiTunesMedia:(id)sender
 {
+    
     NSString *alertSuppressionKey = @"ReloadiTunesMedia";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -202,13 +207,20 @@
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
         alert.showsSuppressionButton = YES;
         
-        if( [alert runModal] == NSAlertFirstButtonReturn)
+        NSModalResponse resp = [alert runModal];
+        
+        if(  resp == NSAlertFirstButtonReturn)
             [self reloadiTunesMedia];
+        
+        
         
         if (alert.suppressionButton.state == NSOnState)
             [defaults setBool: YES forKey: alertSuppressionKey];
+        
     }
+    
 }
+
 
 - (IBAction)cmdFind:(id)sender
 {
@@ -394,12 +406,14 @@
     
     dojobInBkgnd(
                  ^{
+                     self.isLoadItunesMedia = true;
                      postEvent(EventID_importing_tracks_begin, nil);
                      [list  addTrackInfoItems: enumAudioFiles( userMusic )];
                  } ,
                  ^{
                      postEvent(EventID_importing_tracks_end, nil);
                      postEvent(EventID_to_reload_tracklist, list);
+                     self.isLoadItunesMedia = false;
                  });
 }
 
@@ -510,11 +524,13 @@
     [[NSAlert alertWithError:error] runModal];
 }
 
-
--(BOOL)importDirectoryEnabled
+-(bool)isMediaItemReloadItunesEnabled
 {
-    return [player().document.playerlList getSelectedItem].type != type_temporary ;
+    // only enabled when not temp playlist, nor not loading itunes media.
+    return [player().document.playerlList getSelectedItem].type != type_temporary && self.isLoadItunesMedia == false;
 }
+
+
 
 
 - (IBAction)cmdLastFm_Love:(id)sender
