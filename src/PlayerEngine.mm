@@ -20,7 +20,7 @@
     BOOL _playTimeEnded;
     dispatch_source_t	_timer;
 }
-@property (nonatomic,strong) AVPlayer *player;
+@property (atomic,strong) AVPlayer *player;
 
 @end
 
@@ -300,18 +300,27 @@
     Float64 duration = CMTimeGetSeconds(asset.duration);
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
     
-    [_player replaceCurrentItemWithPlayerItem: item ];
+    NSArray *keys = @[@"playable"];
     
-    if (pfi == false)
-        [_player play];
-
-    _playTimeEnded = FALSE;
+    [item.asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
+     
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_player replaceCurrentItemWithPlayerItem: item ];
+            
+            if (pfi == false)
+                [_player play];
+            
+            _playTimeEnded = FALSE;
+            
+            ProgressInfo *info = [[ProgressInfo alloc]init];
+            info.total =  duration;
+            postEvent(EventID_track_started, info);
+            
+            postEvent(EventID_track_state_changed, nil);
+        });
+        
+    }];
     
-    ProgressInfo *info = [[ProgressInfo alloc]init];
-    info.total =  duration;
-    postEvent(EventID_track_started, info);
-    
-    postEvent(EventID_track_state_changed, nil);
     
     return 1;
 }

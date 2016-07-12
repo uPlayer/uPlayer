@@ -168,30 +168,14 @@ void collectInfo(PlayerDocument *d , PlayerEngine *e)
 {
     if( self.selectIndex != -1)
         self.selectItem = [self getItem: self.selectIndex];
- 
     
     for (PlayerList *list in self.playerlList) {
-        
         if (list.type == type_temporary) {
             [self setTempPlayerList:list];
-            
-#ifdef DEBUG
-            static int tempCount = 0;
-            tempCount++;
-            if (tempCount>1) {
-                assert(false);
-            }
-#else
             break;
-#endif
-            
-            
         }
     }
-    
-    
 
-    
 }
 
 @end

@@ -446,17 +446,35 @@ const char fileformat[] = "%08d.plist";
 
 -(PlayerList*)tempPlayerList
 {
-    if (!_tempPlayerlist)
-    {
-        self.tempPlayerlist = [self newPlayerListWithName:@"temporary playlist"];
-        _tempPlayerlist.type = type_temporary;
+#ifdef DEBUG
+    int tempCount = 0;
+    for (  PlayerList *list in self.playerlList) {
+        if (list.type == type_temporary) {
+            tempCount ++;
+        }
     }
     
+    assert( (tempCount == 1 && _tempPlayerlist != nil)  ||
+           (tempCount == 0 && _tempPlayerlist == nil) );
+#endif
+    
+    if (!_tempPlayerlist)
+    {
+        [self setTempPlayerList: [self newPlayerListWithName:@"temporary playlist"]];
+    }
+ 
     return _tempPlayerlist;
 }
 
 -(void)setTempPlayerList:(PlayerList*)list
 {
+    
+#ifdef DEBUG
+    if (list && self.tempPlayerlist) {
+        assert(false);
+    }
+#endif
+    
     self.tempPlayerlist = list;
     list.type = type_temporary;
 }
