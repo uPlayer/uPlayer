@@ -14,10 +14,11 @@
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
 
+static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlayerDemoPlaybackViewControllerRateObservationContext;
+
 @interface PlayerEngine ()
 {
     PlayState _state;
-    BOOL _playTimeEnded;
     dispatch_source_t	_timer;
 }
 @property (atomic,strong) AVPlayer *player;
@@ -49,8 +50,6 @@
     self = [super init];
     if (self) {
         
-        _playTimeEnded = TRUE;
-        
         _state = playstate_stopped;
         
         self.player = [[AVPlayer alloc]init];
@@ -70,6 +69,12 @@
         addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
         
 
+        /* Observe the AVPlayer "rate" property to update the scrubber control. */
+        [self.player addObserver:self
+                      forKeyPath:@"rate"
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:AVPlayerDemoPlaybackViewControllerRateObservationContext];
+        
         
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
         
@@ -105,8 +110,6 @@
 
 -(void)DidPlayToEndTime:(NSNotification*)n
 {
-    _playTimeEnded = TRUE;
-    
     [self stopInner];
     
     postEvent(EventID_track_stopped_playnext, nil);
@@ -191,36 +194,28 @@
 
 -(PlayState)getPlayState
 {
-    if ( _playTimeEnded )
-    {
-        return playstate_stopped;
-    }
-    else
-    {
-        if (_player.rate == 0.0)
-        {
-            return playstate_paused;
-        }
-        else
-        {
-            return playstate_playing;
-        }
-    }
+    return _state;
 }
 
 -(BOOL)isPlaying
 {
-    return  (_player.currentItem != nil) && (_player.rate == 1.0) ;
+//    NSLog(@"isPlaying");
+    return _state == playstate_playing;
+//    return  (_player.currentItem != nil) && (_player.rate != 0.f ) ;
 }
 
 -(bool)isPaused
 {
-    return _player.rate == 0.0;
+//    NSLog(@"isPaused");
+    return _state == playstate_paused;
+//    return _player.rate == 0.0;
 }
 
 -(bool)isStopped
 {
-    return _player.currentItem == nil;
+//    NSLog(@"isStopped");
+    return  _state == playstate_stopped;
+//    return _player.currentItem == nil;
 }
 
 -(bool)isPending
@@ -273,7 +268,6 @@
     {
         [_player play];
         _state = playstate_playing ;
-        _playTimeEnded = FALSE;
         postEvent(EventID_track_resumed, nil);
     }
     
@@ -296,36 +290,53 @@
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
 {
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
+    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset automaticallyLoadedAssetKeys:@[@"playable",@"duration"]];
     
-    Float64 duration = CMTimeGetSeconds(asset.duration);
-    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
+    @try {
+        [_player replaceCurrentItemWithPlayerItem: item ];
+    } @catch (NSException *exception) {
+        NSLog(@"replaceCurrentItemWithPlayerItem: %@",exception);
+    } @finally {
+    }
     
-    NSArray *keys = @[@"playable"];
+    if (pfi == false)
+        [_player play];
     
-    [item.asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
-     
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_player replaceCurrentItemWithPlayerItem: item ];
-            
-            if (pfi == false)
-                [_player play];
-            
-            _playTimeEnded = FALSE;
-            
-            ProgressInfo *info = [[ProgressInfo alloc]init];
-            info.total =  duration;
-            postEvent(EventID_track_started, info);
-            
-            postEvent(EventID_track_state_changed, nil);
-        });
-        
-    }];
+    ProgressInfo *info = [[ProgressInfo alloc]init];
+    info.total = CMTimeGetSeconds( item.duration);
     
+    postEvent(EventID_track_started, info);
+    
+    postEvent(EventID_track_state_changed, nil);
     
     return 1;
 }
 
 
+- (void)observeValueForKeyPath:(NSString*) path
+                      ofObject:(id)object
+                        change:(NSDictionary*)change
+                       context:(void*)context
+{
+    /* AVPlayer "rate" property value observer. */
+    if (context == AVPlayerDemoPlaybackViewControllerRateObservationContext)
+    {
+        [self syncPlayerRate];
+    }
+}
+
+-(void)syncPlayerRate
+{
+    float rate = _player.rate;
+    if (rate == 0.f) {
+        _state = playstate_paused;
+    }
+    else
+    {
+        _state = playstate_playing;
+    }
+    
+}
 
 -(BOOL)playURL:(NSURL *)url
 {
@@ -337,6 +348,7 @@
     [_player pause];
     [_player replaceCurrentItemWithPlayerItem:nil];
     
+    _state = playstate_stopped;
     
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_state_changed, nil);
