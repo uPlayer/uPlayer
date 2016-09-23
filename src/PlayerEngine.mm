@@ -21,8 +21,8 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
     PlayState _state;
     dispatch_source_t	_timer;
 }
-@property (atomic,strong) AVPlayer *player;
-
+//@property (atomic,strong) AVPlayer *player;
+@property (atomic,strong) AVQueuePlayer *player;
 @end
 
 @implementation PlayerEngine
@@ -52,8 +52,11 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
         
         _state = playstate_stopped;
         
-        self.player = [[AVPlayer alloc]init];
-        self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+//        self.player = [[AVPlayer alloc]init];
+//        self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+        
+        
+        
         
         
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
@@ -69,11 +72,7 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
         addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
         
 
-        /* Observe the AVPlayer "rate" property to update the scrubber control. */
-        [self.player addObserver:self
-                      forKeyPath:@"rate"
-                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                         context:AVPlayerDemoPlaybackViewControllerRateObservationContext];
+
         
         
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
@@ -287,20 +286,42 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
     return CMTimeGetSeconds(time);
 }
 
--(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pfi
+-(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit
 {
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
     AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset automaticallyLoadedAssetKeys:@[@"playable",@"duration"]];
-    
-    @try {
-        [_player replaceCurrentItemWithPlayerItem: item ];
-    } @catch (NSException *exception) {
-        NSLog(@"replaceCurrentItemWithPlayerItem: %@",exception);
-    } @finally {
+ 
+    if (_player == nil) {
+        _player = [AVQueuePlayer queuePlayerWithItems:@[item]];
+ 
+        /* Observe the AVPlayer "rate" property to update the scrubber control. */
+        [self.player addObserver:self
+                      forKeyPath:@"rate"
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:AVPlayerDemoPlaybackViewControllerRateObservationContext];
+        
+        
+        if (!pauseAfterInit)
+            [_player play];
+    }
+    else{
+        
+        if ([_player canInsertItem:item afterItem:nil]) {
+            [_player insertItem:item afterItem: nil ];
+            if ([_player items].count == 1) {
+                [_player play];
+            }
+            else{
+                [_player advanceToNextItem];
+            }
+        }
+        else{
+            NSLog(@"can not insert to play queue");
+        }
+        
     }
     
-    if (pfi == false)
-        [_player play];
+  
     
     ProgressInfo *info = [[ProgressInfo alloc]init];
     info.total = CMTimeGetSeconds( item.duration);
