@@ -9,6 +9,7 @@
 #import "PlayerTypeDefines.h"
 
 @class PlayerTrack;
+@class ProgressInfo;
 
 @interface PlayerEngine : NSObject
 
@@ -41,6 +42,8 @@
 
 /// save info and stop.
 -(struct PlayStateTime)close;
+
+@property (nonatomic,strong,readonly) ProgressInfo *progressInfo;
 
 @end
 

@@ -14,18 +14,79 @@
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
 
-static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlayerDemoPlaybackViewControllerRateObservationContext;
+static void *ObservationContext_Rate = &ObservationContext_Rate;
+static void *ObservationContext_Duration = &ObservationContext_Duration;
+
 
 @interface PlayerEngine ()
 {
     PlayState _state;
     dispatch_source_t	_timer;
+    BOOL firstLoaded;
 }
-//@property (atomic,strong) AVPlayer *player;
 @property (atomic,strong) AVQueuePlayer *player;
+@property (nonatomic,strong) AVPlayerItem * item;
 @end
 
 @implementation PlayerEngine
+
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        firstLoaded = true;
+        
+        _state = playstate_stopped;
+        
+        _progressInfo = [ProgressInfo new];
+        
+        _player = [AVQueuePlayer queuePlayerWithItems:@[]];
+ 
+        [self.player addObserver:self
+                      forKeyPath:@"rate"
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context: ObservationContext_Rate];
+        
+        addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
+        
+        addObserverForEvent(self, @selector(actionPlayNext), EventID_to_play_next);
+        
+        addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
+       
+        addObserverForEvent(self, @selector(stop), EventID_to_stop);
+        
+        addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
+        
+        addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
+        
+
+        
+        NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
+        
+        [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+        
+        // Update the UI 5 times per second
+        _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+        dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 2, NSEC_PER_SEC / 3);
+        
+        dispatch_source_set_event_handler(_timer, ^{
+            
+                if ( [self getPlayState] != playstate_stopped)
+                {
+                    [self syncTime];
+                    
+                    postEvent(EventID_track_progress_changed, _progressInfo );
+                }
+        });
+        
+        // Start the timer
+        dispatch_resume(_timer);
+    }
+    
+    return self;
+}
+
 
 -(void)needResumePlayAtBoot
 {
@@ -44,66 +105,6 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
             [self seekToTime:doc.playTime];
     }
 }
-
--(instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-        _state = playstate_stopped;
-        
-//        self.player = [[AVPlayer alloc]init];
-//        self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
-        
-        
-        
-        
-        
-        addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
-        
-        addObserverForEvent(self, @selector(actionPlayNext), EventID_to_play_next);
-        
-        addObserverForEvent(self, @selector(needResumePlayAtBoot), EventID_player_document_loaded);
-       
-        addObserverForEvent(self, @selector(stop), EventID_to_stop);
-        
-        addObserverForEvent(self, @selector(playPause), EventID_to_play_pause_resume);
-        
-        addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
-        
-
-
-        
-        
-        NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
-        
-        [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-        
-        // Update the UI 5 times per second
-        _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-        dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 2, NSEC_PER_SEC / 3);
-        
-        dispatch_source_set_event_handler(_timer, ^{
-            
-                if ( [self getPlayState] != playstate_stopped)
-                {
-                    ProgressInfo *info=[[ProgressInfo alloc]init];
-                    info.current =  [self currentTime];
-                    info.total = CMTimeGetSeconds( _player.currentItem.duration );
-                    
-                    postEvent(EventID_track_progress_changed, info);
-                }
-        });
-        
-        // Start the timer
-        dispatch_resume(_timer);
-    }
-    
-    return self;
-}
-
-
-
 
 
 
@@ -198,23 +199,17 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
 
 -(BOOL)isPlaying
 {
-//    NSLog(@"isPlaying");
     return _state == playstate_playing;
-//    return  (_player.currentItem != nil) && (_player.rate != 0.f ) ;
 }
 
 -(bool)isPaused
 {
-//    NSLog(@"isPaused");
     return _state == playstate_paused;
-//    return _player.rate == 0.0;
 }
 
 -(bool)isStopped
 {
-//    NSLog(@"isStopped");
     return  _state == playstate_stopped;
-//    return _player.currentItem == nil;
 }
 
 -(bool)isPending
@@ -286,51 +281,64 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
     return CMTimeGetSeconds(time);
 }
 
+-(void)syncTime
+{
+    CMTime time = _player.currentTime;
+    _progressInfo.current = CMTimeGetSeconds(time);
+}
+
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit
 {
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
-    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset automaticallyLoadedAssetKeys:@[@"playable",@"duration"]];
- 
-    if (_player == nil) {
-        _player = [AVQueuePlayer queuePlayerWithItems:@[item]];
- 
-        /* Observe the AVPlayer "rate" property to update the scrubber control. */
-        [self.player addObserver:self
-                      forKeyPath:@"rate"
-                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                         context:AVPlayerDemoPlaybackViewControllerRateObservationContext];
+    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
+    
+    
+    if ([_player canInsertItem:item afterItem:nil])
+    {
+        [_player insertItem:item afterItem: nil ];
         
+        [self.item removeObserver:self forKeyPath:@"duration" context:ObservationContext_Duration];
         
-        if (!pauseAfterInit)
-            [_player play];
-    }
-    else{
+        self.item = item;
         
-        if ([_player canInsertItem:item afterItem:nil]) {
-            [_player insertItem:item afterItem: nil ];
-            if ([_player items].count == 1) {
+        [item addObserver:self
+               forKeyPath:@"duration"
+                  options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                  context: ObservationContext_Duration];
+        
+        if ([_player items].count == 1)
+        {
+            if ( firstLoaded ) {
+                firstLoaded = FALSE;
+                
+                if (!pauseAfterInit)
+                    [_player play];
+            }
+            else
                 [_player play];
-            }
-            else{
-                [_player advanceToNextItem];
-            }
         }
         else{
-            NSLog(@"can not insert to play queue");
+            
+            [_player advanceToNextItem];
         }
         
+        
+        [self syncTime];
+        
+        _progressInfo.total = CMTimeGetSeconds(asset.duration);
+        
+        postEvent(EventID_track_started, _progressInfo );
+        
+        postEvent(EventID_track_state_changed, nil);
+        
+        return TRUE;
+    }
+    else{
+        NSLog(@"can not insert to play queue");
+        return FALSE;
     }
     
-  
     
-    ProgressInfo *info = [[ProgressInfo alloc]init];
-    info.total = CMTimeGetSeconds( item.duration);
-    
-    postEvent(EventID_track_started, info);
-    
-    postEvent(EventID_track_state_changed, nil);
-    
-    return 1;
 }
 
 
@@ -339,10 +347,12 @@ static void *AVPlayerDemoPlaybackViewControllerRateObservationContext = &AVPlaye
                         change:(NSDictionary*)change
                        context:(void*)context
 {
-    /* AVPlayer "rate" property value observer. */
-    if (context == AVPlayerDemoPlaybackViewControllerRateObservationContext)
+    if (context == ObservationContext_Rate)
     {
         [self syncPlayerRate];
+    }
+    else if(context == ObservationContext_Duration){
+        _progressInfo.total = CMTimeGetSeconds(_player.currentItem.duration);
     }
 }
 
