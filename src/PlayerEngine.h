@@ -36,8 +36,6 @@
 
 -(void)seekToTime:(NSTimeInterval)time;
 
--(NSTimeInterval)currentTime;
-
 -(void)stop;
 
 /// save info and stop.

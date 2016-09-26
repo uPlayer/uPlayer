@@ -23,9 +23,11 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
     PlayState _state;
     dispatch_source_t	_timer;
     BOOL firstLoaded;
+    CMTime duration;
 }
 @property (atomic,strong) AVQueuePlayer *player;
 @property (nonatomic,strong) AVPlayerItem * item;
+@property (nonatomic,strong) id timeObserver;
 @end
 
 @implementation PlayerEngine
@@ -33,8 +35,8 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 -(instancetype)init
 {
     self = [super init];
-    if (self) {
-        
+    if (self)
+    {
         firstLoaded = true;
         
         _state = playstate_stopped;
@@ -66,7 +68,10 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         
         [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         
+        
+        
         // Update the UI 5 times per second
+        /*
         _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
         dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 2, NSEC_PER_SEC / 3);
         
@@ -82,7 +87,13 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         
         // Start the timer
         dispatch_resume(_timer);
+    */
+        
+        
     }
+    
+    
+    
     
     return self;
 }
@@ -272,14 +283,10 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 
 -(void)seekToTime:(NSTimeInterval)time
 {
-    [_player seekToTime: CMTimeMakeWithSeconds( time , 1) ];
+    CMTime target = CMTimeMake(time *duration.timescale , duration.timescale);
+    [_player seekToTime:  target ];
 }
 
--(NSTimeInterval)currentTime
-{
-   	CMTime time = _player.currentTime;
-    return CMTimeGetSeconds(time);
-}
 
 -(void)syncTime
 {
@@ -296,6 +303,21 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
     if ([_player canInsertItem:item afterItem:nil])
     {
         [_player insertItem:item afterItem: nil ];
+ 
+        
+        
+        if (self.timeObserver) {
+            [_player removeTimeObserver: self.timeObserver ];
+        }
+        
+        // half secsonds
+        CMTime t = CMTimeMake( asset.duration.timescale / 2.0 , asset.duration.timescale );
+        __weak typeof(self) weakSelf = self;
+        self.timeObserver = [_player addPeriodicTimeObserverForInterval:t queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+            weakSelf.progressInfo.current = CMTimeGetSeconds(time);
+            postEvent(EventID_track_progress_changed, weakSelf.progressInfo );
+        }];
+        
         
         [self.item removeObserver:self forKeyPath:@"duration" context:ObservationContext_Duration];
         
@@ -325,7 +347,10 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         
         [self syncTime];
         
-        _progressInfo.total = CMTimeGetSeconds(asset.duration);
+        duration = asset.duration;
+        
+        _progressInfo.total = CMTimeGetSeconds(duration);
+        
         
         postEvent(EventID_track_started, _progressInfo );
         
@@ -352,7 +377,8 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         [self syncPlayerRate];
     }
     else if(context == ObservationContext_Duration){
-        _progressInfo.total = CMTimeGetSeconds(_player.currentItem.duration);
+        duration = _player.currentItem.duration;
+        _progressInfo.total = CMTimeGetSeconds( duration );
     }
 }
 
@@ -377,7 +403,6 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 -(void)stopInner
 {
     [_player pause];
-    [_player replaceCurrentItemWithPlayerItem:nil];
     
     _state = playstate_stopped;
     
@@ -389,7 +414,6 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 -(void)stop
 {
     [_player pause];
-    [_player replaceCurrentItemWithPlayerItem:nil];
     
     setPlaying(nil);
     
@@ -400,7 +424,7 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 -(PlayStateTime)close
 {
     PlayStateTime st;
-    st.time =[self currentTime];
+    st.time = _progressInfo.current;
     st.state = [self getPlayState];
     st.volume = self.volume;
     [self stopInner];
