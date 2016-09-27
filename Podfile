@@ -5,6 +5,6 @@ target 'uPlayer' do
 pod 'socketTool'
 pod 'serialize', :git => 'https://github.com/liaogang/serialize'
 pod 'Last.fm', :git => 'https://github.com/liaogang/Last.fm'
-pod 'Sparkle', '~> 1.11.1'
+pod 'Sparkle', '~> 1.14.0'
 end
 
