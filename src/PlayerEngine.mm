@@ -67,33 +67,7 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
         
         [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-        
-        
-        
-        // Update the UI 5 times per second
-        /*
-        _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-        dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, NSEC_PER_SEC / 2, NSEC_PER_SEC / 3);
-        
-        dispatch_source_set_event_handler(_timer, ^{
-            
-                if ( [self getPlayState] != playstate_stopped)
-                {
-                    [self syncTime];
-                    
-                    postEvent(EventID_track_progress_changed, _progressInfo );
-                }
-        });
-        
-        // Start the timer
-        dispatch_resume(_timer);
-    */
-        
-        
     }
-    
-    
-    
     
     return self;
 }
@@ -121,8 +95,6 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 
 -(void)DidPlayToEndTime:(NSNotification*)n
 {
-    [self stopInner];
-    
     postEvent(EventID_track_stopped_playnext, nil);
     
     if( player().document.trackSongsWhenPlayStarted)
@@ -287,13 +259,6 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
     [_player seekToTime:  target ];
 }
 
-
--(void)syncTime
-{
-    CMTime time = _player.currentTime;
-    _progressInfo.current = CMTimeGetSeconds(time);
-}
-
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit
 {
     AVURLAsset *asset = [AVURLAsset assetWithURL: url];
@@ -303,8 +268,6 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
     if ([_player canInsertItem:item afterItem:nil])
     {
         [_player insertItem:item afterItem: nil ];
- 
-        
         
         if (self.timeObserver) {
             [_player removeTimeObserver: self.timeObserver ];
@@ -345,7 +308,7 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         }
         
         
-        [self syncTime];
+        _progressInfo.current = 0;
         
         duration = asset.duration;
         
