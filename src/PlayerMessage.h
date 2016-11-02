@@ -71,7 +71,9 @@ typedef enum : NSUInteger {
     EventID_to_love_item, // PlayerTrack* item; nil to love the playing item
     
     /// @param: NSNumber *font_size; but -1 to show larger,-2 to show smaller,0 means normal
-    EventID_to_set_font_size
+    EventID_to_set_font_size,
+    
+    EventID_to_show_hide_table_header,
 } EventID;
 
 

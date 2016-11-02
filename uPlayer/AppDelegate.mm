@@ -27,14 +27,18 @@
 #import "PlayerLastFm.h"
 
 #import <Sparkle/SUAppcast.h>
+#import "TracklistViewController.h"
+
 
 @interface AppDelegate ()
+<NSMenuDelegate>
 
 @property (nonatomic,strong) NSWindowController * mainWindowController;
 
 @property (weak) IBOutlet NSMenuItem *menuOpenDirectory;
 
 @property (weak) IBOutlet NSMenuItem *menuPlayOrPause;
+@property (weak) IBOutlet NSMenuItem *menuShowHideTableHeader;
 
 @property (nonatomic,strong) NSStatusItem *statusItem;
 
@@ -42,11 +46,15 @@
 
 @property  bool isLoadItunesMedia;
 
+@property (nonatomic,strong) NSString *titleShowTableHeader,*titleHideTableHeader;
+@property (weak) IBOutlet NSMenu *mainMenu;
+
 @end
 
 
 
 @implementation AppDelegate
+
 -(instancetype)init
 {
     self = [super init];
@@ -74,10 +82,15 @@
         [self loadDocument];
         
         [_mainWindowController showWindow:nil];
+     
+
+        
     }
     
     return self;
 }
+
+
 
 -(void)addObservers
 {
@@ -110,7 +123,7 @@
     [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs: urlArr ];
 }
 
-- (IBAction)cmdPlayPause:(id)sender {
+- (IBAction)cmdPlayPause:(NSMenuItem *)sender {
     
     PlayerEngine *e = player().engine;
     
@@ -263,6 +276,19 @@
         postEvent(EventID_to_reload_playlist, nextList);
 }
 
+- (IBAction)cmdShowHideTableHeader:(NSMenuItem *)sender {
+    
+    if ( ((TracklistViewController*)(WindowController*)self.mainWindowController.contentViewController).tableHeaderHidden ) {
+        sender.title = _titleHideTableHeader;
+    }
+    else{
+        sender.title = _titleShowTableHeader;
+    }
+    
+    postEvent(EventID_to_show_hide_table_header, nil);
+    
+}
+
 - (IBAction)setFontLarger:(id)sender {
     postEvent(EventID_to_set_font_size, @(-1));
 }
@@ -350,6 +376,8 @@
 {
 }
 
+
+
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
     NSMutableArray *trackInfos = [NSMutableArray array];
@@ -388,6 +416,20 @@
     {
         [self loadiTunesMedia];
     }
+ 
+    
+    
+    self.titleShowTableHeader = NSLocalizedString( @"Show Table Header",nil) ;
+    self.titleHideTableHeader = NSLocalizedString(@"Hide Table Header",nil);
+    
+    if ( loadValueTableHeaderHidden()) {
+        self.menuShowHideTableHeader.title = self.titleShowTableHeader;
+    }
+    else{
+        self.menuShowHideTableHeader.title = self.titleHideTableHeader;
+    }
+    
+    self.mainMenu.delegate = self;
     
 }
 

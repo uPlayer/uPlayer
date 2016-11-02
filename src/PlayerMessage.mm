@@ -62,7 +62,8 @@ const char *arrEvent[] =
     "to_play_random",
     "to_play_item",
     "to_love_item",
-    "to_set_font_size"
+    "to_set_font_size",
+    "to_show_hide_table_header"
 };
 
 NSNotificationCenter *sCenter ;

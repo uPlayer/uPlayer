@@ -34,7 +34,7 @@ void setPlaying(PlayerTrack* p);
 
 
 @interface PlayerEngine (playTrack)
--(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi;
+-(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi startTime:(NSTimeInterval)startTime;
 @end
 
 
@@ -49,7 +49,7 @@ extern "C" {
 
     void playTrack(PlayerTrack *track);
     
-    void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track);
+    void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track,NSTimeInterval startTime);
     
     void collectInfo(PlayerDocument *d , PlayerEngine *e);
     

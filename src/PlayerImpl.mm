@@ -89,14 +89,14 @@ NSArray* enumAudioFiles(NSString* path)
 
 
 @implementation PlayerEngine (playTrack)
--(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi
+-(void)playTrackInfo:(PlayerTrack*)track pauseAfterInit:(BOOL)pfi startTime:(NSTimeInterval)startTime
 {
     NSString *path = track.info.path;
     
    if ([[NSFileManager defaultManager] fileExistsAtPath: path])
    {
        setPlaying(track);
-       [self playURL:[NSURL fileURLWithPath: path] pauseAfterInit:pfi];
+       [self playURL:[NSURL fileURLWithPath: path] pauseAfterInit:pfi startTime:0];
    }
     else
         postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile: path]);
@@ -111,7 +111,7 @@ void playTrack(PlayerTrack *track)
     {
         setPlaying(track);
         
-        [player().engine playTrackInfo:track pauseAfterInit: FALSE ];
+        [player().engine playTrackInfo:track pauseAfterInit: FALSE startTime:0 ];
         
         // playing track index changed.
         postEvent( EventID_to_save_config, nil);
@@ -120,10 +120,10 @@ void playTrack(PlayerTrack *track)
     
 }
 
-void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track)
+void playTrackPauseAfterInit(PlayerList *list,PlayerTrack *track,NSTimeInterval startTime)
 {
     if (track)
-        [player().engine playTrackInfo:track pauseAfterInit: TRUE ];
+        [player().engine playTrackInfo:track pauseAfterInit: TRUE startTime:startTime ];
 }
 
 void collectInfo(PlayerDocument *d , PlayerEngine *e)

@@ -16,18 +16,22 @@
 
 static void *ObservationContext_Rate = &ObservationContext_Rate;
 static void *ObservationContext_Duration = &ObservationContext_Duration;
+static void *ObservationContext_Status = &ObservationContext_Status;
 
+
+const NSTimeInterval timeInterval = 0.2;
 
 @interface PlayerEngine ()
 {
     PlayState _state;
-    dispatch_source_t	_timer;
     BOOL firstLoaded;
-    CMTime duration;
+    int justSeeked;
 }
-@property (atomic,strong) AVQueuePlayer *player;
-@property (nonatomic,strong) AVPlayerItem * item;
-@property (nonatomic,strong) id timeObserver;
+
+@property (nonatomic,strong) AVAudioEngine  *audioEngine;
+@property (nonatomic,strong) AVAudioPlayerNode  *audioFilePlayer;
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic, readonly) double sampleRate;
 @end
 
 @implementation PlayerEngine
@@ -37,18 +41,15 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
     self = [super init];
     if (self)
     {
+        
+        _audioEngine = [AVAudioEngine new];
+        _audioFilePlayer = [AVAudioPlayerNode new];
+        [_audioEngine attachNode:_audioFilePlayer];
+        
         firstLoaded = true;
-        
         _state = playstate_stopped;
-        
         _progressInfo = [ProgressInfo new];
-        
-        _player = [AVQueuePlayer queuePlayerWithItems:@[]];
- 
-        [self.player addObserver:self
-                      forKeyPath:@"rate"
-                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                         context: ObservationContext_Rate];
+
         
         addObserverForEvent(self, @selector(playNext), EventID_track_stopped_playnext);
         
@@ -62,17 +63,30 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         
         addObserverForEvent(self, @selector(actionPlayRandom), EventID_to_play_random);
         
-
+        [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(timerComing) userInfo:nil repeats:YES];
         
-        NSNotificationCenter *d =[NSNotificationCenter defaultCenter];
-        
-        [d addObserver:self selector:@selector(DidPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
     
     return self;
 }
-
-
+    
+-(void)timerComing
+{
+    if (justSeeked > 0)
+    {
+        justSeeked-=1;
+    }
+    else
+    {
+        if ( _state == playstate_playing )
+        {
+            _progressInfo.current += timeInterval;
+            postEvent(EventID_track_progress_changed, _progressInfo);
+        }
+    }
+    
+}
+    
 -(void)needResumePlayAtBoot
 {
     PlayerDocument *doc = player().document;
@@ -82,15 +96,16 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
         PlayerList *list = track.list;
         
         if ( doc.playState == playstate_playing )
+        {
             playTrack( track );
+        }
         else
-            playTrackPauseAfterInit( list, track );
+        {
+            playTrackPauseAfterInit( list, track , doc.playTime);
+        }
         
-        if (doc.playTime > 0)
-            [self seekToTime:doc.playTime];
     }
 }
-
 
 
 -(void)DidPlayToEndTime:(NSNotification*)n
@@ -172,6 +187,7 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 
 -(void)dealloc
 {
+//    [self.player removeTimeObserver:self.timeObserver];
     removeObserver(self);
 }
 
@@ -237,13 +253,13 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 -(void)playPause
 {
     if (self.isPlaying) {
-        [_player pause];
+        [_audioFilePlayer pause];
         _state = playstate_paused ;
         postEvent(EventID_track_paused, nil);
     }
     else if (self.isPaused)
     {
-        [_player play];
+        [_audioFilePlayer play];
         _state = playstate_playing ;
         postEvent(EventID_track_resumed, nil);
     }
@@ -255,117 +271,77 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 
 -(void)seekToTime:(NSTimeInterval)time
 {
-    CMTime target = CMTimeMake(time *duration.timescale , duration.timescale);
-    [_player seekToTime:  target ];
+    justSeeked = 2;
+    _progressInfo.current = time + 2 * timeInterval;
+   
+    AVAudioTime *startTime = [AVAudioTime timeWithSampleTime:time * self.sampleRate atRate:self.sampleRate];
+    [_audioFilePlayer pause];
+    [_audioFilePlayer playAtTime:startTime];
 }
 
--(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit
+    
+-(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit startTime:(NSTimeInterval)startTime
 {
-    AVURLAsset *asset = [AVURLAsset assetWithURL: url];
-    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
+    NSURL* fileURL = url;
+    auto audioFile = [[AVAudioFile alloc] initForReading:fileURL error:nil];
+    auto audioFormat = audioFile.processingFormat;
+    uint32 audioFrameCount = (uint32)audioFile.length;
+    auto audioFileBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:audioFormat frameCapacity: audioFrameCount];
+    [audioFile readIntoBuffer:audioFileBuffer error:nil];
     
     
-    if ([_player canInsertItem:item afterItem:nil])
-    {
-        [_player insertItem:item afterItem: nil ];
-        
-        if (self.timeObserver) {
-            [_player removeTimeObserver: self.timeObserver ];
-        }
-        
-        // half secsonds
-        CMTime t = CMTimeMake( asset.duration.timescale / 2.0 , asset.duration.timescale );
-        __weak typeof(self) weakSelf = self;
-        self.timeObserver = [_player addPeriodicTimeObserverForInterval:t queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-            weakSelf.progressInfo.current = CMTimeGetSeconds(time);
-            postEvent(EventID_track_progress_changed, weakSelf.progressInfo );
-        }];
-        
-        
-        [self.item removeObserver:self forKeyPath:@"duration" context:ObservationContext_Duration];
-        
-        self.item = item;
-        
-        [item addObserver:self
-               forKeyPath:@"duration"
-                  options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                  context: ObservationContext_Duration];
-        
-        if ([_player items].count == 1)
-        {
-            if ( firstLoaded ) {
-                firstLoaded = FALSE;
-                
-                if (!pauseAfterInit)
-                    [_player play];
-            }
-            else
-                [_player play];
-        }
-        else{
-            
-            [_player advanceToNextItem];
-        }
-        
-        
-        _progressInfo.current = 0;
-        
-        duration = asset.duration;
-        
-        _progressInfo.total = CMTimeGetSeconds(duration);
-        
-        
-        postEvent(EventID_track_started, _progressInfo );
-        
-        postEvent(EventID_track_state_changed, nil);
-        
-        return TRUE;
+    auto mainMixer = _audioEngine.mainMixerNode;
+    
+    [_audioEngine connect:_audioFilePlayer to:mainMixer format:audioFileBuffer.format];
+    [_audioEngine startAndReturnError:nil];
+   
+    
+    AVAudioFormat *outputFormat = [_audioFilePlayer outputFormatForBus:0];
+    
+    _sampleRate = outputFormat.sampleRate;
+    
+    if (startTime == 0) {
+        [_audioFilePlayer play];
     }
     else{
-        NSLog(@"can not insert to play queue");
-        return FALSE;
+        AVAudioTime *tStart = [AVAudioTime timeWithSampleTime: startTime * self.sampleRate atRate: self.sampleRate];
+        [_audioFilePlayer playAtTime: tStart];
     }
     
     
-}
-
-
-- (void)observeValueForKeyPath:(NSString*) path
-                      ofObject:(id)object
-                        change:(NSDictionary*)change
-                       context:(void*)context
-{
-    if (context == ObservationContext_Rate)
+    [_audioFilePlayer scheduleBuffer:audioFileBuffer atTime:nil options:AVAudioPlayerNodeBufferLoops completionHandler: nil ];
+    
+    
+    if (pauseAfterInit)
     {
-        [self syncPlayerRate];
-    }
-    else if(context == ObservationContext_Duration){
-        duration = _player.currentItem.duration;
-        _progressInfo.total = CMTimeGetSeconds( duration );
-    }
-}
-
--(void)syncPlayerRate
-{
-    float rate = _player.rate;
-    if (rate == 0.f) {
+        [_audioFilePlayer pause];
         _state = playstate_paused;
     }
-    else
-    {
+    else{
+        [_audioFilePlayer play];
         _state = playstate_playing;
     }
     
+    
+    _progressInfo.current = startTime;
+    
+    _progressInfo.total = audioFrameCount / self.sampleRate;
+    
+    postEvent(EventID_track_started, _progressInfo );
+    postEvent(EventID_track_state_changed, nil);
+    
+    return TRUE;
 }
+
 
 -(BOOL)playURL:(NSURL *)url
 {
-    return [self playURL:url pauseAfterInit:false];
+    return [self playURL:url pauseAfterInit:false startTime:0];
 }
 
 -(void)stopInner
 {
-    [_player pause];
+    [_audioFilePlayer stop];
     
     _state = playstate_stopped;
     
@@ -376,7 +352,7 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 
 -(void)stop
 {
-    [_player pause];
+    [_audioFilePlayer pause];
     
     setPlaying(nil);
     
@@ -396,12 +372,12 @@ static void *ObservationContext_Duration = &ObservationContext_Duration;
 
 - (void)setVolume:(float)volume
 {
-    _player.volume = volume;
+    _audioFilePlayer.volume = volume;
 }
 
 - (float)volume
 {
-    return  _player.volume;
+    return _audioFilePlayer.volume;
 }
 
 @end

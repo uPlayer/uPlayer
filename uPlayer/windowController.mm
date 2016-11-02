@@ -278,6 +278,11 @@
 
 -(void)activeSearchControl
 {
+    // show the toolbar is need
+    if (self.window.toolbar.visible == FALSE) {
+        [self.window toggleToolbarShown:nil];
+    }
+    
     [self.window makeFirstResponder:_searchField];
 }
 

@@ -17,6 +17,8 @@
 #import "id3Info.h"
 #import "ThreadJob.h"
 
+void saveValueTableHeaderHidden(BOOL hidden);
+
 //http://stackoverflow.com/questions/1235219/is-there-a-right-way-to-have-nstextfieldcell-draw-vertically-centered-text
 @interface NSTextFieldCell (MyCategories)
 @end
@@ -62,9 +64,11 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 
 @interface TracklistViewController () <NSTableViewDelegate , NSTableViewDataSource >
+
 @property (nonatomic,strong) NSScrollView *tableContainer;
 @property (nonatomic) bool scrolling;
 @property (nonatomic,strong) NSTableView *tableView;
+@property (nonatomic,strong) NSTableHeaderView *headerView;
 @property (nonatomic,strong) NSMutableArray *tableColumns;
 @property (nonatomic,assign) bool isSearchMode;
 @property (nonatomic,strong) PlayerSearchMng* searchMng;
@@ -154,6 +158,8 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     addObserverForEvent( self, @selector(reloadMenu), EventID_player_document_loaded);
     
     addObserverForEvent(self, @selector(onSetFontSize:), EventID_to_set_font_size);
+    
+    addObserverForEvent(self, @selector(showHideTableHeaderView), EventID_to_show_hide_table_header);
     
     self.playerlList = player().document.playerlList;
 }
@@ -340,105 +346,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 
 
--(void)saveLayout
-{
-    
-    {
-        MemoryFileBuffer buffer( [NSTableColumnMy objectSize]  * defaultColumnNumbers);
-        
-        
-        printf("\n");
-        for (int j = 0 ; j < defaultColumnNumbers; j++) {
-            NSTableColumnMy *c = self.tableColumns[j];
-            
-            int i = c.identifier.intValue;
-            int s = c.state;
-            float w = c.width;
-            
-            buffer.write(i);
-            buffer.write(s);
-            buffer.write(w);
-            
-            printf("%s,%d   ",c.title.UTF8String,c.state);
-        }
-        printf("\n");
-        
-        NSData *data = dataFromMemoryFileBuffer(&buffer);
-        [player().layout saveData:data withKey:self.className];
-    }
-    
-    
-    
-    
-    {
-        MemoryFileBuffer buffer( sizeof(int)*2);
-        
-        buffer.write(_fontsize);
-        buffer.write(_rowHeight);
-        
-        NSData *data = dataFromMemoryFileBuffer(&buffer);
-        [player().layout saveData:data withKey: @"tracklistview_font_size" ];
-    }
-    
-}
 
--(bool)loadLayout
-{
-    bool column_loaded = false;
-    NSData *data = [player().layout getDataByKey:self.className];
-    if( data )
-    {
-        MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
-
-        NSMutableArray *arrColumnDatas = [ NSMutableArray array];
-        
-        for (int j = 0 ; j < defaultColumnNumbers; j++) {
-            int identifier;
-            int state;
-            float width;
-            
-            buffer->read(identifier);
-            buffer->read(state);
-            buffer->read(width);
-            
-            
-            NSTableColumnMy *c = [NSTableColumnMy tableColumnWithIdentifies:@(identifier).stringValue title:defaultColumnNames[identifier] state:state width:width];
-            [arrColumnDatas addObject:c];
-        }
-        
-        self.tableColumns = arrColumnDatas;
-        [self debugPrint];
-     
-        delete buffer;
-        
-        column_loaded = true;
-    }
-    
-    
-    bool font_size_loaded = false;
-    {
-        NSData *data = [player().layout getDataByKey: @"tracklistview_font_size"];
-        if( data )
-        {
-            MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
-            
-            int fontsize;
-            int rowHeight;
-            buffer->read(fontsize);
-            buffer->read(rowHeight);
-            
-            
-            _fontsize = fontsize;
-            _rowHeight = rowHeight;
-            
-            delete buffer;
-            
-            font_size_loaded = true;
-        }
-    }
-    
-    return column_loaded && font_size_loaded;
-}
 
 
 
@@ -887,6 +795,13 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     self.tableView.usesAlternatingRowBackgroundColors = true;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+ 
+    self.headerView = self.tableView.headerView;
+    BOOL tableHeaderHidden = loadValueTableHeaderHidden();
+    if (tableHeaderHidden) {
+        [self.tableView setHeaderView:nil];
+    }
+    
     
     tableContainer.documentView = self.tableView;
     tableContainer.hasVerticalScroller = true;
@@ -898,7 +813,21 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     [self.tableView reloadData];
 }
 
-
+-(void)showHideTableHeaderView
+{
+    if (self.tableView.headerView == nil ) {
+        self.tableView.headerView = self.headerView;
+        self.tableHeaderHidden = FALSE;
+    }
+    else{
+        self.headerView = self.tableView.headerView;
+        [self.tableView setHeaderView:nil];
+        self.tableHeaderHidden = TRUE;
+    }
+    
+    saveValueTableHeaderHidden( _tableHeaderHidden);
+    
+}
 
 -(void)tableViewColumnDidMove:(NSNotification*)n
 {
@@ -1073,6 +1002,114 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     return track;
 }
 
+#pragma mark - Layout data save/load
+
+-(void)saveLayout
+{
+    
+    // save columes data
+    {
+        MemoryFileBuffer buffer( [NSTableColumnMy objectSize]  * defaultColumnNumbers);
+        
+        
+        printf("\n");
+        for (int j = 0 ; j < defaultColumnNumbers; j++) {
+            NSTableColumnMy *c = self.tableColumns[j];
+            
+            int i = c.identifier.intValue;
+            int s = c.state;
+            float w = c.width;
+            
+            buffer.write(i);
+            buffer.write(s);
+            buffer.write(w);
+            
+            printf("%s,%d   ",c.title.UTF8String,c.state);
+        }
+        printf("\n");
+        
+        NSData *data = dataFromMemoryFileBuffer(&buffer);
+        [player().layout saveData:data withKey:self.className];
+    }
+    
+    
+    
+    // save font and row height
+    {
+        MemoryFileBuffer buffer( sizeof(int)*2);
+        
+        buffer.write(_fontsize);
+        buffer.write(_rowHeight);
+        
+        NSData *data = dataFromMemoryFileBuffer(&buffer);
+        [player().layout saveData:data withKey: @"tracklistview_font_size" ];
+    }
+    
+}
+
+-(bool)loadLayout
+{
+    bool column_loaded = false;
+    NSData *data = [player().layout getDataByKey:self.className];
+    if( data )
+    {
+        MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
+        
+        NSMutableArray *arrColumnDatas = [ NSMutableArray array];
+        
+        for (int j = 0 ; j < defaultColumnNumbers; j++) {
+            int identifier;
+            int state;
+            float width;
+            
+            buffer->read(identifier);
+            buffer->read(state);
+            buffer->read(width);
+            
+            
+            NSTableColumnMy *c = [NSTableColumnMy tableColumnWithIdentifies:@(identifier).stringValue title:defaultColumnNames[identifier] state:state width:width];
+            [arrColumnDatas addObject:c];
+        }
+        
+        self.tableColumns = arrColumnDatas;
+        [self debugPrint];
+        
+        delete buffer;
+        
+        column_loaded = true;
+    }
+    
+    
+    bool font_size_loaded = false;
+    {
+        NSData *data = [player().layout getDataByKey: @"tracklistview_font_size"];
+        if( data )
+        {
+            MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
+            
+            int fontsize;
+            int rowHeight;
+            buffer->read(fontsize);
+            buffer->read(rowHeight);
+            
+            
+            _fontsize = fontsize;
+            _rowHeight = rowHeight;
+            
+            delete buffer;
+            
+            font_size_loaded = true;
+        }
+    }
+    
+    return column_loaded && font_size_loaded;
+}
+
+
+
+
+
+
 #pragma mark - NSTableViewDataSource
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -1177,7 +1214,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     return textField;
 }
 
-#pragma mark -  scrolling
+#pragma mark -  Scrolling
 
 -(void)scrollViewDidLiveScroll:(NSNotification*)n
 {
@@ -1777,4 +1814,50 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size)
     [targetImage unlockFocus];
     
     return targetImage;
+}
+
+
+
+
+
+
+NSString * tableViewHeaderHidden = @"tableViewHeaderHidden";
+
+void saveValueTableHeaderHidden(BOOL hidden)
+{
+    int _hidden = hidden;
+    
+    MemoryFileBuffer buffer( sizeof(_hidden)*1 );
+    
+    buffer.write(_hidden);
+    
+    NSData *data = dataFromMemoryFileBuffer(&buffer);
+    [player().layout saveData:data withKey: tableViewHeaderHidden ];
+}
+
+BOOL loadValueTableHeaderHidden()
+{
+    static int tableHeaderHidden = -1;
+    if (tableHeaderHidden == -1)
+    {
+        NSData *data = [player().layout getDataByKey: tableViewHeaderHidden];
+        if( data )
+        {
+            MemoryFileBuffer *buffer = newMemoryFileBufferFromData(data);
+            
+            buffer->read(tableHeaderHidden);
+            
+            delete buffer;
+            
+        }
+        else{
+            //default to false
+            tableHeaderHidden = FALSE;
+        }
+        
+    }
+    
+    
+    
+    return tableHeaderHidden;
 }

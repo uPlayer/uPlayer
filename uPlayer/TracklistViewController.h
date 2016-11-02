@@ -15,9 +15,13 @@
 
 @property (nonatomic,strong) WindowController *w;
 
+@property (nonatomic) BOOL tableHeaderHidden;
+
 @end
 
 
 @interface NSTracklistView : NSView
 
 @end
+
+BOOL loadValueTableHeaderHidden();
