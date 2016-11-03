@@ -22,12 +22,14 @@ static void *ObservationContext_Status = &ObservationContext_Status;
 const NSTimeInterval timeInterval = 1.0;
 
 @interface PlayerEngine ()
+<AVAudioPlayerDelegate>
 {
     PlayState _state;
     BOOL firstLoaded;
     int justSeeked;
 }
 
+@property (nonatomic,strong) AVAudioPlayer  *player;
 @property (nonatomic,strong) AVAudioEngine  *engine;
 @property (nonatomic,strong) AVAudioPlayerNode  *playerNode;
 @property (nonatomic, strong) AVAudioFile *audioFile;
@@ -44,6 +46,9 @@ const NSTimeInterval timeInterval = 1.0;
 {
     self.playerNode = [[AVAudioPlayerNode alloc] init];
     [self.engine attachNode:self.playerNode];
+    
+    
+    self.player = [[AVAudioPlayer alloc]init];
 }
 
 -(instancetype)init
@@ -51,7 +56,7 @@ const NSTimeInterval timeInterval = 1.0;
     self = [super init];
     if (self)
     {
-        
+        /*
         self.engine = [[AVAudioEngine alloc]init];
         
         
@@ -73,7 +78,7 @@ const NSTimeInterval timeInterval = 1.0;
         if (error) {
             NSLog(@"error:%@", error);
         }
-        
+        */
         
         
         
@@ -111,13 +116,18 @@ const NSTimeInterval timeInterval = 1.0;
     {
         if ( _state == playstate_playing )
         {
+            /*
             AVAudioTime *nodeTime = self.playerNode.lastRenderTime;
             AVAudioTime *playerTime  = [self.playerNode playerTimeForNodeTime:nodeTime];
             NSTimeInterval t = playerTime.sampleTime / playerTime.sampleRate;
             //NSLog(@"seek , time , %f",t);
             
             _progressInfo.current = t;
+            */
             
+            
+            _progressInfo.total = self.player.duration;
+            _progressInfo.current = self.player.currentTime;
             
             postEvent(EventID_track_progress_changed, _progressInfo);
         }
@@ -305,7 +315,11 @@ const NSTimeInterval timeInterval = 1.0;
 {
     justSeeked = 2;
     _progressInfo.current = time + 2 * timeInterval;
-   
+ 
+    
+    self.player.currentTime = time;
+    
+    /*
     
     AVAudioTime *nodeTime = self.playerNode.lastRenderTime;
     AVAudioTime *playerTime  = [self.playerNode playerTimeForNodeTime:nodeTime];
@@ -331,12 +345,44 @@ const NSTimeInterval timeInterval = 1.0;
     if (_state == playstate_playing) {
         [self.playerNode play];
     }
+    */
+    
+    
     
 }
+/* audioPlayerDidFinishPlaying:successfully: is called when a sound has finished playing. This method is NOT called if the player is stopped due to an interruption. */
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    postEvent(EventID_track_stopped_playnext, nil);
+}
+
+/* if an error occurs while decoding it will be reported to the delegate. */
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error
+{
+    
+}
+
 
     
 -(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit startTime:(NSTimeInterval)startTime
 {
+    NSError *error;
+    self.player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error];
+    if (error) {
+        NSLog(@"error: %@",error);
+        return false;
+    }
+    
+    
+    self.player.delegate = self;
+    [self.player play];
+       _state = playstate_playing;
+    
+    
+    
+    /*
+    
+    
     self.audioFile = [[AVAudioFile alloc] initForReading:url error:nil];
     
     
@@ -372,6 +418,10 @@ const NSTimeInterval timeInterval = 1.0;
     _progressInfo.current = startTime;
     
     _progressInfo.total = audioFrameCount / self.sampleRate;
+    */
+    
+    
+    
     
     postEvent(EventID_track_started, _progressInfo );
     postEvent(EventID_track_state_changed, nil);
