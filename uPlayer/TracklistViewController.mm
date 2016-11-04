@@ -78,7 +78,6 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
 
 @property (nonatomic,strong) NSTextField *bottomTextLeft,*bottomTextRight,*bottomTextCenter;
 @property (weak) IBOutlet NSMenu *subMenuSendtoPL;
-//@property (nonatomic,strong) nsarr
 @property (weak) IBOutlet NSMenuItem *menuItemSendHowMuchItems;
 @property (weak) IBOutlet NSMenuItem *menuItemSendToPL;
 

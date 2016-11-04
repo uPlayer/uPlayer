@@ -102,6 +102,7 @@ const NSTimeInterval timeInterval = 1.0;
 
 -(void)didReachFileEnd
 {
+    _state = playstate_stopped;
     postEvent(EventID_track_stopped_playnext, nil);
     
     if( player().document.trackSongsWhenPlayStarted)
@@ -124,14 +125,30 @@ const NSTimeInterval timeInterval = 1.0;
     PlayerTrack *trackQueue = [queue pop] ;
     if ( trackQueue )
     {
+        // send stop
+        setPlaying(nil);
+        _state = playstate_stopped;
+        postEvent(EventID_track_stopped, nil);
+        postEvent(EventID_track_state_changed, nil);
+        
+        
         playTrack(trackQueue);
     }
     else
     {
         PlayerTrack *track = Playing();
         PlayerList *list = track.list;
+    
+        
+        // send stop
+        setPlaying(nil);
+        
+        _state = playstate_stopped;
+        postEvent(EventID_track_stopped, nil);
+        postEvent(EventID_track_state_changed, nil);
         
         assert(list);
+        
         
         int index = (int)track.index;
         int count = (int)[list count];
@@ -296,7 +313,9 @@ const NSTimeInterval timeInterval = 1.0;
     {
         self.player.delegate = self;
         
-        self.player.currentTime = 1;
+        if (time != -1)
+            self.player.currentTime = time;
+        
         
         if ( initPaused ) {
             [self.player pause];
@@ -308,8 +327,7 @@ const NSTimeInterval timeInterval = 1.0;
         }
         
         
-        
-        
+        _progressInfo.current = self.player.currentTime;
         _progressInfo.total = self.player.duration;
         postEvent(EventID_track_started, _progressInfo );
         postEvent(EventID_track_state_changed, nil);
@@ -334,12 +352,27 @@ const NSTimeInterval timeInterval = 1.0;
 -(void)stop
 {
     [self.player pause];
+    _state = playstate_stopped;
     
     setPlaying(nil);
     
     postEvent(EventID_track_stopped, nil);
     postEvent(EventID_track_state_changed, nil);
 }
+
+
+-(void)stop2
+{
+    [self.player pause];
+    _state = playstate_stopped;
+    
+    
+    postEvent(EventID_track_stopped, nil);
+    postEvent(EventID_track_state_changed, nil);
+}
+
+
+
 
 -(PlayStateTime)close
 {

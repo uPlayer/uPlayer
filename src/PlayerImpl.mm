@@ -93,13 +93,17 @@ NSArray* enumAudioFiles(NSString* path)
 {
     NSString *path = track.info.path;
     
-   if ([[NSFileManager defaultManager] fileExistsAtPath: path])
-   {
-       setPlaying(track);
-       [self playURL:[NSURL fileURLWithPath: path] initPaused:paused time: time ];
-   }
+    if ([[NSFileManager defaultManager] fileExistsAtPath: path])
+    {
+        setPlaying(track);
+        [self playURL:[NSURL fileURLWithPath: path] initPaused:paused time: time ];
+    }
     else
+    {
+        [self stop2];
+        
         postEvent(EventID_play_error_happened, [PlayerError errorNoSuchFile: path]);
+    }
     
 }
 @end

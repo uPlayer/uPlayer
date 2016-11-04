@@ -39,6 +39,8 @@
 
 -(void)stop;
 
+-(void)stop2;
+
 /// save info and stop.
 -(struct PlayStateTime)close;
 
