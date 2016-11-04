@@ -21,9 +21,9 @@
  */
 @property float volume;
 
--(BOOL)playURL:(NSURL *)url;
--(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit startTime:(NSTimeInterval)startTime;
 
+// if time is -1,it will be ignored
+-(BOOL)playURL:(NSURL *)url initPaused:(bool)paused time:(NSTimeInterval)time;
 
 -(enum PlayState)getPlayState;
 

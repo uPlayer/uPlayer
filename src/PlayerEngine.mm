@@ -14,11 +14,6 @@
 #import "PlayerTypeDefines.h"
 #import "UPlayer.h"
 
-static void *ObservationContext_Rate = &ObservationContext_Rate;
-static void *ObservationContext_Duration = &ObservationContext_Duration;
-static void *ObservationContext_Status = &ObservationContext_Status;
-
-
 const NSTimeInterval timeInterval = 1.0;
 
 @interface PlayerEngine ()
@@ -30,58 +25,17 @@ const NSTimeInterval timeInterval = 1.0;
 }
 
 @property (nonatomic,strong) AVAudioPlayer  *player;
-@property (nonatomic,strong) AVAudioEngine  *engine;
-@property (nonatomic,strong) AVAudioPlayerNode  *playerNode;
-@property (nonatomic, strong) AVAudioFile *audioFile;
-@property (nonatomic,strong) AVAudioPCMBuffer *pcmBuffer;
-
-@property (nonatomic, readonly) double sampleRate;
-
 @property (nonatomic,strong) NSTimer *timer;
 @end
 
 @implementation PlayerEngine
 
--(void)setupPlayer
-{
-    self.playerNode = [[AVAudioPlayerNode alloc] init];
-    [self.engine attachNode:self.playerNode];
-    
-    
-    self.player = [[AVAudioPlayer alloc]init];
-}
 
 -(instancetype)init
 {
     self = [super init];
     if (self)
     {
-        /*
-        self.engine = [[AVAudioEngine alloc]init];
-        
-        
-        [self setupPlayer];
-        
-        
-        // Connect Nodes
-        // [Player]  -> [Output]
-        AVAudioFormat *format = [[AVAudioFormat alloc]initStandardFormatWithSampleRate:44100 channels:2];
-        
-        AVAudioMixerNode *mainMixer = self.engine.mainMixerNode;
-        [self.engine connect:self.playerNode to:mainMixer format:format];
-        
-        
-        
-        // Start the engine.
-        NSError *error;
-        [self.engine startAndReturnError:&error];
-        if (error) {
-            NSLog(@"error:%@", error);
-        }
-        */
-        
-        
-        
         firstLoaded = true;
         _state = playstate_stopped;
         _progressInfo = [ProgressInfo new];
@@ -116,18 +70,7 @@ const NSTimeInterval timeInterval = 1.0;
     {
         if ( _state == playstate_playing )
         {
-            /*
-            AVAudioTime *nodeTime = self.playerNode.lastRenderTime;
-            AVAudioTime *playerTime  = [self.playerNode playerTimeForNodeTime:nodeTime];
-            NSTimeInterval t = playerTime.sampleTime / playerTime.sampleRate;
-            //NSLog(@"seek , time , %f",t);
-            
-            _progressInfo.current = t;
-            */
-            
-            
-            _progressInfo.total = self.player.duration;
-            _progressInfo.current = self.player.currentTime;
+            _progressInfo.current += timeInterval;
             
             postEvent(EventID_track_progress_changed, _progressInfo);
         }
@@ -143,14 +86,21 @@ const NSTimeInterval timeInterval = 1.0;
         PlayerTrack *track = Playing();
         PlayerList *list = track.list;
         
-        //if ( doc.playState == playstate_paused )
-            playTrackPauseAfterInit( list, track , doc.playTime );
-
+        if ( doc.playState == playstate_paused )
+            playTrackPauseAfterInit( list, track );
+        else if( doc.playState == playstate_playing) {
+            playTrack(track);
+        }
+        
+        if (doc.playTime > 0) {
+            [self seekToTime:doc.playTime];
+        }
+        
     }
 }
 
 
--(void)DidPlayToEndTime:(NSNotification*)n
+-(void)didReachFileEnd
 {
     postEvent(EventID_track_stopped_playnext, nil);
     
@@ -229,7 +179,6 @@ const NSTimeInterval timeInterval = 1.0;
 
 -(void)dealloc
 {
-//    [self.player removeTimeObserver:self.timeObserver];
     removeObserver(self);
 }
 
@@ -295,13 +244,13 @@ const NSTimeInterval timeInterval = 1.0;
 -(void)playPause
 {
     if (self.isPlaying) {
-        [self.playerNode pause];
+        [self.player pause];
         _state = playstate_paused ;
         postEvent(EventID_track_paused, nil);
     }
     else if (self.isPaused)
     {
-        [self.playerNode play];
+        [self.player play];
         _state = playstate_playing ;
         postEvent(EventID_track_resumed, nil);
     }
@@ -319,125 +268,61 @@ const NSTimeInterval timeInterval = 1.0;
     
     self.player.currentTime = time;
     
-    /*
-    
-    AVAudioTime *nodeTime = self.playerNode.lastRenderTime;
-    AVAudioTime *playerTime  = [self.playerNode playerTimeForNodeTime:nodeTime];
-    NSTimeInterval t = playerTime.sampleTime / playerTime.sampleRate;
-    NSLog(@"seek , time , %f",t);
-    
-    
-    AVAudioFramePosition newSampleTime = (AVAudioFramePosition)(self.sampleRate * time);
-    NSTimeInterval left = _progressInfo.total - time;
-    AVAudioFrameCount framesLeft = self.sampleRate * left;
-    
-    
-    //[self.playerNode pause];
-    [self.playerNode stop];
-    
-    
-    if (framesLeft > 100) {
-        [self.playerNode scheduleSegment: self.audioFile startingFrame:newSampleTime frameCount: framesLeft atTime:0 completionHandler:^{
-            postEvent(EventID_track_stopped_playnext, nil);
-        }];
-    }
-    
-    if (_state == playstate_playing) {
-        [self.playerNode play];
-    }
-    */
-    
-    
-    
 }
-/* audioPlayerDidFinishPlaying:successfully: is called when a sound has finished playing. This method is NOT called if the player is stopped due to an interruption. */
+
+#pragma mark - AVAudioPlayer Delegate
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    postEvent(EventID_track_stopped_playnext, nil);
+    [self didReachFileEnd];
 }
 
-/* if an error occurs while decoding it will be reported to the delegate. */
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error
 {
-    
+    NSLog(@"audioPlayerDecodeErrorDidOccur,error: %@",error);
 }
 
 
-    
--(BOOL)playURL:(NSURL *)url pauseAfterInit:(BOOL)pauseAfterInit startTime:(NSTimeInterval)startTime
+// if time is -1,it will be ignored
+-(BOOL)playURL:(NSURL *)url initPaused:(bool)initPaused time:(NSTimeInterval)time
 {
     NSError *error;
     self.player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error];
-    if (error) {
-        NSLog(@"error: %@",error);
-        return false;
-    }
-    
-    
-    self.player.delegate = self;
-    [self.player play];
-       _state = playstate_playing;
-    
-    
-    
-    /*
-    
-    
-    self.audioFile = [[AVAudioFile alloc] initForReading:url error:nil];
-    
-    
-    AVAudioFormat *audioFormat = self.audioFile.processingFormat;
-    uint32 audioFrameCount = (uint32)self.audioFile.length;
-    
-    
-    self.pcmBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:audioFormat frameCapacity: audioFrameCount];
-    [self.audioFile readIntoBuffer:self.pcmBuffer error:nil];
-    
-
-    AVAudioFormat *outputFormat = [self.playerNode outputFormatForBus:0];
-    _sampleRate = outputFormat.sampleRate;
-
-    
-    [self.playerNode scheduleBuffer:self.pcmBuffer atTime:nil options:AVAudioPlayerNodeBufferLoops completionHandler:^{
-        postEvent(EventID_track_stopped_playnext, nil);
-    }];
-    
-    [self.playerNode play];
-    _state = playstate_playing;
-    
-    
-    
-    if (pauseAfterInit)
+    if (error)
     {
-        [self.playerNode pause];
-        _state = playstate_paused;
+        NSLog(@"error: %@",error);
+        return FALSE;
     }
-   
-    
-    
-    _progressInfo.current = startTime;
-    
-    _progressInfo.total = audioFrameCount / self.sampleRate;
-    */
-    
-    
-    
-    
-    postEvent(EventID_track_started, _progressInfo );
-    postEvent(EventID_track_state_changed, nil);
-    
-    return TRUE;
+    else
+    {
+        self.player.delegate = self;
+        
+        self.player.currentTime = 1;
+        
+        if ( initPaused ) {
+            [self.player pause];
+            _state = playstate_paused;
+        }
+        else{
+            [self.player play];
+            _state = playstate_playing;
+        }
+        
+        
+        
+        
+        _progressInfo.total = self.player.duration;
+        postEvent(EventID_track_started, _progressInfo );
+        postEvent(EventID_track_state_changed, nil);
+        
+        
+        return TRUE;
+    }
 }
 
-
--(BOOL)playURL:(NSURL *)url
-{
-    return [self playURL:url pauseAfterInit:false startTime:0];
-}
 
 -(void)stopInner
 {
-    [self.playerNode stop];
+    [self.player stop];
     
     _state = playstate_stopped;
     
@@ -448,7 +333,7 @@ const NSTimeInterval timeInterval = 1.0;
 
 -(void)stop
 {
-    [self.playerNode pause];
+    [self.player pause];
     
     setPlaying(nil);
     
@@ -468,12 +353,12 @@ const NSTimeInterval timeInterval = 1.0;
 
 - (void)setVolume:(float)volume
 {
-    self.playerNode.volume = volume;
+    self.player.volume = volume;
 }
 
 - (float)volume
 {
-    return self.playerNode.volume;
+    return self.player.volume;
 }
 
 @end
