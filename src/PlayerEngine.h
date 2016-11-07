@@ -57,3 +57,13 @@
 @property (nonatomic) double current,
 total;
 @end
+
+
+enum{
+    FFT_SAMPLE_SIZE = 2048
+};
+
+@interface FFTSampleBlock : NSObject
+@property (nonatomic,unsafe_unretained) Float32 *pSampleL,*pSampleR;
+@end
+

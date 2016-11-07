@@ -74,6 +74,10 @@ typedef enum : NSUInteger {
     EventID_to_set_font_size,
     
     EventID_to_show_hide_table_header,
+    
+    /// @param: FFTSampleBlock
+    EventID_to_draw_spectrum,
+    
 } EventID;
 
 

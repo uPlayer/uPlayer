@@ -18,7 +18,7 @@
 		1E154DF61AAEFA8A0000A3B1 /* keycode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E154DF51AAEFA8A0000A3B1 /* keycode.mm */; };
 		1E169A891A78E701003D3D01 /* windowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A881A78E701003D3D01 /* windowController.mm */; };
 		1E169A8D1A78FF88003D3D01 /* PlayerMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */; };
-		1E1719841BCE36B90048C3EB /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1719801BCE36B90048C3EB /* AlbumViewController.m */; };
+		1E1719841BCE36B90048C3EB /* AlbumViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E1719801BCE36B90048C3EB /* AlbumViewController.mm */; };
 		1E1719851BCE36B90048C3EB /* cd_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1719811BCE36B90048C3EB /* cd_bg.png */; };
 		1E1719861BCE36B90048C3EB /* cd_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1719821BCE36B90048C3EB /* cd_icon.png */; };
 		1E1719871BCE36B90048C3EB /* cd_icon_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1719831BCE36B90048C3EB /* cd_icon_r.png */; };
@@ -151,7 +151,7 @@
 		1E169A8C1A78FF88003D3D01 /* PlayerMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMessage.mm; sourceTree = "<group>"; };
 		1E16D53B1A8B0F8A00C844ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1E17197F1BCE36B90048C3EB /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlbumViewController.h; path = AlbumView/AlbumViewController.h; sourceTree = "<group>"; };
-		1E1719801BCE36B90048C3EB /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlbumViewController.m; path = AlbumView/AlbumViewController.m; sourceTree = "<group>"; };
+		1E1719801BCE36B90048C3EB /* AlbumViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlbumViewController.mm; path = AlbumView/AlbumViewController.mm; sourceTree = "<group>"; };
 		1E1719811BCE36B90048C3EB /* cd_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd_bg.png; sourceTree = "<group>"; };
 		1E1719821BCE36B90048C3EB /* cd_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd_icon.png; sourceTree = "<group>"; };
 		1E1719831BCE36B90048C3EB /* cd_icon_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd_icon_r.png; sourceTree = "<group>"; };
@@ -222,6 +222,7 @@
 		1ED32D971CA90FC000D0C87D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1ED6B0A31AEA043F00DBEEE4 /* id3Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = id3Info.h; path = ../src/id3Info.h; sourceTree = "<group>"; };
 		1ED6B0A41AEA043F00DBEEE4 /* id3Info.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = id3Info.mm; path = ../src/id3Info.mm; sourceTree = "<group>"; };
+		1ED953BD1DD01A630007A2DB /* FFT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFT.h; sourceTree = "<group>"; };
 		1EDAAD461AB6F17E009DB36A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1EDAAD481AB6F180009DB36A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1EDE8FA21A773D810086677B /* Smine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -475,7 +476,8 @@
 				1E5F426B1A887BE800911BE8 /* PlaylistViewController.h */,
 				1E5F426C1A887BE800911BE8 /* PlaylistViewController.mm */,
 				1E17197F1BCE36B90048C3EB /* AlbumViewController.h */,
-				1E1719801BCE36B90048C3EB /* AlbumViewController.m */,
+				1E1719801BCE36B90048C3EB /* AlbumViewController.mm */,
+				1ED953BD1DD01A630007A2DB /* FFT.h */,
 				1E17197E1BCE36B90048C3EB /* AlbumView */,
 				1EFD42CE1A91E847009D65B5 /* ThreadJob.h */,
 				1EFD42CC1A91E826009D65B5 /* ThreadJob.mm */,
@@ -751,7 +753,7 @@
 				1EDE8FAB1A773D810086677B /* main.m in Sources */,
 				1E4A13C61BA94C730008CBEE /* stringConv.cpp in Sources */,
 				1E0B2BFD1A7755C400B4FE14 /* PlayerImpl.mm in Sources */,
-				1E1719841BCE36B90048C3EB /* AlbumViewController.m in Sources */,
+				1E1719841BCE36B90048C3EB /* AlbumViewController.mm in Sources */,
 				1ED32D961CA9059C00D0C87D /* PlayerDocument+ScreenSaver.m in Sources */,
 				1E5F9EC51A7A1979000360D7 /* PlayerEngine.mm in Sources */,
 				1E4A13C51BA94C730008CBEE /* lrcFch_ting.cpp in Sources */,

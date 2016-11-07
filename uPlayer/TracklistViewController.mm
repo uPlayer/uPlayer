@@ -29,6 +29,8 @@ void saveValueTableHeaderHidden(BOOL hidden);
 +(instancetype)tableColumnWithIdentifies:(NSString*)iden title:(NSString*)title state:(bool)state width:(CGFloat)width;
 @end
 
+const char *second_stirng(int sec);
+
 
 
 enum default_column_identifier
@@ -159,6 +161,9 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     addObserverForEvent(self, @selector(onSetFontSize:), EventID_to_set_font_size);
     
     addObserverForEvent(self, @selector(showHideTableHeaderView), EventID_to_show_hide_table_header);
+    
+    addObserverForEvent(self, @selector(progressChanged:), EventID_track_progress_changed);
+    
     
     self.playerlList = player().document.playerlList;
 }
@@ -810,6 +815,19 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
     
     
     [self.tableView reloadData];
+}
+
+
+-(void)progressChanged:(NSNotification*)n
+{
+    ProgressInfo *info = n.object;
+    
+    
+    NSString* curr = [NSString stringWithUTF8String: second_stirng((int)info.current)];
+    NSString *dur = [NSString stringWithUTF8String: second_stirng((int)info.total)];
+    
+    self.bottomTextLeft.stringValue = [NSString stringWithFormat:@"%@/%@",curr,dur];
+    
 }
 
 -(void)showHideTableHeaderView
@@ -1860,3 +1878,30 @@ BOOL loadValueTableHeaderHidden()
     
     return tableHeaderHidden;
 }
+
+
+const char *second_stirng(int sec)
+{
+    static char arg[256];
+    memset(arg, 0, 256 * sizeof(char) );
+    
+    if (sec > 0)
+    {
+        int v = sec;
+        int h = v / (60*60);
+        int m = (v - h * 60 * 60 ) / 60;
+        int s = (v - m * 60 - h*60*60);
+        
+        assert( h >= 0 && s < 60 && m < 60);
+        
+        sprintf(arg, "%0d:%02d",  m , s);
+    }
+    else
+    {
+        strcpy(arg, "00:00");
+    }
+    
+    
+    return arg;
+}
+
