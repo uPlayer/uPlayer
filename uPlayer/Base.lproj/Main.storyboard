@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11535.1" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11535.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -527,11 +528,12 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="a50-0L-eBb">
-                                                            <rect key="frame" x="1" y="1" width="60.394740734442394" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="60" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-b8-uGM">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="109-ro-5qv">
                                                                         <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -564,6 +566,7 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-C9-4wu">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="jgL-sh-12X">
                                                                         <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -596,6 +599,7 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-hC-kCU">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="XxM-of-WlE">
                                                                         <font key="font" metaFont="system" size="30"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -616,7 +620,6 @@
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ZMn-x1-68y">
                                     <rect key="frame" x="1" y="287" width="608" height="15"/>
@@ -789,19 +792,28 @@ CA
                         <rect key="frame" x="0.0" y="0.0" width="890" height="390"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="NJ7-Ea-n7G">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDb-51-Uyu">
+                                <rect key="frame" x="0.0" y="22" width="890" height="368"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="PlJ-Jb-7Ue"/>
+                            </imageView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ba6-j5-5Fd" customClass="SpectrumView">
                                 <rect key="frame" x="0.0" y="22" width="890" height="368"/>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="NJ7-Ea-n7G" firstAttribute="leading" secondItem="1v7-I2-ldt" secondAttribute="leading" id="286-oa-zPO"/>
-                            <constraint firstItem="NJ7-Ea-n7G" firstAttribute="top" secondItem="1v7-I2-ldt" secondAttribute="top" id="5ex-wI-I1J"/>
-                            <constraint firstAttribute="bottom" secondItem="NJ7-Ea-n7G" secondAttribute="bottom" constant="22" id="PGd-8v-FIH"/>
-                            <constraint firstAttribute="trailing" secondItem="NJ7-Ea-n7G" secondAttribute="trailing" id="g09-Ti-RM8"/>
+                            <constraint firstAttribute="bottom" secondItem="KDb-51-Uyu" secondAttribute="bottom" constant="22" id="9ec-zs-rzX"/>
+                            <constraint firstItem="ba6-j5-5Fd" firstAttribute="leading" secondItem="1v7-I2-ldt" secondAttribute="leading" id="Chd-Cr-BQm"/>
+                            <constraint firstItem="KDb-51-Uyu" firstAttribute="top" secondItem="1v7-I2-ldt" secondAttribute="top" id="D6n-Bp-9jl"/>
+                            <constraint firstAttribute="trailing" secondItem="ba6-j5-5Fd" secondAttribute="trailing" id="F4J-Fz-ZX4"/>
+                            <constraint firstItem="KDb-51-Uyu" firstAttribute="leading" secondItem="1v7-I2-ldt" secondAttribute="leading" id="ZCj-Ko-fQZ"/>
+                            <constraint firstItem="ba6-j5-5Fd" firstAttribute="top" secondItem="1v7-I2-ldt" secondAttribute="top" id="hEK-bz-X3c"/>
+                            <constraint firstAttribute="bottom" secondItem="ba6-j5-5Fd" secondAttribute="bottom" constant="22" id="kHS-bS-RwT"/>
+                            <constraint firstAttribute="trailing" secondItem="KDb-51-Uyu" secondAttribute="trailing" id="wR7-Wv-qjV"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cdAlbumView" destination="NJ7-Ea-n7G" id="hj6-Ox-Ais"/>
+                        <outlet property="imageView" destination="KDb-51-Uyu" id="ldG-ls-ZMn"/>
+                        <outlet property="spectrumView" destination="ba6-j5-5Fd" id="3II-X7-6Rh"/>
                     </connections>
                 </viewController>
                 <customObject id="nma-Gv-8yZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

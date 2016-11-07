@@ -8,7 +8,6 @@
 
 #import "AlbumViewController.h"
 #import "keycode.h"
-#import "CDAlbumViewController.h"
 #import "PlayerMessage.h"
 #import "PlayerEngine.h"
 #import "FFT.h"
@@ -16,21 +15,20 @@
 
 
 
-const int bands = 10;
+const int bands = 30;
 @interface SpectrumView : NSView
 @property (nonatomic,strong) FFTSampleBlock *sampleBlock;
 @property (nonatomic,unsafe_unretained) FFT *fft;
+@property (nonatomic) CGContextRef myContext;
 @end
 
 
 
 @interface AlbumViewController ()
 
-@property (weak) IBOutlet NSView *cdAlbumView;
+@property (weak) IBOutlet NSImageView *imageView;
 
-@property (nonatomic,strong) CDAlbumViewController *cdAlbumViewController;
-
-@property (nonatomic,strong) SpectrumView *spectrumView;
+@property (weak) IBOutlet SpectrumView *spectrumView;
 
 @end
 
@@ -45,26 +43,16 @@ const int bands = 10;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.cdAlbumViewController = [[CDAlbumViewController alloc]init];
-    [self.cdAlbumView addSubview:self.cdAlbumViewController.view];
- 
-    
-    SpectrumView *spectrumView = [[SpectrumView alloc]initWithFrame:self.view.bounds];
-    spectrumView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    [self.view addSubview:spectrumView];
-    self.spectrumView = spectrumView;
     
     addObserverForEvent(self, @selector(drawSpectrum:), EventID_to_draw_spectrum);
 }
 
 const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
-//const int FFT_SAMPLE_SIZE = 2048;
 
 -(void)drawSpectrum:(NSNotification*)n
 {
     FFTSampleBlock *sampleBlock = n.object;
     self.spectrumView.sampleBlock = sampleBlock;
-    
     
     [self.spectrumView setNeedsDisplay:YES];
 }
@@ -72,9 +60,7 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
 
 -(void)setAlbumImage:(NSImage*)image
 {
-    [self.cdAlbumViewController setAlbumImage:image];
-    [self.cdAlbumViewController adjustLayout];
-    [self.cdAlbumViewController startAlbumRotation];
+    [self.imageView setImage:image];
 }
 
 -(void)keyDown:(NSEvent *)theEvent
@@ -98,23 +84,23 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
 
 @implementation SpectrumView
 
-- (instancetype)initWithFrame:(NSRect)frame
+
+-(instancetype)initWithCoder:(NSCoder *)coder
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithCoder:coder];
     if (self) {
-        
-        self.fft = new FFT( 2048 );
+        self.fft = new FFT( FFT_SAMPLE_SIZE );
     }
-    return self;
+    return self;   
 }
-
-
 
 
 -(void)drawRect:(NSRect)dirtyRect
 {
     if (self.sampleBlock)
     {
+        NSAssert(self.fft, @"");
+        
         float* lpFloatFFTData = self.fft ->calculate(self.sampleBlock.pSampleL, FFT_SAMPLE_SIZE);
         
         
@@ -132,15 +118,17 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
         float floatBandWidth = ((float)(self.bounds.size.width)/(float)bands);
         float floatMultiplier = 2.0;
         
-        
-        CGContextRef myContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
-        
-        //draw background
-        CGContextSetRGBFillColor (myContext, 1, 1, 1, 1);// 3
-        CGContextFillRect (myContext, self.bounds );// 4
-
+        if (self.myContext == nil)
+        {
+            self.myContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+            //draw background
+            CGContextSetRGBFillColor (self.myContext, 1, 1, 1, 1);
+            CGContextFillRect (self.myContext, self.bounds );
+            
+        }
+       
         //draw bands
-        CGContextSetRGBFillColor (myContext, 221/255.0, 220/255.0, 223/225.0, 1);// 3
+        CGContextSetRGBFillColor (self.myContext, 24/255.0, 171/255.0, 237/225.0, 1);
 
         
         CGFloat width = self.bounds.size.width;
@@ -200,46 +188,17 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
                 wFs = m_floatMag[a];
             }
             
-            
-            //        drawSpectrumAnalyserBar(&rect,c,cy,floatBandWidth-1,wFs*cy,band);
 
+            CGRect rcBand = CGRectMake( (bandWidth+bandspace)*band + bandspace , bottomSpace  , bandWidth,   + wFs* bandHeight );
             
-            
-            
-                
-                CGRect rcBand = CGRectMake( (bandWidth+bandspace)*band + bandspace , bottomSpace  , bandWidth,   + wFs* bandHeight );
-                
-                CGContextFillRect (myContext, rcBand );// 4
-            
-            
-            
-            
-            
+            CGContextFillRect (self.myContext, rcBand );// 4
             
             
             
             c += floatBandWidth;
         }
-        
    
     }
-    
-    
-    
-    
-    
-
-    
-//    CGContextFillRect (myContext, CGRectMake (0, 0, 200, 100 ));// 4
-//    
-//    CGContextSetRGBFillColor (myContext, 0, 0, 1, .5);// 5
-//    
-//    CGContextFillRect (myContext, CGRectMake (0, 0, 100, 200));
-    
-    
-
-    
-    
     
 }
 
