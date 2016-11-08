@@ -105,9 +105,8 @@ void getSampleBlockInBufferAtTime(AVAudioPCMBuffer* pcmBuffer, AVAudioFormat *au
             
             
             
-            getSampleBlockInBufferAtTime(self.pcmBuffer, self.audioFormat, _progressInfo.current , self.sampleBlock);
+            getSampleBlockInBufferAtTime(self.pcmBuffer, self.audioFormat, self.player.currentTime , self.sampleBlock);
             postEvent(EventID_to_draw_spectrum, self.sampleBlock);
-            
             
         }
     }
@@ -465,56 +464,31 @@ void getSampleBlockInBufferAtTime(AVAudioPCMBuffer* pcmBuffer, AVAudioFormat *au
 
 void getSampleBlockInBufferAtTime(AVAudioPCMBuffer* pcmBuffer, AVAudioFormat *audioFormat, NSTimeInterval time,FFTSampleBlock* sampleBlock)
 {
-//    
-//    printf("%lu,%lu,%lu\n",sizeof(Float32),sizeof(int32_t),sizeof(int16_t));
-//  
-//    printf("interleaved, %d\n",audioFormat.interleaved);
-//    
-//    printf("audioFrameCount: %d\n",pcmBuffer.frameLength);
-//    
-//    printf("\n,channels,%d, sample rate: %f,\n",audioFormat.channelCount,audioFormat.sampleRate);
-
-
+    sampleBlock.pSampleR = nil;
+    
+    //the display may have delay.
+    const int offset = 420;
     
     if( pcmBuffer.floatChannelData )
     {
-//        printf("floatChannelData,sizeof float: %lu\n",sizeof(float));
-        
         Float32 *leftChannelBuffer = pcmBuffer.floatChannelData [0];
         Float32 *rightChannelBuffer = pcmBuffer.floatChannelData [ 1];
         
-        for( int i = 0; i < FFT_SAMPLE_SIZE ; i+=1)
-        {
-            sampleBlock.pSampleL = leftChannelBuffer +((int)(time * audioFormat.sampleRate) - FFT_SAMPLE_SIZE/2 + i );
-            sampleBlock.pSampleR = rightChannelBuffer +((int)(time * audioFormat.sampleRate) - FFT_SAMPLE_SIZE/2 + i );
-        }
+        sampleBlock.pSampleL = leftChannelBuffer +((int)(time * audioFormat.sampleRate) - FFT_SAMPLE_SIZE/2 + offset);
+        sampleBlock.pSampleR = rightChannelBuffer +((int)(time * audioFormat.sampleRate) - FFT_SAMPLE_SIZE/2 + offset );
         
     }
     else if(pcmBuffer.int16ChannelData)
     {
-        printf("int16ChannelData,sizeof int16: %lu\n",sizeof(int16_t));
-        
-//        result.pSample = (Float32*)pcmBuffer.int16ChannelData [ (int)(time * audioFormat.sampleRate) - [FFTSampleBlock getSampleLength]/2 ];
-        
     }
     else if( pcmBuffer.int32ChannelData)
     {
-        printf("int32ChannelData,int32: %lu\n",sizeof(int32_t));
-        
-//        result.pSample = (Float32*)pcmBuffer.int32ChannelData [ (int)(time * audioFormat.sampleRate) - [FFTSampleBlock getSampleLength]/2 ];
-        
     }
-    else{
+    else
+    {
         //can not be here.
         assert(false);
     }
-    
-    typedef enum{
-        mono=1, //单声道
-        stereo, //联合立体声
-        mode_3d //
-    } channel_mode;
-    
 
 }
 

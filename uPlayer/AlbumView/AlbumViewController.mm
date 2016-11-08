@@ -14,6 +14,9 @@
 
 
 
+void drawGradientRect(CGContextRef context,CGRect rc);
+void drawPeaks(CGContextRef context,CGRect rc,int band);
+
 
 const int bands = 30;
 @interface SpectrumView : NSView
@@ -30,6 +33,7 @@ const int bands = 30;
 
 @property (weak) IBOutlet SpectrumView *spectrumView;
 
+@property (nonatomic) bool viewAppear;
 @end
 
 
@@ -51,10 +55,28 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
 
 -(void)drawSpectrum:(NSNotification*)n
 {
-    FFTSampleBlock *sampleBlock = n.object;
-    self.spectrumView.sampleBlock = sampleBlock;
+    if (self.viewAppear)
+    {
+        FFTSampleBlock *sampleBlock = n.object;
+        self.spectrumView.sampleBlock = sampleBlock;
+        
+        [self.spectrumView setNeedsDisplay:YES];
+    }
     
-    [self.spectrumView setNeedsDisplay:YES];
+}
+
+-(void)viewWillAppear
+{
+    [super viewWillAppear];
+    
+    self.viewAppear = true;
+}
+
+-(void)viewDidDisappear
+{
+    [super viewDidDisappear];
+    
+    self.viewAppear = false;
 }
 
 
@@ -94,21 +116,28 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
     return self;   
 }
 
+-(void)dealloc
+{
+    delete self.fft;
+}
 
 -(void)drawRect:(NSRect)dirtyRect
 {
-    if (self.sampleBlock)
+    if (self.sampleBlock && self.sampleBlock.pSampleL)
     {
         NSAssert(self.fft, @"");
         
         float* lpFloatFFTData = self.fft ->calculate(self.sampleBlock.pSampleL, FFT_SAMPLE_SIZE);
         
         
-        float m_floatMag[DEFAULT_SAMPLE_SIZE/2];
+        float *m_floatMag = lpFloatFFTData;
+//        float m_floatMag[DEFAULT_SAMPLE_SIZE/2];
+//        memcpy(m_floatMag, lpFloatFFTData, FFT_SAMPLE_SIZE/2);
+        
+        
         int m_floatMagDecay[DEFAULT_SAMPLE_SIZE/2];
         
         
-        memcpy(m_floatMag, lpFloatFFTData, FFT_SAMPLE_SIZE/2);
         
         
         float c = 0;
@@ -122,11 +151,11 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
         {
             self.myContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
             //draw background
-            CGContextSetRGBFillColor (self.myContext, 1, 1, 1, 1);
-            CGContextFillRect (self.myContext, self.bounds );
-            
+//            CGContextSetRGBFillColor (self.myContext, 1, 1, 1, 1);
+            //CGContextFillRect (self.myContext, self.bounds );
         }
        
+        
         //draw bands
         CGContextSetRGBFillColor (self.myContext, 24/255.0, 171/255.0, 237/225.0, 1);
 
@@ -138,7 +167,7 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
         
         const CGFloat topSpace = 5;
         
-        const CGFloat bottomSpace = 5;
+        const CGFloat bottomSpace = 0;
         
         CGFloat bandWidth = (width - bandspace ) / bands - bandspace;
         
@@ -191,7 +220,8 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
 
             CGRect rcBand = CGRectMake( (bandWidth+bandspace)*band + bandspace , bottomSpace  , bandWidth,   + wFs* bandHeight );
             
-            CGContextFillRect (self.myContext, rcBand );// 4
+            drawGradientRect(self.myContext , rcBand);
+            drawPeaks(self.myContext, rcBand, band);
             
             
             
@@ -202,7 +232,122 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
     
 }
 
+
+
+
 @end
+
+
+
+void drawPeaks(CGContextRef context,CGRect rc,int band)
+{
+    const int fallDelay = 2;
+    const int fallingSpeed = 6;
+    const int peakHeight = 6;
+
+    static int peaks[bands];
+    static int peaksDelay[bands];
+    
+    CGFloat height = rc.size.height + rc.origin.y;
+    
+   	if( height > peaks[band])
+    {
+        //raising
+        if (height > peaks[band] * 2 )
+            peaksDelay[band] = fallDelay * 2 ;
+        else
+            peaksDelay[band] = fallDelay;
+        
+        
+        peaks[band] = height;
+    }
+    else
+    {
+        //falling
+        if (peaksDelay[band] > 0)
+        {
+            peaksDelay[band]--;
+        }
+        else
+        {
+            peaks[band] -= fallingSpeed;
+            
+            if (peaks[band] < 0)
+                peaks[band] = 0;
+        }
+        
+    }
+    
+    
+ 
+    
+    CGRect rcPeak = rc;
+    rcPeak.origin.y =  peaks[band];
+    rcPeak.size.height = peakHeight;
+    
+    CGContextFillRect( context, rcPeak );
+    
+}
+
+
+void drawGradientRect(CGContextRef context,CGRect rc)
+{
+//    CGContextClipToRect(context, rc);
+    CGContextSaveGState(context);
+    CGContextAddRect(context, rc);
+    CGContextClip(context);
+    
+    
+    CGColorSpaceRef myColorspace;
+    
+    size_t num_locations = 2;
+    
+    CGFloat locations[2] = { 0.0, 1.0 };
+    
+    CGFloat components[8] = { 1.0, 0.5, 0.4, 1.0,  // Start color
+        
+        0.8, 0.8, 0.3, 1.0 }; // End color
+    
+    
+    myColorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    
+    CGGradientRef myGradient = CGGradientCreateWithColorComponents (myColorspace, components, locations, num_locations);
+    
+    
+    CGPoint myStartPoint, myEndPoint;
+    
+    myStartPoint.x = 0.0;
+    
+    myStartPoint.y = 0.0;
+    
+    myEndPoint.x = 0.0;
+    
+    CGFloat height = rc.size.height;
+    
+    myEndPoint.y = height;
+
+    
+    
+    CGContextDrawLinearGradient ( context , myGradient, myStartPoint, myEndPoint, 0);
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    CGContextRestoreGState(context);
+    
+    
+    CGColorSpaceRelease (myColorspace);
+    CGGradientRelease(myGradient);
+    
+}
+
+
+
 
 
 
