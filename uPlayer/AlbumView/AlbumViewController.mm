@@ -232,9 +232,6 @@ const int  DEFAULT_SAMPLE_SIZE = 16000;  //one time read from file
     
 }
 
-
-
-
 @end
 
 
@@ -292,7 +289,6 @@ void drawPeaks(CGContextRef context,CGRect rc,int band)
 
 void drawGradientRect(CGContextRef context,CGRect rc)
 {
-//    CGContextClipToRect(context, rc);
     CGContextSaveGState(context);
     CGContextAddRect(context, rc);
     CGContextClip(context);
