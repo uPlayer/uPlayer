@@ -43,6 +43,8 @@
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
 		1E8F91E71E9F7B4900271D44 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F91E61E9F7B4900271D44 /* Sparkle.framework */; };
+		1E8F91EB1E9F7DC000271D44 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F91E61E9F7B4900271D44 /* Sparkle.framework */; };
+		1E8F91EC1E9F7DC000271D44 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E8F91E61E9F7B4900271D44 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
 		1E9047F91AB2CA190000ED86 /* MAAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047F81AB2CA190000ED86 /* MAAssert.m */; };
 		1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047FB1AB2CB110000ED86 /* PlayerError.m */; };
@@ -116,6 +118,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */,
+				1E8F91EC1E9F7DC000271D44 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +266,7 @@
 				1EE5DDAD1A83380F0074D282 /* CoreMedia.framework in Frameworks */,
 				1EE5DDAB1A8337DC0074D282 /* AVFoundation.framework in Frameworks */,
 				3A4ED56EE8C89A4225510F30 /* libPods-uPlayer.a in Frameworks */,
+				1E8F91EB1E9F7DC000271D44 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
