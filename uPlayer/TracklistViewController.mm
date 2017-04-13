@@ -1183,7 +1183,7 @@ NSImage* resizeImage(NSImage* sourceImage ,NSSize size);
                 if (top <= row && row <= top + rowsPerPage) {
                     
                     
-                    __weak typeof (imageV) weakImageV = imageV;
+                    __weak  __typeof__(imageV)  weakImageV = imageV;
                     dojobInBkgnd(^{
                         
                         NSImage * image =  [[NSImage alloc]initWithData: getId3ImageFromAudio([NSURL fileURLWithPath: info.path])];

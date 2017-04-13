@@ -42,6 +42,7 @@
 		1E7A78381AA974D9004E9DDC /* keymaps.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A78371AA974D9004E9DDC /* keymaps.json */; };
 		1E89285C1AA1B06B00CF0634 /* LLHotKeyRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EFD42B41A91A986009D65B5 /* LLHotKeyRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E8F70321AA470950012402E /* PlayerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F70311AA470950012402E /* PlayerQueue.m */; };
+		1E8F91E71E9F7B4900271D44 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F91E61E9F7B4900271D44 /* Sparkle.framework */; };
 		1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8FF13A1AA084A900EA0A89 /* Carbon.framework */; };
 		1E9047F91AB2CA190000ED86 /* MAAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047F81AB2CA190000ED86 /* MAAssert.m */; };
 		1E9047FC1AB2CB110000ED86 /* PlayerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9047FB1AB2CB110000ED86 /* PlayerError.m */; };
@@ -183,6 +184,7 @@
 		1E7A78371AA974D9004E9DDC /* keymaps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = keymaps.json; path = res/keymaps.json; sourceTree = SOURCE_ROOT; };
 		1E8F702F1AA4707F0012402E /* PlayerQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerQueue.h; sourceTree = "<group>"; };
 		1E8F70311AA470950012402E /* PlayerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerQueue.m; sourceTree = "<group>"; };
+		1E8F91E61E9F7B4900271D44 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = myFrameworks/Sparkle.framework; sourceTree = "<group>"; };
 		1E8FF13A1AA084A900EA0A89 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		1E9047F71AB2CA190000ED86 /* MAAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAssert.h; sourceTree = "<group>"; };
 		1E9047F81AB2CA190000ED86 /* MAAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAssert.m; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E8F91E71E9F7B4900271D44 /* Sparkle.framework in Frameworks */,
 				1E211DC91ACA5490005F994C /* libpthread.dylib in Frameworks */,
 				1E8FF13B1AA084A900EA0A89 /* Carbon.framework in Frameworks */,
 				1EFD42B91A91A9EF009D65B5 /* LLHotKeyRecorder.framework in Frameworks */,
@@ -480,6 +483,7 @@
 		1EDE8FE21A7742000086677B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E8F91E61E9F7B4900271D44 /* Sparkle.framework */,
 				1E211DC41ACA47BE005F994C /* libtag.1.dylib */,
 				1E211DC81ACA5490005F994C /* libpthread.dylib */,
 				1E8FF13A1AA084A900EA0A89 /* Carbon.framework */,
@@ -545,13 +549,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EDE8FC21A773D810086677B /* Build configuration list for PBXNativeTarget "uPlayer" */;
 			buildPhases = (
-				0008378F2ED268B10DCCA31C /* Check Pods Manifest.lock */,
+				0008378F2ED268B10DCCA31C /* [CP] Check Pods Manifest.lock */,
 				1EDE8F9E1A773D810086677B /* Sources */,
 				1EDE8F9F1A773D810086677B /* Frameworks */,
 				1EDE8FA01A773D810086677B /* Resources */,
 				1E89285B1AA1B05600CF0634 /* CopyFiles */,
-				8A933A250DE2408F5C0B5F60 /* Embed Pods Frameworks */,
-				0C0AFDA3DD1E8A022554F94C /* Copy Pods Resources */,
+				8A933A250DE2408F5C0B5F60 /* [CP] Embed Pods Frameworks */,
+				0C0AFDA3DD1E8A022554F94C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -658,29 +662,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0008378F2ED268B10DCCA31C /* Check Pods Manifest.lock */ = {
+		0008378F2ED268B10DCCA31C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		0C0AFDA3DD1E8A022554F94C /* Copy Pods Resources */ = {
+		0C0AFDA3DD1E8A022554F94C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,14 +692,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-uPlayer/Pods-uPlayer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8A933A250DE2408F5C0B5F60 /* Embed Pods Frameworks */ = {
+		8A933A250DE2408F5C0B5F60 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -825,6 +829,7 @@
 /* Begin XCBuildConfiguration section */
 		1EDE8FC01A773D810086677B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8F7659B8BBB38202F51A341 /* Pods-uPlayer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -866,6 +871,7 @@
 		};
 		1EDE8FC11A773D810086677B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 317B1433D115C61D7CAC8F8E /* Pods-uPlayer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -911,6 +917,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/myFrameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -921,7 +928,10 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/libtag.1.14.0.dylib";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = (
@@ -946,6 +956,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/myFrameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -956,7 +967,10 @@
 				INFOPLIST_FILE = uPlayer/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/libtag.1.14.0.dylib";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = (
