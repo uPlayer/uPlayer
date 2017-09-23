@@ -1,4 +1,4 @@
-#uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)  
+# uPlayer [![Build Status](https://travis-ci.org/uPlayer/uPlayer.svg?branch=master)](https://travis-ci.org/uPlayer/uPlayer)  
 
 ![uPlayer](res/uPlayer.png)    
 
@@ -9,12 +9,12 @@ Last.fm scrobbling and global key blinding is supported.
 <p><img src="res/uPlayerScreen.png" alt="" style="max-width:100%;"/></p>
 <p><img src="res/screen2.png" alt="" style="max-width:100%;"/></p>
 
-##Download  
+## Download  
 
 [View Latest Releases](https://github.com/uPlayer/uPlayer/releases/latest)  
 
 
-##Advance fetures  
+## Advance fetures  
 
 * Global key blinding:  
 uPlayer use a json format config file.  
@@ -34,12 +34,12 @@ You can change it yourself. Make sure all words is *lowecased*.
 	 * uPlayer will send "nowPlaying" message to last.fm when a track started.
 	 * You can also mark a song loved via menu "Love @ Last.fm"
 
-##System  
+## System  
 
 Only tested in OS X 10.10 Yosemite  
 
 
-##How to build This Project  
+## How to build This Project  
 
 1. Clone this project 
 		
@@ -58,7 +58,7 @@ Only tested in OS X 10.10 Yosemite
 
 
 
-##License   
+## License   
 Attribution  
 ![by](https://creativecommons.org/images/deed/by.png)   
 NonCommercial  
