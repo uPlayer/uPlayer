@@ -9,7 +9,7 @@
 #import "PlayerTypeDefines.h"
 #import "PlayerDocument.h"
 #import <Foundation/Foundation.h>
-#import "serialize.h"
+//#import "serialize.h"
 #include "PlayerDocument+ScreenSaver.h"
 #include "ThreadJob.h"
 #import "PlayerMessage.h"

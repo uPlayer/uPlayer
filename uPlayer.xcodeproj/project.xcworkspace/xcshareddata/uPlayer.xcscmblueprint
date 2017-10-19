@@ -1,0 +1,58 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "679D5178DC105629D3F991569DE1C7BA0951C699",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "679D5178DC105629D3F991569DE1C7BA0951C699" : 0,
+    "E882237546CBA62FD2A2E0A0237D35872ADF39DA" : 0,
+    "1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708" : 0,
+    "F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E" : 0,
+    "2C404F14CD435FC66D96BF9AF27ABC55394B0C65" : 0,
+    "18F77737BD2767E2CDC1C8B28D94DD278248CBC4" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "68FECB0B-CC7A-4BB3-8026-AE22384DE6B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "679D5178DC105629D3F991569DE1C7BA0951C699" : "uPlayer\/",
+    "E882237546CBA62FD2A2E0A0237D35872ADF39DA" : "uPlayerLLHotKeyRecorder",
+    "1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708" : "uPlayerLast.fm\/serialize",
+    "F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E" : "uPlayer\/lyricsFetcher\/",
+    "2C404F14CD435FC66D96BF9AF27ABC55394B0C65" : "uPlayerLast.fm\/socketTool",
+    "18F77737BD2767E2CDC1C8B28D94DD278248CBC4" : "uPlayerLast.fm"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "uPlayer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "uPlayer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/liaogang\/Last.fm.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "18F77737BD2767E2CDC1C8B28D94DD278248CBC4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/liaogang\/serialize.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1A87CD33C77C7F24AFD333DB8DE8F9BEB8AF5708"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/liaogang\/socketTool.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2C404F14CD435FC66D96BF9AF27ABC55394B0C65"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/uPlayer\/uPlayer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "679D5178DC105629D3F991569DE1C7BA0951C699"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ddeville\/LLHotKeyRecorder.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E882237546CBA62FD2A2E0A0237D35872ADF39DA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/liaogang\/lyricsFetcher.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F20129BFED79CBF27C79EF1D92DB8AF0BF2D830E"
+    }
+  ]
+}

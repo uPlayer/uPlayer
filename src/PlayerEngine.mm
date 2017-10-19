@@ -24,6 +24,7 @@ const NSTimeInterval timeInterval = 0.2;
     PlayState _state;
     BOOL firstLoaded;
     int justSeeked;
+    float _volume;
 }
 
 @property (nonatomic,strong) AVAudioPlayer  *player;
@@ -120,6 +121,8 @@ void getSampleBlockInBufferAtTime(AVAudioPCMBuffer* pcmBuffer, AVAudioFormat *au
     {
         PlayerTrack *track = Playing();
         PlayerList *list = track.list;
+        
+        _volume = doc.volume;
         
         if ( doc.playState == playstate_paused )
             playTrackPauseAfterInit( list, track );
@@ -360,6 +363,8 @@ void getSampleBlockInBufferAtTime(AVAudioPCMBuffer* pcmBuffer, AVAudioFormat *au
     
     NSError *error;
     self.player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error];
+    self.player.volume = _volume;
+    
     if (error)
     {
         NSLog(@"error: %@",error);
@@ -442,6 +447,7 @@ void getSampleBlockInBufferAtTime(AVAudioPCMBuffer* pcmBuffer, AVAudioFormat *au
 
 - (void)setVolume:(float)volume
 {
+    _volume = volume;
     self.player.volume = volume;
 }
 
